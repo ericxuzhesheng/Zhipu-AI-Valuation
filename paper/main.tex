@@ -2,27 +2,79 @@
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{amsmath}
 \usepackage{caption}
 \usepackage{float}
 \usepackage{natbib}
 \usepackage{enumitem}
 \usepackage{xeCJK}
-\setCJKmainfont{SimSun}
+\setCJKmainfont[BoldFont=SimHei]{SimSun}
+\newCJKfontfamily\heiti{SimHei}
+\usepackage{tikz}
 \usepackage[hidelinks]{hyperref}
-\graphicspath{{../figures/}}
+\graphicspath{{../figures/}{./}}
 \captionsetup{font=small,labelfont=bf}
 \setlength{\parskip}{0.4em}
 \setlength{\parindent}{0pt}
 
-\title{\textbf{Capability Surprise, Not Earnings Surprise:\\
-Valuing and Pricing a Pre-Revenue Frontier-AI Lab\\
-\large Zhipu AI / Knowledge Atlas Technology (2513.HK)}}
-\author{Zhesheng Xu (许哲圣) \\ Student ID: 42353012 \\ \small Corporate Finance --- Final Project}
-\date{June 2026}
+\newcommand{\papertitle}{Capability Surprise as the Pricing Mechanism of a Pre-Revenue
+Foundation-Model Lab: How Model-Release and Benchmark Events Drive Price Discovery and Drift
+(Zhipu AI, 2513.HK)}
 
 \begin{document}
-\maketitle
+
+% ===================== SWUFE course-paper cover =====================
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north] at ([yshift=-3.0cm]current page.north)
+       {\includegraphics[width=7.5cm]{logo_watermark.png}};
+\end{tikzpicture}
+\centering
+\vspace*{1.1cm}
+{\heiti\Huge 西南财经大学\par}
+\vspace{0.5em}
+{\itshape\large Southwestern University of Finance and Economics\par}
+\vspace{1.7cm}
+{\heiti\Huge 课程论文\par}
+\vspace{2.2cm}
+
+\hfill\begin{minipage}{0.80\textwidth}
+\large
+\renewcommand{\arraystretch}{1.9}
+\begin{tabular}{@{}>{\heiti}p{2.6cm} p{8.4cm}@{}}
+学年学期 & ：2025-2026-2 \\
+课程名称 & ：公司金融（英）\\
+论文题目 & ：\papertitle \\
+学生学号 & ：42353012 \\
+学生姓名 & ：许哲圣 \\
+学院 & ：特拉华数据科学学院 \\
+年级专业 & ：2023 级\ 金融数学 \\
+\end{tabular}
+\end{minipage}\hfill\null
+
+\vfill
+\setlength{\fboxsep}{12pt}
+\noindent\fbox{\begin{minipage}[t][5.2cm][t]{0.88\textwidth}
+\large 评语：\par
+\vfill
+\hspace*{0.5cm}得\quad 分：\rule{4cm}{0.4pt}\par
+\vspace{0.8cm}
+\hspace*{0.5cm}评阅教师签字：\rule{4cm}{0.4pt}\hspace{1cm}年\quad\ 月\par
+\vspace{0.4cm}
+\end{minipage}}
+\vspace{0.8cm}
+\end{titlepage}
+% ===================== end cover =====================
+
+\begin{center}
+{\bfseries\large \papertitle\par}
+\vspace{0.6em}
+{Zhesheng Xu (许哲圣)\quad\textbar\quad Student ID: 42353012\quad\textbar\quad Corporate Finance — Final Project\par}
+\vspace{0.3em}
+{June 2026\par}
+\end{center}
+\vspace{0.5em}
 
 \begin{abstract}
 \noindent In January 2026 Zhipu AI (Knowledge Atlas Technology, 2513.HK) became the first

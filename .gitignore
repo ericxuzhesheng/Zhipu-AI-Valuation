@@ -2,6 +2,7 @@
 *.aux
 *.log
 *.out
+*.bbl
 *.blg
 *.fls
 *.fdb_latexmk
@@ -11,8 +12,6 @@ paper/build.log
 paper/b.log
 paper/x*.log
 paper/p*.log
-# keep main.bbl so the bibliography builds even without bibtex
-!paper/main.bbl
 
 # stray / scratch images at repo root (not project figures)
 /edbf3c01f61b417720d1073a8d1d6a52.png

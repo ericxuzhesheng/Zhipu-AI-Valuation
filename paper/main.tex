@@ -6,7 +6,7 @@
 \usepackage{amsmath}
 \usepackage{caption}
 \usepackage{float}
-\usepackage{natbib}
+\usepackage[super,numbers,sort&compress]{natbib}
 \usepackage{enumitem}
 \usepackage{anyfontsize}
 \usepackage{xeCJK}
@@ -14,6 +14,7 @@
 \newCJKfontfamily\heiti{SimHei}[AutoFakeBold=2.2]
 \usepackage{tikz}
 \usepackage[hidelinks]{hyperref}
+\hyphenation{comparables comparable}% never hyphenate "comparable(s)" across a line break
 \graphicspath{{../figures/}{./}}
 \captionsetup{font=small,labelfont=bf}
 \setlength{\parskip}{0.4em}
@@ -44,7 +45,10 @@ Foundation-Model Lab: Evidence from Zhipu AI (2513.HK)}
 \begin{tabular}{@{}l @{}l@{}}
 学年学期： & \underline{\makebox[8cm][l]{\,2025-2026-2}}\\
 课程名称： & \underline{\makebox[8cm][l]{\,公司金融（英）}}\\
-论文题目： & \parbox[t]{8cm}{\raggedright\footnotesize\papertitle}\\[4pt]
+论文题目： & \parbox[t]{10.4cm}{\fontsize{15}{26}\selectfont
+  \underline{\makebox[10.4cm][l]{\,Capability Surprise and the Pricing of an}}\\
+  \underline{\makebox[10.4cm][l]{\,Early-Commercial-Stage Foundation-Model}}\\
+  \underline{\makebox[10.4cm][l]{\,Lab: Evidence from Zhipu AI (2513.HK)}}}\\[4pt]
 学生学号： & \underline{\makebox[8cm][l]{\,42353012}}\\
 学生姓名： & \underline{\makebox[8cm][l]{\,许哲圣}}\\
 学\hspace{2em}院： & \underline{\makebox[8cm][l]{\,特拉华数据科学学院}}\\
@@ -71,16 +75,12 @@ Foundation-Model Lab: Evidence from Zhipu AI (2513.HK)}
 
 \begin{center}
 {\bfseries\large \papertitle\par}
-\vspace{0.6em}
-{Zhesheng Xu (许哲圣)\quad\textbar\quad Student ID: 42353012\quad\textbar\quad Corporate Finance — Final Project\par}
-\vspace{0.3em}
-{June 2026\par}
 \end{center}
 \vspace{0.5em}
 
 \begin{abstract}
-\noindent In January 2026 Zhipu AI (Knowledge Atlas Technology, 2513.HK) became the first foundation-model
-laboratory to list publicly anywhere, under Hong Kong's Chapter~18C listing regime. By 26~June~2026 its shares
+\noindent In January 2026, Zhipu AI (Knowledge Atlas Technology, 2513.HK) became the first foundation-model
+laboratory to list publicly anywhere, under Hong Kong's Chapter~18C listing regime. By 26~June~2026, its shares
 had risen about seventeen-fold to a market capitalisation near US\$114bn---an equity value roughly 570 times its
 $\sim$US\$200m of expected 2026 revenue---despite a gross margin that has fallen to near zero and negative book
 equity. We ask what such a firm is worth and how its price forms. A three-scenario DCF, a reverse DCF, a
@@ -102,7 +102,7 @@ The first half of 2026 produced an event with no precedent in capital-market his
 hours, two Chinese ``AI tiger'' laboratories---Zhipu AI (2513.HK, 8~January) and MiniMax (00100.HK,
 9~January)---became the first foundation-model developers to go public anywhere, listing on the Hong Kong
 Stock Exchange. Zhipu listed under Chapter~18C, the regime for specialist-technology firms that admits
-pre-profit issuers. By 26~June~2026 its shares had compounded roughly seventeen-fold to a market
+pre-profit issuers. By 26~June~2026, its shares had compounded roughly seventeen-fold to a market
 capitalisation near US\$114bn on FY2026 expected revenue of about US\$200m---an implied equity-value-to-revenue
 multiple near 570$\times$ \citep{tushare2026,prospectus2513}.
 
@@ -111,7 +111,8 @@ the re-rating imply---efficient pricing of capability, exuberance, or option val
 open-weight, cost-disruption strategy sustainable? Our contribution is methodological: because an early-stage
 lab has no earnings, the standard earnings-surprise event study \citep{ball1968,bernard1989} has nothing to
 bite on, so we reframe the information event as a \emph{capability surprise}---a model release or benchmark
-jump---adapting the surprise-event (\emph{chao yuqi}) design of \citet{guosen2020} to a new asset class. The
+jump---adapting the surprise-event (\emph{chao yuqi}) design of Guosen Securities\citep{guosen2020} to a new
+asset class. The
 weight of the paper falls on the valuation (Section~\ref{sec:val}) and the event study
 (Section~\ref{sec:event}); Sections~\ref{sec:bg}--\ref{sec:context} give only the context they require.
 
@@ -131,14 +132,25 @@ workloads. \emph{(3)} Losses and leverage are deepening: the 2025 net loss was a
 and at 30~June~2025 the group reported net liabilities of RMB~6.15bn against cash of only RMB~190.9m
 \citep{prospectus2513}. Zhipu is therefore \emph{early-commercial-stage and pre-profit}, with negative book
 equity---so ratio analysis is of
-limited use and the informative metrics are growth, the gross-margin path, and cash runway.
+limited use and the informative metrics are growth, the gross-margin path, and cash runway
+(Figure~\ref{fig:fin}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\textwidth]{fig8_financial_profile.png}
+\caption{Zhipu's financial profile. Revenue compounds rapidly (RMB millions, left axis) while the gross margin
+collapses from a normal software level of 76\% in 2022 to near zero (right axis), as compute-heavy,
+under-priced workloads buy market share; the FY2025 margin point is the H1~2025 figure. Source: Chapter~18C
+prospectus and the H1~2025 interim disclosure \citep{prospectus2513}.}
+\label{fig:fin}
+\end{figure}
 
 \textbf{Listing and market reaction.} Zhipu priced at HK\$116.20, raising about HK\$4.3bn with HK\$3bn of
 cornerstone commitments, at an implied valuation near US\$6.7--7.4bn \citep{prospectus2513}. The listing is
 strategically remarkable
-on three counts: Chapter~18C gave a loss-making lab permanent public capital years before profitability; being
-the world's first listed foundation-model company conferred a certification premium; and the stock then
-re-rated to about HK\$2,046 by 26~June~2026 ($\approx +1{,}660\%$ versus IPO; realised annualised volatility
+on three counts: Chapter~18C gave a loss-making lab permanent public capital years before profitability; its
+status as the world's first listed foundation-model company conferred a certification premium; and the stock
+then re-rated to about HK\$2,046 by 26~June~2026 ($\approx +1{,}660\%$ versus IPO; realised annualised volatility
 near 193\%; Figure~\ref{fig:price}). MiniMax, listing one day later at HK\$165, doubled on debut and then
 \emph{de-rated} by roughly 60\% from its peak---a divergence we exploit in Section~\ref{sec:event}.
 
@@ -152,11 +164,23 @@ dominance through \emph{cost disruption}: a mixture-of-experts GLM-5 line (GLM-4
 GLM-5.2 (June~2026) shipped with MIT open weights and a one-million-token context---priced below closed
 competitors, now paired with nascent pricing power (8--17\% API price rises with each GLM-5.x release)
 \citep{glm_modelcard}. This cadence
-defines the event taxonomy of Section~\ref{sec:event}. The main weakness is self-inflicted: the same cadence
-commoditises its own product, while the near-zero gross margin and compute dependence cap monetisation.
+defines the event taxonomy of Section~\ref{sec:event} (Figure~\ref{fig:timeline}). The main weakness is
+self-inflicted: the same cadence commoditises its own product, while the near-zero gross margin and compute
+dependence cap monetisation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{fig9_glm_timeline.png}
+\caption{Company timeline from the 2019 founding (Tsinghua Knowledge Engineering Group) through the 2026
+Chapter~18C listing and the GLM-5.x release cadence. Each open-weight, cost-disruptive launch is the unit of
+\emph{capability surprise} studied in Section~\ref{sec:event} and the primary currency of value for an
+early-commercial-stage lab; milestones are evenly spaced for legibility. Sources: Chapter~18C prospectus
+\citep{prospectus2513} and official model cards and technical documentation \citep{glm_modelcard}.}
+\label{fig:timeline}
+\end{figure}
 
 \textbf{The Hong Kong AI-IPO landscape.} The 2026 listing wave spans two business models. Zhipu and MiniMax
-are general-purpose foundation-model laboratories; a third entrant, \textbf{Wenge AI} (中科闻歌, 01956.HK),
+are general-purpose foundation-model laboratories; a third entrant, \textbf{Wenge AI} (01956.HK),
 listed on 26~June~2026 at HK\$60.70 and closed its first day near HK\$111.7 ($+84\%$), at about HK\$10.5bn
 ($\sim$US\$1.3bn) \citep{prospectus1956}.
 Founded in 2017 by a Chinese Academy of Sciences (Institute of Automation) team, Wenge ranked first by revenue
@@ -187,6 +211,20 @@ shares, and net cash of about \textbf{US\$0.55bn}---net IPO proceeds of $\sim$HK
 plus pre-IPO cash of $\sim$US\$0.03bn. The pre-IPO net-liability position is dominated by redeemable preferred
 shares that convert to ordinary equity on listing, so it is not post-IPO debt; treating any residual as debt
 would only lower equity value and reinforce our conclusion.
+
+\textbf{Two caveats, deliberately retained.} We keep this single comparables-based WACC for transparency, but
+two simplifications deserve flagging. \emph{(i) The beta source.} The bottom-up $\beta$ is built from mature
+global AI-software names (Salesforce-, Palantir-type firms) with healthy margins and conventional cash-flow
+profiles, whereas Zhipu today behaves more like a high-capex frontier ``hard-tech'' lab; a $\beta$ drawn from
+pre-profit infrastructure or biotech comparables---asset classes with the same binary, make-or-break payoff
+structure---would be higher and would raise $K_e$. \emph{(ii) A static WACC.} Holding WACC fixed at 13.5\%
+across the full 2026--2035 horizon is mechanical: under the reflexivity logic developed later in this section,
+a break in the high-valuation loop would push Zhipu's cost of capital up non-linearly, so a fuller model would
+attach a dynamic risk premium or an explicit distress/default probability to the discount rate. We do not do so
+here because both refinements push value in the \emph{same} direction---a higher or state-dependent WACC lowers
+the DCF---and the sensitivity analysis (Figure~\ref{fig:tornado}) already shows that even a markedly \emph{lower}
+WACC cannot close the gap to the market price. The binary tail that these adjustments would proxy is, in any
+case, handled more naturally by the real-options reading below.
 
 \subsection{Scenario DCF}
 We project FCFF over 2026--2035 from a US\$200m base, with revenue growth fading from a scenario-specific
@@ -293,14 +331,14 @@ the market price; the diamonds mark the probability-weighted DCF and the compara
 \label{sec:event}
 \textbf{Hypothesis.} If the firm is priced on its capability trajectory, then capability information should
 move the price. Under semi-strong efficiency \citep{fama1970} the reaction should be immediate and complete;
-any systematic \emph{post-capability-announcement drift} (PCAD)---the analogue of the post-earnings drift of
-\citet{ball1968,bernard1989}---would indicate inefficiency.
+any systematic \emph{post-capability-announcement drift} (PCAD)---the analogue of the classic
+post-earnings-announcement drift\citep{ball1968,bernard1989}---would indicate inefficiency.
 
 \textbf{Method.} Event dates are identified \emph{independently} from official model-release announcements and
 technical documentation \citep{glm_modelcard}, not from the price series. On daily prices \citep{tushare2026}
 we compute mean-adjusted abnormal returns and CARs over three windows---leakage $[-5,-1]$, reaction $[0,+1]$,
 and drift $[+2,+10]$---following standard event-study practice \citep{mackinlay1997} and the surprise-event
-design of \citet{guosen2020}. For each event the expected daily return is Zhipu's mean return over the
+design of Guosen Securities\citep{guosen2020}. For each event the expected daily return is Zhipu's mean return over the
 pre-event estimation window $[-20,-6]$, and the abnormal return is
 $AR_t = R_t - \overline{R}_{[-20,-6]}$. Figure~\ref{fig:rets} then serves as a \emph{descriptive cross-check}:
 several of the largest positive-return days coincide with these independently dated capability events.
@@ -507,7 +545,62 @@ Year & Revenue & Growth & EBIT margin & Cash tax & NOL end & NOPAT & Reinvest & 
 \end{table}
 
 \clearpage
-\bibliographystyle{plainnat}
-\bibliography{refs}
+% References: numbered (superscript in-text via natbib super,numbers), entries formatted in APA style,
+% ordered by first appearance in the text.
+\begin{thebibliography}{99}
+
+\bibitem{tushare2026}
+Tushare. (2026). \emph{Tushare Pro financial data API: Hong Kong daily quotations} (hk\_daily) [Data set].
+\url{https://tushare.pro}
+
+\bibitem{prospectus2513}
+Knowledge Atlas Technology Joint Stock Company Limited (Zhipu AI). (2025). \emph{Global offering prospectus
+(Stock code 2513)} [Chapter~18C listing document]. HKEXnews.
+\url{https://www1.hkexnews.hk/listedco/listconews/sehk/2025/1230/2025123000017.pdf}
+
+\bibitem{ball1968}
+Ball, R., \& Brown, P. (1968). An empirical evaluation of accounting income numbers. \emph{Journal of
+Accounting Research, 6}(2), 159--178.
+
+\bibitem{bernard1989}
+Bernard, V. L., \& Thomas, J. K. (1989). Post-earnings-announcement drift: Delayed price response or risk
+premium? \emph{Journal of Accounting Research, 27}, 1--36.
+
+\bibitem{guosen2020}
+Guosen Securities Economic Research Institute. (2020). \emph{A complete guide to earnings-surprise investing}
+[Special report on financial engineering]. Guosen Securities.
+
+\bibitem{glm_modelcard}
+Zhipu AI. (2026). \emph{GLM-4.6 and GLM-5 series model cards and technical reports} [Architecture, context
+length, and benchmark results]. Hugging Face. \url{https://huggingface.co/zai-org/GLM-4.6}
+
+\bibitem{prospectus1956}
+Wenge Technology Co., Ltd. (2026). \emph{Global offering prospectus and allotment results (Stock code 1956)}.
+HKEXnews.
+
+\bibitem{hsi2026}
+Hang Seng Indexes Company Limited. (2026). \emph{Index review results and constituent-change announcements}.
+Hang Seng Indexes Co.
+
+\bibitem{black1973}
+Black, F., \& Scholes, M. (1973). The pricing of options and corporate liabilities. \emph{Journal of
+Political Economy, 81}(3), 637--654.
+
+\bibitem{damodaran2018}
+Damodaran, A. (2018). \emph{The dark side of valuation: Valuing young, distressed, and complex businesses}
+(3rd ed.). Pearson Education.
+
+\bibitem{fengliu}
+Feng, L. (2017). \emph{Collected investment essays}. Gao Yi Asset Management.
+
+\bibitem{fama1970}
+Fama, E. F. (1970). Efficient capital markets: A review of theory and empirical work. \emph{Journal of
+Finance, 25}(2), 383--417.
+
+\bibitem{mackinlay1997}
+MacKinlay, A. C. (1997). Event studies in economics and finance. \emph{Journal of Economic Literature,
+35}(1), 13--39.
+
+\end{thebibliography}
 
 \end{document}

@@ -1,88 +1,66 @@
-# Valuing a Frontier-Model AI Lab — and Testing How Its Price Discovers "Capability"
-## Zhipu AI (Knowledge Atlas, 2513.HK) — Corporate Finance Final Project, Detailed Outline
+# Paper Map & Status — Zhipu AI (2513.HK) Valuation + Capability-Surprise Event Study
 
-**Subject company:** Zhipu AI / Knowledge Atlas Technology Joint Stock Co., Ltd. — HKEX Main Board, **2513.HK**, listed **2026-01-08** via **Chapter 18C** (specialist technology).
-**Comparable / benchmark:** MiniMax (稀宇科技), HKEX **00100.HK**, listed **2026-01-09**.
-**Language:** English. **Typesetting:** LaTeX (+BibTeX). **Model:** Excel. **Abstract:** ≤ 300 words.
+**Title:** *Capability Surprise as the Pricing Mechanism of an Early-Commercial-Stage Foundation-Model Lab:
+How Model-Release and Benchmark Events Drive Price Discovery and Drift (Zhipu AI, 2513.HK).*
+**Author:** Zhesheng Xu（许哲圣）· 42353012 · 公司金融（英）· 2025-2026-2.
+**Build:** XeLaTeX (`paper/main.tex` → `main.pdf`, 12 pp). **Data as of 2026-06-26.**
 
-### The original idea (the paper's spine)
-A pre-revenue foundation-model lab has **no earnings to be surprised by**, yet its price moved ~**19x** to **~US$124B** (**P/S ≈ 600x**). So the paper does two things:
-1. **(Main line) Valuation** — establish a *fundamental anchor* with scenario DCF + comparables + a real-options lens that explains why a pre-revenue lab can rationally carry option-like value.
-2. **(Original highlight) "Capability-Surprise" event study** — port the classic earnings-surprise / PEAD machinery onto a new event type: **model releases and benchmark-leaderboard rankings** (GLM-5.x, Z.code). Test whether *capability information* is efficiently priced, or whether there is **Post-Capability-Announcement Drift (PCAD)** — the AI analogue of PEAD.
-
-> Thesis: price discovery for frontier AI labs has shifted from *earnings surprise* to *capability surprise*; the market is semi-efficient with respect to capability signals, which both anchors and bounds the bubble debate.
-> (Methodological lineage: extends the author's prior work — *Earnings-Surprise-Market-Efficiency*, China A-shares — to a new asset class, reusing CAR windows, SUE-style normalization, and an honest diagnostic posture.)
+> Term-paper rules satisfied: title carries core concept (*capability surprise*) + mechanism (price discovery
+> & drift); abstract ~165 words (limit 400); main body ~2,095 words (limit 3,000); full reference list at end.
 
 ---
 
-## 0. Abstract (≤300 words) + Keywords
-Subject; dual method (valuation anchor + capability-surprise event study); headline finding; practical takeaway.
-Keywords: foundation models, Chapter 18C, pre-revenue valuation, real options, market efficiency, event study, PEAD/PCAD.
+## Structure (current)
 
-## 1. Introduction
-- 1.1 The 2026 "AI Tigers" HK listing wave (Zhipu 1/8, MiniMax 1/9).
-- 1.2 Research questions: (i) fundamental value range? (ii) does the ~19x run reflect efficient pricing of *capability*, exuberance, or option value? (iii) is open-source + cost-disruption financially sustainable?
-- 1.3 Contribution: the *capability-surprise* reframing of market efficiency. Roadmap.
+| § | Section | Role | Key content |
+|---|---|---|---|
+| Cover | SWUFE official template | — | 西南财经大学本科考试 / 课程论文, official crest watermark |
+| 0 | Abstract (≤400w) | — | subject, dual method, headline, takeaway |
+| 1 | Introduction | setup | 3 research questions; capability-surprise reframing |
+| 2 | Background: Company, Financials, Listing | **condensed** | open-weight model; 3 financial facts (revenue, gross-margin collapse, negative equity); IPO + re-rating + MiniMax divergence |
+| 3 | Industry, Macro, Strategy | **condensed** | Porter + leaderboard cost-disruption; **HK AI-IPO landscape incl. Wenge AI (decision-intelligence, not a comparable)**; macro + flow events |
+| 4 | **Valuation** (main line) | **emphasised** | CAPM/WACC; 3-scenario DCF; **reverse DCF**; relative val (MiniMax direct; Wenge excluded); **real options (fundamental vs option value)** |
+| 5 | **Capability Surprise: Event Study** (original) | **emphasised** | hypothesis; method; CAR results; **flow vs capability events**; peer-adjusted robustness; honesty box |
+| 6 | Conclusion | — | capability momentum priced as option; preliminary PCAD |
+| A | Appendix: Financial Statements | reproducibility | income statement + balance sheet (RMB) |
+| B | Appendix: Base-Case DCF Projection | reproducibility | full 10-yr chain: Revenue→Growth→EBIT margin→NOPAT→Reinvest→FCFF→TV→Equity→per share |
 
-## 2. Company & Business Model
-History (Tsinghua KEG → Knowledge Atlas, 2019); GLM family; revenue model (API usage + subscription + on-prem + fine-tuning); **open-weight funnel**; Z.ai / Z.code platform; ownership & governance.
+## Four unique points (kept central, per supervisor feedback)
+1. **Capability Surprise** — title + conclusion centre, not a side analysis.
+2. **Reverse DCF** — "what must the company achieve to justify the price."
+3. **Fundamental value vs option value** — not "above DCF ⇒ bubble," but a right-tail option.
+4. **Capability vs flow catalysts** — model releases separated from index/Stock-Connect flows.
 
-## 3. Financial Performance (2023–H1 2025; pre-revenue adaptation)
-Revenue trajectory (Table D1/D4); losses, R&D intensity, cash burn, runway; post-IPO balance sheet (proceeds ~70% to model R&D 2026–28); pivot from ratios to **unit economics / usage metrics**.
+## Headline numbers (2026-06-26)
+- Price HK$2,046 (~+1,660%, ~17×); mcap ~US$114B; **P/S ~570×**; vol ~193%.
+- DCF: bear/base/bull HK$29/46/84; prob-weighted **HK$47 (~2% of price)**.
+- Reverse DCF: price implies **~US$100B revenue by 2035 (~100% CAGR)**.
+- Event study (mean-adj): reaction **+17.8%**, drift **+1.5%** (bimodal); peer-adj drift **+19.2%**.
+  GLM-5.2 drift window **truncated** (7/9 days) — provisional.
 
-## 4. Market Reaction & Capital-Market Strategy  ← *["Why HK-Zhipu is so impressive" thread]*
-IPO mechanics (HK$116.20, cornerstones, 18C eligibility); post-listing price action vs MiniMax & HK tech (Tables D2/D3); **why the listing matters** (first foundation-model IPO globally; 18C regulatory access for a pre-revenue lab; signaling/certification; permanent capital). Sets up the efficiency question pursued empirically in §9.
+## Sourcing policy (granular; primary > news)
+Key data cite, via the bibliography (not just footnotes):
+- **HKEX prospectus / announcements** — `prospectus2513`, `prospectus1956` (offering terms, financials, market share).
+- **Official model cards / technical reports** — `glm_modelcard` (architecture, benchmarks).
+- **Hang Seng Indexes Company announcements** — `hsi2026` (index inclusion / flows).
+- **Formal market database** — `tushare2026` (HK daily prices, cross-checked with HKEX).
+- **Academic** — Ball–Brown, Bernard–Thomas, Fama, MacKinlay, Black–Scholes, Damodaran, Guosen (2020).
+News media corroborate only; they do not carry the most important numbers.
 
-## 5. Industry & Competitive Landscape  ← *[GLM-5.x / Z.code leaderboard thread]*
-Porter's Five Forces for foundation models; China "AI Tigers" + global frontier labs as the valuation anchor set; **leaderboard strategy decoded** (MoE: GLM-4.6 ≈355B/32B active, 200K ctx; GLM-5.1 #1 SWE-Bench Pro 58.4%; open-weight + low token price = cost-disruption flywheel). This section **defines the event taxonomy** consumed by §9.
+## TODO — data refresh after 2026-07-03 close (user will supply)
+1. Re-pull `hk_daily` for 2513/00100/01956 through 2026-07-03; rerun `recompute.py` → new prices, vol, CAR, figures.
+2. **GLM-5.2 drift window completes** (≥+10 trading days from 06-15): remove the "truncated/provisional" caveat once full.
+3. Update market row in Table~\ref{tab:dcf} (price/mcap/P/S) and reverse-DCF target.
+4. Re-export `model/valuation_model.xlsx` Summary; refresh README headline numbers.
+5. Optionally extend the event panel with MiniMax / Wenge (Decitron, Yayi) releases for a multi-lab study.
 
-## 6. Macroeconomic & Policy Environment
-China AI policy / state procurement; US compute-export controls (efficiency-by-necessity); HK capital market (18C, Stock Connect eligibility, liquidity); rates / risk appetite / HKD peg and long-duration growth valuation.
-
-## 7. Corporate Strategy & SWOT
-Open-source flywheel vs closed frontier; enterprise + sovereign + overseas expansion; SWOT; scenario drivers feeding §8.
-
-## 8. Valuation — MAIN LINE  ← *[recommended mix]*
-- 8.1 Cost of capital: CAPM Ke with **bottom-up/comparable beta** (HK index unavailable in feed → global AI-software comps, unlever→relever); WACC.
-- 8.2 **Scenario DCF (FCFF, explicit 2026–2035 + terminal)**: Bear/Base/Bull on revenue CAGR, steady-state margin, reinvestment; probability-weighted EV → per-share equity value.
-- 8.3 **Comparables**: EV/Sales vs MiniMax and global labs (private-round implied multiples); reconcile to market price.
-- 8.4 **Real-options lens**: lab as a portfolio of options on AGI-scale outcomes; decision-tree / Black–Scholes sizing to *explain* (not justify) the premium and the ~600x P/S.
-- 8.5 Football-field chart; 8.6 Sensitivity & tornado (WACC, terminal margin, CAGR).
-
-## 9. Original Highlight — The "Capability-Surprise" Event Study (Zhipu vs MiniMax)
-- 9.1 Motivation: no earnings ⇒ test efficiency w.r.t. *capability* signals; PEAD → **PCAD** hypothesis.
-- 9.2 **Event taxonomy** (from §5): model launches (GLM-5/5.1, MiniMax releases), benchmark rank changes (SWE-Bench Pro, LMArena/coding leaderboards), major open-weight drops, big customer/sovereign deals.
-- 9.3 **"Surprise" metric**: define a capability-surprise proxy (e.g., benchmark-delta vs prior SOTA / vs consensus expectation; ranked tiers), analogous to SUE/standardized surprise.
-- 9.4 **Method**: CAR across three windows — leakage (pre-event), reaction [0,+1]/[1,10], drift [11,N]; market model with comparable/peer benchmark (since HK index feed unavailable, use peer-adjusted or equal-weight AI-basket return); Zhipu vs MiniMax cross-section.
-- 9.5 **Results & interpretation**: immediate reaction vs drift → semi-strong efficiency verdict; link drift sign/size back to the §8 fundamental anchor (does the market over/under-react to capability?).
-- 9.6 **Honesty box** (repo-style): small sample (only ~5 months since listing, limited events) ⇒ *diagnostic evidence, not definitive*; robustness across surprise definitions and windows.
-
-## 10. Conclusion & Practical Implications
-Fundamental range vs market price → over/under/optionality verdict; capability-surprise efficiency finding; implications for investors, 18C founders, policymakers; limitations & future work (expand event panel, NLP-scored capability surprise, multi-lab panel).
-
-## Appendices
-A. Data tables (`DATA_TABLES.md`). B. Excel assumptions log. C. Event log & CAR tables. D. Bibliography (BibTeX).
-
----
-
-### Assignment requirement → section map
-| Requirement | Section(s) |
-|---|---|
-| Historical financials & operations | §2, §3 |
-| Market reaction | §4, **§9** |
-| Future strategy | §5, §7 |
-| Industry & business environment | §5 |
-| Macroeconomic impact | §6 |
-| Corporate finance theory (valuation, cost of capital, real options, market efficiency, event study) | §4, **§8 (main)**, **§9 (original)** |
-
-### Repo / build structure
+## Repo
 ```
-Coporate-Finance-Final-Project/
-├── OUTLINE.md                 ← this file
-├── DATA_TABLES.md             ← compiled data + sources (+ event log D6)
-├── data/                      ← Tushare CSVs (prices), event-study inputs
-├── paper/                     ← LaTeX (main.tex, sections/, refs.bib)     [next]
-├── model/                     ← valuation_model.xlsx                       [next]
-├── eventstudy/                ← CAR computation scripts + outputs          [next]
-└── figures/                   ← football field, CAR plots, price charts    [next]
+paper/        main.tex, refs.bib (12 refs), crest_watermark.png, main.pdf
+42353012_许哲圣_*.pdf   submission copy
+model/        valuation_model.xlsx (live formulas)
+eventstudy/   car_robustness.csv, base_projection.csv, zhipu_car.csv
+figures/      fig1-4 (regenerated 2026-06-26)
+data/         Zhipu_/MiniMax_/WengeAI_daily.csv, price_summary.csv
+DATA_TABLES.md, EVENT_STUDY.md, README.md, LICENSE
 ```

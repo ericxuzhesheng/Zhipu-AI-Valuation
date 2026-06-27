@@ -1,4 +1,4 @@
-\begin{thebibliography}{4}
+\begin{thebibliography}{12}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -23,10 +23,63 @@ Fischer Black and Myron Scholes.
 \newblock \emph{Journal of Political Economy}, 81\penalty0 (3):\penalty0
   637--654, 1973.
 
+\bibitem[Damodaran(2018)]{damodaran2018}
+Aswath Damodaran.
+\newblock \emph{The Dark Side of Valuation: Valuing Young, Distressed, and
+  Complex Businesses}.
+\newblock Pearson Education, 3rd edition, 2018.
+
+\bibitem[Fama(1970)]{fama1970}
+Eugene~F. Fama.
+\newblock Efficient capital markets: A review of theory and empirical work.
+\newblock \emph{Journal of Finance}, 25\penalty0 (2):\penalty0 383--417, 1970.
+
 \bibitem[{Guosen Securities Economic Research Institute}(2020)]{guosen2020}
 {Guosen Securities Economic Research Institute}.
 \newblock 金融工程专题研究：超预期投资全攻略 [special report
   on financial engineering: A complete guide to earnings-surprise investing].
 \newblock Technical report, Guosen Securities, Sep 2020.
+
+\bibitem[{Hang Seng Indexes Company Limited}(2026)]{hsi2026}
+{Hang Seng Indexes Company Limited}.
+\newblock Index review results and constituent-change announcements.
+\newblock Hang Seng Indexes Co.\ announcements, Jun 2026.
+\newblock Hang Seng TECH Index inclusion of 2513.HK.
+
+\bibitem[{Knowledge Atlas Technology Joint Stock Company Limited (Zhipu
+  AI)}(2025)]{prospectus2513}
+{Knowledge Atlas Technology Joint Stock Company Limited (Zhipu AI)}.
+\newblock Global offering prospectus (stock code 2513).
+\newblock HKEXnews,
+  \url{https://www1.hkexnews.hk/listedco/listconews/sehk/2025/1230/2025123000017.pdf},
+  Dec 2025.
+\newblock Chapter~18C listing document; financials and offering terms.
+
+\bibitem[MacKinlay(1997)]{mackinlay1997}
+A.~Craig MacKinlay.
+\newblock Event studies in economics and finance.
+\newblock \emph{Journal of Economic Literature}, 35\penalty0 (1):\penalty0
+  13--39, 1997.
+
+\bibitem[{Tushare}(2026)]{tushare2026}
+{Tushare}.
+\newblock Tushare pro financial data api: Hong kong daily quotations
+  (\texttt{hk\_daily}).
+\newblock \url{https://tushare.pro}, 2026.
+\newblock Daily prices for 2513.HK, 00100.HK, 01956.HK, cross-checked with
+  HKEX.
+
+\bibitem[{Wenge Technology Co., Ltd.\ (中科闻歌)}(2026)]{prospectus1956}
+{Wenge Technology Co., Ltd.\ (中科闻歌)}.
+\newblock Global offering prospectus and allotment results (stock code 1956).
+\newblock HKEXnews, Jun 2026.
+\newblock Enterprise decision-intelligence; market-share and offering data.
+
+\bibitem[{Zhipu AI / Z.ai}(2026)]{glm_modelcard}
+{Zhipu AI / Z.ai}.
+\newblock Glm-4.6 and glm-5 series model cards and technical reports.
+\newblock Hugging Face, \url{https://huggingface.co/zai-org/GLM-4.6}; Z.ai
+  developer docs, 2026.
+\newblock Architecture (MoE), context length, benchmark results.
 
 \end{thebibliography}

@@ -33,3 +33,6 @@ venv/
 # never commit secrets
 .env
 *token*
+
+# third-party copyrighted reference PDFs — keep local, do not publish
+/reference/

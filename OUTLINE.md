@@ -1,7 +1,7 @@
 # Paper Map & Status — Zhipu AI (2513.HK) Valuation + Capability-Surprise Event Study
 
-**Title:** *Capability Surprise as the Pricing Mechanism of an Early-Commercial-Stage Foundation-Model Lab:
-How Model-Release and Benchmark Events Drive Price Discovery and Drift (Zhipu AI, 2513.HK).*
+**Title:** *Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab:
+Evidence from Zhipu AI (2513.HK).*
 **Author:** Zhesheng Xu（许哲圣）· 42353012 · 公司金融（英）· 2025-2026-2.
 **Build:** XeLaTeX (`paper/main.tex` → `main.pdf`, 12 pp). **Data as of 2026-06-26.**
 
@@ -33,9 +33,9 @@ How Model-Release and Benchmark Events Drive Price Discovery and Drift (Zhipu AI
 
 ## Headline numbers (2026-06-26)
 - Price HK$2,046 (~+1,660%, ~17×); mcap ~US$114B; **P/S ~570×**; vol ~193%.
-- DCF: bear/base/bull HK$29/46/84; prob-weighted **HK$47 (~2% of price)**.
-- Reverse DCF: price implies **~US$100B revenue by 2035 (~100% CAGR)**.
-- Event study (mean-adj): reaction **+17.8%**, drift **+1.5%** (bimodal); peer-adj drift **+19.2%**.
+- DCF (net cash US$0.55bn): bear/base/bull HK$11/29/67; prob-weighted **HK$30 (~1.5% of price)**.
+- Reverse DCF: price implies **~US$130B revenue by 2035 (~105% annual, 2026–2035)**.
+- Event study (mean-adj, [−20,−6] window): reaction **+18.7%**, drift **+4.8%** (bimodal); peer-adj drift **+19.2%**.
   GLM-5.2 drift window **truncated** (7/9 days) — provisional.
 
 ## Sourcing policy (granular; primary > news)

@@ -67,12 +67,12 @@ Balance sheet @ 30-Jun-2025: net liabilities **−RMB 6,150.8M** (negative equit
 
 | Event | Day 0 | React [0,+1] | Drift [+2,+10] | Note |
 |---|---|---:|---:|---|
-| GLM-5 | 2026-02-11 | +20.7% | +16.7% | under-reaction |
-| GLM-5-Turbo | 2026-03-16 | +10.6% | −6.4% | mild reversal |
-| GLM-5.1 | 2026-04-08 | +12.2% | −21.5% | over-reaction (flips +12.9% peer-adj) |
-| GLM-5.2 | 2026-06-15 | +27.7% | +17.2%† | strong under-reaction |
-| MiniMax M2.7 | 2026-03-18 | +4.7% | −3.3% | muted / de-rate |
-| **Avg (4 GLM)** | | **+17.8%** | **+1.5%** | peer-adj: +18.5% / +19.2% |
+| GLM-5 | 2026-02-11 | +22.5% | +24.7% | under-reaction |
+| GLM-5-Turbo | 2026-03-16 | +7.7% | −19.3% | reversal |
+| GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | over-reaction (flips +12.9% peer-adj) |
+| GLM-5.2 | 2026-06-15 | +30.8% | +28.2%† | strong under-reaction |
+| MiniMax M2.7 | 2026-03-18 | −5.5% | −49.1% | muted / de-rate |
+| **Avg (4 GLM)** | | **+18.7%** | **+4.8%†** | peer-adj: +18.5% / +19.2% |
 
 † GLM-5.2 drift window truncated (7/9 days through 06-26) — provisional. Non-capability spikes: 02-20 (+43%),
 05-13 (+37%) = Hang Seng Tech inclusion / Stock Connect flow events.

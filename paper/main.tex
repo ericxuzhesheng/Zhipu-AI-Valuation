@@ -19,54 +19,59 @@
 \setlength{\parskip}{0.4em}
 \setlength{\parindent}{0pt}
 
-\newcommand{\papertitle}{Capability Surprise as the Pricing Mechanism of an Early-Commercial-Stage
-Foundation-Model Lab: How Model-Release and Benchmark Events Drive Price Discovery and Drift
-(Zhipu AI, 2513.HK)}
+\newcommand{\papertitle}{Capability Surprise and the Pricing of an Early-Commercial-Stage
+Foundation-Model Lab: Evidence from Zhipu AI (2513.HK)}
 
 \begin{document}
 
 % ===================== SWUFE course-paper cover (official template) =====================
 \begin{titlepage}
 \begin{tikzpicture}[remember picture,overlay]
-  \node[anchor=north] at ([yshift=-4.2cm]current page.north)
-       {\includegraphics[width=7.0cm]{crest_watermark.png}};
+  % crest watermark (gray), centred over the title block
+  \node at ([yshift=-6.0cm]current page.north) {\includegraphics[width=8.6cm]{crest_watermark.png}};
+  % four corner registration marks
+  \begin{scope}[line width=0.6pt]
+   \draw ([xshift=1cm,yshift=-1.6cm]current page.north west)--([xshift=1cm,yshift=-1cm]current page.north west)--([xshift=1.6cm,yshift=-1cm]current page.north west);
+   \draw ([xshift=-1cm,yshift=-1.6cm]current page.north east)--([xshift=-1cm,yshift=-1cm]current page.north east)--([xshift=-1.6cm,yshift=-1cm]current page.north east);
+   \draw ([xshift=1cm,yshift=1.6cm]current page.south west)--([xshift=1cm,yshift=1cm]current page.south west)--([xshift=1.6cm,yshift=1cm]current page.south west);
+   \draw ([xshift=-1cm,yshift=1.6cm]current page.south east)--([xshift=-1cm,yshift=1cm]current page.south east)--([xshift=-1.6cm,yshift=1cm]current page.south east);
+  \end{scope}
 \end{tikzpicture}
 \centering
-\vspace*{1.4cm}
+\vspace*{1.2cm}
 {\heiti\fontsize{26}{32}\selectfont 西南财经大学本科考试\par}
-\vspace{1.6cm}
+\vspace{1.7cm}
 {\heiti\fontsize{42}{50}\selectfont 课程论文\par}
-\vspace{0.45cm}
-{\rule{8.2cm}{1.1pt}\\[2.2pt]\rule{8.2cm}{0.5pt}\par}
-\vspace{2.4cm}
+\vspace{2.0cm}
 
 \flushleft
-\hspace{1.6cm}\begin{minipage}{0.82\textwidth}
-\fontsize{16}{34}\selectfont
-\begin{tabular}{@{}>{\heiti}l @{}p{9.2cm}@{}}
-学年学期 & ：2025-2026-2 \\
-课程名称 & ：公司金融（英）\\
-论文题目 & ：\papertitle \\
-学生学号 & ：42353012 \\
-学生姓名 & ：许哲圣 \\
-学\hspace{2em}院 & ：特拉华数据科学学院 \\
-年级专业 & ：2023 级\quad 金融数学 \\
+\hspace{1.5cm}\begin{minipage}{15cm}
+\fontsize{15}{22}\selectfont
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}>{\heiti}l @{}l@{}}
+学年学期： & \underline{\makebox[8.2cm][l]{\,2025-2026-2}}\\
+课程名称： & \underline{\makebox[8.2cm][l]{\,公司金融（英）}}\\
+论文题目： & \parbox[t]{8.2cm}{\footnotesize\papertitle}\\[4pt]
+学生学号： & \underline{\makebox[8.2cm][l]{\,42353012}}\\
+学生姓名： & \underline{\makebox[8.2cm][l]{\,许哲圣}}\\
+学\hspace{2em}院： & \underline{\makebox[8.2cm][l]{\,特拉华数据科学学院}}\\
+年级专业： & \underline{\makebox[8.2cm][l]{\,2023 级\quad 金融数学}}\\
 \end{tabular}
 \end{minipage}
 
 \vfill
 \centering
 \setlength{\fboxsep}{12pt}
-\noindent\fbox{\begin{minipage}[t][5.0cm][t]{0.86\textwidth}
+\noindent\fbox{\begin{minipage}[t][4.6cm][t]{0.88\textwidth}
 \fontsize{14}{20}\selectfont
 评语：\par
 \vfill
 \hspace*{0.3cm}得\quad 分：\rule{4cm}{0.4pt}\par
 \vspace{0.7cm}
 \hspace*{0.3cm}评阅教师签字：\rule{3.6cm}{0.4pt}\hspace{0.8cm}年\quad\ 月\par
-\vspace{0.3cm}
+\vspace{0.2cm}
 \end{minipage}}
-\vspace{1.0cm}
+\vspace{0.6cm}
 \end{titlepage}
 % ===================== end cover =====================
 
@@ -81,17 +86,17 @@ Foundation-Model Lab: How Model-Release and Benchmark Events Drive Price Discove
 
 \begin{abstract}
 \noindent In January 2026 Zhipu AI (Knowledge Atlas Technology, 2513.HK) became the first foundation-model
-laboratory to list publicly anywhere, on Hong Kong's Chapter-18C board. By 26~June~2026 its shares had risen
-about seventeen-fold to a market capitalisation near US\$114bn---roughly 570 times its $\sim$US\$200m of
-expected 2026 revenue---despite a gross margin that has fallen to near zero and negative book equity. We ask
-what such a firm is worth and how its price forms. A three-scenario DCF, a reverse DCF, a comparables check
-and a real-options reading place fundamental value at only HK\$29--84 per share (about 2\% of the market
-price); the price instead embeds a winner-take-all outcome of roughly US\$100bn revenue by 2035. Because the
-firm has no earnings to be surprised by, we replace the earnings-surprise event study with a
-\emph{capability-surprise} one (model releases and benchmark jumps). The market prices capability immediately
-and discriminately---separating Zhipu from peers on model quality, not sector---with preliminary evidence of
-post-capability-announcement drift. The valuation gap is best read as capability momentum priced as an option,
-not a simple bubble.
+laboratory to list publicly anywhere, under Hong Kong's Chapter~18C listing regime. By 26~June~2026 its shares
+had risen about seventeen-fold to a market capitalisation near US\$114bn---roughly 570 times its
+$\sim$US\$200m of expected 2026 revenue---despite a gross margin that has fallen to near zero and negative book
+equity. We ask what such a firm is worth and how its price forms. A three-scenario DCF, a reverse DCF, a
+comparables check and a real-options reading place fundamental value at only HK\$11--67 per share (about
+1.5\% of the market price); the price instead embeds a winner-take-all outcome of more than US\$100bn revenue
+by 2035. Because conventional earnings-surprise measures are economically uninformative for a deeply
+loss-making early-stage lab, we replace them with \emph{capability-surprise} events (model releases and
+benchmark jumps). The market prices capability immediately and discriminately---separating Zhipu from peers on
+model quality, not sector---with preliminary evidence of post-capability-announcement drift. The valuation gap
+is best read as capability momentum priced as an option, not a simple bubble.
 
 \vspace{0.6em}
 \noindent\textbf{Keywords:} foundation models; Chapter 18C; pre-profit valuation; real options; market
@@ -179,11 +184,15 @@ Section~\ref{sec:event}, where we separate them from capability events.
 \label{sec:val}
 
 \subsection{Cost of capital}
-We estimate the cost of equity with the CAPM. Lacking a usable local index series, we relever a bottom-up beta
-from global AI-software comparables, giving $\beta \approx 1.6$. With a risk-free rate of 4.0\% and an equity
-risk premium of 6.0\%, $K_e = 4.0\% + 1.6\times 6.0\% = 13.6\%$. As the firm is effectively all-equity, we take
-WACC~$\approx$~13.5\%. Throughout we use HK\$7.8/US\$ and (for RMB statements) RMB~7.1/US\$, and
-$\approx$435m shares outstanding.
+We estimate the cost of equity with the CAPM. Given Zhipu's extremely short post-IPO trading history, an
+estimated regression beta would be unstable and dominated by IPO- and event-driven shocks; we therefore
+construct a bottom-up beta from global AI-software comparables, giving $\beta \approx 1.6$. With a risk-free
+rate of 4.0\% and an equity risk premium of 6.0\%, $K_e = 4.0\% + 1.6\times 6.0\% = 13.6\%$; as the firm is
+effectively all-equity, WACC~$\approx$~13.5\%. Throughout we use HK\$7.8/US\$, RMB~7.1/US\$, $\approx$435m
+shares, and net cash of about \textbf{US\$0.55bn}---net IPO proceeds of $\sim$HK\$4.3bn ($\sim$US\$0.55bn)
+plus pre-IPO cash of $\sim$US\$0.03bn. The pre-IPO net-liability position is dominated by redeemable preferred
+shares that convert to ordinary equity on listing, so it is not post-IPO debt; treating any residual as debt
+would only lower equity value and reinforce our conclusion.
 
 \subsection{Scenario DCF}
 We project FCFF over 2026--2035 from a US\$200m base, with revenue growth fading from a scenario-specific start
@@ -200,26 +209,26 @@ headline results in Table~\ref{tab:dcf}.
 \toprule
 Scenario & Rev.\ CAGR '26--35 & Term.\ margin & Equity value & Per share (HK\$) \\
 \midrule
-Bear ($p=0.35$) & 21\% & 18\% & US\$1.6B & 29 \\
-Base ($p=0.45$) & 31\% & 28\% & US\$2.5B & 46 \\
-Bull ($p=0.20$) & 43\% & 35\% & US\$4.7B & 84 \\
+Bear ($p=0.35$) & 21\% & 18\% & US\$0.6B & 11 \\
+Base ($p=0.45$) & 31\% & 28\% & US\$1.6B & 29 \\
+Bull ($p=0.20$) & 43\% & 35\% & US\$3.7B & 67 \\
 \midrule
-\textbf{Probability-weighted} & --- & --- & \textbf{US\$2.6B} & \textbf{47} \\
+\textbf{Probability-weighted} & --- & --- & \textbf{US\$1.7B} & \textbf{30} \\
 \midrule
 \textit{Market (2026-06-26)} & --- & --- & \textit{US\$114B} & \textit{2{,}046} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The probability-weighted intrinsic value is about HK\$47 per share---roughly \textbf{2\% of the market price}.
-No reasonable point estimate of fundamentals approaches the quote.
+The probability-weighted intrinsic value is about HK\$30 per share---roughly \textbf{1.5\% of the market
+price}. No reasonable point estimate of fundamentals approaches the quote.
 
 \subsection{Reverse DCF: what the price requires}
 We invert the model to ask what would justify the US\$114bn equity value. Holding WACC at 13.5\% and a 40\%
-terminal margin, the price requires sustained revenue growth on the order of 100\% per year, implying revenue
-\textbf{on the order of US\$100bn by 2035} (roughly a 100\% ten-year CAGR, several hundred times FY2026E). The
-exact figure is sensitive to the reinvestment assumption, but the qualitative message is robust: the price
-embeds a hyperscaler-tier outcome reserved for a handful of global winners.
+terminal margin, the price requires revenue of \textbf{more than US\$100bn by 2035}---an annual growth rate
+near 105\% over 2026--2035 (nine growth intervals), several hundred times FY2026E. The exact figure is
+sensitive to the reinvestment assumption, but the qualitative message is robust: the price embeds a
+hyperscaler-tier outcome reserved for a handful of global winners.
 
 \subsection{Relative valuation}
 \label{sec:rel}
@@ -255,11 +264,14 @@ move the price. Under semi-strong efficiency \citep{fama1970} the reaction shoul
 any systematic \emph{post-capability-announcement drift} (PCAD)---the analogue of the post-earnings drift of
 \citet{ball1968,bernard1989}---would indicate inefficiency.
 
-\textbf{Method.} On daily prices \citep{tushare2026} we compute mean-adjusted abnormal returns and CARs over
-three windows---leakage $[-5,-1]$, reaction $[0,+1]$, and drift $[+2,+10]$---following standard event-study
-practice \citep{mackinlay1997} and the surprise-event design of \citet{guosen2020}. We first detected Zhipu's
-largest abnormal up-days \emph{blind}; they coincide almost one-for-one with GLM releases
-(Figure~\ref{fig:rets}), validating the event dates against price action.
+\textbf{Method.} Event dates are identified \emph{independently} from official model-release announcements and
+technical documentation \citep{glm_modelcard}, not from the price series. On daily prices \citep{tushare2026}
+we compute mean-adjusted abnormal returns and CARs over three windows---leakage $[-5,-1]$, reaction $[0,+1]$,
+and drift $[+2,+10]$---following standard event-study practice \citep{mackinlay1997} and the surprise-event
+design of \citet{guosen2020}. For each event the expected daily return is Zhipu's mean return over the
+pre-event estimation window $[-20,-6]$, and the abnormal return is
+$AR_t = R_t - \overline{R}_{[-20,-6]}$. Figure~\ref{fig:rets} then serves as a \emph{descriptive cross-check}:
+several of the largest positive-return days coincide with these independently dated capability events.
 
 \begin{figure}[H]
 \centering
@@ -272,17 +284,18 @@ divergent paths: Zhipu re-rates on successive SOTA releases while MiniMax de-rat
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.88\textwidth]{fig2_daily_returns.png}
-\caption{Zhipu daily returns. The largest up-days cluster on capability releases---the market trades a
-``capability calendar.''}
+\caption{Descriptive cross-check: several of Zhipu's largest up-days coincide with independently dated GLM
+releases. (Event dates are taken from official announcements, not from this chart.)}
 \label{fig:rets}
 \end{figure}
 
-\textbf{Results.} Averaged across the four GLM events, leakage is small, the reaction window is $+17.8\%$ (the
-market prices capability, fast), and the drift averages only $+1.5\%$ but is strongly \emph{bimodal}
-(Table~\ref{tab:car}). The drift sign depends on the \emph{type} of release: a genuine SOTA leap (GLM-5.2)
-continues upward, whereas an incremental upgrade (GLM-5.1) reverses. MiniMax's M2.7 produced a muted reaction
-and then de-rated, consistent with \emph{capability surprise, not sector membership, driving the
-cross-section} (Figures~\ref{fig:car}--\ref{fig:scatter}).
+\textbf{Results.} Averaged across the four GLM events, the reaction window is $+18.7\%$ (the market prices
+capability, fast) and the drift averages only $+4.8\%$ but is strongly \emph{bimodal} (Table~\ref{tab:car}).
+The drift sign depends on the \emph{type} of release: a genuine SOTA leap (GLM-5.2) continues upward, whereas
+incremental upgrades (GLM-5-Turbo, GLM-5.1) reverse. MiniMax's M2.7 drew a negligible reaction and a sharp
+subsequent de-rating ($-49\%$, partly the unwinding of its own debut bubble), consistent with
+\emph{capability surprise, not sector membership, driving the cross-section}
+(Figures~\ref{fig:car}--\ref{fig:scatter}).
 
 \begin{table}[H]
 \centering
@@ -292,25 +305,28 @@ cross-section} (Figures~\ref{fig:car}--\ref{fig:scatter}).
 \toprule
 Event & Day 0 & Reaction $[0,+1]$ & Drift $[+2,+10]$ & Reading \\
 \midrule
-GLM-5 & 2026-02-11 & $+20.7$ & $+16.7$ & under-reaction \\
-GLM-5-Turbo & 2026-03-16 & $+10.6$ & $-6.4$ & mild reversal \\
-GLM-5.1 & 2026-04-08 & $+12.2$ & $-21.5$ & over-reaction \\
-GLM-5.2 & 2026-06-15 & $+27.7$ & $+17.2^{\dagger}$ & strong under-reaction \\
+GLM-5 & 2026-02-11 & $+22.5$ & $+24.7$ & under-reaction \\
+GLM-5-Turbo & 2026-03-16 & $+7.7$ & $-19.3$ & reversal \\
+GLM-5.1 & 2026-04-08 & $+13.8$ & $-14.2$ & over-reaction \\
+GLM-5.2 & 2026-06-15 & $+30.8$ & $+28.2^{\dagger}$ & strong under-reaction \\
 \midrule
-\textit{MiniMax M2.7} & 2026-03-18 & $+4.7$ & $-3.3$ & muted / de-rate \\
+\textit{MiniMax M2.7} & 2026-03-18 & $-5.5$ & $-49.1$ & de-rate \\
 \midrule
-\textbf{Average (4 GLM)} & & $\mathbf{+17.8}$ & $\mathbf{+1.5}$ & \\
+\textbf{Average (4 GLM)} & & $\mathbf{+18.7}$ & $\mathbf{+4.8^{\dagger}}$ & \\
 \bottomrule
 \end{tabular}
 
-{\footnotesize $^{\dagger}$ GLM-5.2's $[+2,+10]$ window is \emph{truncated} (only 7 of 9 trading days fall on
-or before the 2026-06-26 cut-off); its drift is therefore provisional.}
+{\footnotesize Mean-adjusted: $AR_t=R_t-\overline{R}_{[-20,-6]}$. $^{\dagger}$ GLM-5.2's $[+2,+10]$ window is
+\emph{truncated} (only 7 of 9 trading days fall on/before the 2026-06-26 cut-off), so its drift---and the
+4-event average drift---are provisional.}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.72\textwidth]{fig3_car_eventtime.png}
-\caption{Average CAR in event time across the four GLM events.}
+\caption{Average CAR in event time across the four GLM events (mean-adjusted, $[-20,-6]$ estimation window).
+The average is plotted only where all four events have data; the available count falls from four to three after
+day~$+7$ (GLM-5.2 window truncated at the 2026-06-26 cut-off).}
 \label{fig:car}
 \end{figure}
 
@@ -332,9 +348,9 @@ against attributing every move to model quality.
 \subsection{Robustness: peer-adjusted abnormal returns}
 Because Zhipu and MiniMax share sector and macro shocks, we re-run the study with \emph{peer-adjusted} returns
 (benchmark $=$ MiniMax's same-day return). Table~\ref{tab:robust} shows the reaction result is highly robust
-($+17.8\%$ vs $+18.5\%$), while the average drift \emph{strengthens} ($+1.5\%\!\to\!+19.2\%$): once the falling
+($+18.7\%$ vs $+18.5\%$), while the average drift \emph{strengthens} ($+4.8\%\!\to\!+19.2\%$): once the falling
 sector is removed, all four events drift positively, and GLM-5.1's apparent reversal flips to continuation
-($-21.5\%\!\to\!+12.9\%$). The under-reaction pattern is reinforced, not weakened, by peer adjustment.
+($-14.2\%\!\to\!+12.9\%$). The under-reaction pattern is reinforced, not weakened, by peer adjustment.
 
 \begin{table}[H]
 \centering
@@ -346,14 +362,17 @@ sector is removed, all four events drift positively, and GLM-5.1's apparent reve
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}
 Event & React $[0,1]$ & Drift $[2,10]$ & React $[0,1]$ & Drift $[2,10]$ \\
 \midrule
-GLM-5 & $+20.7$ & $+16.7$ & $+17.2$ & $+13.3$ \\
-GLM-5-Turbo & $+10.6$ & $-6.4$ & $+14.6$ & $+19.2$ \\
-GLM-5.1 & $+12.2$ & $-21.5$ & $+13.4$ & $+12.9$ \\
-GLM-5.2 & $+27.7$ & $+17.2$ & $+28.7$ & $+31.3$ \\
+GLM-5 & $+22.5$ & $+24.7$ & $+17.2$ & $+13.3$ \\
+GLM-5-Turbo & $+7.7$ & $-19.3$ & $+14.6$ & $+19.2$ \\
+GLM-5.1 & $+13.8$ & $-14.2$ & $+13.4$ & $+12.9$ \\
+GLM-5.2 & $+30.8$ & $+28.2^{\dagger}$ & $+28.7$ & $+31.3^{\dagger}$ \\
 \midrule
-\textbf{Average} & $+17.8$ & $+1.5$ & $+18.5$ & $+19.2$ \\
+\textbf{Average} & $+18.7$ & $+4.8^{\dagger}$ & $+18.5$ & $+19.2^{\dagger}$ \\
 \bottomrule
 \end{tabular}
+
+{\footnotesize $^{\dagger}$ GLM-5.2 drift window truncated (7/9 days through 2026-06-26); the GLM-5.2 rows and
+the average drifts are provisional.}
 \end{table}
 
 \textbf{Honesty box.} This is \emph{preliminary, diagnostic} evidence consistent with PCAD, not a proven
@@ -363,7 +382,7 @@ interesting undergraduate case, not a general law. The natural extensions are a 
 (adding MiniMax and Wenge releases) and an NLP-scored surprise magnitude.
 
 \section{Conclusion and Implications}
-A disciplined valuation cannot reconcile Zhipu's fundamentals (HK\$29--84 per share) with its market price
+A disciplined valuation cannot reconcile Zhipu's fundamentals (HK\$11--67 per share) with its market price
 (HK\$2,046 on 26~June~2026). The reverse DCF shows why: the price embeds a winner-take-all, US\$100bn-revenue
 outcome, best expressed as a call option on frontier AI rather than a cash-flow stream. The event study shows
 \emph{how} that price is discovered---through capability surprises priced immediately and discriminately, with
@@ -445,8 +464,8 @@ Year & Revenue & Growth & EBIT margin & NOPAT & Reinvest & FCFF \\
 \midrule
 \multicolumn{7}{l}{Terminal value (2035) $=450\times1.04/(0.135-0.04)=\text{US\$}4{,}925$m;
  PV of TV $=\text{US\$}1{,}388$m.}\\
-\multicolumn{7}{l}{Enterprise value $=\text{US\$}1{,}040$m; $+$ net cash US\$1{,}500m $=$ equity
- US\$2{,}540m $=$ \textbf{HK\$46/share}.}\\
+\multicolumn{7}{l}{Enterprise value $=\text{US\$}1{,}040$m; $+$ net cash US\$550m $=$ equity
+ US\$1{,}590m $=$ \textbf{HK\$29/share}.}\\
 \bottomrule
 \end{tabular}
 \end{table}

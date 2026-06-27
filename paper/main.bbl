@@ -34,6 +34,13 @@ Eugene~F. Fama.
 \newblock Efficient capital markets: A review of theory and empirical work.
 \newblock \emph{Journal of Finance}, 25\penalty0 (2):\penalty0 383--417, 1970.
 
+\bibitem[Feng(2017)]{fengliu}
+Liu Feng.
+\newblock Collected investment essays.
+\newblock Gao Yi Asset Management, 2017.
+\newblock Practitioner essays applying Soros's reflexivity to equity pricing
+  and on reverse investing; essays dated 2005--2017.
+
 \bibitem[{Guosen Securities Economic Research Institute}(2020)]{guosen2020}
 {Guosen Securities Economic Research Institute}.
 \newblock 金融工程专题研究：超预期投资全攻略 [special report
@@ -81,13 +88,5 @@ A.~Craig MacKinlay.
 \newblock Hugging Face, \url{https://huggingface.co/zai-org/GLM-4.6}; Z.ai
   developer docs, 2026.
 \newblock Architecture (MoE), context length, benchmark results.
-
-\bibitem[冯柳~(Feng(2017)]{fengliu}
-Liu) 冯柳~(Feng.
-\newblock 高毅投资冯柳文章（全集）[collected investment essays],
-  2017.
-\newblock Practitioner essays applying Soros's reflexivity (反身性) to
-  equity pricing and on reverse/contrarian investing (逆向投资); essays
-  dated 2005--2017.
 
 \end{thebibliography}

@@ -6,14 +6,16 @@
 > and ask the only question that matters for market efficiency: *does the price react once and stop, or does it
 > keep drifting?* This is the AI analogue of post-earnings-announcement drift (PEAD) → **PCAD**.
 >
-> Method: mean-adjusted abnormal returns on authoritative Tushare/HKEX prices, three windows — leakage
-> `[-5,-1]`, reaction `[0,+1]`, drift `[+2,+10]`; robustness via peer-adjustment (benchmark = MiniMax).
+> Method: mean-adjusted abnormal returns ($AR_t = R_t - \overline{R}_{[-20,-6]}$, pre-event estimation
+> window) on authoritative Tushare/HKEX prices; three windows — leakage `[-5,-1]`, reaction `[0,+1]`,
+> drift `[+2,+10]`; robustness via peer-adjustment (benchmark = MiniMax).
 
 ---
 
-## 1. The data finds the events before we tell it the dates
-We flagged Zhipu's largest abnormal up-days *blind*, then checked them against the GLM release log. They line
-up almost one-for-one:
+## 1. Independently dated events, with prices as a descriptive cross-check
+Event dates are taken from **official GLM release announcements** — not inferred from the price series. As a
+*descriptive* cross-check, several of Zhipu's largest abnormal up-days coincide with these independently dated
+events:
 
 | Data-found spike | Daily ret | Matches |
 |---|---|---|
@@ -33,19 +35,19 @@ Average CAR across the four GLM events (mean-adjusted):
 | Window | Avg CAR | Read |
 |---|---:|---|
 | Leakage `[-5,-1]` | small | no systematic front-running |
-| Reaction `[0,+1]` | **+17.8%** | market *does* price capability, fast |
-| Drift `[+2,+10]` | **+1.5%** (bimodal) | sign depends on release type — see below |
+| Reaction `[0,+1]` | **+18.7%** | market *does* price capability, fast |
+| Drift `[+2,+10]` | **+4.8%†** (bimodal) | sign depends on release type — see below |
 
 ![Average CAR](figures/fig3_car_eventtime.png)
 ![Reaction vs drift](figures/fig4_reaction_vs_drift.png)
 
 ## 3. Three cases
-- **GLM-5.2 (06-15) — under-reaction / momentum.** +27.7% reaction and **+17.2% further drift** (window
+- **GLM-5.2 (06-15) — under-reaction / momentum.** +30.8% reaction and **+28.2% further drift** (window
   *truncated*: only 7 of 9 trading days fall on/before the 06-26 cut-off, so this drift is provisional). A
   genuine SOTA jump (MIT open weights, 1M context) kept re-rating.
-- **GLM-5.1 (04-08) — over-reaction / reversal.** +12.2% reaction then **−21.5% drift**: an *incremental*
+- **GLM-5.1 (04-08) — over-reaction / reversal.** +13.8% reaction then **−14.2% drift**: an *incremental*
   upgrade was "buy the rumor, sell the news" — but see the peer-adjusted result in §5.
-- **MiniMax M2.7 (03-18) — the cross-section test.** Muted +4.7% reaction, −3.3% drift; MiniMax de-rated ~60%
+- **MiniMax M2.7 (03-18) — the cross-section test.** Negligible −5.5% reaction, −49.1% drift; MiniMax de-rated ~60%
   from its high while Zhipu kept climbing (`fig1`). Same sector, opposite paths → **capability surprise, not
   sector beta, drives the cross-section.**
 
@@ -60,7 +62,7 @@ The fundamental anchor (DCF + real options) tells you *the level*; the event stu
 there*.
 
 ## 5. Robustness & honesty box
-- **Peer-adjusted** (benchmark = MiniMax): reaction robust (**+17.8% → +18.5%**); average drift **strengthens
+- **Peer-adjusted** (benchmark = MiniMax): reaction robust (**+18.7% → +18.5%**); average drift **strengthens
   to +19.2%** once the falling sector is removed — GLM-5.1's reversal flips to continuation
   (−21.5% → +12.9%). The under-reaction/PCAD pattern is reinforced, not weakened.
 - **Preliminary, diagnostic** evidence consistent with PCAD — *not* a proven anomaly: n = 4 single-firm events

@@ -25,7 +25,7 @@
 
 本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2026 年预计收入仅约 2 亿美元、毛利率已跌至 −0.4%、净权益为负的"早期商业化、尚未盈利"公司，为何上市约五个月暴涨约 17 倍、市值达约 1140 亿美元（市销率约 570 倍）？**
 
-**主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 仅支撑约 HK$47/股（约为市价的 2%）；现价隐含 2035 年收入约 1000 亿美元、约 100% 的十年复合增速。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
+**主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 仅支撑约 HK$30/股（约为市价的 1.5%）；现价隐含 2035 年收入约 1300 亿美元、2026–2035 年约 105% 的年增速（9 个增长区间）。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
 
 ### 快速导航
 
@@ -61,10 +61,10 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 | 情景 | 收入CAGR '26–35 | 终期利润率 | 股权价值 | 每股(HK$) |
 |---|---:|---:|---:|---:|
-| 悲观 (p=0.35) | 21% | 18% | $1.6B | 29 |
-| 中性 (p=0.45) | 31% | 28% | $2.5B | 46 |
-| 乐观 (p=0.20) | 43% | 35% | $4.7B | 84 |
-| **概率加权** | — | — | **$2.6B** | **47** |
+| 悲观 (p=0.35) | 21% | 18% | $0.6B | 11 |
+| 中性 (p=0.45) | 31% | 28% | $1.6B | 29 |
+| 乐观 (p=0.20) | 43% | 35% | $3.7B | 67 |
+| **概率加权** | — | — | **$1.7B** | **30** |
 | *市价 (2026-06-26)* | — | — | *$114B* | *2,046* |
 
 **反向 DCF：** 要支撑现价，需相信 2035 年收入约 **US$1000 亿**（约 **100%** 的十年复合增速，约数百倍 FY26E）——超级算力巨头级别。市场市销率约 **570×**，而 OpenAI/Anthropic 一级市场约 30–40×；**MiniMax 是最合适的直接可比对象，中科闻歌因商业模式不同而排除在倍数比较之外**。
@@ -75,16 +75,16 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 | 事件 | Day 0 | 反应[0,+1] | 漂移[+2,+10] | 读数 |
 |---|---|---:|---:|---|
-| GLM-5 | 2026-02-11 | +20.7% | +16.7% | 反应不足 |
-| GLM-5-Turbo | 2026-03-16 | +10.6% | −6.4% | 小幅反转 |
-| GLM-5.1 | 2026-04-08 | +12.2% | −21.5% | 过度反应 |
-| GLM-5.2 | 2026-06-15 | +27.7% | +17.2%† | 强反应不足 |
-| *MiniMax M2.7* | 2026-03-18 | +4.7% | −3.3% | 哑火/板块分化 |
-| **均值(4)** | | **+17.8%** | **+1.5%** | |
+| GLM-5 | 2026-02-11 | +22.5% | +24.7% | 反应不足 |
+| GLM-5-Turbo | 2026-03-16 | +7.7% | −19.3% | 反转 |
+| GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | 过度反应 |
+| GLM-5.2 | 2026-06-15 | +30.8% | +28.2%† | 强反应不足 |
+| *MiniMax M2.7* | 2026-03-18 | −5.5% | −49.1% | 哑火/去估值 |
+| **均值(4)** | | **+18.7%** | **+4.8%†** | |
 
 † GLM-5.2 的 [+2,+10] 窗口**未走完**（截至 6/26 只覆盖 9 天中的 7 天），漂移为临时值。
 
-**要点：** ① 数据盲测出的最大异常日几乎一一命中 GLM 发布日；② 反应一致为正（均值 +17.8%），漂移分化；③ **同业调整后漂移全部转正**（+1.5% → +19.2%），GLM-5.1 的"过度反应"翻为延续，说明其反转主要是板块效应；④ 2/20、5/13 两个尖峰为**非能力的指数/资金流事件**（恒生科技纳入、港股通预期）。结论定位为**初步诊断性证据**，4 个事件足以构成有趣的本科案例，但不足以确立普遍异象。
+**要点：** ① 事件日期独立取自官方发布公告（不靠股价倒推），图 2 仅作描述性交叉验证；② 反应一致为正（均值 +18.7%），漂移分化；③ **同业调整后漂移全部转正**（+4.8% → +19.2%），GLM-5.1 的"过度反应"翻为延续，说明其反转主要是板块效应；④ 2/20、5/13 两个尖峰为**非能力的指数/资金流事件**（恒生科技纳入、港股通预期）。结论定位为**初步诊断性证据**，4 个事件足以构成有趣的本科案例，但不足以确立普遍异象。
 
 ### 港股AI新股
 
@@ -154,8 +154,8 @@ early-commercial-stage, pre-profit firm — ~US$200m expected 2026 revenue, a gr
 negative book equity — rise ~17x in five months to a ~US$114B market cap (≈570× sales)?**
 
 **Main conclusion:** neither a simple bubble nor efficient pricing, but **a call option on a winner-take-all
-AGI outcome, priced through capability momentum**. A disciplined DCF supports only ~HK$47/share (≈2% of price);
-the price embeds ~US$100B of revenue by 2035 at a ~100% CAGR. Price discovery has shifted from *earnings
+AGI outcome, priced through capability momentum**. A disciplined DCF supports only ~HK$30/share (≈1.5% of
+price); the price embeds ~US$130B of revenue by 2035 at a ~105% annual rate (2026–2035). Price discovery has shifted from *earnings
 surprise* to **capability surprise** — pricing built around model releases and leaderboard wins.
 
 ### Core Argument — Two Pillars (weight on valuation + event study)
@@ -172,13 +172,13 @@ WACC ≈ 13.5% (CAPM, bottom-up β≈1.6). Conventions: HK$7.8/US$, RMB 7.1/US$,
 
 | Scenario | Rev. CAGR '26–35 | Term. margin | Equity | Per share (HK$) |
 |---|---:|---:|---:|---:|
-| Bear (p=0.35) | 21% | 18% | $1.6B | 29 |
-| Base (p=0.45) | 31% | 28% | $2.5B | 46 |
-| Bull (p=0.20) | 43% | 35% | $4.7B | 84 |
-| **Prob-weighted** | — | — | **$2.6B** | **47** |
+| Bear (p=0.35) | 21% | 18% | $0.6B | 11 |
+| Base (p=0.45) | 31% | 28% | $1.6B | 29 |
+| Bull (p=0.20) | 43% | 35% | $3.7B | 67 |
+| **Prob-weighted** | — | — | **$1.7B** | **30** |
 | *Market (2026-06-26)* | — | — | *$114B* | *2,046* |
 
-**Reverse DCF:** justifying the price requires ~US$100B revenue by 2035 (~100% CAGR, several hundred ×FY26E).
+**Reverse DCF:** justifying the price requires ~US$130B revenue by 2035 (~105% annual over 2026–2035, several hundred ×FY26E).
 Market P/S ≈ 570× vs ~30–40× for OpenAI/Anthropic; **MiniMax is the appropriate direct comparable; Wenge AI is
 excluded from the multiple comparison** (different business model).
 
@@ -186,16 +186,16 @@ excluded from the multiple comparison** (different business model).
 
 | Event | Day 0 | Reaction [0,+1] | Drift [+2,+10] | Reading |
 |---|---|---:|---:|---|
-| GLM-5 | 2026-02-11 | +20.7% | +16.7% | under-reaction |
-| GLM-5-Turbo | 2026-03-16 | +10.6% | −6.4% | mild reversal |
-| GLM-5.1 | 2026-04-08 | +12.2% | −21.5% | over-reaction |
-| GLM-5.2 | 2026-06-15 | +27.7% | +17.2%† | strong under-reaction |
-| *MiniMax M2.7* | 2026-03-18 | +4.7% | −3.3% | muted / de-rate |
-| **Average (4)** | | **+17.8%** | **+1.5%** | |
+| GLM-5 | 2026-02-11 | +22.5% | +24.7% | under-reaction |
+| GLM-5-Turbo | 2026-03-16 | +7.7% | −19.3% | reversal |
+| GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | over-reaction |
+| GLM-5.2 | 2026-06-15 | +30.8% | +28.2%† | strong under-reaction |
+| *MiniMax M2.7* | 2026-03-18 | −5.5% | −49.1% | muted / de-rate |
+| **Average (4)** | | **+18.7%** | **+4.8%†** | |
 
 † GLM-5.2's [+2,+10] window is truncated (7 of 9 days through 2026-06-26); its drift is provisional.
 
-Blind-detected abnormal days map onto GLM releases; reaction is robust (mean-adj +17.8% vs peer-adj +18.5%),
+Independently-dated events; reaction is robust (mean-adj +18.7% vs peer-adj +18.5%),
 and drift **strengthens to +19.2%** once the falling sector is removed (PCAD survives, GLM-5.1's reversal flips
 to continuation). Two spikes (Feb-20, May-13) are non-capability index/flow events (Hang Seng Tech inclusion,
 Stock Connect). Treated as **preliminary, diagnostic** evidence — an undergraduate case, not a general law.

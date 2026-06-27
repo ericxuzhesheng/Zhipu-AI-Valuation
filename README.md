@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/标的-智谱AI · 2513.HK-F2C94C?style=for-the-badge" alt="2513.HK">
   <img src="https://img.shields.io/badge/上市-港交所主板 · 第18C章-4CAF50?style=for-the-badge" alt="HKEX 18C">
   <img src="https://img.shields.io/badge/论文-XeLaTeX-008080?style=for-the-badge&logo=latex&logoColor=white" alt="XeLaTeX">
-  <img src="https://img.shields.io/badge/市销率-~570x · DCF缺口~98%25-9B51E0?style=for-the-badge" alt="P/S 570x">
+  <img src="https://img.shields.io/badge/收入倍数-~570x · DCF缺口~98%25-9B51E0?style=for-the-badge" alt="Revenue multiple 570x">
   <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT">
 </p>
 
@@ -23,9 +23,9 @@
 
 ### 一句话概览
 
-本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2026 年预计收入仅约 2 亿美元、毛利率已跌至 −0.4%、净权益为负的"早期商业化、尚未盈利"公司，为何上市约五个月暴涨约 17 倍、市值达约 1140 亿美元（市销率约 570 倍）？**
+本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2026 年预计收入仅约 2 亿美元、毛利率已跌至 −0.4%、净权益为负的"早期商业化、尚未盈利"公司，为何上市约五个月暴涨约 17 倍、市值达约 1140 亿美元（股权价值/收入约 570 倍）？**
 
-**主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 仅支撑约 HK$30/股（约为市价的 1.5%）；现价隐含 2035 年收入约 1300 亿美元、2026–2035 年约 105% 的年增速（9 个增长区间）。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
+**主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 概率加权约 HK$33/股（约为市价的 1.6%）；现价隐含 2035 年收入约 1300 亿美元、2026–2035 年约 105% 的年增速（9 个增长区间）。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
 
 ### 快速导航
 
@@ -61,13 +61,13 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 | 情景 | 收入CAGR '26–35 | 终期利润率 | 股权价值 | 每股(HK$) |
 |---|---:|---:|---:|---:|
-| 悲观 (p=0.35) | 21% | 18% | $0.6B | 11 |
-| 中性 (p=0.45) | 31% | 28% | $1.6B | 29 |
-| 乐观 (p=0.20) | 43% | 35% | $3.7B | 67 |
-| **概率加权** | — | — | **$1.7B** | **30** |
+| 悲观 (p=0.35) | 21% | 18% | $0.7B | 12 |
+| 中性 (p=0.45) | 31% | 28% | $1.6B | 28 |
+| 乐观 (p=0.20) | 46% | 35% | $4.6B | 82 |
+| **概率加权** | — | — | **$1.9B** | **33** |
 | *市价 (2026-06-26)* | — | — | *$114B* | *2,046* |
 
-**反向 DCF：** 要支撑现价，需相信 2035 年收入约 **US$1000 亿**（约 **100%** 的十年复合增速，约数百倍 FY26E）——超级算力巨头级别。市场市销率约 **570×**，而 OpenAI/Anthropic 一级市场约 30–40×；**MiniMax 是最合适的直接可比对象，中科闻歌因商业模式不同而排除在倍数比较之外**。
+**反向 DCF：** 要支撑现价，需相信 2035 年收入约 **US$1000 亿**（约 **100%** 的十年复合增速，约数百倍 FY26E）——超级算力巨头级别。市场股权价值/收入约 **570×**，而 OpenAI/Anthropic 一级市场约 30–40×；**MiniMax 是最合适的直接可比对象，中科闻歌因商业模式不同而排除在倍数比较之外**。
 
 ### 事件研究
 
@@ -104,7 +104,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 <p align="center"><img src="figures/fig1_price_paths.png" width="800" alt="价格路径"></p>
 <p align="center"><img src="figures/fig5_football_field.png" width="720" alt="估值足球场"></p>
-<p align="center"><img src="figures/fig6_ps_comps.png" width="640" alt="市销率对比"></p>
+<p align="center"><img src="figures/fig6_ps_comps.png" width="640" alt="收入倍数对比"></p>
 <p align="center"><img src="figures/fig3_car_eventtime.png" width="640" alt="平均CAR"></p>
 <p align="center"><img src="figures/fig4_reaction_vs_drift.png" width="560" alt="反应vs漂移"></p>
 
@@ -153,10 +153,10 @@ A corporate-finance valuation and price-discovery study of the world's **first p
 foundation-model company** — Zhipu AI (Knowledge Atlas, 2513.HK, listed on the HKEX Main Board under
 Chapter 18C on 2026-01-08). The question is not a target price but a counter-intuitive one: **why did an
 early-commercial-stage, pre-profit firm — ~US$200m expected 2026 revenue, a gross margin fallen to −0.4%,
-negative book equity — rise ~17x in five months to a ~US$114B market cap (≈570× sales)?**
+negative book equity — rise ~17x in five months to a ~US$114B market cap (≈570× equity value / revenue)?**
 
 **Main conclusion:** neither a simple bubble nor efficient pricing, but **a call option on a winner-take-all
-AGI outcome, priced through capability momentum**. A disciplined DCF supports only ~HK$30/share (≈1.5% of
+AGI outcome, priced through capability momentum**. A disciplined DCF supports only ~HK$33/share (≈1.6% of
 price); the price embeds ~US$130B of revenue by 2035 at a ~105% annual rate (2026–2035). Price discovery has shifted from *earnings
 surprise* to **capability surprise** — pricing built around model releases and leaderboard wins.
 
@@ -174,14 +174,14 @@ WACC ≈ 13.5% (CAPM, bottom-up β≈1.6). Conventions: HK$7.8/US$, RMB 7.1/US$,
 
 | Scenario | Rev. CAGR '26–35 | Term. margin | Equity | Per share (HK$) |
 |---|---:|---:|---:|---:|
-| Bear (p=0.35) | 21% | 18% | $0.6B | 11 |
-| Base (p=0.45) | 31% | 28% | $1.6B | 29 |
-| Bull (p=0.20) | 43% | 35% | $3.7B | 67 |
-| **Prob-weighted** | — | — | **$1.7B** | **30** |
+| Bear (p=0.35) | 21% | 18% | $0.7B | 12 |
+| Base (p=0.45) | 31% | 28% | $1.6B | 28 |
+| Bull (p=0.20) | 46% | 35% | $4.6B | 82 |
+| **Prob-weighted** | — | — | **$1.9B** | **33** |
 | *Market (2026-06-26)* | — | — | *$114B* | *2,046* |
 
 **Reverse DCF:** justifying the price requires ~US$130B revenue by 2035 (~105% annual over 2026–2035, several hundred ×FY26E).
-Market P/S ≈ 570× vs ~30–40× for OpenAI/Anthropic; **MiniMax is the appropriate direct comparable; Wenge AI is
+Market equity value / revenue ≈ 570× vs ~30–40× for OpenAI/Anthropic; **MiniMax is the appropriate direct comparable; Wenge AI is
 excluded from the multiple comparison** (different business model).
 
 ### Event Study

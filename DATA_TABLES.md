@@ -28,7 +28,7 @@ Fundamentals from the **HKEX Chapter-18C prospectus** (stock code 2513). All fig
 | Return vs IPO | **+1,661% (~17×)** | +159% | +84% |
 | Period high / low (close) | 2,410 / 131.5 | 1,238 / 345 | — (1 day) |
 | Latest market cap | **~HK$890B (~US$114B)** | ~HK$130B (~US$17B) | ~HK$10.5B |
-| P/S (FY26E US$200M) | **~570×** | far lower than Zhipu | n/a (different model) |
+| Equity value / revenue (FY26E US$200M) | **~570×** | far lower than Zhipu | n/a (different model) |
 
 ## Table D3 — Risk / Volatility
 
@@ -50,7 +50,7 @@ Fundamentals from the **HKEX Chapter-18C prospectus** (stock code 2513). All fig
 
 Balance sheet @ 30-Jun-2025: net liabilities **−RMB 6,150.8M** (negative equity), net current liabilities
 −RMB 9,564.8M, cash RMB 190.9M. Shares outstanding ~435M. FX: HK$7.8/US$, RMB 7.1/US$.
-**Implied market P/S ≈ 570× FY26E** (US$114B / US$200M).
+**Implied market equity value / revenue ≈ 570× FY26E** (US$114B / US$200M).
 
 ## Table D5 — Product / Competitive Data (leaderboard thread)
 

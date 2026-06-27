@@ -56,7 +56,7 @@ Average CAR across the four GLM events (mean-adjusted):
 ## 4. Verdict (the non-textbook one)
 The market is **neither efficient nor a blind bubble**. It prices capability *immediately and discriminately*
 (separating Zhipu from MiniMax on model quality, not sector) but **mis-times magnitude** — under-reacting to
-true SOTA leaps, over-reacting to incremental ones. The **~17x / ~570x-P/S** re-rating is best read as
+true SOTA leaps, over-reacting to incremental ones. The **~17x / ~570x equity-value-to-revenue** re-rating is best read as
 **capability momentum priced as an option** — a behavioural signature, not a morality tale about "AI hype."
 The fundamental anchor (DCF + real options) tells you *the level*; the event study tells you *how price gets
 there*.

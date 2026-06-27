@@ -81,11 +81,11 @@ Foundation-Model Lab: Evidence from Zhipu AI (2513.HK)}
 \begin{abstract}
 \noindent In January 2026 Zhipu AI (Knowledge Atlas Technology, 2513.HK) became the first foundation-model
 laboratory to list publicly anywhere, under Hong Kong's Chapter~18C listing regime. By 26~June~2026 its shares
-had risen about seventeen-fold to a market capitalisation near US\$114bn---roughly 570 times its
+had risen about seventeen-fold to a market capitalisation near US\$114bn---an equity value roughly 570 times its
 $\sim$US\$200m of expected 2026 revenue---despite a gross margin that has fallen to near zero and negative book
 equity. We ask what such a firm is worth and how its price forms. A three-scenario DCF, a reverse DCF, a
-comparables check and a real-options reading place fundamental value at only HK\$11--67 per share (about
-1.5\% of the market price); the price instead embeds a winner-take-all outcome of more than US\$100bn revenue
+comparables check and a real-options reading place fundamental value at only HK\$12--82 per share (about
+1.6\% of the market price); the price instead embeds a winner-take-all outcome of more than US\$100bn revenue
 by 2035. Because conventional earnings-surprise measures are economically uninformative for a deeply
 loss-making early-stage lab, we replace them with \emph{capability-surprise} events (model releases and
 benchmark jumps). The market prices capability immediately and discriminately---separating Zhipu from peers on
@@ -103,7 +103,7 @@ hours, two Chinese ``AI tiger'' laboratories---Zhipu AI (2513.HK, 8~January) and
 9~January)---became the first foundation-model developers to go public anywhere, listing on the Hong Kong
 Stock Exchange. Zhipu listed under Chapter~18C, the regime for specialist-technology firms that admits
 pre-profit issuers. By 26~June~2026 its shares had compounded roughly seventeen-fold to a market
-capitalisation near US\$114bn on FY2026 expected revenue of about US\$200m---an implied price-to-sales
+capitalisation near US\$114bn on FY2026 expected revenue of about US\$200m---an implied equity-value-to-revenue
 multiple near 570$\times$ \citep{tushare2026,prospectus2513}.
 
 This paper poses three questions: \textbf{(i)} what is Zhipu worth on fundamentals; \textbf{(ii)} what does
@@ -189,11 +189,13 @@ shares that convert to ordinary equity on listing, so it is not post-IPO debt; t
 would only lower equity value and reinforce our conclusion.
 
 \subsection{Scenario DCF}
-We project FCFF over 2026--2035 from a US\$200m base, with revenue growth fading from a scenario-specific start
-to a mature rate, operating margin ramping from $-30\%$ to a terminal level, a 15\% tax rate, and reinvestment
-via a sales-to-capital ratio of 1.6--2.0; terminal value uses $g=4\%$. All cells are live in the companion
-workbook (\texttt{model/valuation\_model.xlsx}); the full Base-case chain is in Appendix~\ref{sec:proj}, and
-headline results in Table~\ref{tab:dcf}.
+We project FCFF over 2026--2035 from a US\$200m base, with revenue growth fading from a scenario-specific
+2027 start to a mature rate, operating margin ramping from $-30\%$ to a terminal level, a 15\% tax rate, and
+reinvestment via a sales-to-capital ratio of 1.6--2.0; terminal value uses $g=4\%$. When EBIT is negative, cash
+tax is zero and losses accumulate in a simple NOL carryforward account; positive EBIT is taxed only after the
+NOL balance has been absorbed. All cells are live in the companion workbook
+(\texttt{model/valuation\_model.xlsx}); the full Base-case chain is in Appendix~\ref{sec:proj}, and headline
+results in Table~\ref{tab:dcf}.
 
 \begin{table}[H]
 \centering
@@ -203,18 +205,18 @@ headline results in Table~\ref{tab:dcf}.
 \toprule
 Scenario & Rev.\ CAGR '26--35 & Term.\ margin & Equity value & Per share (HK\$) \\
 \midrule
-Bear ($p=0.35$) & 21\% & 18\% & US\$0.6B & 11 \\
-Base ($p=0.45$) & 31\% & 28\% & US\$1.6B & 29 \\
-Bull ($p=0.20$) & 43\% & 35\% & US\$3.7B & 67 \\
+Bear ($p=0.35$) & 21\% & 18\% & US\$0.7B & 12 \\
+Base ($p=0.45$) & 31\% & 28\% & US\$1.6B & 28 \\
+Bull ($p=0.20$) & 46\% & 35\% & US\$4.6B & 82 \\
 \midrule
-\textbf{Probability-weighted} & --- & --- & \textbf{US\$1.7B} & \textbf{30} \\
+\textbf{Probability-weighted} & --- & --- & \textbf{US\$1.9B} & \textbf{33} \\
 \midrule
 \textit{Market (2026-06-26)} & --- & --- & \textit{US\$114B} & \textit{2{,}046} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The probability-weighted intrinsic value is about HK\$30 per share---roughly \textbf{1.5\% of the market
+The probability-weighted intrinsic value is about HK\$33 per share---roughly \textbf{1.6\% of the market
 price}. No reasonable point estimate of fundamentals approaches the quote.
 
 \subsection{Reverse DCF: what the price requires}
@@ -226,7 +228,7 @@ hyperscaler-tier outcome reserved for a handful of global winners.
 
 \subsection{Relative valuation}
 \label{sec:rel}
-On FY2026E revenue Zhipu trades near \textbf{570$\times$ sales}. For context, leading private frontier labs
+On FY2026E revenue Zhipu trades near \textbf{570$\times$ equity value / revenue}. For context, leading private frontier labs
 (OpenAI, Anthropic) have transacted around 30--40$\times$ trailing revenue, and MiniMax---the most appropriate
 direct comparable---trades far lower than Zhipu on the same basis. We deliberately \emph{exclude} Wenge AI from
 the multiple comparison: its government/enterprise project-delivery model is not comparable to a frontier
@@ -237,7 +239,7 @@ richest private peers---consistent with the reverse-DCF reading rather than with
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.78\textwidth]{fig6_ps_comps.png}
-\caption{EV/Sales multiples (log scale). Zhipu's $\approx$570$\times$ is roughly an order of magnitude above
+\caption{Equity value / revenue multiples (log scale). Zhipu's $\approx$570$\times$ is roughly an order of magnitude above
 the 30--40$\times$ at which leading private frontier labs have transacted; even MiniMax sits far below.
 Private-lab multiples are illustrative.}
 \label{fig:comps}
@@ -263,10 +265,11 @@ unwind as fast as it built.
 
 \subsection{Sensitivity and synthesis}
 The conclusion is not an artefact of any single assumption. Figure~\ref{fig:tornado} tornadoes the Base case
-against its main drivers: even jointly bullish settings (WACC~12\%, terminal margin~33\%, 72\% start growth)
-lift value only to the mid-HK\$30s---still about two orders of magnitude below the market. Figure~\ref{fig:ff}
-draws the whole picture together as a valuation football field: scenario DCF (HK\$11--67) and a comparables
-cross-check (HK\$108--143 at 30--40$\times$ sales) both sit far to the left of the HK\$2,046 quote, a gap of
+against its main drivers: even the most favorable one-at-a-time changes---lower WACC, a higher terminal margin,
+or stronger 2027 growth---raise estimated value only to the mid-HK\$30s, still about two orders of magnitude
+below the market. Figure~\ref{fig:ff} draws the whole picture together as a valuation football field: scenario
+DCF (HK\$12--82) and an equity-value-to-revenue cross-check (HK\$108--143 at 30--40$\times$ revenue) both sit
+far to the left of the HK\$2,046 quote, a gap of
 roughly 60--70$\times$. The market is not pricing a different point on the same distribution; it is pricing a
 different distribution---the right-tail option of Section~\ref{sec:val}.
 
@@ -355,7 +358,7 @@ GLM-5.2 & 2026-06-15 & $+30.8$ & $+28.2^{\dagger}$ & strong under-reaction \\
 \includegraphics[width=0.72\textwidth]{fig3_car_eventtime.png}
 \caption{Average CAR in event time across the four GLM events (mean-adjusted, $[-20,-6]$ estimation window).
 The average is plotted only where all four events have data; the available count falls from four to three after
-day~$+7$ (GLM-5.2 window truncated at the 2026-06-26 cut-off).}
+day~$+8$ (GLM-5.2 window truncated at the 2026-06-26 cut-off).}
 \label{fig:car}
 \end{figure}
 
@@ -411,7 +414,7 @@ interesting undergraduate case, not a general law. The natural extensions are a 
 (adding MiniMax and Wenge releases) and an NLP-scored surprise magnitude.
 
 \section{Conclusion and Implications}
-A disciplined valuation cannot reconcile Zhipu's fundamentals (HK\$11--67 per share) with its market price
+A disciplined valuation cannot reconcile Zhipu's fundamentals (HK\$12--82 per share) with its market price
 (HK\$2,046 on 26~June~2026). The reverse DCF shows why: the price embeds a winner-take-all, US\$100bn-revenue
 outcome, best expressed as a call option on frontier AI rather than a cash-flow stream. The event study shows
 \emph{how} that price is discovered---through capability surprises priced immediately and discriminately, with
@@ -469,34 +472,38 @@ fundamentals.
 \clearpage
 \section{Base-Case DCF Projection}
 \label{sec:proj}
-Base-case chain (US\$m unless noted), reproducing the live workbook: WACC~$=13.5\%$, tax~$=15\%$, terminal
-$g=4\%$, sales-to-capital~$=1.8$, $\approx$435m shares, HK\$7.8/US\$. Revenue grows from US\$200m fading
-$62\%\!\to\!8\%$; operating margin ramps $-30\%\!\to\!28\%$.
+Base-case chain (US\$m unless noted), reproducing the live workbook: WACC~$=13.5\%$, statutory tax~$=15\%$,
+terminal $g=4\%$, sales-to-capital~$=1.8$, $\approx$435m shares, HK\$7.8/US\$. Revenue grows from US\$200m in
+2026, with growth fading from 56\% in 2027 to 8\% in 2035; the 2026 bridge from the 2025 revenue base of
+about US\$102m is therefore about 96\%. Operating margin ramps $-30\%\!\to\!28\%$. Cash tax is zero while EBIT
+is negative; losses accumulate as NOLs and shelter future positive EBIT until exhausted.
 
 \begin{table}[H]
 \centering
 \caption{Base-case projection (US\$ millions unless noted).}
-\begin{tabular}{lrrrrrr}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrr}
 \toprule
-Year & Revenue & Growth & EBIT margin & NOPAT & Reinvest & FCFF \\
+Year & Revenue & Growth & EBIT margin & Cash tax & NOL end & NOPAT & Reinvest & FCFF \\
 \midrule
-2026 & 200 & 62\% & $-30\%$ & $-51$ & 43 & $-94$ \\
-2027 & 312 & 56\% & $-24\%$ & $-62$ & 62 & $-125$ \\
-2028 & 468 & 50\% & $-17\%$ & $-68$ & 87 & $-155$ \\
-2029 & 674 & 44\% & $-11\%$ & $-61$ & 114 & $-176$ \\
-2030 & 930 & 38\% & $-4\%$ & $-33$ & 142 & $-176$ \\
-2031 & 1{,}228 & 32\% & 2\% & 23 & 165 & $-142$ \\
-2032 & 1{,}547 & 26\% & 9\% & 114 & 177 & $-63$ \\
-2033 & 1{,}856 & 20\% & 15\% & 238 & 172 & 67 \\
-2034 & 2{,}116 & 14\% & 22\% & 388 & 144 & 243 \\
-2035 & 2{,}285 & 8\% & 28\% & 544 & 94 & 450 \\
+2026 & 200 & 96\% & $-30\%$ & 0 & 60 & $-60$ & 54 & $-114$ \\
+2027 & 312 & 56\% & $-24\%$ & 0 & 133 & $-73$ & 62 & $-136$ \\
+2028 & 468 & 50\% & $-17\%$ & 0 & 214 & $-80$ & 87 & $-167$ \\
+2029 & 674 & 44\% & $-11\%$ & 0 & 285 & $-72$ & 114 & $-186$ \\
+2030 & 930 & 38\% & $-4\%$ & 0 & 325 & $-39$ & 142 & $-182$ \\
+2031 & 1{,}228 & 32\% & 2\% & 0 & 297 & 27 & 165 & $-138$ \\
+2032 & 1{,}547 & 26\% & 9\% & 0 & 163 & 134 & 177 & $-43$ \\
+2033 & 1{,}856 & 20\% & 15\% & 18 & 0 & 263 & 172 & 91 \\
+2034 & 2{,}116 & 14\% & 22\% & 68 & 0 & 388 & 144 & 243 \\
+2035 & 2{,}285 & 8\% & 28\% & 96 & 0 & 544 & 94 & 450 \\
 \midrule
-\multicolumn{7}{l}{Terminal value (2035) $=450\times1.04/(0.135-0.04)=\text{US\$}4{,}925$m;
+\multicolumn{9}{l}{Terminal value (2035) $=450\times1.04/(0.135-0.04)=\text{US\$}4{,}925$m;
  PV of TV $=\text{US\$}1{,}388$m.}\\
-\multicolumn{7}{l}{Enterprise value $=\text{US\$}1{,}040$m; $+$ net cash US\$550m $=$ equity
- US\$1{,}590m $=$ \textbf{HK\$29/share}.}\\
+\multicolumn{9}{l}{Enterprise value $=\text{US\$}1{,}015$m; $+$ net cash US\$550m $=$ equity
+ US\$1{,}565m $=$ \textbf{HK\$28/share}.}\\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \clearpage

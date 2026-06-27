@@ -32,8 +32,8 @@ Evidence from Zhipu AI (2513.HK).*
 4. **Capability vs flow catalysts** — model releases separated from index/Stock-Connect flows.
 
 ## Headline numbers (2026-06-26)
-- Price HK$2,046 (~+1,660%, ~17×); mcap ~US$114B; **P/S ~570×**; vol ~193%.
-- DCF (net cash US$0.55bn): bear/base/bull HK$11/29/67; prob-weighted **HK$30 (~1.5% of price)**.
+- Price HK$2,046 (~+1,660%, ~17×); mcap ~US$114B; **equity value / revenue ~570×**; vol ~193%.
+- DCF (net cash US$0.55bn, with NOL carryforward): bear/base/bull HK$12/28/82; prob-weighted **HK$33 (~1.6% of price)**.
 - Reverse DCF: price implies **~US$130B revenue by 2035 (~105% annual, 2026–2035)**.
 - Event study (mean-adj, [−20,−6] window): reaction **+18.7%**, drift **+4.8%** (bimodal); peer-adj drift **+19.2%**.
   GLM-5.2 drift window **truncated** (7/9 days) — provisional.
@@ -50,7 +50,7 @@ News media corroborate only; they do not carry the most important numbers.
 ## TODO — data refresh after 2026-07-03 close (user will supply)
 1. Re-pull `hk_daily` for 2513/00100/01956 through 2026-07-03; rerun `recompute.py` → new prices, vol, CAR, figures.
 2. **GLM-5.2 drift window completes** (≥+10 trading days from 06-15): remove the "truncated/provisional" caveat once full.
-3. Update market row in Table~\ref{tab:dcf} (price/mcap/P/S) and reverse-DCF target.
+3. Update market row in Table~\ref{tab:dcf} (price/mcap/equity-value-to-revenue multiple) and reverse-DCF target.
 4. Re-export `model/valuation_model.xlsx` Summary; refresh README headline numbers.
 5. Optionally extend the event panel with MiniMax / Wenge (Decitron, Yayi) releases for a multi-lab study.
 

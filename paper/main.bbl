@@ -1,4 +1,4 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{13}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -81,5 +81,13 @@ A.~Craig MacKinlay.
 \newblock Hugging Face, \url{https://huggingface.co/zai-org/GLM-4.6}; Z.ai
   developer docs, 2026.
 \newblock Architecture (MoE), context length, benchmark results.
+
+\bibitem[冯柳~(Feng(2017)]{fengliu}
+Liu) 冯柳~(Feng.
+\newblock 高毅投资冯柳文章（全集）[collected investment essays],
+  2017.
+\newblock Practitioner essays applying Soros's reflexivity (反身性) to
+  equity pricing and on reverse/contrarian investing (逆向投资); essays
+  dated 2005--2017.
 
 \end{thebibliography}

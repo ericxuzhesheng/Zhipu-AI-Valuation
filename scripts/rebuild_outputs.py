@@ -341,6 +341,84 @@ def write_comps_chart() -> None:
     plt.close(fig)
 
 
+def write_financial_profile() -> None:
+    """Company-introduction figure: revenue compounding vs gross-margin collapse."""
+    labels = ["FY2022", "FY2023", "FY2024", "FY2025"]
+    x = np.arange(len(labels))
+    revenue = np.array([np.nan, 120.0, 312.4, 724.3])  # RMB millions
+    margin = np.array([76.1, np.nan, 3.4, -0.4])  # %, FY2025 point is H1 2025
+
+    fig, ax1 = plt.subplots(figsize=(8.2, 4.2), dpi=150)
+    rev_mask = ~np.isnan(revenue)
+    ax1.bar(x[rev_mask], revenue[rev_mask], width=0.55, color="#4C78A8", zorder=2,
+            label="Revenue (RMB m)")
+    for xi, rv in zip(x[rev_mask], revenue[rev_mask]):
+        ax1.text(xi, rv + 18, f"{rv:.0f}", ha="center", fontsize=8, color="#27496B")
+    ax1.set_ylabel("Revenue (RMB millions)", color="#4C78A8")
+    ax1.tick_params(axis="y", labelcolor="#4C78A8")
+    ax1.set_ylim(0, 840)
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(labels)
+    ax1.spines[["top"]].set_visible(False)
+
+    ax2 = ax1.twinx()
+    mar_mask = ~np.isnan(margin)
+    ax2.plot(x[mar_mask], margin[mar_mask], "o-", color="#E45756", linewidth=2,
+             zorder=3, label="Gross margin (%)")
+    for xi, mg in zip(x[mar_mask], margin[mar_mask]):
+        note = " (H1)" if xi == 3 else ""
+        ax2.text(xi, mg + 5, f"{mg:.1f}%{note}", ha="center", fontsize=8, color="#A3302F")
+    ax2.axhline(0, color="#999999", linewidth=0.7, linestyle=":")
+    ax2.set_ylabel("Gross margin (%)", color="#E45756")
+    ax2.tick_params(axis="y", labelcolor="#E45756")
+    ax2.set_ylim(-12, 100)
+    ax2.spines[["top"]].set_visible(False)
+
+    ax1.set_title("Revenue compounds while the gross margin collapses")
+    fig.tight_layout()
+    fig.savefig(FIGURES / "fig8_financial_profile.png", bbox_inches="tight")
+    plt.close(fig)
+
+
+def write_glm_timeline() -> None:
+    """Company-introduction figure: milestones from founding (2019) to GLM-5.2 (2026).
+
+    Events are evenly spaced (not on a proportional date axis) so the dense 2026 release
+    cadence stays legible alongside the longer 2019--2025 build-up.
+    """
+    events = [
+        ("2019", "Founded — Tsinghua KEG", "#72B7B2"),
+        ("2022", "GLM family · 76% gross margin", "#72B7B2"),
+        ("2024", "Revenue RMB 312m", "#72B7B2"),
+        ("2025", "Revenue RMB 724m (+132%)", "#72B7B2"),
+        ("Jan 2026", "IPO HK$116.20 · Ch.18C", "#54A24B"),
+        ("Feb 2026", "GLM-5", "#4C78A8"),
+        ("Mar 2026", "GLM-5-Turbo", "#4C78A8"),
+        ("Apr 2026", "GLM-5.1 · #1 SWE-Bench Pro", "#4C78A8"),
+        ("Jun 2026", "GLM-5.2 · MIT weights · 1M ctx", "#F58518"),
+    ]
+    n = len(events)
+    fig, ax = plt.subplots(figsize=(12.0, 3.4), dpi=150)
+    ax.axhline(0, color="#444444", linewidth=1.4, zorder=1)
+    for i, (date_lbl, name, color) in enumerate(events):
+        y = 0.62 if i % 2 == 0 else -0.62
+        ax.plot([i, i], [0, y], color=color, linewidth=1.1, zorder=1)
+        ax.scatter([i], [0], s=70, color=color, zorder=3)
+        ax.annotate(
+            f"{date_lbl}\n{name}", (i, y), ha="center",
+            va="bottom" if y > 0 else "top", fontsize=8.2, color="#222222",
+        )
+    ax.set_xlim(-0.6, n - 0.4)
+    ax.set_ylim(-1.55, 1.55)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_title("From a Tsinghua lab (2019) to GLM-5.2 (2026): the path to and beyond the IPO")
+    ax.spines[["top", "right", "left", "bottom"]].set_visible(False)
+    fig.tight_layout()
+    fig.savefig(FIGURES / "fig9_glm_timeline.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def event_car_series() -> dict[str, pd.Series]:
     prices = pd.read_csv(ROOT / "data" / "Zhipu_KnowledgeAtlas_daily.csv")
     prices["trade_date"] = pd.to_datetime(prices["trade_date"].astype(str))
@@ -395,6 +473,8 @@ def main() -> None:
     write_sensitivity_chart()
     write_football_field()
     write_comps_chart()
+    write_financial_profile()
+    write_glm_timeline()
     write_event_chart()
 
 

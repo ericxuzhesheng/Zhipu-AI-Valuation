@@ -136,9 +136,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 ```bash
 cd paper
-# 需 TeX Live + XeLaTeX（论文含中文，必须用 xelatex）
-xelatex -interaction=nonstopmode main.tex
-bibtex   main
+# 需 TeX Live + XeLaTeX（封面含中文，必须用 xelatex；参考文献为内嵌 APA 列表，无需 bibtex）
 xelatex -interaction=nonstopmode main.tex
 xelatex -interaction=nonstopmode main.tex
 ```
@@ -218,8 +216,7 @@ Stock Connect). Treated as **preliminary, diagnostic** evidence — an undergrad
 
 ```bash
 cd paper
-xelatex -interaction=nonstopmode main.tex   # XeLaTeX required (CJK content)
-bibtex   main
+# XeLaTeX required (CJK cover); references are an inline APA list, so no bibtex step
 xelatex -interaction=nonstopmode main.tex
 xelatex -interaction=nonstopmode main.tex
 ```

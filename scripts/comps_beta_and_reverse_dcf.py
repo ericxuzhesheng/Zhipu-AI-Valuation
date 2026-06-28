@@ -18,7 +18,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import yfinance as yf
 
 ROOT = Path(__file__).resolve().parents[1]
 FIGURES = ROOT / "figures"
@@ -34,34 +33,37 @@ C_INK = "#222222"
 # PART 1 — Comparable-company beta bridge (CSV + LaTeX)
 # ============================================================
 
-COMPS = {
-    "Salesforce": "CRM",
-    "Palantir": "PLTR",
-    "Snowflake": "SNOW",
-    "Datadog": "DDOG",
-    "MongoDB": "MDB",
-    "Cloudflare": "NET",
-    "C3.ai": "AI",
-}
+# Comparable-company snapshot (last verified 2026-06-28).
+# Update these values when refreshing the beta bridge.
+COMPS = [
+    {"Company": "Salesforce", "Ticker": "CRM",  "Levered_beta": 1.151,
+     "Mcap_USD": 129_705_025_536, "Total_debt_USD": 42_547_998_720},
+    {"Company": "Palantir",   "Ticker": "PLTR", "Levered_beta": 1.515,
+     "Mcap_USD": 270_728_445_952, "Total_debt_USD": 211_976_992},
+    {"Company": "Snowflake",  "Ticker": "SNOW", "Levered_beta": 1.355,
+     "Mcap_USD": 86_289_539_072,  "Total_debt_USD": 2_772_094_976},
+    {"Company": "Datadog",    "Ticker": "DDOG", "Levered_beta": 1.553,
+     "Mcap_USD": 85_348_573_184,  "Total_debt_USD": 1_285_052_032},
+    {"Company": "MongoDB",    "Ticker": "MDB",  "Levered_beta": 1.553,
+     "Mcap_USD": 25_256_429_568,  "Total_debt_USD": 58_635_000},
+    {"Company": "Cloudflare", "Ticker": "NET",  "Levered_beta": 1.674,
+     "Mcap_USD": 84_205_862_912,  "Total_debt_USD": 3_524_536_064},
+    {"Company": "C3.ai",      "Ticker": "AI",   "Levered_beta": 2.033,
+     "Mcap_USD": 1_383_498_496,   "Total_debt_USD": 58_681_000},
+]
 
-TAX_RATE_BETA = 0.21  # US statutory rate for unlevering
+TAX_RATE_BETA = 0.21
 
 
-def fetch_beta_bridge() -> pd.DataFrame:
-    """Fetch levered beta, market cap, total debt and unlever."""
+def build_beta_bridge() -> pd.DataFrame:
+    """Compute debt/equity and unlevered beta from the snapshot."""
     rows = []
-    for name, ticker in COMPS.items():
-        t = yf.Ticker(ticker)
-        info = t.info or {}
-        beta = info.get("beta", float("nan"))
-        mcap = info.get("marketCap", float("nan"))
-        debt = info.get("totalDebt", 0.0) or 0.0
-        de = debt / mcap if (mcap and mcap > 0) else float("nan")
-        bu = beta / (1 + (1 - TAX_RATE_BETA) * de) if (beta == beta) else float("nan")
-        rows.append({"Company": name, "Ticker": ticker,
-                      "Levered_beta": beta, "Mcap_USD": mcap,
-                      "Total_debt_USD": debt, "Debt_Equity": de,
-                      "Unlevered_beta": bu})
+    for c in COMPS:
+        mcap = c["Mcap_USD"]
+        debt = c["Total_debt_USD"]
+        de = debt / mcap if mcap > 0 else float("nan")
+        bu = c["Levered_beta"] / (1 + (1 - TAX_RATE_BETA) * de)
+        rows.append({**c, "Debt_Equity": de, "Unlevered_beta": bu})
     df = pd.DataFrame(rows)
     median_bu = df["Unlevered_beta"].median()
     return df, median_bu
@@ -80,7 +82,7 @@ def write_beta_latex(df: pd.DataFrame, median_bu: float, path: Path) -> None:
     tex = (
         "\\begin{table}[H]\n"
         "\\centering\n"
-        f"\\caption{{Comparable-company beta bridge (accessed {pd.Timestamp.now().strftime('%d~%B~%Y')}).}}\n"
+        f"\\caption{{Comparable-company beta bridge (accessed 28~June~2026).}}\n"
         "\\label{tab:beta}\n"
         "\\begin{tabular}{lccc}\n"
         "\\toprule\n"
@@ -95,7 +97,7 @@ def write_beta_latex(df: pd.DataFrame, median_bu: float, path: Path) -> None:
         "\\end{table}\n"
     )
     path.write_text(tex, encoding="utf-8")
-    print(f"[OK] LaTeX table → {path}")
+    print(f"[OK] LaTeX table -> {path}")
 
 
 # ============================================================
@@ -117,43 +119,31 @@ WACC_GRID = np.array([0.10, 0.115, 0.13, 0.135, 0.15, 0.17, 0.20])
 MARGIN_GRID = np.array([0.20, 0.28, 0.35, 0.40, 0.50])
 
 # Target equity value (market, 2026-06-26)
-TARGET_EQUITY_USDM = 114_000  # ~US$114bn in millions
-TARGET_EV_USDM = TARGET_EQUITY_USDM - NET_CASH_USDM  # ~US$113,450m
+TARGET_EQUITY_USDM = 114_000
+TARGET_EV_USDM = TARGET_EQUITY_USDM - NET_CASH_USDM
 
 
 def growth_path(base_rev: float) -> list[float]:
-    """Base-case revenue growth rates 2026→2035 (9 intervals)."""
+    """Base-case revenue growth rates 2026-2035 (9 intervals)."""
     return [0.56, 0.50, 0.44, 0.38, 0.32, 0.26, 0.20, 0.14, 0.08]
 
 
 def compute_required_2035_rev(wacc: float, term_margin: float) -> float:
-    """Solve for 2035 revenue (US$m) that makes EV = TARGET_EV_USDM.
-
-    We scale a unit-revenue path: assume $1 of 2035 revenue, compute the
-    growth path backward, get unit FCFFs, discount them, then scale up to
-    hit the target EV.
-    """
+    """Solve for 2035 revenue (US$m) that makes EV = TARGET_EV_USDM."""
     g_path = growth_path(1.0)
-    # Build revenue path for $1 of 2035 revenue (work backward)
     revs = [1.0]
     for g in reversed(g_path):
         revs.insert(0, revs[0] / (1 + g))
-    # revs[0] = 2026 rev implied by $1 of 2035 rev
 
-    # Compute FCFF per unit of 2035 revenue
-    # Margin ramps linearly from -30% (2026) to term_margin (2035)
-    n = len(revs)  # 10 years
+    n = len(revs)
     margins = np.linspace(-0.30, term_margin, n)
     fcf_unit = []
     pv_unit = 0.0
     for i in range(n):
-        yr = 2026 + i
         rev_i = revs[i]
         ebit_i = rev_i * margins[i]
-        # Tax: zero when EBIT negative (NOL accumulation)
         tax_i = max(0, ebit_i * TAX)
         nopat_i = ebit_i - tax_i
-        # Reinvestment via sales-to-capital
         if i == 0:
             reinvest_i = rev_i / SALES_TO_CAP
         else:
@@ -162,27 +152,21 @@ def compute_required_2035_rev(wacc: float, term_margin: float) -> float:
         pv_unit += fcff_i / (1 + wacc) ** (i + 1)
         fcf_unit.append(fcff_i)
 
-    # Terminal value at 2035 per unit of 2035 revenue
     fcff_term = fcf_unit[-1]
     if wacc <= TERM_G:
-        return float("inf")  # undefined
+        return float("inf")
     tv_unit = fcff_term * (1 + TERM_G) / (wacc - TERM_G)
     pv_tv_unit = tv_unit / (1 + wacc) ** n
 
-    # Total EV per unit of 2035 revenue
     ev_per_unit = pv_unit + pv_tv_unit
     if ev_per_unit <= 0:
         return float("inf")
 
-    # Required 2035 revenue = target EV / ev_per_unit
-    # But we need to subtract PV of net cash path — actually EV = equity - net cash
-    # We want: EV_unit * R_2035 = TARGET_EV
-    req_rev = TARGET_EV_USDM / ev_per_unit
-    return req_rev
+    return TARGET_EV_USDM / ev_per_unit
 
 
 def build_sensitivity_grid() -> pd.DataFrame:
-    """Build the WACC × margin grid of required 2035 revenue (US$bn)."""
+    """Build the WACC x margin grid of required 2035 revenue (US$bn)."""
     rows = []
     for w in WACC_GRID:
         for m in MARGIN_GRID:
@@ -194,12 +178,11 @@ def build_sensitivity_grid() -> pd.DataFrame:
 
 
 def plot_sensitivity_heatmap(df: pd.DataFrame, path: Path) -> None:
-    """Heatmap: WACC (y) × terminal margin (x), colour = required 2035 rev (US$bn)."""
+    """Heatmap: WACC (y) x terminal margin (x), colour = required 2035 rev."""
     pivot = df.pivot(index="WACC", columns="Term_margin", values="Req_rev_2035_USDbn")
-    pivot = pivot.sort_index(ascending=True)  # low WACC at bottom
+    pivot = pivot.sort_index(ascending=True)
 
     data = pivot.values.astype(float)
-    # Cap for visual clarity
     data_capped = np.clip(data, 0, 500)
 
     fig, ax = plt.subplots(figsize=(8, 5))
@@ -213,7 +196,6 @@ def plot_sensitivity_heatmap(df: pd.DataFrame, path: Path) -> None:
     ax.set_xlabel("Terminal operating margin", fontsize=11)
     ax.set_ylabel("WACC", fontsize=11)
 
-    # Annotate cells with actual values
     for i in range(len(pivot.index)):
         for j in range(len(pivot.columns)):
             val = data[i, j]
@@ -222,7 +204,6 @@ def plot_sensitivity_heatmap(df: pd.DataFrame, path: Path) -> None:
             ax.text(j, i, label, ha="center", va="center",
                     fontsize=9, fontweight="bold", color=colour)
 
-    # Highlight the base-case cell (WACC=13.5%, margin=40%)
     base_i = list(pivot.index).index(0.135) if 0.135 in pivot.index else None
     base_j = list(pivot.columns).index(0.40) if 0.40 in pivot.columns else None
     if base_i is not None and base_j is not None:
@@ -240,7 +221,7 @@ def plot_sensitivity_heatmap(df: pd.DataFrame, path: Path) -> None:
     plt.tight_layout()
     fig.savefig(path, dpi=200, bbox_inches="tight")
     plt.close(fig)
-    print(f"[OK] Heatmap → {path}")
+    print(f"[OK] Heatmap -> {path}")
 
 
 # ============================================================
@@ -253,29 +234,28 @@ def main() -> None:
     FIGURES.mkdir(exist_ok=True)
 
     # ---- Part 1: Beta bridge ----
-    print("[1/4] Fetching comparable-company data …")
-    df_beta, median_bu = fetch_beta_bridge()
+    print("[1/3] Building comparable-company beta bridge …")
+    df_beta, median_bu = build_beta_bridge()
     csv_beta = DATA / "comps_beta_bridge.csv"
     df_beta.to_csv(csv_beta, index=False)
-    print(f"[OK] CSV → {csv_beta}")
+    print(f"[OK] CSV -> {csv_beta}")
     tex_beta = ROOT / "paper" / "beta_bridge_auto.tex"
     write_beta_latex(df_beta, median_bu, tex_beta)
 
     # ---- Part 2: Reverse-DCF sensitivity ----
-    print("[2/4] Computing reverse-DCF sensitivity grid …")
+    print("[2/3] Computing sensitivity grid …")
     df_sens = build_sensitivity_grid()
     csv_sens = EVENTSTUDY / "reverse_dcf_sensitivity.csv"
     df_sens.to_csv(csv_sens, index=False)
-    print(f"[OK] CSV → {csv_sens}")
+    print(f"[OK] CSV -> {csv_sens}")
 
-    print("[3/4] Plotting sensitivity heatmap …")
+    print("[3/3] Plotting sensitivity heatmap …")
     fig_path = FIGURES / "fig11_reverse_dcf_heatmap.png"
     plot_sensitivity_heatmap(df_sens, fig_path)
 
-    # Print a quick summary for the paper
     base_rev = compute_required_2035_rev(WACC_BASE, 0.40)
     print(f"\n[Summary] Base case (WACC={WACC_BASE:.1%}, margin=40%): "
-          f"required 2035 rev ≈ US${base_rev / 1000:.0f}B")
+          f"required 2035 rev = US${base_rev / 1000:.0f}B")
     for w in [0.10, 0.15, 0.20]:
         r = compute_required_2035_rev(w, 0.40)
         print(f"  WACC={w:.0%}, margin=40%: US${r / 1000:.0f}B")

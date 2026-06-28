@@ -82,8 +82,8 @@ Foundation-Model Lab: Evidence from Zhipu AI (2513.HK)}
 \noindent In January 2026, Zhipu AI (Knowledge Atlas Technology, 2513.HK) became the first foundation-model
 laboratory to list publicly anywhere, under Hong Kong's Chapter~18C listing regime. By 26~June~2026, its shares
 had risen about seventeen-fold to a market capitalisation near US\$114bn---an equity value roughly 570 times its
-$\sim$US\$200m of expected 2026 revenue---despite a gross margin that has fallen to near zero and negative book
-equity. We ask what such a firm is worth and how its price forms. A three-scenario DCF, a reverse DCF, a
+$\sim$US\$200m of expected 2026 revenue---despite deep losses, negative book equity and cloud-deployment
+margin pressure. We ask what such a firm is worth and how its price forms. A three-scenario DCF, a reverse DCF, a
 comparables check and a real-options reading place fundamental value at only HK\$12--82 per share (about
 1.6\% of the market price); the price instead embeds a winner-take-all outcome of more than US\$100bn revenue
 by 2035. Because conventional earnings-surprise measures are economically uninformative for a deeply
@@ -104,8 +104,8 @@ hours, two Chinese ``AI tiger'' laboratories---Zhipu AI (2513.HK, 8~January) and
 Stock Exchange. Zhipu listed under Chapter~18C, the regime for specialist-technology firms that admits
 pre-profit issuers. By 26~June~2026, its shares had compounded roughly seventeen-fold to a market
 capitalisation near US\$114bn on FY2026 expected revenue of about US\$200m---an implied equity-value-to-revenue
-multiple near 570$\times$ \citep{tushare2026,prospectus2513}. The 2026 AI-IPO wave---Anthropic, OpenAI,
-SpaceX/xAI---is now a global capital-market event.
+multiple near 570$\times$ \citep{tushare2026,prospectus2513}. The broader frontier-AI financing wave has
+therefore moved from private markets into public price discovery.
 
 This paper poses three questions: \textbf{(i)} what is Zhipu worth on fundamentals; \textbf{(ii)} what does
 the re-rating imply---efficient pricing of capability, exuberance, or option value; and \textbf{(iii)} is the
@@ -126,23 +126,24 @@ flagship models are released with open weights and aggressive token pricing, con
 into a usage flywheel via the Z.ai and Z.code platforms.
 
 \textbf{Financials (full statements in Appendix~\ref{sec:statements}).} Three facts dominate. \emph{(1)}
-Revenue is explosive but tiny: RMB~312.4m (2024) $\to$ RMB~724.3m (2025, $+132\%$), i.e.\ roughly US\$44m
-then US\$102m. \emph{(2)} The gross margin has \emph{collapsed} from 76.1\% (2022, a normal software profile)
-to 3.4\% (2024) and to $-0.4\%$ in H1~2025, as the firm bought share through compute-heavy, under-priced
-workloads. \emph{(3)} Losses and leverage are deepening: the 2025 net loss was about RMB~4.70bn ($+237\%$),
-and at 30~June~2025 the group reported net liabilities of RMB~6.15bn against cash of only RMB~190.9m
+Revenue is explosive but tiny: RMB~57.4m (2022) $\to$ RMB~312.4m (2024), with H1~2025 revenue of
+RMB~190.9m. For the DCF we use a FY2025E base of about RMB~724m (US\$102m), a run-rate estimate rather than a
+reported full-year figure. \emph{(2)} Total gross margin remained positive (50.0\% in H1~2025), but the
+strategically important cloud-deployment margin fell from 76.1\% (2022) to 3.4\% (2024) and to a $0.4\%$
+gross loss in H1~2025 as API prices were cut. \emph{(3)} Losses and leverage are deepening: H1~2025 net loss
+was RMB~2.36bn, and at 30~June~2025 the group reported net liabilities of RMB~6.15bn
 \citep{prospectus2513}. Zhipu is therefore \emph{early-commercial-stage and pre-profit}, with negative book
 equity---so ratio analysis is of
-limited use and the informative metrics are growth, the gross-margin path, and cash runway
+limited use and the informative metrics are growth, cloud monetisation, and cash runway
 (Figure~\ref{fig:fin}).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.82\textwidth]{fig8_financial_profile.png}
-\caption{Zhipu's financial profile. Revenue compounds rapidly (RMB millions, left axis) while the gross margin
-collapses from a normal software level of 76\% in 2022 to near zero (right axis), as compute-heavy,
-under-priced workloads buy market share; the FY2025 margin point is the H1~2025 figure. Source: Chapter~18C
-prospectus and the H1~2025 interim disclosure \citep{prospectus2513}.}
+\caption{Zhipu's financial profile. Revenue compounds rapidly (RMB millions, left axis). Total gross margin
+remains positive, but cloud deployment margin compresses from 76.1\% in 2022 to a 0.4\% gross loss in
+H1~2025 as low-priced, compute-heavy API usage buys share. Source: Chapter~18C prospectus
+\citep{prospectus2513}.}
 \label{fig:fin}
 \end{figure}
 
@@ -166,7 +167,7 @@ GLM-5.2 (June~2026) shipped with MIT open weights and a one-million-token contex
 competitors, now paired with nascent pricing power (8--17\% API price rises with each GLM-5.x release)
 \citep{glm_modelcard}. This cadence
 defines the event taxonomy of Section~\ref{sec:event} (Figure~\ref{fig:timeline}). The main weakness is
-self-inflicted: the same cadence commoditises its own product, while the near-zero gross margin and compute
+self-inflicted: the same cadence commoditises its own product, while cloud-margin pressure and compute
 dependence cap monetisation.
 
 \begin{figure}[H]
@@ -184,9 +185,8 @@ early-commercial-stage lab; milestones are evenly spaced for legibility. Sources
 Hong Kong--listed AI firms, SenseTime (0020.HK) has pivoted toward generative AI via its SenseNova models,
 Fourth Paradigm (6682.HK) provides enterprise ML infrastructure, and Wenge AI (01956.HK, listed 26~June~2026,
 $+84\%$ on debut) focuses on decision intelligence \citep{prospectus1956}---none is a direct frontier-model
-comparable. In the upcoming IPO pipeline, Moonshot AI (Kimi) is preparing a Hong Kong listing; its
-\textbf{Kimi~2.6} release (June~2026) is a strong competitor to GLM-5.2, and other Chinese frontier labs
-(StepStar, 01.AI) are similarly restructuring for public debuts. These prospective listings reinforce the
+comparable. In the upcoming IPO pipeline, Moonshot AI (Kimi) is reportedly preparing a Hong Kong listing, and
+other Chinese frontier labs (StepStar, 01.AI) may similarly seek public capital. These prospective listings reinforce the
 first-mover premium Zhipu's Chapter~18C listing confers. \emph{For this paper's valuation, only MiniMax is a
 direct comparable} (Section~\ref{sec:rel}).
 
@@ -467,7 +467,7 @@ windows. Shaded areas are percentile 95\% null intervals, and red lines mark the
 
 \textbf{Honesty box.} This is \emph{preliminary, diagnostic} evidence consistent with PCAD, not a proven
 anomaly: $n=4$ single-firm events (plus one peer) over five months; GLM-5.2's drift window is truncated; and
-drift windows can overlap competing-lab releases (e.g.\ Kimi~2.6 in June~2026). No statistical significance
+drift windows can overlap competing-lab news. No statistical significance
 is claimed---four events make an interesting undergraduate case, not a general law. The natural extensions
 are a wider, multi-lab event panel and an NLP-scored surprise magnitude.
 
@@ -482,26 +482,25 @@ drive part of the rest. The verdict is neither ``efficient'' nor ``bubble'' but 
 priced as an option}. For investors, this argues for trading the capability calendar with attention to release
 \emph{type}; for founders, Chapter~18C has made capability milestones the primary currency of value; for
 policymakers, compute access is now a direct input to capital formation. The main limitations are the small
-event sample and a near-zero gross margin whose future path is highly uncertain.
+event sample and uncertain cloud monetisation.
 
 \appendix
 \clearpage
 \section{Financial Statements Summary}
 \label{sec:statements}
-From the Chapter~18C prospectus and the H1~2025 interim disclosure (RMB; USD at $\approx$7.1).
+From the Chapter~18C prospectus (RMB; USD at $\approx$7.1).
 
 \begin{table}[H]
 \centering
 \caption{Income-statement summary (RMB millions unless noted).}
 \begin{tabular}{lcccc}
 \toprule
- & FY2022 & FY2023 & FY2024 & FY2025 \\
+ & FY2022 & FY2023 & FY2024 & H1 2025 \\
 \midrule
-Revenue & --- & $\approx$120 & 312.4 & 724.3 \\
-\quad growth & --- & --- & --- & +132\% \\
-Gross margin & 76.1\% & --- & 3.4\% & $\approx$0\% (H1: $-0.4\%$) \\
-Net loss & --- & --- & 2{,}958.0 & $\approx$4{,}700 \\
-\quad loss growth & --- & --- & --- & +237\% \\
+Revenue & 57.4 & 124.5 & 312.4 & 190.9 \\
+Total gross margin & 54.6\% & 64.6\% & 56.3\% & 50.0\% \\
+Cloud gross margin & 76.1\% & 31.0\% & 3.4\% & $-0.4\%$ \\
+Net loss & 143.7 & 788.0 & 2{,}958.0 & 2{,}357.9 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -513,9 +512,9 @@ Net loss & --- & --- & 2{,}958.0 & $\approx$4{,}700 \\
 \toprule
 Item & Amount \\
 \midrule
-Cash and cash equivalents & 190.9 \\
+Cash and cash equivalents & 2{,}552.0 \\
 Net liabilities (negative equity) & $-6{,}150.8$ \\
-Net current liabilities & $-9{,}564.8$ \\
+Net current liabilities & $-7{,}088.9$ \\
 \midrule
 Shares outstanding (post-IPO, approx.) & $\approx$435m \\
 IPO price / gross proceeds & HK\$116.20 / $\approx$HK\$4.3bn \\
@@ -523,18 +522,17 @@ IPO price / gross proceeds & HK\$116.20 / $\approx$HK\$4.3bn \\
 \end{tabular}
 \end{table}
 
-The gross-margin collapse from 76\% to near zero is the central operating fact: Zhipu is converting a
-high-margin software model into a compute-subsidised, share-grab model. Combined with negative equity, it is
-why the valuation in Section~\ref{sec:val} must rest on a future-option logic rather than on current
-fundamentals.
+The central operating fact is not a collapse in total gross margin, but the compression of cloud deployment
+economics as Zhipu cuts API prices to win share. Combined with losses and negative equity, it is why the
+valuation in Section~\ref{sec:val} must rest on future-option logic rather than current fundamentals.
 
 \clearpage
 \section{Base-Case DCF Projection}
 \label{sec:proj}
 Base-case chain (US\$m unless noted), reproducing the live workbook: WACC~$=13.5\%$, statutory tax~$=15\%$,
 terminal $g=4\%$, sales-to-capital~$=1.8$, $\approx$435m shares, HK\$7.8/US\$. Revenue grows from US\$200m in
-2026, with growth fading from 56\% in 2027 to 8\% in 2035; the 2026 bridge from the 2025 revenue base of
-about US\$102m is therefore about 96\%. Operating margin ramps $-30\%\!\to\!28\%$. Cash tax is zero while EBIT
+2026, with growth fading from 56\% in 2027 to 8\% in 2035; the 2025 base of about US\$102m is a FY2025E
+run-rate estimate. Operating margin ramps $-30\%\!\to\!28\%$. Cash tax is zero while EBIT
 is negative; losses accumulate as NOLs and shelter future positive EBIT until exhausted.
 
 \begin{table}[H]

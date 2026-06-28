@@ -19,11 +19,11 @@ Evidence from Zhipu AI (2513.HK).*
 |---|---|---|---|
 | Cover | SWUFE official template | — | 西南财经大学本科考试 / 课程论文, official crest watermark |
 | 0 | Abstract (≤400w) | — | subject, dual method, headline, takeaway |
-| 1 | Introduction | setup | 3 research questions; capability-surprise reframing; **global AI-IPO wave (Anthropic, OpenAI, SpaceX/xAI)** |
+| 1 | Introduction | setup | 3 research questions; capability-surprise reframing; frontier-AI financing moving into public price discovery |
 | 2 | Background: Company, Financials, Listing | **condensed** | open-weight model; 3 financial facts (revenue, gross-margin collapse, negative equity); IPO + re-rating + MiniMax divergence |
-| 3 | Industry, Macro, Strategy | **condensed** | Porter + leaderboard cost-disruption; **HK AI-IPO landscape: SenseTime, Fourth Paradigm, Wenge (brief); Kimi 2.6 + IPO pipeline (brief)**; macro + flow events |
+| 3 | Industry, Macro, Strategy | **condensed** | Porter + leaderboard cost-disruption; **HK AI-IPO landscape: SenseTime, Fourth Paradigm, Wenge (brief); IPO pipeline caveat**; macro + flow events |
 | 4 | **Valuation** (main line) | **emphasised** | CAPM/WACC; 3-scenario DCF; **reverse DCF**; relative val (MiniMax direct; Wenge excluded); **real options (fundamental vs option value)** |
-| 5 | **Capability Surprise: Event Study** (original) | **emphasised** | hypothesis; method; CAR results; **flow vs capability events**; peer-adjusted + block-bootstrap robustness; honesty box (**Kimi 2.6 cross-firm spillover caveat**) |
+| 5 | **Capability Surprise: Event Study** (original) | **emphasised** | hypothesis; method; CAR results; **flow vs capability events**; peer-adjusted + block-bootstrap robustness; honesty box (competing-lab news caveat) |
 | 6 | Conclusion | — | capability momentum priced as option; preliminary PCAD |
 | A | Appendix: Financial Statements | reproducibility | income statement + balance sheet (RMB) |
 | B | Appendix: Base-Case DCF Projection | reproducibility | full 10-yr chain: Revenue→Growth→EBIT margin→NOPAT→Reinvest→FCFF→TV→Equity→per share |
@@ -53,7 +53,7 @@ Key data cite, via the bibliography (not just footnotes):
 News media corroborate only; they do not carry the most important numbers.
 
 ## TODO — data refresh after 2026-07-03 close (user will supply)
-1. Re-pull `hk_daily` for 2513/00100/01956 through 2026-07-03; rerun `recompute.py` → new prices, vol, CAR, figures.
+1. Re-pull `hk_daily` for 2513/00100/01956 through 2026-07-03; rerun `python scripts/rebuild_outputs.py` → new prices, vol, CAR, figures.
 2. **GLM-5.2 drift window completes** (≥+10 trading days from 06-15): remove the "truncated/provisional" caveat once full.
 3. Update market row in Table~\ref{tab:dcf} (price/mcap/equity-value-to-revenue multiple) and reverse-DCF target.
 4. Re-export `model/valuation_model.xlsx` Summary; refresh README headline numbers.

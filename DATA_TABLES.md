@@ -42,14 +42,15 @@ Fundamentals from the **HKEX Chapter-18C prospectus** (stock code 2513). All fig
 
 | Period | Revenue | Gross margin | Net loss |
 |---|---|---|---|
-| FY2022 | — | 76.1% | — |
-| FY2024 | RMB 312.4M (~US$44M) | 3.4% | RMB 2,958M |
-| H1 2025 | RMB ~190 (cash 190.9M) | −0.4% | — |
-| FY2025 | RMB 724.3M (~US$102M, +132%) | ~0% | ~RMB 4,700M (+237%) |
-| FY2026E | ~US$200M | — | — |
+| FY2022 | RMB 57.4M | total 54.6%; cloud 76.1% | RMB 143.7M |
+| FY2023 | RMB 124.5M | total 64.6%; cloud 31.0% | RMB 788.0M |
+| FY2024 | RMB 312.4M (~US$44M) | total 56.3%; cloud 3.4% | RMB 2,958M |
+| H1 2025 | RMB 190.9M | total 50.0%; cloud −0.4% | RMB 2,357.9M |
+| FY2025E model base | RMB 724.3M (~US$102M) | model assumption | n/a |
+| FY2026E | ~US$200M | model assumption | n/a |
 
 Balance sheet @ 30-Jun-2025: net liabilities **−RMB 6,150.8M** (negative equity), net current liabilities
-−RMB 9,564.8M, cash RMB 190.9M. Shares outstanding ~435M. FX: HK$7.8/US$, RMB 7.1/US$.
+−RMB 7,088.9M, cash and cash equivalents RMB 2,552.0M. Shares outstanding ~435M. FX: HK$7.8/US$, RMB 7.1/US$.
 **Implied market equity value / revenue ≈ 570× FY26E** (US$114B / US$200M).
 
 ## Table D5 — Product / Competitive Data (leaderboard thread)
@@ -78,7 +79,7 @@ Balance sheet @ 30-Jun-2025: net liabilities **−RMB 6,150.8M** (negative equit
 05-13 (+37%) = Hang Seng Tech inclusion / Stock Connect flow events.
 
 ## Remaining / refresh items
-1. After **2026-07-03 close**: re-pull prices, rerun `recompute.py`; GLM-5.2 window completes (drop the † caveat).
+1. After **2026-07-03 close**: re-pull prices, rerun `python scripts/rebuild_outputs.py`; GLM-5.2 window completes (drop the † caveat).
 2. MiniMax / Wenge absolute financials for a multi-lab event panel (extension, not required).
 
 ---

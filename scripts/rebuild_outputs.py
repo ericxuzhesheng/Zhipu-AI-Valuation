@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import NamedTuple
+import os
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -24,7 +26,6 @@ TAX_RATE = 0.15
 SHARES_M = 435
 USD_HKD = 7.8
 NET_CASH_USDM = 550
-MARKET_PRICE_HKD = 2046
 REV_2025_USDM = 102
 REV_2026_USDM = 200
 
@@ -53,6 +54,90 @@ SCENARIOS = [
     Scenario("Base", 0.45, 0.56, 0.08, 0.28, 1.8),
     Scenario("Bull", 0.20, 0.85, 0.12, 0.35, 1.6),
 ]
+
+
+def write_csv(df: pd.DataFrame, path: Path) -> None:
+    tmp_path = path.with_name(f"{path.stem}.tmp{path.suffix}")
+    df.to_csv(tmp_path, index=False)
+    os.replace(tmp_path, path)
+
+
+def savefig(fig: plt.Figure, path: Path, **kwargs) -> None:
+    tmp_path = path.with_name(f"{path.stem}.tmp{path.suffix}")
+    fig.savefig(tmp_path, **kwargs)
+    os.replace(tmp_path, path)
+
+
+class MarketSnapshot(NamedTuple):
+    date: pd.Timestamp
+    price_hkd: float
+    equity_value_usdm: float
+    revenue_multiple: float
+    ret_vs_ipo_pct: float
+    ann_vol_pct: float
+
+
+def _price_frame(filename: str, ipo_price: float) -> pd.DataFrame:
+    df = pd.read_csv(ROOT / "data" / filename)
+    df["date"] = pd.to_datetime(df["trade_date"].astype(str))
+    df = df.sort_values("date").reset_index(drop=True)
+    df["rebased"] = df["close"] / ipo_price * 100.0
+    df["daily_return"] = df["close"].pct_change()
+    return df
+
+
+def market_snapshot() -> MarketSnapshot:
+    zhipu = _price_frame("Zhipu_KnowledgeAtlas_daily.csv", 116.2)
+    latest = zhipu.iloc[-1]
+    price = float(latest["close"])
+    equity_value_usdm = price * SHARES_M / USD_HKD
+    revenue_multiple = equity_value_usdm / REV_2026_USDM
+    ann_vol_pct = float(zhipu["daily_return"].dropna().std(ddof=1) * np.sqrt(252) * 100)
+    return MarketSnapshot(
+        date=pd.Timestamp(latest["date"]),
+        price_hkd=price,
+        equity_value_usdm=equity_value_usdm,
+        revenue_multiple=revenue_multiple,
+        ret_vs_ipo_pct=(price / 116.2 - 1) * 100,
+        ann_vol_pct=ann_vol_pct,
+    )
+
+
+MARKET = market_snapshot()
+
+
+def write_price_summary_csv() -> None:
+    specs = [
+        ("02513.HK", "Zhipu_KnowledgeAtlas", "Zhipu_KnowledgeAtlas_daily.csv", 116.2),
+        ("00100.HK", "MiniMax", "MiniMax_daily.csv", 165.0),
+        ("01956.HK", "WengeAI", "WengeAI_daily.csv", 60.7),
+    ]
+    rows = []
+    for code, name, filename, ipo_price in specs:
+        df = _price_frame(filename, ipo_price)
+        latest = df.iloc[-1]
+        daily_returns = df["daily_return"].dropna()
+        ann_vol_pct = (
+            float(daily_returns.std(ddof=1) * np.sqrt(252) * 100)
+            if len(daily_returns) >= 2
+            else 0.0
+        )
+        rows.append(
+            {
+                "code": code,
+                "name": name,
+                "ipo_price": ipo_price,
+                "first_day_close": round(float(df.iloc[0]["close"]), 1),
+                "latest_date": int(latest["date"].strftime("%Y%m%d")),
+                "latest_close": round(float(latest["close"]), 1),
+                "ret_vs_ipo": round((float(latest["close"]) / ipo_price - 1) * 100, 1),
+                "high": round(float(df["close"].max()), 1),
+                "low": round(float(df["close"].min()), 1),
+                "ann_vol_pct": round(ann_vol_pct, 1),
+                "n_days": int(len(df)),
+            }
+        )
+    write_csv(pd.DataFrame(rows), ROOT / "data" / "price_summary.csv")
 
 
 def project_scenario(
@@ -139,7 +224,7 @@ def write_base_projection_csv() -> None:
     for col in out.columns:
         if col != "year":
             out[col] = out[col].round(1)
-    out.to_csv(EVENTSTUDY / "base_projection.csv", index=False)
+    write_csv(out, EVENTSTUDY / "base_projection.csv")
 
 
 def write_nonparametric_robustness_csv() -> None:
@@ -172,7 +257,7 @@ def write_nonparametric_robustness_csv() -> None:
                 "bootstrap_mean_ci_97_5_pct": round(float(hi), 1),
             }
         )
-    pd.DataFrame(rows).to_csv(EVENTSTUDY / "nonparametric_robustness.csv", index=False)
+    write_csv(pd.DataFrame(rows), EVENTSTUDY / "nonparametric_robustness.csv")
 
 
 def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
@@ -239,7 +324,7 @@ def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
             "peer_drift_mean_car_pct": drift_draws,
         }
     )
-    distribution.to_csv(EVENTSTUDY / "block_bootstrap_distribution.csv", index=False)
+    write_csv(distribution, EVENTSTUDY / "block_bootstrap_distribution.csv")
 
     summary_rows = []
     for window, draws, actual_mean in [
@@ -261,7 +346,7 @@ def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
                 "excluded_event_window_days": len(excluded_dates),
             }
         )
-    pd.DataFrame(summary_rows).to_csv(EVENTSTUDY / "block_bootstrap_summary.csv", index=False)
+    write_csv(pd.DataFrame(summary_rows), EVENTSTUDY / "block_bootstrap_summary.csv")
 
     fig, axes = plt.subplots(1, 2, figsize=(10.8, 4.1), dpi=150)
     panels = [
@@ -294,7 +379,7 @@ def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
     axes[0].legend(loc="lower left", fontsize=7.8, framealpha=0.92)
     fig.suptitle("Block-bootstrap null distribution of peer-adjusted mean CAR", y=1.02)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig10_block_bootstrap.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig10_block_bootstrap.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -314,7 +399,8 @@ def write_workbook() -> None:
             NET_CASH_USDM,
             "net IPO proceeds plus pre-IPO cash; preferred shares convert at IPO",
         ),
-        ("Market price (HK$)", MARKET_PRICE_HKD, None),
+        ("Market date", MARKET.date.strftime("%Y-%m-%d"), "derived from data/Zhipu_KnowledgeAtlas_daily.csv"),
+        ("Market price (HK$)", MARKET.price_hkd, None),
         ("2025 revenue (US$m)", REV_2025_USDM, None),
         ("2026E revenue (US$m)", REV_2026_USDM, None),
     ]
@@ -352,9 +438,9 @@ def write_workbook() -> None:
             r = 9 + i
             prev_r = r - 1
             if year == 2026:
-                growth_formula = "=Assumptions!$B$10/Assumptions!$B$9-1"
-                revenue_formula = "=Assumptions!$B$10"
-                drev_formula = "=D9-Assumptions!$B$9"
+                growth_formula = "=Assumptions!$B$11/Assumptions!$B$10-1"
+                revenue_formula = "=Assumptions!$B$11"
+                drev_formula = "=D9-Assumptions!$B$10"
                 prior_nol = "0"
             else:
                 growth_formula = f"=$B$2+($B$3-$B$2)*(B{r}-1)/8"
@@ -399,9 +485,33 @@ def write_workbook() -> None:
     for i, scenario in enumerate(SCENARIOS, start=3):
         ws.append([scenario.name, scenario.probability, f"={scenario.name}!B24", f"={scenario.name}!B26"])
     ws.append(["PROB-WEIGHTED", None, "=SUMPRODUCT(B3:B5,C3:C5)/SUM(B3:B5)", "=SUMPRODUCT(B3:B5,D3:D5)/SUM(B3:B5)"])
-    ws.append(["Market price (HK$)", "=Assumptions!B8"])
+    ws.append(["Market price (HK$)", "=Assumptions!B9"])
     ws.append(["DCF value as % of market", "=D6/B7"])
-    ws.append(["Market equity value / revenue", "=(Assumptions!B8*Assumptions!B5/Assumptions!B6)/Assumptions!B10"])
+    ws.append(["Market equity value / revenue", "=(Assumptions!B9*Assumptions!B5/Assumptions!B6)/Assumptions!B11"])
+
+    audit = wb.create_sheet("Audit Summary")
+    results = {scenario.name: project_scenario(scenario) for scenario in SCENARIOS}
+    weighted_equity = sum(s.probability * results[s.name]["equity_value"] for s in SCENARIOS)
+    weighted_share = sum(s.probability * results[s.name]["per_share_hkd"] for s in SCENARIOS)
+    audit_rows = [
+        ("Market date", MARKET.date.strftime("%Y-%m-%d")),
+        ("Market price (HK$)", round(MARKET.price_hkd, 1)),
+        ("Market equity value (US$m)", round(MARKET.equity_value_usdm, 1)),
+        ("Market EV / FY2026E revenue", round(MARKET.revenue_multiple, 1)),
+        ("Bear per share (HK$)", round(results["Bear"]["per_share_hkd"], 1)),
+        ("Base per share (HK$)", round(results["Base"]["per_share_hkd"], 1)),
+        ("Bull per share (HK$)", round(results["Bull"]["per_share_hkd"], 1)),
+        ("Probability-weighted equity (US$m)", round(weighted_equity, 1)),
+        ("Probability-weighted per share (HK$)", round(weighted_share, 1)),
+        ("DCF value as % of market", round(weighted_share / MARKET.price_hkd, 4)),
+    ]
+    for row in audit_rows:
+        audit.append(row)
+
+    summary_df = pd.DataFrame(
+        [{"metric": metric, "value": value} for metric, value in audit_rows]
+    )
+    write_csv(summary_df, EVENTSTUDY / "valuation_summary.csv")
 
     for sheet in wb.worksheets:
         for col in range(1, sheet.max_column + 1):
@@ -453,7 +563,7 @@ def write_sensitivity_chart() -> None:
     ax.grid(axis="x", alpha=0.25)
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig7_sensitivity.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig7_sensitivity.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -463,7 +573,7 @@ def write_football_field() -> None:
     rows = [
         ("Scenario DCF", results["Bear"]["per_share_hkd"], results["Bull"]["per_share_hkd"]),
         ("Valuation / revenue", 30 * REV_2026_USDM / SHARES_M * USD_HKD, 40 * REV_2026_USDM / SHARES_M * USD_HKD),
-        ("Market", MARKET_PRICE_HKD, MARKET_PRICE_HKD),
+        ("Market", MARKET.price_hkd, MARKET.price_hkd),
     ]
     fig, ax = plt.subplots(figsize=(8.6, 3.6), dpi=150)
     y = np.arange(len(rows))
@@ -485,13 +595,13 @@ def write_football_field() -> None:
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.legend(loc="lower right", fontsize=8)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig5_football_field.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig5_football_field.png", bbox_inches="tight")
     plt.close(fig)
 
 
 def write_comps_chart() -> None:
     names = ["MiniMax", "OpenAI / Anthropic", "Zhipu"]
-    values = [35, 35, MARKET_PRICE_HKD * SHARES_M / USD_HKD / REV_2026_USDM]
+    values = [35, 35, MARKET.revenue_multiple]
     colors = [C_BLUE, C_GREEN, C_RED]
     fig, ax = plt.subplots(figsize=(7.8, 4.0), dpi=150)
     ax.bar(names, values, color=colors)
@@ -503,16 +613,17 @@ def write_comps_chart() -> None:
     ax.grid(axis="y", which="both", alpha=0.25)
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig6_ps_comps.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig6_ps_comps.png", bbox_inches="tight")
     plt.close(fig)
 
 
 def write_financial_profile() -> None:
-    """Company-introduction figure: revenue compounding vs gross-margin collapse."""
-    labels = ["FY2022", "FY2023", "FY2024", "FY2025"]
+    """Company-introduction figure: revenue compounding vs cloud-margin compression."""
+    labels = ["FY2022", "FY2023", "FY2024", "H1 2025"]
     x = np.arange(len(labels))
-    revenue = np.array([np.nan, 120.0, 312.4, 724.3])  # RMB millions
-    margin = np.array([76.1, np.nan, 3.4, -0.4])  # %, FY2025 point is H1 2025
+    revenue = np.array([57.4, 124.5, 312.4, 190.9])  # RMB millions
+    total_margin = np.array([54.6, 64.6, 56.3, 50.0])  # %, FY2025 point is H1 2025
+    cloud_margin = np.array([76.1, 31.0, 3.4, -0.4])  # %, FY2025 point is H1 2025
 
     fig, ax1 = plt.subplots(figsize=(8.2, 4.2), dpi=150)
     rev_mask = ~np.isnan(revenue)
@@ -528,21 +639,22 @@ def write_financial_profile() -> None:
     ax1.spines[["top"]].set_visible(False)
 
     ax2 = ax1.twinx()
-    mar_mask = ~np.isnan(margin)
-    ax2.plot(x[mar_mask], margin[mar_mask], "o-", color=C_RED, linewidth=2,
-             zorder=3, label="Gross margin (%)")
-    for xi, mg in zip(x[mar_mask], margin[mar_mask]):
-        note = " (H1)" if xi == 3 else ""
-        ax2.text(xi, mg + 5, f"{mg:.1f}%{note}", ha="center", fontsize=8, color=C_RED)
+    ax2.plot(x, total_margin, "o-", color=C_GREEN, linewidth=2,
+             zorder=3, label="Total gross margin (%)")
+    ax2.plot(x, cloud_margin, "o--", color=C_RED, linewidth=2,
+             zorder=3, label="Cloud gross margin (%)")
+    for xi, mg in zip(x, cloud_margin):
+        ax2.text(xi, mg - 8, f"{mg:.1f}%", ha="center", fontsize=8, color=C_RED)
     ax2.axhline(0, color=C_GRAY, linewidth=0.7, linestyle=":")
     ax2.set_ylabel("Gross margin (%)", color=C_RED)
     ax2.tick_params(axis="y", labelcolor=C_RED)
     ax2.set_ylim(-12, 100)
     ax2.spines[["top"]].set_visible(False)
+    ax2.legend(loc="upper right", fontsize=7.5, framealpha=0.9)
 
-    ax1.set_title("Revenue compounds while the gross margin collapses")
+    ax1.set_title("Revenue scales while cloud deployment margins compress")
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig8_financial_profile.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig8_financial_profile.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -554,9 +666,9 @@ def write_glm_timeline() -> None:
     """
     events = [
         ("2019", "Founded — Tsinghua KEG", C_TEAL),
-        ("2022", "GLM family · 76% gross margin", C_TEAL),
+        ("2022", "GLM family · cloud GM 76%", C_TEAL),
         ("2024", "Revenue RMB 312m", C_TEAL),
-        ("2025", "Revenue RMB 724m (+132%)", C_TEAL),
+        ("H1 2025", "Revenue RMB 191m · total GM 50%", C_TEAL),
         ("8 Jan 2026", "IPO HK$116.20 · Ch.18C", C_GREEN),
         ("11 Feb 2026", "GLM-5", C_ORANGE),
         ("16 Mar 2026", "GLM-5-Turbo", C_ORANGE),
@@ -582,7 +694,7 @@ def write_glm_timeline() -> None:
     ax.set_title("From a Tsinghua lab (2019) to GLM-5.2 (2026): the path to and beyond the IPO")
     ax.spines[["top", "right", "left", "bottom"]].set_visible(False)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig9_glm_timeline.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig9_glm_timeline.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -651,7 +763,7 @@ def write_price_paths() -> None:
     ]
     ax.legend(handles=handles, loc="lower right", fontsize=7.5, framealpha=0.9)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig1_price_paths.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig1_price_paths.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -689,7 +801,7 @@ def write_daily_returns() -> None:
         Patch(color=C_GRAY, label="Other day"),
     ], loc="lower left", fontsize=7.5, framealpha=0.9)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig2_daily_returns.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig2_daily_returns.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -738,7 +850,7 @@ def write_event_chart() -> None:
     ax.grid(alpha=0.25)
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig3_car_eventtime.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig3_car_eventtime.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -772,11 +884,12 @@ def write_reaction_vs_drift() -> None:
     ax.grid(alpha=0.2)
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
-    fig.savefig(FIGURES / "fig4_reaction_vs_drift.png", bbox_inches="tight")
+    savefig(fig, FIGURES / "fig4_reaction_vs_drift.png", bbox_inches="tight")
     plt.close(fig)
 
 
 def main() -> None:
+    write_price_summary_csv()
     write_base_projection_csv()
     write_nonparametric_robustness_csv()
     write_block_bootstrap_outputs()

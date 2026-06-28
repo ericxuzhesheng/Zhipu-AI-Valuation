@@ -23,7 +23,7 @@
 
 ### 一句话概览
 
-本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2026 年预计收入仅约 2 亿美元、毛利率已跌至 −0.4%、净权益为负的"早期商业化、尚未盈利"公司，为何上市约五个月暴涨约 17 倍、市值达约 1140 亿美元（股权价值/收入约 570 倍）？**
+本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2026 年预计收入仅约 2 亿美元、深度亏损、净权益为负且云部署毛利率已跌至 −0.4% 的"早期商业化、尚未盈利"公司，为何上市约五个月暴涨约 17 倍、市值达约 1140 亿美元（股权价值/收入约 570 倍）？**
 
 **主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 概率加权约 HK$33/股（约为市价的 1.6%）；现价隐含 2035 年收入约 1300 亿美元、2026–2035 年约 105% 的年增速（9 个增长区间）。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
 
@@ -136,6 +136,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 ```bash
 cd paper
+python ../scripts/rebuild_outputs.py
 # 需 TeX Live + XeLaTeX（封面含中文，必须用 xelatex；参考文献为内嵌 APA 列表，无需 bibtex）
 xelatex -interaction=nonstopmode main.tex
 xelatex -interaction=nonstopmode main.tex
@@ -150,8 +151,9 @@ xelatex -interaction=nonstopmode main.tex
 A corporate-finance valuation and price-discovery study of the world's **first publicly listed
 foundation-model company** — Zhipu AI (Knowledge Atlas, 2513.HK, listed on the HKEX Main Board under
 Chapter 18C on 2026-01-08). The question is not a target price but a counter-intuitive one: **why did an
-early-commercial-stage, pre-profit firm — ~US$200m expected 2026 revenue, a gross margin fallen to −0.4%,
-negative book equity — rise ~17x in five months to a ~US$114B market cap (≈570× equity value / revenue)?**
+early-commercial-stage, pre-profit firm — ~US$200m expected 2026 revenue, deep losses, negative book equity,
+and a cloud-deployment gross margin down to −0.4% — rise ~17x in five months to a ~US$114B market cap
+(≈570× equity value / revenue)?**
 
 **Main conclusion:** neither a simple bubble nor efficient pricing, but **a call option on a winner-take-all
 AGI outcome, priced through capability momentum**. A disciplined DCF supports only ~HK$33/share (≈1.6% of
@@ -216,6 +218,7 @@ Stock Connect). Treated as **preliminary, diagnostic** evidence — an undergrad
 
 ```bash
 cd paper
+python ../scripts/rebuild_outputs.py
 # XeLaTeX required (CJK cover); references are an inline APA list, so no bibtex step
 xelatex -interaction=nonstopmode main.tex
 xelatex -interaction=nonstopmode main.tex

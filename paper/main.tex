@@ -151,7 +151,7 @@ H1~2025 as low-priced, compute-heavy API usage buys share. Source: Chapter~18C p
 cornerstone commitments, at an implied valuation near US\$6.7--7.4bn \citep{prospectus2513}. The listing is
 strategically remarkable
 on three counts: Chapter~18C gave a loss-making lab permanent public capital years before profitability; its
-status as the world's first listed foundation-model company conferred a certification premium; and the stock
+first-listed-foundation-model status conferred a certification premium; and the stock
 then re-rated to about HK\$2,046 by 26~June~2026 ($\approx +1{,}660\%$ versus IPO; realised annualised volatility
 near 193\%; Figure~\ref{fig:price}). MiniMax, listing one day later at HK\$165, doubled on debut and then
 \emph{de-rated} by roughly 60\% from its peak---a divergence we exploit in Section~\ref{sec:event}.
@@ -257,28 +257,40 @@ The probability-weighted intrinsic value is about HK\$33 per share---roughly \te
 price}. No reasonable point estimate of fundamentals approaches the quote.
 
 \subsection{Reverse DCF: what the price requires}
-We invert the model to ask what would justify the US\$114bn equity value. Holding WACC at 13.5\% and a 40\%
-terminal margin, the price requires revenue of \textbf{more than US\$100bn by 2035}---an annual growth rate
-near 105\% over 2026--2035 (nine growth intervals), several hundred times FY2026E. The exact figure is
-sensitive to the reinvestment assumption, but the qualitative message is robust: the price embeds a
-hyperscaler-tier outcome reserved for a handful of global winners.
+We invert the model to ask what justifies the US\$114bn equity value. At WACC~13.5\% and 40\% terminal
+margin, the price requires \textbf{about US\$130bn of 2035 revenue}---$\sim$105\% annual growth over
+2026--2035. Figure~\ref{fig:revheat} grids WACC (10--20\%) against terminal margin (20--50\%):
+even the most favourable cell (10\%/50\%) demands $\sim\$42$bn, and 15\%/40\% pushes to \$181bn. The
+message is robust: the price embeds a hyperscaler-tier outcome reserved for a handful of global winners.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\textwidth]{fig11_reverse_dcf_heatmap.png}
+\caption{Reverse-DCF sensitivity: 2035 revenue (US\$bn) required to justify the US\$114bn equity value
+across WACC and terminal-margin assumptions. The red box marks the base case (13.5\%/40\%). Even the
+most favourable cell demands revenue far beyond any current AI company. Data:
+Table~\ref{tab:revheat} in Appendix~\ref{sec:revheat}.}
+\label{fig:revheat}
+\end{figure}
 
 \subsection{Relative valuation}
 \label{sec:rel}
-On FY2026E revenue Zhipu trades near \textbf{570$\times$ equity value / revenue}. For context, leading private frontier labs
-(OpenAI, Anthropic) have transacted around 30--40$\times$ trailing revenue, and MiniMax---the most appropriate
-direct comparable---trades far lower than Zhipu on the same basis. We deliberately \emph{exclude} Wenge AI from
-the multiple comparison: its government/enterprise project-delivery model is not comparable to a frontier
-model-API and developer-ecosystem business. Zhipu is thus priced roughly an order of magnitude above even the
-richest private peers---consistent with the reverse-DCF reading rather than with comparable multiples
+On FY2026E revenue Zhipu trades near \textbf{570$\times$ equity value / revenue}. For context, OpenAI's
+March~2025 round (\$40bn, $\approx$\$300bn valuation) implied $\sim$24$\times$ ARR, and its early-2026
+round ($\sim$\$852bn) $\sim$35$\times$ ARR \citep{openai2026}; Anthropic's mid-2026 valuation near
+\$965bn on $\sim\$\,$47bn ARR implies $\approx$21$\times$ \citep{anthropic2026}. These are
+private-market reference points. MiniMax---the most appropriate direct comparable---trades far lower.
+We deliberately \emph{exclude} Wenge AI: its government/enterprise project-delivery model is not
+comparable to a frontier-model-API business. Zhipu is priced roughly an order of magnitude above even
+the richest private peers---consistent with the reverse-DCF reading
 (Figure~\ref{fig:comps}).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.78\textwidth]{fig6_ps_comps.png}
 \caption{Equity value / revenue multiples (log scale). Zhipu's $\approx$570$\times$ is roughly an order of magnitude above
-the 30--40$\times$ at which leading private frontier labs have transacted; even MiniMax sits far below.
-Private-lab multiples are illustrative.}
+the 20--35$\times$ at which leading private frontier labs have transacted in recent funding rounds
+(Section~\ref{sec:rel}); even MiniMax sits far below. Private-lab multiples are private-market reference points, not liquid-market prices.}
 \label{fig:comps}
 \end{figure}
 
@@ -305,7 +317,7 @@ The conclusion is not an artefact of any single assumption. Figure~\ref{fig:torn
 against its main drivers: even the most favorable one-at-a-time changes---lower WACC, a higher terminal margin,
 or stronger 2027 growth---raise estimated value only to the mid-HK\$30s, still about two orders of magnitude
 below the market. Figure~\ref{fig:ff} draws the whole picture together as a valuation football field: scenario
-DCF (HK\$12--82) and an equity-value-to-revenue cross-check (HK\$108--143 at 30--40$\times$ revenue) both sit
+DCF (HK\$12--82) and an equity-value-to-revenue cross-check (HK\$72--126 at 20--35$\times$ revenue) both sit
 far to the left of the HK\$2,046 quote, a gap of
 roughly 60--70$\times$. The market is not pricing a different point on the same distribution; it is pricing a
 different distribution---the right-tail option of Section~\ref{sec:val}.
@@ -480,9 +492,9 @@ are a wider, multi-lab event panel and an NLP-scored surprise magnitude.
 
 \section{Conclusion and Implications}
 \enlargethispage{3\baselineskip}% keep the whole conclusion on one page (avoid a 2--3 line widow page)
-A disciplined valuation cannot reconcile Zhipu's fundamentals (HK\$12--82 per share) with its market price
-(HK\$2,046 on 26~June~2026). The reverse DCF shows why: the price embeds a winner-take-all, US\$100bn-revenue
-outcome, best expressed as a call option on frontier AI rather than a cash-flow stream. The event study shows
+A disciplined valuation cannot reconcile Zhipu's fundamentals (HK\$12--82 per share) with its HK\$2,046
+market price (26~June~2026). The reverse DCF shows why: the price embeds a winner-take-all, US\$130bn-revenue
+outcome---a call option on frontier AI, not a cash-flow stream. The event study shows
 \emph{how} that price is discovered---through capability surprises priced immediately and discriminately, with
 preliminary evidence of under-reaction (a PCAD that survives peer adjustment), while separate index/flow events
 drive part of the rest. The verdict is neither ``efficient'' nor ``bubble'' but \textbf{capability momentum
@@ -579,25 +591,42 @@ $\beta_U=\beta_L/[1+(1-T)D/E]$, using a 21\% tax rate, market capitalisation as 
 as debt \citep{yahoo2026}. Because Zhipu is effectively all-equity after IPO preference-share conversion, the
 relevered beta is close to the unlevered beta; we use the median bridge ($\approx$1.53) rounded to
 $\beta=1.6$ to leave a modest early-stage hard-tech risk buffer.
+Raw data (CSV) are at \texttt{data/comps\_beta\_bridge.csv}, and the table below is generated by
+\texttt{scripts/comps\_beta\_and\_reverse\_dcf.py} from \texttt{yfinance} to avoid manual transcription.
+
+\input{beta_bridge_auto}
+
+\clearpage
+\section{Reverse-DCF Sensitivity Grid}
+\label{sec:revheat}
+Table~\ref{tab:revheat} reports the 2035 revenue (US\$bn) required to justify the US\$114bn equity value
+across a grid of WACC and terminal-margin assumptions, underlying Figure~\ref{fig:revheat}. The grid is
+generated by the same script as Appendix~\ref{sec:beta}; the raw data are at
+\texttt{eventstudy/reverse\_dcf\_sensitivity.csv}.
 
 \begin{table}[H]
 \centering
-\caption{Comparable-company beta bridge.}
-\begin{tabular}{lccc}
+\caption{Reverse-DCF sensitivity: required 2035 revenue (US\$bn) to justify US\$114bn equity.}
+\label{tab:revheat}
+\begin{tabular}{lccccc}
 \toprule
-Comparable & Levered beta & Debt/equity & Unlevered beta \\
+WACC & \multicolumn{5}{c}{Terminal operating margin} \\
+\cmidrule(lr){2-6}
+ & 20\% & 28\% & 35\% & 40\% & 50\% \\
 \midrule
-Salesforce & 1.15 & 32.8\% & 0.91 \\
-Palantir & 1.51 & 0.1\% & 1.51 \\
-Snowflake & 1.35 & 3.2\% & 1.32 \\
-Datadog & 1.55 & 1.5\% & 1.53 \\
-MongoDB & 1.55 & 0.2\% & 1.55 \\
-Cloudflare & 1.67 & 4.2\% & 1.62 \\
-C3.ai & 2.03 & 4.2\% & 1.97 \\
-\midrule
-\textbf{Median} & --- & --- & \textbf{1.53} \\
+10.0\% & 205 & 101 & 70 & 57 & 42 \\
+11.5\% & 374 & 156 & 104 & 84 & 60 \\
+13.0\% & 755 & 238 & 149 & 118 & 83 \\
+\textbf{13.5\%} & \textbf{1{,}009} & \textbf{274} & \textbf{168} & \textbf{131} & \textbf{92} \\
+15.0\% & $>$1{,}000 & 425 & 237 & 181 & 122 \\
+17.0\% & n/a & 830 & 380 & 274 & 176 \\
+20.0\% & n/a & $>$1{,}000 & 841 & 524 & 299 \\
 \bottomrule
 \end{tabular}
+
+{\footnotesize Bold row = base-case WACC. ``n/a'' = WACC $\leq g$ makes terminal value undefined at that margin.
+All figures assume $g=4\%$, sales-to-capital~1.8, 15\% tax, and the base-case growth path fading from
+56\% (2027) to 8\% (2035).}
 \end{table}
 
 \clearpage
@@ -641,6 +670,14 @@ Hang Seng Indexes Co.
 \bibitem{yahoo2026}
 Yahoo Finance. (2026). \emph{Company beta, market capitalisation, and total debt data} [Accessed via the
 \texttt{yfinance} Python package on 28~June~2026]. \url{https://finance.yahoo.com}
+
+\bibitem{openai2026}
+AIPRM. (2025). \emph{50+ OpenAI statistics 2025: Funding, revenue, and valuation data} [Funding-round
+history through Q1~2026]. \url{https://www.aiprm.com/openai-statistics/}
+
+\bibitem{anthropic2026}
+CNBC. (2026). \emph{Anthropic tops OpenAI as most valuable AI startup, nears \$1 trillion valuation}
+[28~May~2026]. \url{https://www.cnbc.com/2026/05/28/anthropic-open-ai-startup-value.html}
 
 \bibitem{black1973}
 Black, F., \& Scholes, M. (1973). The pricing of options and corporate liabilities. \emph{Journal of

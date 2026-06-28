@@ -104,7 +104,10 @@ hours, two Chinese ``AI tiger'' laboratories---Zhipu AI (2513.HK, 8~January) and
 Stock Exchange. Zhipu listed under Chapter~18C, the regime for specialist-technology firms that admits
 pre-profit issuers. By 26~June~2026, its shares had compounded roughly seventeen-fold to a market
 capitalisation near US\$114bn on FY2026 expected revenue of about US\$200m---an implied equity-value-to-revenue
-multiple near 570$\times$ \citep{tushare2026,prospectus2513}.
+multiple near 570$\times$ \citep{tushare2026,prospectus2513}. Zhipu and MiniMax are no longer alone: in
+mid-2026, Anthropic (Claude) and OpenAI have each filed confidential S-1 drafts with the U.S.\ SEC, and Elon
+Musk's xAI---developer of the Grok model family---was bundled into SpaceX's record-setting Nasdaq debut on
+13~June~2026. The 2026 AI-IPO wave is thus a global capital-market event, not a purely Chinese one.
 
 This paper poses three questions: \textbf{(i)} what is Zhipu worth on fundamentals; \textbf{(ii)} what does
 the re-rating imply---efficient pricing of capability, exuberance, or option value; and \textbf{(iii)} is the
@@ -179,17 +182,38 @@ early-commercial-stage lab; milestones are evenly spaced for legibility. Sources
 \label{fig:timeline}
 \end{figure}
 
-\textbf{The Hong Kong AI-IPO landscape.} The 2026 listing wave spans two business models. Zhipu and MiniMax
-are general-purpose foundation-model laboratories; a third entrant, \textbf{Wenge AI} (01956.HK),
-listed on 26~June~2026 at HK\$60.70 and closed its first day near HK\$111.7 ($+84\%$), at about HK\$10.5bn
-($\sim$US\$1.3bn) \citep{prospectus1956}.
-Founded in 2017 by a Chinese Academy of Sciences (Institute of Automation) team, Wenge ranked first by revenue
-in China's enterprise decision-intelligence large-model market in 2025 (\textasciitilde10.2\% share), selling a
-DIOS decision-intelligence operating system and the Decitron and Yayi models mainly to government, media, and
-enterprise clients. \emph{Recent Hong Kong AI listings include foundation-model laboratories such as Zhipu AI
-and MiniMax, as well as enterprise-focused AI platforms such as Wenge AI; however, Wenge is better classified
-as a decision-intelligence solution provider than as a direct frontier-model comparable.} It therefore enters
-this paper as cross-sectional context, not as a valuation comparable (Section~\ref{sec:rel}).
+\textbf{The Hong Kong AI-IPO landscape.} The 2026 listing wave extends well beyond the two foundation-model
+laboratories. Hong Kong now hosts at least three additional categories of listed AI company. \textbf{SenseTime}
+(0020.HK, December~2021), originally a computer-vision specialist, has pivoted toward generative AI through its
+SenseNova model family and the SenseChat chatbot platform; its business model combines AI-software licensing
+with smart-city infrastructure and hardware, making it more of an AI-platform conglomerate than a pure
+foundation-model lab---and its revenue trajectory has been under pressure from margin compression and
+geopolitical headwinds. \textbf{Fourth Paradigm} (6682.HK, September~2023) offers an enterprise
+machine-learning platform (the \emph{Xianzhi}/Prophet platform) that automates predictive-model deployment for
+banking, telecommunications, and retail clients; it is an AI-infrastructure and enterprise-software firm, not a
+frontier foundation-model developer. A third entrant, \textbf{Wenge AI} (01956.HK), listed on 26~June~2026 at
+HK\$60.70 and closed its first day near HK\$111.7 ($+84\%$), at about HK\$10.5bn ($\sim$US\$1.3bn)
+\citep{prospectus1956}. Founded in 2017 by a Chinese Academy of Sciences (Institute of Automation) team, Wenge
+ranked first by revenue in China's enterprise decision-intelligence large-model market in 2025
+(\textasciitilde10.2\% share), selling a DIOS decision-intelligence operating system and the Decitron and Yayi
+models mainly to government, media, and enterprise clients. These three---SenseTime, Fourth Paradigm, and
+Wenge---are better classified as AI-platform and application firms than as direct frontier-model comparables.
+
+Looking ahead, a pipeline of Chinese frontier-model laboratories is actively preparing public debuts.
+\textbf{Moonshot AI} (\emph{Yue Zhi An Mian}), developer of the \textbf{Kimi} chatbot, is reportedly dismantling
+its VIE architecture in preparation for a Hong Kong IPO; its \textbf{Kimi~2.6} release (June~2026) has drawn
+widespread attention for strong long-context reasoning and agentic-coding performance, representing a direct
+competitive threat to GLM-5.2's positioning in the Chinese developer ecosystem. \textbf{StepStar}
+(\emph{Jieyue Xingchen}) and \textbf{01.AI} (\emph{Lingyi Wanwu}) are similarly restructuring for Hong Kong
+listings, while \textbf{DeepSeek}---widely seen as the most cost-efficient Chinese frontier lab---is considered
+a likely candidate for a domestic STAR Market listing. Collectively, these prospective IPOs suggest that the
+Hong Kong exchange is consolidating its position as the default listing venue for frontier-model laboratories
+globally, reinforcing the first-mover premium that Zhipu's Chapter~18C listing confers. In the United States,
+\textbf{SpaceX}'s 13~June~2026 Nasdaq debut---which bundles Elon Musk's \textbf{xAI} and its Grok model
+family---represents the American analogue, although xAI is not a standalone listing and its valuation is
+inseparable from the broader SpaceX conglomerate. \emph{For this paper's valuation purposes, SenseTime, Fourth
+Paradigm, and Wenge enter as industry context rather than as valuation comparables; only MiniMax is a clean
+direct comparable} (Section~\ref{sec:rel}).
 
 \textbf{Macro and flows.} Chinese AI is a policy priority (state/SOE demand); U.S. compute-export controls
 force the architectural efficiency that doubles as Zhipu's cost edge; and Hong Kong's market structure sets
@@ -468,9 +492,11 @@ windows. Shaded areas are percentile 95\% null intervals, and red lines mark the
 
 \textbf{Honesty box.} This is \emph{preliminary, diagnostic} evidence consistent with PCAD, not a proven
 anomaly: $n=4$ single-firm events (plus one peer) over five months; GLM-5.2's drift window is truncated; and
-drift windows can overlap a fast release cadence. No statistical significance is claimed---four events make an
-interesting undergraduate case, not a general law. The natural extensions are a wider, multi-lab event panel
-(adding MiniMax and Wenge releases) and an NLP-scored surprise magnitude.
+drift windows can overlap a fast release cadence---including from competing labs (Moonshot AI's Kimi~2.6, for
+instance, launched in June~2026 and may confound the GLM-5.2 drift measurement if investors treat it as
+sector-wide capability news rather than Zhipu-specific). No statistical significance is claimed---four events
+make an interesting undergraduate case, not a general law. The natural extensions are a wider, multi-lab event
+panel (adding MiniMax and Wenge releases) and an NLP-scored surprise magnitude.
 
 \section{Conclusion and Implications}
 \enlargethispage{3\baselineskip}% keep the whole conclusion on one page (avoid a 2--3 line widow page)

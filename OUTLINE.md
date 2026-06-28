@@ -6,10 +6,12 @@ Evidence from Zhipu AI (2513.HK).*
 **Build:** XeLaTeX (`paper/main.tex` → `main.pdf`, 14 pp). **Data as of 2026-06-26.**
 
 > Term-paper rules satisfied: title carries core concept (*capability surprise*) + mechanism (price discovery
-> & drift); abstract ~189 words (limit 400); main body is approximately 2,435 words, and approximately
-> 2,624 words including the abstract (limit 3,000); full reference list at end.
-> Word-count audit note: the earlier "~2,095 words" outline estimate was low; the corrected manual count above
-> is the pre-non-parametric-robustness body count.
+> & drift); abstract is below the 400-word limit; full reference list at end.
+> Word-count audit note: the earlier "~2,095 words" outline estimate was low. The user-checked pre-robustness
+> manuscript count was approximately 2,435 words for the main body and approximately 2,624 words including the
+> abstract. After adding the non-parametric/bootstrap robustness check, `texcount` gives approximately 2,461
+> text words for Sections 1-6 and approximately 2,665 including the abstract, excluding captions, appendices,
+> and references.
 
 ---
 

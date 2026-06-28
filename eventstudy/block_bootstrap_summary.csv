@@ -1,0 +1,3 @@
+window,n_bootstrap,actual_mean_car_pct,bootstrap_mean_pct,bootstrap_ci_2_5_pct,bootstrap_ci_97_5_pct,actual_percentile,block_lengths_days,excluded_event_window_days
+"Peer-adjusted reaction [0,+1]",20000,18.47,1.59,-17.26,14.0,99.64,"2,2,2,2",42
+"Peer-adjusted drift [+2,+10]",20000,19.18,8.18,-20.22,30.62,78.7,"9,9,9,7",42

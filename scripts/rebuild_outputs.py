@@ -175,6 +175,129 @@ def write_nonparametric_robustness_csv() -> None:
     pd.DataFrame(rows).to_csv(EVENTSTUDY / "nonparametric_robustness.csv", index=False)
 
 
+def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
+    """Block-bootstrap peer-adjusted CAR means under a no-event null."""
+    zhipu = pd.read_csv(ROOT / "data" / "Zhipu_KnowledgeAtlas_daily.csv")
+    peer = pd.read_csv(ROOT / "data" / "MiniMax_daily.csv")
+    zhipu["date"] = pd.to_datetime(zhipu["trade_date"].astype(str))
+    peer["date"] = pd.to_datetime(peer["trade_date"].astype(str))
+    merged = (
+        zhipu[["date", "pct_chg"]]
+        .rename(columns={"pct_chg": "zhipu_ret"})
+        .merge(peer[["date", "pct_chg"]].rename(columns={"pct_chg": "peer_ret"}), on="date", how="inner")
+        .sort_values("date")
+        .reset_index(drop=True)
+    )
+    merged["peer_adjusted_ar"] = merged["zhipu_ret"] - merged["peer_ret"]
+
+    events = [pd.Timestamp(day) for _, day in CAPABILITY_EVENTS]
+    event_locs = [int(merged.index[merged["date"] == event_day][0]) for event_day in events]
+    actual = pd.read_csv(EVENTSTUDY / "car_robustness.csv")
+    actual_react_mean = float(actual["react_peer"].mean())
+    actual_drift_mean = float(actual["drift_peer"].mean())
+    drift_lengths = [9 if bool(full) else 7 for full in actual["drift_full"]]
+
+    excluded_dates = set()
+    for loc, drift_len in zip(event_locs, drift_lengths):
+        for rel in range(0, 2):
+            if 0 <= loc + rel < len(merged):
+                excluded_dates.add(merged.loc[loc + rel, "date"])
+        for rel in range(2, 2 + drift_len):
+            if 0 <= loc + rel < len(merged):
+                excluded_dates.add(merged.loc[loc + rel, "date"])
+
+    rng = np.random.default_rng(2513)
+
+    def valid_block_starts(length: int) -> np.ndarray:
+        starts = []
+        for start in range(0, len(merged) - length + 1):
+            dates = set(merged.loc[start : start + length - 1, "date"])
+            if not dates.intersection(excluded_dates):
+                starts.append(start)
+        return np.array(starts, dtype=int)
+
+    def sampled_block_cars(lengths: list[int]) -> np.ndarray:
+        draws = np.empty(n_boot)
+        starts_by_length = {length: valid_block_starts(length) for length in sorted(set(lengths))}
+        for length, starts in starts_by_length.items():
+            if len(starts) == 0:
+                raise ValueError(f"No valid block starts for length {length}")
+        for i in range(n_boot):
+            cars = []
+            for length in lengths:
+                start = int(rng.choice(starts_by_length[length]))
+                cars.append(float(merged.loc[start : start + length - 1, "peer_adjusted_ar"].sum()))
+            draws[i] = float(np.mean(cars))
+        return draws
+
+    react_draws = sampled_block_cars([2, 2, 2, 2])
+    drift_draws = sampled_block_cars(drift_lengths)
+    distribution = pd.DataFrame(
+        {
+            "draw": np.arange(1, n_boot + 1),
+            "peer_reaction_mean_car_pct": react_draws,
+            "peer_drift_mean_car_pct": drift_draws,
+        }
+    )
+    distribution.to_csv(EVENTSTUDY / "block_bootstrap_distribution.csv", index=False)
+
+    summary_rows = []
+    for window, draws, actual_mean in [
+        ("Peer-adjusted reaction [0,+1]", react_draws, actual_react_mean),
+        ("Peer-adjusted drift [+2,+10]", drift_draws, actual_drift_mean),
+    ]:
+        lo, hi = np.percentile(draws, [2.5, 97.5])
+        percentile = (np.sum(draws <= actual_mean) + 0.5 * np.sum(draws == actual_mean)) / len(draws) * 100
+        summary_rows.append(
+            {
+                "window": window,
+                "n_bootstrap": n_boot,
+                "actual_mean_car_pct": round(actual_mean, 2),
+                "bootstrap_mean_pct": round(float(np.mean(draws)), 2),
+                "bootstrap_ci_2_5_pct": round(float(lo), 2),
+                "bootstrap_ci_97_5_pct": round(float(hi), 2),
+                "actual_percentile": round(float(percentile), 2),
+                "block_lengths_days": ",".join(str(length) for length in ([2, 2, 2, 2] if "reaction" in window else drift_lengths)),
+                "excluded_event_window_days": len(excluded_dates),
+            }
+        )
+    pd.DataFrame(summary_rows).to_csv(EVENTSTUDY / "block_bootstrap_summary.csv", index=False)
+
+    fig, axes = plt.subplots(1, 2, figsize=(10.8, 4.1), dpi=150)
+    panels = [
+        (axes[0], react_draws, actual_react_mean, summary_rows[0], "Reaction [0,+1]"),
+        (axes[1], drift_draws, actual_drift_mean, summary_rows[1], "Drift [+2,+10]"),
+    ]
+    for ax, draws, actual_mean, summary, title in panels:
+        lo = summary["bootstrap_ci_2_5_pct"]
+        hi = summary["bootstrap_ci_97_5_pct"]
+        percentile = summary["actual_percentile"]
+        ax.hist(draws, bins=42, color=C_BLUE, alpha=0.78, edgecolor="white", linewidth=0.4)
+        ax.axvspan(lo, hi, color=C_BLUE, alpha=0.14, label="95% null interval")
+        ax.axvline(actual_mean, color=C_RED, linewidth=2.0, label="Actual mean CAR")
+        ax.axvline(0, color=C_INK, linestyle=":", linewidth=1.0)
+        ax.set_title(title)
+        ax.set_xlabel("Bootstrapped mean CAR (%)")
+        ax.set_ylabel("Frequency")
+        ax.text(
+            0.03,
+            0.95,
+            f"CI [{lo:.1f}, {hi:.1f}]%\nactual {actual_mean:.1f}%\npercentile {percentile:.1f}",
+            transform=ax.transAxes,
+            va="top",
+            ha="left",
+            fontsize=8.3,
+            bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "edgecolor": C_GRAY, "alpha": 0.92},
+        )
+        ax.grid(axis="y", alpha=0.2)
+        ax.spines[["top", "right"]].set_visible(False)
+    axes[0].legend(loc="lower left", fontsize=7.8, framealpha=0.92)
+    fig.suptitle("Block-bootstrap null distribution of peer-adjusted mean CAR", y=1.02)
+    fig.tight_layout()
+    fig.savefig(FIGURES / "fig10_block_bootstrap.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def write_workbook() -> None:
     wb = openpyxl.Workbook()
     ws = wb.active
@@ -656,6 +779,7 @@ def write_reaction_vs_drift() -> None:
 def main() -> None:
     write_base_projection_csv()
     write_nonparametric_robustness_csv()
+    write_block_bootstrap_outputs()
     write_workbook()
     write_sensitivity_chart()
     write_football_field()

@@ -420,7 +420,7 @@ inclusion and Stock Connect access (realised 5~and 8~June). Separating capabilit
 matters: the CARs above are driven by the former, while the latter explain part of the raw volatility and warn
 against attributing every move to model quality.
 
-\subsection{Robustness: peer-adjusted and non-parametric checks}
+\subsection{Robustness: peer-adjusted and block-bootstrap checks}
 Because Zhipu and MiniMax share sector and macro shocks, we re-run the study with \emph{peer-adjusted} returns
 (benchmark $=$ MiniMax's same-day return). Table~\ref{tab:robust} shows the reaction result is highly robust
 ($+18.7\%$ vs $+18.5\%$), while the average drift \emph{strengthens} ($+4.8\%\!\to\!+19.2\%$): once the falling
@@ -450,33 +450,22 @@ GLM-5.2 & $+30.8$ & $+28.2^{\dagger}$ & $+28.7$ & $+31.3^{\dagger}$ \\
 the average drifts are provisional.}
 \end{table}
 
-\textbf{Non-parametric check.} With only four capability events, a parametric $t$-test would create false
-precision. We therefore add an event-level bootstrap over the four CAR observations and an exact one-sided
-sign test for positive CARs (Table~\ref{tab:nonparam}). The check is deliberately conservative: the
-mean-adjusted drift is not statistically informative (two positive events, bootstrap interval crosses zero),
-but both peer-adjusted windows are positive in all four events. The sign-test $p$-value is 0.0625---the best
-possible with $n=4$---so the result should be read as robust directional evidence, not conventional
-5\%-level significance.
+\textbf{Block-bootstrap check.} With only four events, a parametric $t$-test would create false precision. We
+therefore draw 20{,}000 non-event peer-adjusted return blocks with numpy.random.choice, preserving the
+two-day reaction and nine-/seven-day drift window lengths, and compare the actual four-event mean CAR with the
+bootstrap mean distribution (Figure~\ref{fig:boot}). The actual peer-adjusted reaction ($+18.5\%$) sits above
+the 95\% null interval ($[-17.3,+14.0]\%$) and at the 99.6th percentile. Drift ($+19.2\%$) is positive but
+inside its wider null interval ($[-20.2,+30.6]\%$), at the 78.7th percentile. Thus the block bootstrap supports
+a strong immediate capability reaction and only directional, not statistically conclusive, continuation.
 
-\begin{table}[H]
+\begin{figure}[H]
 \centering
-\caption{Non-parametric robustness: event-level bootstrap and sign test.}
-\label{tab:nonparam}
-\begin{tabular}{lcccc}
-\toprule
-Window & Positive events & Mean & Median & Bootstrap 95\% CI \\
-\midrule
-Mean-adjusted reaction & 4/4 & $+18.7$ & $+18.2$ & $[+10.8,+26.7]$ \\
-Mean-adjusted drift & 2/4 & $+4.8$ & $+5.2$ & $[-16.8,+26.4]$ \\
-Peer-adjusted reaction & 4/4 & $+18.5$ & $+15.9$ & $[+14.0,+25.2]$ \\
-Peer-adjusted drift & 4/4 & $+19.2$ & $+16.2$ & $[+13.1,+26.8]$ \\
-\bottomrule
-\end{tabular}
-
-{\footnotesize Percentile bootstrap uses 20,000 resamples of the four event-level CARs. Exact one-sided sign
-test against a 50\% positive-event null: $p=0.0625$ for the three 4/4 rows and $p=0.6875$ for the 2/4
-mean-adjusted drift row.}
-\end{table}
+\includegraphics[width=0.92\textwidth]{fig10_block_bootstrap.png}
+\caption{Block-bootstrap null distributions for peer-adjusted mean CAR. Each draw samples four non-event
+return blocks with replacement using numpy.random.choice; block lengths match the actual event
+windows. Shaded areas are percentile 95\% null intervals, and red lines mark the actual four-event means.}
+\label{fig:boot}
+\end{figure}
 
 \textbf{Honesty box.} This is \emph{preliminary, diagnostic} evidence consistent with PCAD, not a proven
 anomaly: $n=4$ single-firm events (plus one peer) over five months; GLM-5.2's drift window is truncated; and

@@ -9,8 +9,8 @@ Evidence from Zhipu AI (2513.HK).*
 > & drift); abstract is below the 400-word limit; full reference list at end.
 > Word-count audit note: the earlier "~2,095 words" outline estimate was low. The user-checked pre-robustness
 > manuscript count was approximately 2,435 words for the main body and approximately 2,624 words including the
-> abstract. After adding the non-parametric/bootstrap robustness check and the short beta-bridge reference,
-> `texcount` gives approximately 2,469 text words for Sections 1-6 and approximately 2,673 including the
+> abstract. After adding the block-bootstrap robustness check and the short beta-bridge reference,
+> `texcount` gives approximately 2,473 text words for Sections 1-6 and approximately 2,677 including the
 > abstract, excluding captions, appendices, and references.
 
 ---
@@ -25,7 +25,7 @@ Evidence from Zhipu AI (2513.HK).*
 | 2 | Background: Company, Financials, Listing | **condensed** | open-weight model; 3 financial facts (revenue, gross-margin collapse, negative equity); IPO + re-rating + MiniMax divergence |
 | 3 | Industry, Macro, Strategy | **condensed** | Porter + leaderboard cost-disruption; **HK AI-IPO landscape incl. Wenge AI (decision-intelligence, not a comparable)**; macro + flow events |
 | 4 | **Valuation** (main line) | **emphasised** | CAPM/WACC; 3-scenario DCF; **reverse DCF**; relative val (MiniMax direct; Wenge excluded); **real options (fundamental vs option value)** |
-| 5 | **Capability Surprise: Event Study** (original) | **emphasised** | hypothesis; method; CAR results; **flow vs capability events**; peer-adjusted + non-parametric/bootstrap robustness; honesty box |
+| 5 | **Capability Surprise: Event Study** (original) | **emphasised** | hypothesis; method; CAR results; **flow vs capability events**; peer-adjusted + block-bootstrap robustness; honesty box |
 | 6 | Conclusion | — | capability momentum priced as option; preliminary PCAD |
 | A | Appendix: Financial Statements | reproducibility | income statement + balance sheet (RMB) |
 | B | Appendix: Base-Case DCF Projection | reproducibility | full 10-yr chain: Revenue→Growth→EBIT margin→NOPAT→Reinvest→FCFF→TV→Equity→per share |
@@ -66,8 +66,8 @@ News media corroborate only; they do not carry the most important numbers.
 paper/        main.tex, refs.bib (12 refs), crest_watermark.png, main.pdf
 42353012_许哲圣_*.pdf   submission copy
 model/        valuation_model.xlsx (live formulas)
-eventstudy/   car_robustness.csv, nonparametric_robustness.csv, base_projection.csv, zhipu_car.csv
-figures/      fig1-4 (regenerated 2026-06-26)
+eventstudy/   car_robustness.csv, nonparametric_robustness.csv, block_bootstrap_summary.csv, block_bootstrap_distribution.csv, base_projection.csv, zhipu_car.csv
+figures/      fig1-10 (regenerated 2026-06-28)
 data/         Zhipu_/MiniMax_/WengeAI_daily.csv, price_summary.csv
 DATA_TABLES.md, EVENT_STUDY.md, README.md, LICENSE
 ```

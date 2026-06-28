@@ -3,15 +3,13 @@
 **Title:** *Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab:
 Evidence from Zhipu AI (2513.HK).*
 **Author:** Zhesheng Xu（许哲圣）· 42353012 · 公司金融（英）· 2025-2026-2.
-**Build:** XeLaTeX (`paper/main.tex` → `main.pdf`, 15 pp). **Data as of 2026-06-26.**
+**Build:** XeLaTeX (`paper/main.tex` → `main.pdf`, 16 pp). **Data as of 2026-06-26.**
 
 > Term-paper rules satisfied: title carries core concept (*capability surprise*) + mechanism (price discovery
 > & drift); abstract is below the 400-word limit; full reference list at end.
-> Word-count audit note: the earlier "~2,095 words" outline estimate was low. The user-checked pre-robustness
-> manuscript count was approximately 2,435 words for the main body and approximately 2,624 words including the
-> abstract. After adding the block-bootstrap robustness check and the short beta-bridge reference,
-> `texcount` gives approximately 2,473 text words for Sections 1-6 and approximately 2,677 including the
-> abstract, excluding captions, appendices, and references.
+> Word-count audit note: `texcount -inc -sum main.tex` (2026-06-28) gives **3,251 words in text**
+> (Sections 1–6 + abstract), 60 words in headers, 468 words in captions. Total sum count 3,845.
+> Sections 1–6 body text ≈ 2,991 words; with abstract ≈ 3,195 words. Exceeds the 3,000-word target.
 
 ---
 
@@ -21,11 +19,11 @@ Evidence from Zhipu AI (2513.HK).*
 |---|---|---|---|
 | Cover | SWUFE official template | — | 西南财经大学本科考试 / 课程论文, official crest watermark |
 | 0 | Abstract (≤400w) | — | subject, dual method, headline, takeaway |
-| 1 | Introduction | setup | 3 research questions; capability-surprise reframing |
+| 1 | Introduction | setup | 3 research questions; capability-surprise reframing; **global AI-IPO wave (Anthropic, OpenAI, SpaceX/xAI)** |
 | 2 | Background: Company, Financials, Listing | **condensed** | open-weight model; 3 financial facts (revenue, gross-margin collapse, negative equity); IPO + re-rating + MiniMax divergence |
-| 3 | Industry, Macro, Strategy | **condensed** | Porter + leaderboard cost-disruption; **HK AI-IPO landscape incl. Wenge AI (decision-intelligence, not a comparable)**; macro + flow events |
+| 3 | Industry, Macro, Strategy | **condensed → expanded** | Porter + leaderboard cost-disruption; **HK AI-IPO landscape: SenseTime (0020.HK), Fourth Paradigm (6682.HK), Wenge AI; IPO pipeline: Moonshot AI/Kimi 2.6, StepStar, 01.AI, DeepSeek; SpaceX/xAI (US)**; macro + flow events |
 | 4 | **Valuation** (main line) | **emphasised** | CAPM/WACC; 3-scenario DCF; **reverse DCF**; relative val (MiniMax direct; Wenge excluded); **real options (fundamental vs option value)** |
-| 5 | **Capability Surprise: Event Study** (original) | **emphasised** | hypothesis; method; CAR results; **flow vs capability events**; peer-adjusted + block-bootstrap robustness; honesty box |
+| 5 | **Capability Surprise: Event Study** (original) | **emphasised** | hypothesis; method; CAR results; **flow vs capability events**; peer-adjusted + block-bootstrap robustness; honesty box (**Kimi 2.6 cross-firm spillover caveat**) |
 | 6 | Conclusion | — | capability momentum priced as option; preliminary PCAD |
 | A | Appendix: Financial Statements | reproducibility | income statement + balance sheet (RMB) |
 | B | Appendix: Base-Case DCF Projection | reproducibility | full 10-yr chain: Revenue→Growth→EBIT margin→NOPAT→Reinvest→FCFF→TV→Equity→per share |

@@ -3,15 +3,15 @@
 **Title:** *Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab:
 Evidence from Zhipu AI (2513.HK).*
 **Author:** Zhesheng Xu（许哲圣）· 42353012 · 公司金融（英）· 2025-2026-2.
-**Build:** XeLaTeX (`paper/main.tex` → `main.pdf`, 14 pp). **Data as of 2026-06-26.**
+**Build:** XeLaTeX (`paper/main.tex` → `main.pdf`, 15 pp). **Data as of 2026-06-26.**
 
 > Term-paper rules satisfied: title carries core concept (*capability surprise*) + mechanism (price discovery
 > & drift); abstract is below the 400-word limit; full reference list at end.
 > Word-count audit note: the earlier "~2,095 words" outline estimate was low. The user-checked pre-robustness
 > manuscript count was approximately 2,435 words for the main body and approximately 2,624 words including the
-> abstract. After adding the non-parametric/bootstrap robustness check, `texcount` gives approximately 2,461
-> text words for Sections 1-6 and approximately 2,665 including the abstract, excluding captions, appendices,
-> and references.
+> abstract. After adding the non-parametric/bootstrap robustness check and the short beta-bridge reference,
+> `texcount` gives approximately 2,469 text words for Sections 1-6 and approximately 2,673 including the
+> abstract, excluding captions, appendices, and references.
 
 ---
 
@@ -29,6 +29,7 @@ Evidence from Zhipu AI (2513.HK).*
 | 6 | Conclusion | — | capability momentum priced as option; preliminary PCAD |
 | A | Appendix: Financial Statements | reproducibility | income statement + balance sheet (RMB) |
 | B | Appendix: Base-Case DCF Projection | reproducibility | full 10-yr chain: Revenue→Growth→EBIT margin→NOPAT→Reinvest→FCFF→TV→Equity→per share |
+| C | Appendix: Bottom-Up Beta Bridge | robustness | compact comparable-company list and unlevering bridge supporting beta approx. 1.6 |
 
 ## Four unique points (kept central, per supervisor feedback)
 1. **Capability Surprise** — title + conclusion centre, not a side analysis.
@@ -45,6 +46,7 @@ Evidence from Zhipu AI (2513.HK).*
 
 ## Sourcing policy (granular; primary > news)
 Key data cite, via the bibliography (not just footnotes):
+- **Comparable beta bridge** — `yahoo2026` (Yahoo Finance via `yfinance`: beta, market cap, total debt).
 - **HKEX prospectus / announcements** — `prospectus2513`, `prospectus1956` (offering terms, financials, market share).
 - **Official model cards / technical reports** — `glm_modelcard` (architecture, benchmarks).
 - **Hang Seng Indexes Company announcements** — `hsi2026` (index inclusion / flows).

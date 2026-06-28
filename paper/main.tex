@@ -210,7 +210,8 @@ effectively all-equity, WACC~$\approx$~13.5\%. Throughout we use HK\$7.8/US\$, R
 shares, and net cash of about \textbf{US\$0.55bn}---net IPO proceeds of $\sim$HK\$4.3bn ($\sim$US\$0.55bn)
 plus pre-IPO cash of $\sim$US\$0.03bn. The pre-IPO net-liability position is dominated by redeemable preferred
 shares that convert to ordinary equity on listing, so it is not post-IPO debt; treating any residual as debt
-would only lower equity value and reinforce our conclusion.
+would only lower equity value and reinforce our conclusion. Appendix~\ref{sec:beta} lists the comparable set
+and unlevering bridge.
 
 \textbf{Two caveats, deliberately retained.} We keep this single comparables-based WACC for transparency, but
 two simplifications deserve flagging. \emph{(i) The beta source.} The bottom-up $\beta$ is built from mature
@@ -578,6 +579,36 @@ Year & Revenue & Growth & EBIT margin & Cash tax & NOL end & NOPAT & Reinvest & 
 \end{table}
 
 \clearpage
+\section{Bottom-Up Beta Bridge}
+\label{sec:beta}
+The bottom-up beta uses public software and AI-infrastructure comparables with observable market betas and
+capital structures. We unlever each beta as
+$\beta_U=\beta_L/[1+(1-T)D/E]$, using a 21\% tax rate, market capitalisation as equity value, and total debt
+as debt \citep{yahoo2026}. Because Zhipu is effectively all-equity after IPO preference-share conversion, the
+relevered beta is close to the unlevered beta; we use the median bridge ($\approx$1.53) rounded to
+$\beta=1.6$ to leave a modest early-stage hard-tech risk buffer.
+
+\begin{table}[H]
+\centering
+\caption{Comparable-company beta bridge.}
+\begin{tabular}{lccc}
+\toprule
+Comparable & Levered beta & Debt/equity & Unlevered beta \\
+\midrule
+Salesforce & 1.15 & 32.8\% & 0.91 \\
+Palantir & 1.51 & 0.1\% & 1.51 \\
+Snowflake & 1.35 & 3.2\% & 1.32 \\
+Datadog & 1.55 & 1.5\% & 1.53 \\
+MongoDB & 1.55 & 0.2\% & 1.55 \\
+Cloudflare & 1.67 & 4.2\% & 1.62 \\
+C3.ai & 2.03 & 4.2\% & 1.97 \\
+\midrule
+\textbf{Median} & --- & --- & \textbf{1.53} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
 % References: numbered (superscript in-text via natbib super,numbers), entries formatted in APA style,
 % ordered by first appearance in the text.
 \begin{thebibliography}{99}
@@ -614,6 +645,10 @@ HKEXnews.
 \bibitem{hsi2026}
 Hang Seng Indexes Company Limited. (2026). \emph{Index review results and constituent-change announcements}.
 Hang Seng Indexes Co.
+
+\bibitem{yahoo2026}
+Yahoo Finance. (2026). \emph{Company beta, market capitalisation, and total debt data} [Accessed via the
+\texttt{yfinance} Python package on 28~June~2026]. \url{https://finance.yahoo.com}
 
 \bibitem{black1973}
 Black, F., \& Scholes, M. (1973). The pricing of options and corporate liabilities. \emph{Journal of

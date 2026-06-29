@@ -1,0 +1,27 @@
+[project]
+name = "zhipu-ai-valuation"
+version = "0.1.0"
+description = "Valuation and event-study workflow for Zhipu AI."
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib",
+    "numpy",
+    "openpyxl",
+    "pandas",
+    "pypdf",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["scripts"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+

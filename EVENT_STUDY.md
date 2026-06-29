@@ -65,10 +65,10 @@ there*.
 - **Peer-adjusted** (benchmark = MiniMax): reaction robust (**+18.7% → +18.5%**); average drift **strengthens
   to +19.2%** once the falling sector is removed — GLM-5.1's reversal flips to continuation
   (−21.5% → +12.9%). The under-reaction/PCAD pattern is reinforced, not weakened.
-- **Expanded event panel framework:** `eventstudy/event_catalog.csv` now tracks Zhipu capability events,
+- **Expanded event panel framework:** `data/event_catalog_input.csv` now tracks Zhipu capability events,
   Zhipu index/flow catalysts, MiniMax M2.7, listing events, and candidate Wenge/Moonshot/Kimi events. Only
-  events with enough local post-listing price history enter `eventstudy/event_panel.csv`; excluded candidates
-  carry an explicit reason instead of being forced into the statistics.
+  events with enough local post-listing price history enter the generated `eventstudy/event_panel.csv`; excluded
+  candidates carry an explicit reason instead of being forced into the statistics.
 - **Preliminary, diagnostic** evidence consistent with PCAD — *not* a proven anomaly: n = 4 single-firm events
   (+1 peer) over ~5 months; GLM-5.2's drift window is truncated; windows can overlap a fast release cadence.
   No statistical significance claimed.

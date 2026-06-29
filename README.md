@@ -229,6 +229,13 @@ Stock Connect). Treated as **preliminary, diagnostic** evidence — an undergrad
 python scripts/build_project.py
 ```
 
+Quick checks:
+
+```bash
+python -m unittest discover -s tests
+python scripts/validate_outputs.py
+```
+
 Manual equivalent:
 
 ```bash

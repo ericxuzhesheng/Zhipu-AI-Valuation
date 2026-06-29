@@ -116,15 +116,19 @@ def check_event_panel() -> None:
     panel = ROOT / "eventstudy" / "event_panel.csv"
     catalog = ROOT / "eventstudy" / "event_catalog.csv"
     summary = ROOT / "eventstudy" / "event_panel_summary.csv"
-    for path in [panel, catalog, summary]:
+    input_catalog = ROOT / "data" / "event_catalog_input.csv"
+    for path in [input_catalog, panel, catalog, summary]:
         if not path.exists():
             fail(f"event-study output missing: {path}")
     panel_rows = pd.read_csv(panel)
     if len(panel_rows) < 9:
         fail(f"event panel has too few computable events: {len(panel_rows)}")
     catalog_rows = pd.read_csv(catalog)
+    input_rows = pd.read_csv(input_catalog, keep_default_na=False)
     if len(catalog_rows) < len(panel_rows):
         fail("event catalog should include all panel rows and excluded candidates")
+    if len(catalog_rows) != len(input_rows):
+        fail(f"event catalog row count {len(catalog_rows)} does not match input {len(input_rows)}")
 
 
 def check_appendix_outputs() -> None:

@@ -1,0 +1,15 @@
+company,ticker,event,day0,event_type,source_type,data_file,peer_file,reason_if_excluded
+Zhipu,02513.HK,GLM-5,2026-02-11,capability,official model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,GLM-5-Turbo,2026-03-16,capability,official model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,GLM-5.1,2026-04-08,capability,official model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,GLM-5.2,2026-06-15,capability,official model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+MiniMax,00100.HK,M2.7,2026-03-18,capability_peer,official model release,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,Stock Connect inclusion,2026-06-08,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,IPO listing,2026-01-08,listing,HKEX listing,Zhipu_KnowledgeAtlas_daily.csv,,no pre-event estimation window
+MiniMax,00100.HK,IPO listing,2026-01-09,listing,HKEX listing,MiniMax_daily.csv,,no pre-event estimation window
+Wenge AI,01956.HK,IPO listing,2026-06-26,listing,HKEX listing,WengeAI_daily.csv,,only one trading day in local data
+Wenge AI,01956.HK,Decitron/Yayi releases,,candidate_capability,candidate model release,,,candidate only; no event date and post-event price window in local data
+Moonshot/Kimi,unlisted,Kimi model release,,candidate_capability,candidate model release,,,candidate only; no listed equity price series

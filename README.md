@@ -135,8 +135,15 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 ### 如何编译
 
 ```bash
+python scripts/build_project.py
+```
+
+手动等价命令：
+
+```bash
 cd paper
 python ../scripts/rebuild_outputs.py
+python ../scripts/comps_beta_and_reverse_dcf.py
 # 需 TeX Live + XeLaTeX（封面含中文，必须用 xelatex；参考文献为内嵌 APA 列表，无需 bibtex）
 xelatex -interaction=nonstopmode main.tex
 xelatex -interaction=nonstopmode main.tex
@@ -219,8 +226,15 @@ Stock Connect). Treated as **preliminary, diagnostic** evidence — an undergrad
 ### How to Build
 
 ```bash
+python scripts/build_project.py
+```
+
+Manual equivalent:
+
+```bash
 cd paper
 python ../scripts/rebuild_outputs.py
+python ../scripts/comps_beta_and_reverse_dcf.py
 # XeLaTeX required (CJK cover); references are an inline APA list, so no bibtex step
 xelatex -interaction=nonstopmode main.tex
 xelatex -interaction=nonstopmode main.tex

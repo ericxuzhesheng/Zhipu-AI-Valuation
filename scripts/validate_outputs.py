@@ -13,14 +13,19 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "paper" / "main.tex"
-PDFS = [
-    ROOT / "paper" / "main.pdf",
-    ROOT / "42353012_许哲圣_Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab - Evidence from Zhipu AI (2513.HK).pdf",
-]
+SUBMISSION_GLOB = "42353012_*.pdf"
 
 
 def fail(message: str) -> None:
     raise AssertionError(message)
+
+
+def submission_pdf_path() -> Path:
+    matches = sorted(ROOT.glob(SUBMISSION_GLOB))
+    if len(matches) != 1:
+        found = ", ".join(path.name for path in matches) or "none"
+        fail(f"expected exactly one root-level {SUBMISSION_GLOB} file; found {found}")
+    return matches[0]
 
 
 def texcount_words() -> int:
@@ -97,7 +102,7 @@ def check_valuation_summary() -> None:
 
 
 def check_pdfs() -> None:
-    for path in PDFS:
+    for path in [ROOT / "paper" / "main.pdf", submission_pdf_path()]:
         if not path.exists():
             fail(f"PDF missing: {path}")
         if path.stat().st_size < 100_000:
@@ -122,6 +127,26 @@ def check_event_panel() -> None:
         fail("event catalog should include all panel rows and excluded candidates")
 
 
+def check_appendix_outputs() -> None:
+    required = [
+        ROOT / "data" / "comps_beta_bridge.csv",
+        ROOT / "paper" / "beta_bridge_auto.tex",
+        ROOT / "eventstudy" / "reverse_dcf_sensitivity.csv",
+        ROOT / "figures" / "fig11_reverse_dcf_heatmap.png",
+    ]
+    for path in required:
+        if not path.exists():
+            fail(f"appendix output missing: {path}")
+        if path.stat().st_size <= 0:
+            fail(f"appendix output is empty: {path}")
+    beta = pd.read_csv(ROOT / "data" / "comps_beta_bridge.csv")
+    if len(beta) < 5:
+        fail(f"comps beta bridge has too few rows: {len(beta)}")
+    reverse = pd.read_csv(ROOT / "eventstudy" / "reverse_dcf_sensitivity.csv")
+    if len(reverse) < 20:
+        fail(f"reverse DCF grid has too few rows: {len(reverse)}")
+
+
 def main() -> int:
     checks = [
         ("texcount text words < 3000", lambda: texcount_words() < 3000),
@@ -130,6 +155,7 @@ def main() -> int:
         ("valuation_summary matches Excel Audit Summary", check_valuation_summary),
         ("PDF files exist and have pages", check_pdfs),
         ("event panel outputs exist", check_event_panel),
+        ("appendix outputs exist", check_appendix_outputs),
     ]
     for label, check in checks:
         result = check()

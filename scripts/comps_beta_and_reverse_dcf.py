@@ -30,7 +30,7 @@ C_BLUE = "#1F4E79"
 C_INK = "#222222"
 
 # ============================================================
-# PART 1 — Comparable-company beta bridge (CSV + LaTeX)
+# PART 1 - Comparable-company beta bridge (CSV + LaTeX)
 # ============================================================
 
 # Comparable-company snapshot (last verified 2026-06-28).
@@ -101,7 +101,7 @@ def write_beta_latex(df: pd.DataFrame, median_bu: float, path: Path) -> None:
 
 
 # ============================================================
-# PART 2 — Reverse-DCF sensitivity (required 2035 revenue grid)
+# PART 2 - Reverse-DCF sensitivity (required 2035 revenue grid)
 # ============================================================
 
 # Fixed assumptions
@@ -234,7 +234,7 @@ def main() -> None:
     FIGURES.mkdir(exist_ok=True)
 
     # ---- Part 1: Beta bridge ----
-    print("[1/3] Building comparable-company beta bridge …")
+    print("[1/3] Building comparable-company beta bridge ...")
     df_beta, median_bu = build_beta_bridge()
     csv_beta = DATA / "comps_beta_bridge.csv"
     df_beta.to_csv(csv_beta, index=False)
@@ -243,13 +243,13 @@ def main() -> None:
     write_beta_latex(df_beta, median_bu, tex_beta)
 
     # ---- Part 2: Reverse-DCF sensitivity ----
-    print("[2/3] Computing sensitivity grid …")
+    print("[2/3] Computing sensitivity grid ...")
     df_sens = build_sensitivity_grid()
     csv_sens = EVENTSTUDY / "reverse_dcf_sensitivity.csv"
     df_sens.to_csv(csv_sens, index=False)
     print(f"[OK] CSV -> {csv_sens}")
 
-    print("[3/3] Plotting sensitivity heatmap …")
+    print("[3/3] Plotting sensitivity heatmap ...")
     fig_path = FIGURES / "fig11_reverse_dcf_heatmap.png"
     plot_sensitivity_heatmap(df_sens, fig_path)
 

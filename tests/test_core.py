@@ -45,7 +45,7 @@ class EventPanelTests(unittest.TestCase):
 class ValuationTests(unittest.TestCase):
     def test_base_case_per_share_value_is_stable(self) -> None:
         result = rebuild_outputs.project_scenario(rebuild_outputs.SCENARIOS[1])
-        self.assertAlmostEqual(result["per_share_hkd"], 28.1, places=1)
+        self.assertAlmostEqual(result["per_share_hkd"], 27.4, places=1)
 
 
 if __name__ == "__main__":

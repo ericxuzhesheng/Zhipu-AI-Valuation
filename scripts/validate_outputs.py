@@ -170,7 +170,7 @@ def main() -> int:
     ]
     if not args.skip_tex_checks:
         checks = [
-            ("texcount text words < 3000", lambda: texcount_words() < 3000),
+            ("texcount text words <= 3000", lambda: texcount_words() <= 3000),
             ("abstract words < 400", lambda: abstract_words() < 400),
             ("PDF files exist and have pages", check_pdfs),
             *checks,

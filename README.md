@@ -10,12 +10,12 @@
   <img src="https://img.shields.io/badge/标的-智谱AI · 2513.HK-F2C94C?style=for-the-badge" alt="2513.HK">
   <img src="https://img.shields.io/badge/上市-港交所主板 · 第18C章-4CAF50?style=for-the-badge" alt="HKEX 18C">
   <img src="https://img.shields.io/badge/论文-XeLaTeX-008080?style=for-the-badge&logo=latex&logoColor=white" alt="XeLaTeX">
-  <img src="https://img.shields.io/badge/收入倍数-~570x · DCF缺口~98%25-9B51E0?style=for-the-badge" alt="Revenue multiple 570x">
+  <img src="https://img.shields.io/badge/收入倍数-~601x · DCF缺口~98%25-9B51E0?style=for-the-badge" alt="Revenue multiple 601x">
   <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT">
 </p>
 
 > **作者 / Author:** Zhesheng Xu（许哲圣） · **学号 / Student ID:** 42353012 · 公司金融期末项目 / Corporate Finance Final Project
-> **数据截至 / Data as of:** 2026-06-26
+> **数据截至 / Data as of:** 2026-06-30
 
 ---
 
@@ -23,9 +23,9 @@
 
 ### 一句话概览
 
-本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2025 年收入仅约 1.02 亿美元、2026 年预计收入约 2 亿美元、深度亏损、净权益为负的"早期商业化、尚未盈利"公司，为何上市约五个月暴涨约 17 倍、市值达约 1140 亿美元（股权价值/收入约 570 倍）？**
+本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2025 年收入仅约 1.02 亿美元、2026 年预计收入约 2 亿美元、深度亏损、净权益为负的"早期商业化、尚未盈利"公司，为何上市约五个多月暴涨约 18 倍、市值达约 1200 亿美元（股权价值/收入约 601 倍）？**
 
-**主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 概率加权约 HK$33/股（约为市价的 1.6%）；现价隐含 2035 年收入约 1300 亿美元、2026–2035 年约 105% 的年增速（9 个增长区间）。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
+**主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 概率加权约 HK$32/股（约为市价的 1.5%）；现价隐含 2035 年收入约 1390 亿美元、2026–2035 年约 107% 的年增速（9 个增长区间）。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
 
 ### 快速导航
 
@@ -57,17 +57,17 @@
 
 ### 估值结论
 
-WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一：HK$7.8/US$、RMB 7.1/US$、约 4.35 亿股。活公式模型见 [`model/valuation_model.xlsx`](model/valuation_model.xlsx)，十年完整 Base Case 链见论文附录 B。
+WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一：HK$7.8/US$、RMB 7.1/US$、约 4.46 亿股。活公式模型见 [`model/valuation_model.xlsx`](model/valuation_model.xlsx)，十年完整 Base Case 链见论文附录 B。
 
 | 情景 | 收入CAGR '26–35 | 终期利润率 | 股权价值 | 每股(HK$) |
 |---|---:|---:|---:|---:|
 | 悲观 (p=0.35) | 21% | 18% | $0.7B | 12 |
-| 中性 (p=0.45) | 31% | 28% | $1.6B | 28 |
-| 乐观 (p=0.20) | 46% | 35% | $4.6B | 82 |
-| **概率加权** | — | — | **$1.9B** | **33** |
-| *市价 (2026-06-26)* | — | — | *$114B* | *2,046* |
+| 中性 (p=0.45) | 31% | 28% | $1.6B | 27 |
+| 乐观 (p=0.20) | 46% | 35% | $4.6B | 80 |
+| **概率加权** | — | — | **$1.9B** | **32** |
+| *市价 (2026-06-30)* | — | — | *$120B* | *2,104* |
 
-**反向 DCF：** 要支撑现价，需相信 2035 年收入约 **US$1000 亿**（约 **100%** 的十年复合增速，约数百倍 FY26E）——超级算力巨头级别。市场股权价值/收入约 **570×**，而 OpenAI/Anthropic 一级市场约 30–40×；**MiniMax 是最合适的直接可比对象，中科闻歌因商业模式不同而排除在倍数比较之外**。
+**反向 DCF：** 要支撑现价，需相信 2035 年收入约 **US$1390 亿**（约 **107%** 的十年复合增速，约数百倍 FY26E）——超级算力巨头级别。市场股权价值/收入约 **601×**，而 OpenAI/Anthropic 一级市场约 30–40×；**MiniMax 是最合适的直接可比对象，中科闻歌因商业模式不同而排除在倍数比较之外**。
 
 ### 事件研究
 
@@ -78,13 +78,13 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 | GLM-5 | 2026-02-11 | +22.5% | +24.7% | 反应不足 |
 | GLM-5-Turbo | 2026-03-16 | +7.7% | −19.3% | 反转 |
 | GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | 过度反应 |
-| GLM-5.2 | 2026-06-15 | +30.8% | +28.2%† | 强反应不足 |
+| GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | 强反应不足 |
 | *MiniMax M2.7* | 2026-03-18 | −5.5% | −49.1% | 哑火/去估值 |
-| **均值(4)** | | **+18.7%** | **+4.8%†** | |
+| **均值(4)** | | **+18.7%** | **+4.8%** | |
 
-† GLM-5.2 的 [+2,+10] 窗口**未走完**（截至 6/26 只覆盖 9 天中的 7 天），漂移为临时值。
+均值调整口径：`AR_t = R_t - average(R[-20,-6])`。截至 2026-06-30，GLM-5.2 的 [+2,+10] 窗口已覆盖完整 9 个交易日。
 
-**要点：** ① 事件日期独立取自官方发布公告（不靠股价倒推），图 2 仅作描述性交叉验证；② 反应一致为正（均值 +18.7%），漂移分化；③ **同业调整后漂移全部转正**（+4.8% → +19.2%），GLM-5.1 的"过度反应"翻为延续，说明其反转主要是板块效应；④ 2/20、5/13 两个尖峰为**非能力的指数/资金流事件**（恒生科技纳入、港股通预期）。结论定位为**初步诊断性证据**，4 个事件足以构成有趣的本科案例，但不足以确立普遍异象。
+**要点：** ① 事件日期独立取自官方发布公告（不靠股价倒推），图 2 仅作描述性交叉验证；② 反应一致为正（均值 +18.7%），漂移分化；③ **同业调整后漂移全部转正**（+4.8% → +20.5%），GLM-5.1 的"过度反应"翻为延续，说明其反转主要是板块效应；④ 2/20、5/13 两个尖峰为**非能力的指数/资金流事件**（恒生科技纳入、港股通预期）。结论定位为**初步诊断性证据**，4 个事件足以构成有趣的本科案例，但不足以确立普遍异象。
 
 ### 港股AI新股
 
@@ -92,7 +92,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 | 公司 | 代码 | 定位 | 上市表现 |
 |---|---|---|---|
-| 智谱AI | 2513.HK | 通用基础大模型实验室 | IPO HK$116.20 → ~HK$2,046（~+1,660%） |
+| 智谱AI | 2513.HK | 通用基础大模型实验室 | IPO HK$116.20 → ~HK$2,104（~+1,711%） |
 | MiniMax | 00100.HK | 通用/多模态基础模型公司 | IPO HK$165 → ~HK$427（首日翻倍后回落） |
 | 中科闻歌 Wenge AI | 01956.HK | 企业级决策大模型与 AI 解决方案商 | 2026-06-26 上市，IPO HK$60.70 → 首日 ~HK$111.7（+84%），市值 ~HK$105 亿 |
 
@@ -114,6 +114,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 - **行情：** Tushare `hk_daily`（2513.HK、00100.HK、01956.HK）与 HKEX 日行情交叉核对，见 [`data/`](data/)。
 - **财务：** 港交所第18C章招股书及 2025 年度报告（论文附录 A）。
+- **AGM 通函：** 2026年6月22日股东大会投票结果公告（确认总股本 445,843,090 股、股权激励方案等 20 项决议全票通过）。
 - **能力事件：** GLM/MiniMax 官方模型卡与 SWE-Bench Pro 等榜单。
 - **指数/资金流：** 恒生指数公司指数调整公告、HKEX/SSE 港股通名单。
 
@@ -161,12 +162,12 @@ A corporate-finance valuation and price-discovery study of the world's **first p
 foundation-model company** — Zhipu AI (Knowledge Atlas, 2513.HK, listed on the HKEX Main Board under
 Chapter 18C on 2026-01-08). The question is not a target price but a counter-intuitive one: **why did an
 early-commercial-stage, pre-profit firm — ~US$200m expected 2026 revenue, deep losses, negative book equity,
-and volatile cloud-deployment economics — rise ~17x in five months to a ~US$114B market cap
-(≈570× equity value / revenue)?**
+and volatile cloud-deployment economics — rise ~18x in less than six months to a ~US$120B market cap
+(≈601× equity value / revenue)?**
 
 **Main conclusion:** neither a simple bubble nor efficient pricing, but **a call option on a winner-take-all
-AGI outcome, priced through capability momentum**. A disciplined DCF supports only ~HK$33/share (≈1.6% of
-price); the price embeds ~US$130B of revenue by 2035 at a ~105% annual rate (2026–2035). Price discovery has shifted from *earnings
+AGI outcome, priced through capability momentum**. A disciplined DCF supports only ~HK$32/share (≈1.5% of
+price); the price embeds ~US$139B of revenue by 2035 at a ~107% annual rate (2026–2035). Price discovery has shifted from *earnings
 surprise* to **capability surprise** — pricing built around model releases and leaderboard wins.
 
 ### Core Argument — Two Pillars (weight on valuation + event study)
@@ -176,21 +177,21 @@ surprise* to **capability surprise** — pricing built around model releases and
 | **A — Fundamental anchor** | CAPM/WACC, three-scenario DCF, reverse DCF, comparables, real options | Intrinsic value far below market; the premium is option time value |
 | **B — Original empirics** | Capability-surprise event study (GLM-5 → GLM-5.2 vs MiniMax) | Immediate, discriminating reaction, with **preliminary** evidence of PCAD drift |
 
-### Valuation Summary (market row at 2026-06-26)
+### Valuation Summary (market row at 2026-06-30)
 
-WACC ≈ 13.5% (CAPM, bottom-up β≈1.6). Conventions: HK$7.8/US$, RMB 7.1/US$, ≈435m shares. Live workbook:
+WACC ≈ 13.5% (CAPM, bottom-up β≈1.6). Conventions: HK$7.8/US$, RMB 7.1/US$, ≈446m shares. Live workbook:
 [`model/valuation_model.xlsx`](model/valuation_model.xlsx); full ten-year Base case in the paper's Appendix B.
 
 | Scenario | Rev. CAGR '26–35 | Term. margin | Equity | Per share (HK$) |
 |---|---:|---:|---:|---:|
 | Bear (p=0.35) | 21% | 18% | $0.7B | 12 |
-| Base (p=0.45) | 31% | 28% | $1.6B | 28 |
-| Bull (p=0.20) | 46% | 35% | $4.6B | 82 |
-| **Prob-weighted** | — | — | **$1.9B** | **33** |
-| *Market (2026-06-26)* | — | — | *$114B* | *2,046* |
+| Base (p=0.45) | 31% | 28% | $1.6B | 27 |
+| Bull (p=0.20) | 46% | 35% | $4.6B | 80 |
+| **Prob-weighted** | — | — | **$1.9B** | **32** |
+| *Market (2026-06-30)* | — | — | *$120B* | *2,104* |
 
-**Reverse DCF:** justifying the price requires ~US$130B revenue by 2035 (~105% annual over 2026–2035, several hundred ×FY26E).
-Market equity value / revenue ≈ 570× vs ~30–40× for OpenAI/Anthropic; **MiniMax is the appropriate direct comparable; Wenge AI is
+**Reverse DCF:** justifying the price requires ~US$139B revenue by 2035 (~107% annual over 2026–2035, several hundred ×FY26E).
+Market equity value / revenue ≈ 601× vs ~30–40× for OpenAI/Anthropic; **MiniMax is the appropriate direct comparable; Wenge AI is
 excluded from the multiple comparison** (different business model).
 
 ### Event Study
@@ -200,14 +201,14 @@ excluded from the multiple comparison** (different business model).
 | GLM-5 | 2026-02-11 | +22.5% | +24.7% | under-reaction |
 | GLM-5-Turbo | 2026-03-16 | +7.7% | −19.3% | reversal |
 | GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | over-reaction |
-| GLM-5.2 | 2026-06-15 | +30.8% | +28.2%† | strong under-reaction |
+| GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | strong under-reaction |
 | *MiniMax M2.7* | 2026-03-18 | −5.5% | −49.1% | muted / de-rate |
-| **Average (4)** | | **+18.7%** | **+4.8%†** | |
+| **Average (4)** | | **+18.7%** | **+4.8%** | |
 
-† GLM-5.2's [+2,+10] window is truncated (7 of 9 days through 2026-06-26); its drift is provisional.
+Mean-adjusted definition: `AR_t = R_t - average(R[-20,-6])`. As of 2026-06-30, GLM-5.2's [+2,+10] window is complete with all 9 trading days.
 
 Independently-dated events; reaction is robust (mean-adj +18.7% vs peer-adj +18.5%),
-and drift **strengthens to +19.2%** once the falling sector is removed (PCAD survives, GLM-5.1's reversal flips
+and drift **strengthens to +20.5%** once the falling sector is removed (PCAD survives, GLM-5.1's reversal flips
 to continuation). Two spikes (Feb-20, May-13) are non-capability index/flow events (Hang Seng Tech inclusion,
 Stock Connect). Treated as **preliminary, diagnostic** evidence — an undergraduate case, not a general law.
 

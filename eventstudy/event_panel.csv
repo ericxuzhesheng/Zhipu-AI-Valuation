@@ -2,7 +2,7 @@ company,ticker,event,day0,event_type,source_type,included,exclusion_reason,leaka
 Zhipu,02513.HK,GLM-5,2026-02-11,capability,official model release,True,,22.33,22.48,24.72,17.19,13.27,-1.7,5.0,2.0,9.0,True
 Zhipu,02513.HK,GLM-5-Turbo,2026-03-16,capability,official model release,True,,-21.53,7.7,-19.32,14.61,19.2,14.15,5.0,2.0,9.0,True
 Zhipu,02513.HK,GLM-5.1,2026-04-08,capability,official model release,True,,7.38,13.83,-14.21,13.4,12.88,11.49,5.0,2.0,9.0,True
-Zhipu,02513.HK,GLM-5.2,2026-06-15,capability,official model release,True,,-23.24,30.83,28.19,28.66,31.29,32.82,5.0,2.0,7.0,False
+Zhipu,02513.HK,GLM-5.2,2026-06-15,capability,official model release,True,,-23.24,30.83,28.16,28.66,36.75,32.82,5.0,2.0,9.0,True
 MiniMax,00100.HK,M2.7,2026-03-18,capability_peer,official model release,True,,-44.71,-5.52,-49.08,-2.27,-37.71,19.85,5.0,2.0,9.0,True
 Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,True,,57.56,16.11,-20.8,18.79,-2.0,42.72,5.0,2.0,9.0,True
 Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,True,,-8.2,31.81,45.4,9.31,43.85,36.9,5.0,2.0,9.0,True

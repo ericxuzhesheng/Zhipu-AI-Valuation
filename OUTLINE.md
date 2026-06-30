@@ -1,72 +1,65 @@
-# Paper Map & Status — Zhipu AI (2513.HK) Valuation + Capability-Surprise Event Study
+# Paper Map & Status - Zhipu AI (2513.HK) Valuation + Capability-Surprise Event Study
 
 **Title:** *Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab:
-Evidence from Zhipu AI (2513.HK).*
-**Author:** Zhesheng Xu（许哲圣）· 42353012 · 公司金融（英）· 2025-2026-2.
-**Build:** XeLaTeX (`paper/main.tex` → `main.pdf`, 17 pp). **Data as of 2026-06-28.**
+Evidence from Zhipu AI (2513.HK).*  
+**Author:** Zhesheng Xu (42353012), Corporate Finance, 2025-2026-2.  
+**Build:** XeLaTeX (`paper/main.tex` to `main.pdf`, 17 pp). **Data as of 2026-06-30.**
 
 > Term-paper rules satisfied: title carries core concept (*capability surprise*) + mechanism (price discovery
-> & drift); abstract is below the 400-word limit; full reference list at end.
-> Word-count audit note: `texcount -inc -sum main.tex` (2026-06-28) gives **2,996 words in text**
-> (Sections 1–6 + abstract + appendices). Within the 3,000-word ceiling.
+> and drift); abstract is below the 400-word limit; full reference list at end.
+> Word-count audit note: `texcount -inc -sum main.tex` previously gave text near the 3,000-word ceiling; rerun after final formatting if the instructor enforces it strictly.
 
 ---
 
 ## Structure (current)
 
-| § | Section | Role | Key content |
-|---|---|---|---|
-| Cover | SWUFE official template | — | 西南财经大学本科考试 / 课程论文, official crest watermark |
-| 0 | Abstract (≤400w) | — | subject, dual method, headline, takeaway |
-| 1 | Introduction | setup | 3 research questions; capability-surprise reframing; frontier-AI financing moving into public price discovery |
-| 2 | Background: Company, Financials, Listing | **condensed** | open-weight model; 3 financial facts (revenue, gross-margin collapse, negative equity); IPO + re-rating + MiniMax divergence |
-| 3 | Industry, Macro, Strategy | **condensed** | Porter + leaderboard cost-disruption; **HK AI-IPO landscape: SenseTime, Fourth Paradigm, Wenge (brief); IPO pipeline caveat**; macro + flow events |
-| 4 | **Valuation** (main line) | **emphasised** | CAPM/WACC; 3-scenario DCF; **reverse DCF + sensitivity heatmap (Fig 11)**; relative val (OpenAI/Anthropic specific rounds; MiniMax direct; Wenge excluded); **real options (fundamental vs option value)** |
-| 5 | **Capability Surprise: Event Study** (original) | **emphasised** | hypothesis; method; CAR results; **flow vs capability events**; peer-adjusted + block-bootstrap robustness; honesty box (competing-lab news caveat) |
-| 6 | Conclusion | — | capability momentum priced as option; preliminary PCAD |
-| A | Appendix: Financial Statements | reproducibility | income statement + balance sheet (RMB) |
-| B | Appendix: Base-Case DCF Projection | reproducibility | full 10-yr chain: Revenue→Growth→EBIT margin→NOPAT→Reinvest→FCFF→TV→Equity→per share |
-| C | Appendix: Bottom-Up Beta Bridge | robustness | auto-generated from yfinance via `scripts/comps_beta_and_reverse_dcf.py`; CSV at `data/comps_beta_bridge.csv` |
-| D | Appendix: Reverse-DCF Sensitivity Grid | robustness | WACC × terminal-margin grid of required 2035 revenue; CSV at `eventstudy/reverse_dcf_sensitivity.csv` |
+| Section | Role | Key content |
+|---|---|---|
+| Cover | SWUFE official template | official course-paper cover and crest watermark |
+| Abstract | summary | subject, dual method, headline valuation gap, takeaway |
+| 1. Introduction | setup | 3 research questions; capability-surprise reframing; frontier-AI financing moving into public price discovery |
+| 2. Background | condensed | open-weight model; FY2025 annual-report financials; IPO + re-rating + MiniMax divergence |
+| 3. Industry, Macro, Strategy | condensed | Porter + leaderboard cost-disruption; HK AI-IPO landscape; macro + flow events |
+| 4. Valuation | main line | WACC; 3-scenario DCF; reverse DCF + heatmap; relative valuation; real-options reading |
+| 5. Capability Surprise | original contribution | CAR results; flow vs capability events; peer-adjusted + block-bootstrap checks; honesty box |
+| 6. Conclusion | close | capability momentum priced as option; preliminary PCAD evidence |
+| Appendix A-D | reproducibility | statements, DCF chain, beta bridge, reverse-DCF sensitivity grid |
 
-## Four unique points (kept central, per supervisor feedback)
-1. **Capability Surprise** — title + conclusion centre, not a side analysis.
-2. **Reverse DCF** — "what must the company achieve to justify the price."
-3. **Fundamental value vs option value** — not "above DCF ⇒ bubble," but a right-tail option.
-4. **Capability vs flow catalysts** — model releases separated from index/Stock-Connect flows.
+## Four unique points
+1. **Capability Surprise** - title + conclusion centre, not a side analysis.
+2. **Reverse DCF** - "what must the company achieve to justify the price."
+3. **Fundamental value vs option value** - not "above DCF therefore bubble," but a right-tail option.
+4. **Capability vs flow catalysts** - model releases separated from index/Stock-Connect flows.
 
-## Headline numbers (2026-06-26)
-- Price HK$2,046 (~+1,660%, ~17×); mcap ~US$114B; **equity value / revenue ~570×**; vol ~193%.
-- DCF (net cash US$0.55bn, with NOL carryforward): bear/base/bull HK$12/28/82; prob-weighted **HK$33 (~1.6% of price)**.
-- Reverse DCF: price implies **~US$130B revenue by 2035 (~105% annual, 2026–2035)**.
-- Event study (mean-adj, [−20,−6] window): reaction **+18.7%**, drift **+4.8%** (bimodal); peer-adj drift **+19.2%**.
-  GLM-5.2 drift window **truncated** (7/9 days) — provisional.
+## Headline numbers (2026-06-30)
+- Price HK$2,104 (~+1,711%, ~18x); mcap ~US$120B; **equity value / revenue ~601x**; vol ~192%.
+- DCF (net cash US$0.55bn, with NOL carryforward): bear/base/bull HK$12/27/80; prob-weighted **HK$32 (~1.5% of price)**.
+- Reverse DCF: price implies **~US$139B revenue by 2035 (~107% annual, 2026-2035)**.
+- Event study (mean-adjusted, `[-20,-6]` estimation window): reaction **+18.7%**, drift **+4.8%** (bimodal); peer-adj drift **+20.5%**.
+  GLM-5.2's `[+2,+10]` drift window is now complete through all 9 trading days.
 
 ## Sourcing policy (granular; primary > news)
-Key data cite, via the bibliography (not just footnotes):
-- **Comparable beta bridge** — `yahoo2026` (Yahoo Finance via `yfinance`: beta, market cap, total debt). Auto-generated by `scripts/comps_beta_and_reverse_dcf.py`.
-- **Private-lab funding rounds** — `openai2026` (AIPRM: OpenAI funding history through Q1 2026), `anthropic2026` (CNBC: Anthropic mid-2026 valuation near $965bn).
-- **HKEX prospectus / announcements** — `prospectus2513`, `prospectus1956` (offering terms, financials, market share).
-- **Official model cards / technical reports** — `glm_modelcard` (architecture, benchmarks).
-- **Hang Seng Indexes Company announcements** — `hsi2026` (index inclusion / flows).
-- **Formal market database** — `tushare2026` (HK daily prices, cross-checked with HKEX).
-- **Academic** — Ball–Brown, Bernard–Thomas, Fama, MacKinlay, Black–Scholes, Damodaran, Guosen (2020).
-News media corroborate only; they do not carry the most important numbers.
+Key data cite, via the bibliography:
+- **Comparable beta bridge** - `yahoo2026` (Yahoo Finance via `yfinance`: beta, market cap, total debt). Auto-generated by `scripts/comps_beta_and_reverse_dcf.py`.
+- **Private-lab funding rounds** - `openai2026`, `anthropic2026`.
+- **HKEX prospectus / annual report / announcements** - `prospectus2513`, `annualreport2513`, `agm2513`, `prospectus1956`.
+- **Official model cards / technical reports** - `glm_modelcard`.
+- **Hang Seng Indexes Company announcements** - `hsi2026`.
+- **Formal market database** - `tushare2026` (HK daily prices, cross-checked with HKEX).
+- **Manual close record** - 2026-06-30 closes were entered from East Money screenshots pending the Tushare database refresh.
+- News media corroborate only; they do not carry the most important numbers.
 
-## TODO — data refresh after 2026-07-03 close (user will supply)
-1. Re-pull `hk_daily` for 2513/00100/01956 through 2026-07-03; rerun `python scripts/rebuild_outputs.py` → new prices, vol, CAR, figures.
-2. **GLM-5.2 drift window completes** (≥+10 trading days from 06-15): remove the "truncated/provisional" caveat once full.
-3. Update market row in Table~\ref{tab:dcf} (price/mcap/equity-value-to-revenue multiple) and reverse-DCF target.
-4. Re-export `model/valuation_model.xlsx` Summary; refresh README headline numbers.
-5. Optionally extend the event panel with MiniMax / Wenge (Decitron, Yayi) releases for a multi-lab study.
+## Remaining items
+1. Tushare data refreshed through 2026-06-29; 2026-06-30 close still from East Money screenshots.
+2. Optionally extend the event panel with MiniMax / Wenge (Decitron, Yayi) releases for a multi-lab study once enough post-listing price history exists.
+3. Rerun `texcount -inc -sum paper/main.tex` if a hard word-count audit is required after final formatting.
 
 ## Repo
 ```
-paper/        main.tex, refs.bib (14 refs), beta_bridge_auto.tex, crest_watermark.png, main.pdf
-42353012_许哲圣_*.pdf   submission copy
+paper/        main.tex, refs.bib, beta_bridge_auto.tex, crest_watermark.png, main.pdf
 model/        valuation_model.xlsx (live formulas)
 eventstudy/   car_robustness.csv, nonparametric_robustness.csv, block_bootstrap_summary.csv, block_bootstrap_distribution.csv, base_projection.csv, zhipu_car.csv, reverse_dcf_sensitivity.csv
-figures/      fig1-11 (regenerated 2026-06-28)
+figures/      fig1-11
 data/         Zhipu_/MiniMax_/WengeAI_daily.csv, price_summary.csv, comps_beta_bridge.csv
 scripts/      rebuild_outputs.py, validate_outputs.py, comps_beta_and_reverse_dcf.py
 DATA_TABLES.md, EVENT_STUDY.md, README.md, LICENSE

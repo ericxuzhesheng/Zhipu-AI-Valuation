@@ -10,6 +10,6 @@ Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,Zhipu_Knowle
 Zhipu,02513.HK,Stock Connect inclusion,2026-06-08,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,IPO listing,2026-01-08,listing,HKEX listing,Zhipu_KnowledgeAtlas_daily.csv,,no pre-event estimation window
 MiniMax,00100.HK,IPO listing,2026-01-09,listing,HKEX listing,MiniMax_daily.csv,,no pre-event estimation window
-Wenge AI,01956.HK,IPO listing,2026-06-26,listing,HKEX listing,WengeAI_daily.csv,,only one trading day in local data
+Wenge AI,01956.HK,IPO listing,2026-06-26,listing,HKEX listing,WengeAI_daily.csv,,insufficient post-listing history for event window
 Wenge AI,01956.HK,Decitron/Yayi releases,,candidate_capability,candidate model release,,,candidate only; no event date and post-event price window in local data
 Moonshot/Kimi,unlisted,Kimi model release,,candidate_capability,candidate model release,,,candidate only; no listed equity price series

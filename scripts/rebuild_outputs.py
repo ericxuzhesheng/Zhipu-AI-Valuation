@@ -25,7 +25,7 @@ MODEL = ROOT / "model" / "valuation_model.xlsx"
 WACC = 0.135
 TERMINAL_G = 0.04
 TAX_RATE = 0.15
-SHARES_M = 435
+SHARES_M = 445.843  # 445,843,090 total issued shares per AGM circular 2026-06-22
 USD_HKD = 7.8
 NET_CASH_USDM = 550
 REV_2025_USDM = 102
@@ -282,7 +282,7 @@ def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
     actual = pd.read_csv(EVENTSTUDY / "car_robustness.csv")
     actual_react_mean = float(actual["react_peer"].mean())
     actual_drift_mean = float(actual["drift_peer"].mean())
-    drift_lengths = [9 if bool(full) else 7 for full in actual["drift_full"]]
+    drift_lengths = [int(days) for days in actual["drift_days"]]
 
     excluded_dates = set()
     for loc, drift_len in zip(event_locs, drift_lengths):
@@ -677,6 +677,7 @@ def write_glm_timeline() -> None:
         ("8 Apr 2026", "GLM-5.1 · #1 SWE-Bench Pro", C_ORANGE),
         ("5–8 Jun 2026", "HSTECH index · Stock Connect", C_GREEN),
         ("15 Jun 2026", "GLM-5.2 · MIT weights · 1M ctx", C_RED),
+        ("22 Jun 2026", "AGM · 445.8m shares · Z.AI name", C_TEAL),
     ]
     n = len(events)
     fig, ax = plt.subplots(figsize=(13.0, 3.6), dpi=150)
@@ -847,7 +848,7 @@ def write_event_chart() -> None:
     ax.set_xlabel("Event day")
     ax.set_ylabel("CAR (%)")
     ax.set_title("Average CAR in event time")
-    ax.text(8.1, ax.get_ylim()[0] + 2, "n falls after +8", fontsize=8)
+    ax.text(8.1, ax.get_ylim()[0] + 2, "Full +10 window", fontsize=8)
     ax.legend(fontsize=8, ncol=2, loc="upper left")
     ax.grid(alpha=0.25)
     ax.spines[["top", "right"]].set_visible(False)
@@ -858,13 +859,19 @@ def write_event_chart() -> None:
 
 def write_reaction_vs_drift() -> None:
     """fig4: immediate reaction vs post-event drift (mean-adjusted), matching Table 2."""
+    robustness = pd.read_csv(EVENTSTUDY / "car_robustness.csv")
+    glm_rows = robustness[robustness["event"].str.startswith("GLM-")].copy()
     glm = [
-        ("GLM-5", 22.5, 24.7),
-        ("GLM-5-Turbo", 7.7, -19.3),
-        ("GLM-5.1", 13.8, -14.2),
-        ("GLM-5.2 †", 30.8, 28.2),
+        (
+            f"{row.event}{' †' if str(row.drift_full).lower() != 'true' else ''}",
+            float(row.react_mean),
+            float(row.drift_mean),
+        )
+        for row in glm_rows.itertuples(index=False)
     ]
-    minimax = ("MiniMax M2.7", -5.5, -49.1)
+    panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")
+    minimax_row = panel[panel["event_type"] == "capability_peer"].iloc[0]
+    minimax = ("MiniMax M2.7", float(minimax_row["react_mean"]), float(minimax_row["drift_mean"]))
     fig, ax = plt.subplots(figsize=(7.4, 5.0), dpi=150)
     ax.axhline(0, color=C_GRAY, linewidth=1)
     ax.axvline(0, color=C_GRAY, linewidth=1)
@@ -882,7 +889,7 @@ def write_reaction_vs_drift() -> None:
             va="top", ha="left", fontsize=8, color=C_RED)
     ax.set_xlabel("Immediate reaction CAR[0,+1] (%)")
     ax.set_ylabel("Post-event drift CAR[+2,+10] (%)")
-    ax.set_title("Reaction vs. Drift (mean-adjusted; GLM-5.2 drift provisional †)")
+    ax.set_title("Reaction vs. Drift (mean-adjusted; full +10 windows)")
     ax.grid(alpha=0.2)
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
@@ -894,6 +901,15 @@ def main() -> None:
     write_price_summary_csv()
     write_base_projection_csv()
     write_event_panel_outputs(write_csv)
+    panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")
+    capability = panel[panel["event_type"] == "capability"].copy()
+    robustness = capability[
+        ["event", "day0", "react_mean", "drift_mean", "react_peer", "drift_peer", "drift_days", "drift_full"]
+    ].copy()
+    for col in ["react_mean", "drift_mean", "react_peer", "drift_peer"]:
+        robustness[col] = robustness[col].astype(float).round(1)
+    robustness["drift_days"] = robustness["drift_days"].astype(int)
+    write_csv(robustness, EVENTSTUDY / "car_robustness.csv")
     write_nonparametric_robustness_csv()
     write_block_bootstrap_outputs()
     write_workbook()

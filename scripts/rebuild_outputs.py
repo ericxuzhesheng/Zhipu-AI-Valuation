@@ -621,11 +621,11 @@ def write_comps_chart() -> None:
 
 def write_financial_profile() -> None:
     """Company-introduction figure: revenue compounding vs cloud-margin compression."""
-    labels = ["FY2022", "FY2023", "FY2024", "H1 2025"]
+    labels = ["FY2022", "FY2023", "FY2024", "FY2025"]
     x = np.arange(len(labels))
-    revenue = np.array([57.4, 124.5, 312.4, 190.9])  # RMB millions
-    total_margin = np.array([54.6, 64.6, 56.3, 50.0])  # %, FY2025 point is H1 2025
-    cloud_margin = np.array([76.1, 31.0, 3.4, -0.4])  # %, FY2025 point is H1 2025
+    revenue = np.array([57.4, 124.5, 312.4, 724.3])  # RMB millions
+    total_margin = np.array([54.6, 64.6, 56.3, 41.0])
+    cloud_margin = np.array([76.1, 31.0, 3.4, 18.9])
 
     fig, ax1 = plt.subplots(figsize=(8.2, 4.2), dpi=150)
     rev_mask = ~np.isnan(revenue)
@@ -670,7 +670,7 @@ def write_glm_timeline() -> None:
         ("2019", "Founded — Tsinghua KEG", C_TEAL),
         ("2022", "GLM family · cloud GM 76%", C_TEAL),
         ("2024", "Revenue RMB 312m", C_TEAL),
-        ("H1 2025", "Revenue RMB 191m · total GM 50%", C_TEAL),
+        ("FY2025", "Revenue RMB 724m · total GM 41%", C_TEAL),
         ("8 Jan 2026", "IPO HK$116.20 · Ch.18C", C_GREEN),
         ("11 Feb 2026", "GLM-5", C_ORANGE),
         ("16 Mar 2026", "GLM-5-Turbo", C_ORANGE),

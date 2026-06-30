@@ -1,7 +1,7 @@
 # Data Tables — Zhipu (2513.HK), MiniMax (00100.HK), Wenge AI (01956.HK)
 
 Market data via **Tushare `hk_daily`** cross-checked with HKEX, **as of 2026-06-26** (CSV in `data/`).
-Fundamentals from the **HKEX Chapter-18C prospectus** (stock code 2513). All figures consistent with the paper.
+Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report** (stock code 2513). All figures consistent with the paper.
 
 ---
 
@@ -45,12 +45,11 @@ Fundamentals from the **HKEX Chapter-18C prospectus** (stock code 2513). All fig
 | FY2022 | RMB 57.4M | total 54.6%; cloud 76.1% | RMB 143.7M |
 | FY2023 | RMB 124.5M | total 64.6%; cloud 31.0% | RMB 788.0M |
 | FY2024 | RMB 312.4M (~US$44M) | total 56.3%; cloud 3.4% | RMB 2,958M |
-| H1 2025 | RMB 190.9M | total 50.0%; cloud −0.4% | RMB 2,357.9M |
-| FY2025E model base | RMB 724.3M (~US$102M) | model assumption | n/a |
+| FY2025 | RMB 724.3M (~US$102M) | total 41.0%; cloud 18.9% | RMB 4,718M |
 | FY2026E | ~US$200M | model assumption | n/a |
 
-Balance sheet @ 30-Jun-2025: net liabilities **−RMB 6,150.8M** (negative equity), net current liabilities
-−RMB 7,088.9M, cash and cash equivalents RMB 2,552.0M. Shares outstanding ~435M. FX: HK$7.8/US$, RMB 7.1/US$.
+Balance sheet @ 31-Dec-2025: net liabilities **−RMB 8,111.0M** (negative equity), net current liabilities
+−RMB 8,834.8M, cash and cash equivalents RMB 2,259.1M. Shares outstanding ~435M. FX: HK$7.8/US$, RMB 7.1/US$.
 **Implied market equity value / revenue ≈ 570× FY26E** (US$114B / US$200M).
 
 ## Table D5 — Product / Competitive Data (leaderboard thread)

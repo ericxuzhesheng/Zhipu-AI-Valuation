@@ -23,7 +23,7 @@
 
 ### 一句话概览
 
-本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2026 年预计收入仅约 2 亿美元、深度亏损、净权益为负且云部署毛利率已跌至 −0.4% 的"早期商业化、尚未盈利"公司，为何上市约五个月暴涨约 17 倍、市值达约 1140 亿美元（股权价值/收入约 570 倍）？**
+本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2025 年收入仅约 1.02 亿美元、2026 年预计收入约 2 亿美元、深度亏损、净权益为负的"早期商业化、尚未盈利"公司，为何上市约五个月暴涨约 17 倍、市值达约 1140 亿美元（股权价值/收入约 570 倍）？**
 
 **主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 概率加权约 HK$33/股（约为市价的 1.6%）；现价隐含 2035 年收入约 1300 亿美元、2026–2035 年约 105% 的年增速（9 个增长区间）。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
 
@@ -113,7 +113,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 来源优先级：**HKEX 招股书与公告 > 官方模型卡/技术报告 > 恒生指数公司公告 > 正式市场数据库**；新闻媒体仅作佐证。
 
 - **行情：** Tushare `hk_daily`（2513.HK、00100.HK、01956.HK）与 HKEX 日行情交叉核对，见 [`data/`](data/)。
-- **财务：** 港交所第18C章招股书及 H1 2025 中报（论文附录 A）。
+- **财务：** 港交所第18C章招股书及 2025 年度报告（论文附录 A）。
 - **能力事件：** GLM/MiniMax 官方模型卡与 SWE-Bench Pro 等榜单。
 - **指数/资金流：** 恒生指数公司指数调整公告、HKEX/SSE 港股通名单。
 
@@ -161,7 +161,7 @@ A corporate-finance valuation and price-discovery study of the world's **first p
 foundation-model company** — Zhipu AI (Knowledge Atlas, 2513.HK, listed on the HKEX Main Board under
 Chapter 18C on 2026-01-08). The question is not a target price but a counter-intuitive one: **why did an
 early-commercial-stage, pre-profit firm — ~US$200m expected 2026 revenue, deep losses, negative book equity,
-and a cloud-deployment gross margin down to −0.4% — rise ~17x in five months to a ~US$114B market cap
+and volatile cloud-deployment economics — rise ~17x in five months to a ~US$114B market cap
 (≈570× equity value / revenue)?**
 
 **Main conclusion:** neither a simple bubble nor efficient pricing, but **a call option on a winner-take-all

@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>港股打新估值评估 | HK IPO Valuation</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#f0f2f5;--card:#fff;--primary:#1e3a5f;--accent:#2563eb;--success:#059669;
+  --warn:#d97706;--danger:#dc2626;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+  --shadow:0 2px 8px rgba(0,0,0,.08);--radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,'Microsoft YaHei','PingFang SC',sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;font-size:14px}
+.header{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 60%,#1e40af 100%);
+  color:#fff;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.6rem;font-weight:700;letter-spacing:.5px}
+.header .sub{font-size:.85rem;opacity:.8;margin-top:4px}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.toolbar button,.toolbar select{padding:7px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:.82rem;transition:.2s}
+.toolbar button:hover,.toolbar select:hover{background:rgba(255,255,255,.25)}
+.toolbar select option{color:#333;background:#fff}
+.company-bar{background:#fff;padding:16px 32px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;
+  border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.company-bar .field{display:flex;flex-direction:column;gap:3px}
+.company-bar label{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.company-bar input{padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;
+  min-width:120px;outline:none;transition:.2s}
+.company-bar input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.company-bar input.wide{min-width:200px}
+.main{padding:24px 32px;display:grid;gap:20px;max-width:1400px;margin:0 auto}
+.module{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.module-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.module-head h2{font-size:1.05rem;font-weight:700;color:var(--primary)}
+.module-head .badge{font-size:.7rem;padding:3px 10px;border-radius:20px;font-weight:600}
+.badge-green{background:#d1fae5;color:#065f46}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-yellow{background:#fef3c7;color:#92400e}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.module-body{padding:20px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.input-group{margin-bottom:14px}
+.input-group label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:4px;font-weight:600}
+.input-group input,.input-group select{width:100%;padding:7px 10px;border:1px solid var(--border);
+  border-radius:8px;font-size:.88rem;outline:none;transition:.2s}
+.input-group input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.input-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.input-row-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
+.result-box{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:12px}
+.result-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f1f5f9}
+.result-row:last-child{border-bottom:none}
+.result-row .label{color:var(--muted);font-size:.84rem}
+.result-row .value{font-weight:700;font-size:.92rem}
+.value-green{color:var(--success)}
+.value-red{color:var(--danger)}
+.value-yellow{color:var(--warn)}
+.scenario-tabs{display:flex;gap:0;margin-bottom:16px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.scenario-tabs button{flex:1;padding:10px;border:none;cursor:pointer;font-weight:600;font-size:.85rem;
+  background:#f8fafc;color:var(--muted);transition:.2s}
+.scenario-tabs button.active{background:var(--accent);color:#fff}
+.scenario-tabs button:hover:not(.active){background:#e2e8f0}
+.scenario-panel{display:none}
+.scenario-panel.active{display:block}
+.sensitivity-grid{display:grid;gap:2px;margin-top:12px;font-size:.75rem}
+.sensitivity-grid .cell{padding:8px 4px;text-align:center;border-radius:4px;font-weight:600}
+.sensitivity-grid .header-cell{background:#f1f5f9;color:var(--muted);font-weight:700}
+.comp-bar{margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.comp-bar .name{min-width:100px;font-size:.84rem;font-weight:600}
+.comp-bar .bar-wrap{flex:1;height:28px;background:#f1f5f9;border-radius:6px;position:relative;overflow:hidden}
+.comp-bar .bar{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;
+  padding-right:8px;font-size:.75rem;font-weight:700;color:#fff;min-width:40px;transition:width .5s}
+.comp-bar .val{min-width:60px;text-align:right;font-size:.84rem;font-weight:700}
+.scorecard{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.score-items{display:flex;flex-direction:column;gap:10px}
+.score-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;background:#f8fafc;border:1px solid var(--border)}
+.score-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.score-item .info{flex:1}
+.score-item .info .name{font-size:.84rem;font-weight:600}
+.score-item .info .desc{font-size:.75rem;color:var(--muted)}
+.score-item .score-val{font-weight:800;font-size:1.1rem}
+.verdict-box{text-align:center;padding:24px;border-radius:12px;margin-top:16px}
+.verdict-box .verdict-label{font-size:.8rem;opacity:.8;margin-bottom:4px}
+.verdict-box .verdict-text{font-size:1.5rem;font-weight:800}
+.verdict-box .verdict-sub{font-size:.85rem;margin-top:8px;opacity:.9}
+.chart-container{position:relative;height:280px;margin-top:12px}
+.chart-container.tall{height:350px}
+.collapsible-head{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px}
+.collapsible-head .arrow{transition:transform .2s;font-size:.7rem}
+.collapsible-head.open .arrow{transform:rotate(90deg)}
+.collapsible-body{overflow:hidden;transition:max-height .3s}
+.footer{text-align:center;padding:20px;font-size:.75rem;color:var(--muted)}
+@media(max-width:900px){
+  .grid-2,.scorecard{grid-template-columns:1fr}
+  .main{padding:16px}
+  .header{padding:20px 16px}
+  .company-bar{padding:12px 16px}
+}
+@media print{
+  .header{background:#1e3a5f !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .toolbar,.company-bar input{display:none}
+  .module{break-inside:avoid}
+}
+.fade-in{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1 id="title">港股打新估值评估工具</h1>
+    <div class="sub" id="subtitle">基于多维估值框架的IPO申购决策支持 — 三情景DCF · 反向DCF · 可比倍数 · 综合评分卡</div>
+  </div>
+  <div class="toolbar">
+    <button onclick="toggleLang()" id="langBtn">English</button>
+    <button onclick="exportPDF()" id="exportBtn">📄 导出报告</button>
+    <button onclick="resetDefaults()" id="resetBtn">🔄 重置默认</button>
+    <select onchange="loadPreset(this.value)" id="presetSel">
+      <option value="">— 预设案例 —</option>
+      <option value="zhipu">智谱 2513.HK</option>
+      <option value="generic_ai">通用AI公司</option>
+      <option value="generic_biotech">生物科技公司</option>
+    </select>
+  </div>
+</div>
+
+<div class="company-bar">
+  <div class="field">
+    <label id="lb_company">公司名称</label>
+    <input id="inp_company" class="wide" value="智谱 (Knowledge Atlas)">
+  </div>
+  <div class="field">
+    <label id="lb_ticker">股票代码</label>
+    <input id="inp_ticker" value="2513.HK">
+  </div>
+  <div class="field">
+    <label id="lb_sector">行业板块</label>
+    <input id="inp_sector" value="AI / 大模型">
+  </div>
+  <div class="field">
+    <label id="lb_ipoprice">IPO发行价 (HK$)</label>
+    <input id="inp_ipoprice" type="number" value="116" step="0.1">
+  </div>
+  <div class="field">
+    <label id="lb_mktprice">当前市价 (HK$)</label>
+    <input id="inp_mktprice" type="number" value="2104" step="1">
+  </div>
+  <div class="field">
+    <label id="lb_exchange">上市板块</label>
+    <input id="inp_exchange" value="HKEX 18C">
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ========== Module 1: CAPM / WACC ========== -->
+<div class="module fade-in">
+  <div class="module-head">
+    <div class="collapsible-head open" onclick="toggleModule(this)">
+      <span class="arrow">▶</span>
+      <h2>① <span class="t" data-cn="资本成本 (CAPM / WACC)" data-en="Cost of Capital (CAPM / WACC)">资本成本 (CAPM / WACC)</span></h2>
+    </div>
+    <span class="badge badge-blue" id="wacc_badge">WACC: 13.6%</span>
+  </div>
+  <div class="module-body collapsible-body" style="max-height:2000px">
+    <div class="grid-2">
+      <div>
+        <div class="input-row">
+          <div class="input-group">
+            <label class="t" data-cn="无风险利率 Rf (%)" data-en="Risk-free Rate Rf (%)">无风险利率 Rf (%)</label>
+            <input id="capm_rf" type="number" value="4.0" step="0.1">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="股权风险溢价 ERP (%)" data-en="Equity Risk Premium ERP (%)">股权风险溢价 ERP (%)</label>
+            <input id="capm_erp" type="number" value="6.0" step="0.1">
+          </div>
+        </div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Beta (β)</label>
+            <input id="capm_beta" type="number" value="1.6" step="0.01">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="税率 (%)" data-en="Tax Rate (%)">税率 (%)</label>
+            <input id="capm_tax" type="number" value="15" step="1">
+          </div>
+        </div>
+        <div class="input-row">
+          <div class="input-group">
+            <label class="t" data-cn="债务比例 D/V (%)" data-en="Debt Ratio D/V (%)">债务比例 D/V (%)</label>
+            <input id="capm_dv" type="number" value="0" step="1">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="税前债务成本 Kd (%)" data-en="Pre-tax Cost of Debt Kd (%)">税前债务成本 Kd (%)</label>
+            <input id="capm_kd" type="number" value="5.0" step="0.1">
+          </div>
+        </div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:8px" class="t"
+           data-cn="💡 IPO新股通常全股权融资（D/V=0），此时WACC=Ke。Beta通过可比公司无杠杆Beta中位数估算，加上早期风险缓冲。"
+           data-en="💡 IPO firms are typically all-equity (D/V=0), so WACC=Ke. Beta is the median unlevered beta of comparables plus an early-stage risk buffer.">
+          💡 IPO新股通常全股权融资（D/V=0），此时WACC=Ke。Beta通过可比公司无杠杆Beta中位数估算，加上早期风险缓冲。
+        </p>
+      </div>
+      <div>
+        <div class="result-box">
+          <div class="result-row"><span class="label t" data-cn="股权成本 Ke" data-en="Cost of Equity Ke">股权成本 Ke</span><span class="value" id="res_ke">13.6%</span></div>
+          <div class="result-row"><span class="label t" data-cn="税后债务成本 Kd(1-T)" data-en="After-tax Cost of Debt Kd(1-T)">税后债务成本 Kd(1-T)</span><span class="value" id="res_kd_at">—</span></div>
+          <div class="result-row" style="border-top:2px solid var(--accent);padding-top:10px">
+            <span class="label" style="font-weight:700" class="t" data-cn="加权平均资本成本 WACC" data-en="Weighted Average Cost of Capital">加权平均资本成本 WACC</span>
+            <span class="value" style="font-size:1.2rem;color:var(--accent)" id="res_wacc">13.6%</span>
+          </div>
+        </div>
+        <div style="margin-top:16px">
+          <canvas id="chart_wacc" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== Module 2: Three-Scenario DCF ========== -->
+<div class="module fade-in">
+  <div class="module-head">
+    <div class="collapsible-head open" onclick="toggleModule(this)">
+      <span class="arrow">▶</span>
+      <h2>② <span class="t" data-cn="三情景DCF估值" data-en="Three-Scenario DCF Valuation">三情景DCF估值</span></h2>
+    </div>
+    <span class="badge badge-yellow" id="dcf_badge">加权: HK$32</span>
+  </div>
+  <div class="module-body collapsible-body" style="max-height:5000px">
+    <div class="grid-2">
+      <div>
+        <div class="input-row-4">
+          <div class="input-group">
+            <label class="t" data-cn="FY2025收入 (US$M)" data-en="FY2025 Revenue (US$M)">FY2025收入 (US$M)</label>
+            <input id="dcf_rev2025" type="number" value="102" step="5">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="FY2026E收入 (US$M)" data-en="FY2026E Revenue (US$M)">FY2026E收入 (US$M)</label>
+            <input id="dcf_rev" type="number" value="200" step="10">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="净现金 (US$M)" data-en="Net Cash (US$M)">净现金 (US$M)</label>
+            <input id="dcf_cash" type="number" value="550" step="50">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="总股本 (百万股)" data-en="Shares (Million)">总股本 (百万股)</label>
+            <input id="dcf_shares" type="number" value="445.843" step="1">
+          </div>
+        </div>
+        <div class="input-row-4">
+          <div class="input-group">
+            <label class="t" data-cn="永续增长率 g (%)" data-en="Terminal Growth g (%)">永续增长率 g (%)</label>
+            <input id="dcf_g" type="number" value="4.0" step="0.5">
+          </div>
+          <div class="input-group">
+            <label>HK$/US$</label>
+            <input id="dcf_fx" type="number" value="7.8" step="0.1">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="初始利润率 (%)" data-en="Initial Margin (%)">初始利润率 (%)</label>
+            <input id="dcf_m0" type="number" value="-30" step="5">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="税率 (%)" data-en="Tax Rate (%)">税率 (%)</label>
+            <input id="dcf_tax" type="number" value="15" step="1">
+          </div>
+        </div>
+
+        <div class="scenario-tabs">
+          <button class="active" onclick="switchScenario('bear',this)" id="tab_bear">🐻 <span class="t" data-cn="熊市" data-en="Bear">熊市</span></button>
+          <button onclick="switchScenario('base',this)" id="tab_base">📊 <span class="t" data-cn="基准" data-en="Base">基准</span></button>
+          <button onclick="switchScenario('bull',this)" id="tab_bull">🚀 <span class="t" data-cn="牛市" data-en="Bull">牛市</span></button>
+        </div>
+
+        <div class="scenario-panel active" id="panel_bear">
+          <div class="input-row">
+            <div class="input-group">
+              <label class="t" data-cn="概率权重" data-en="Probability Weight">概率权重</label>
+              <input id="bear_prob" type="number" value="0.35" step="0.05">
+            </div>
+            <div class="input-group">
+              <label class="t" data-cn="销售/资本比" data-en="Sales/Capital">销售/资本比</label>
+              <input id="bear_sc" type="number" value="2.0" step="0.1">
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label class="t" data-cn="2027增长率 (%)" data-en="2027 Growth (%)">2027增长率 (%)</label>
+              <input id="bear_g1" type="number" value="40" step="1">
+            </div>
+            <div class="input-group">
+              <label class="t" data-cn="2035增长率 (%)" data-en="2035 Growth (%)">2035增长率 (%)</label>
+              <input id="bear_gn" type="number" value="6" step="1">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="末期利润率 (%)" data-en="Terminal Margin (%)">末期利润率 (%)</label>
+            <input id="bear_tm" type="number" value="18" step="1">
+          </div>
+        </div>
+
+        <div class="scenario-panel" id="panel_base">
+          <div class="input-row">
+            <div class="input-group">
+              <label class="t" data-cn="概率权重" data-en="Probability Weight">概率权重</label>
+              <input id="base_prob" type="number" value="0.45" step="0.05">
+            </div>
+            <div class="input-group">
+              <label class="t" data-cn="销售/资本比" data-en="Sales/Capital">销售/资本比</label>
+              <input id="base_sc" type="number" value="1.8" step="0.1">
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label class="t" data-cn="2027增长率 (%)" data-en="2027 Growth (%)">2027增长率 (%)</label>
+              <input id="base_g1" type="number" value="56" step="1">
+            </div>
+            <div class="input-group">
+              <label class="t" data-cn="2035增长率 (%)" data-en="2035 Growth (%)">2035增长率 (%)</label>
+              <input id="base_gn" type="number" value="8" step="1">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="末期利润率 (%)" data-en="Terminal Margin (%)">末期利润率 (%)</label>
+            <input id="base_tm" type="number" value="28" step="1">
+          </div>
+        </div>
+
+        <div class="scenario-panel" id="panel_bull">
+          <div class="input-row">
+            <div class="input-group">
+              <label class="t" data-cn="概率权重" data-en="Probability Weight">概率权重</label>
+              <input id="bull_prob" type="number" value="0.20" step="0.05">
+            </div>
+            <div class="input-group">
+              <label class="t" data-cn="销售/资本比" data-en="Sales/Capital">销售/资本比</label>
+              <input id="bull_sc" type="number" value="1.6" step="0.1">
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label class="t" data-cn="2027增长率 (%)" data-en="2027 Growth (%)">2027增长率 (%)</label>
+              <input id="bull_g1" type="number" value="85" step="1">
+            </div>
+            <div class="input-group">
+              <label class="t" data-cn="2035增长率 (%)" data-en="2035 Growth (%)">2035增长率 (%)</label>
+              <input id="bull_gn" type="number" value="12" step="1">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="末期利润率 (%)" data-en="Terminal Margin (%)">末期利润率 (%)</label>
+            <input id="bull_tm" type="number" value="35" step="1">
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="result-box">
+          <div class="result-row"><span class="label">🐻 <span class="t" data-cn="熊市情景" data-en="Bear Case">熊市情景</span></span><span class="value" id="res_bear">—</span></div>
+          <div class="result-row"><span class="label">📊 <span class="t" data-cn="基准情景" data-en="Base Case">基准情景</span></span><span class="value" id="res_base">—</span></div>
+          <div class="result-row"><span class="label">🚀 <span class="t" data-cn="牛市情景" data-en="Bull Case">牛市情景</span></span><span class="value" id="res_bull">—</span></div>
+          <div class="result-row" style="border-top:2px solid var(--warn);padding-top:10px">
+            <span class="label" style="font-weight:700" class="t" data-cn="概率加权估值" data-en="Probability-Weighted Value">概率加权估值</span>
+            <span class="value" style="font-size:1.2rem;color:var(--warn)" id="res_pw">—</span>
+          </div>
+          <div class="result-row">
+            <span class="label t" data-cn="DCF估值 / 当前市价" data-en="DCF Value / Market Price">DCF估值 / 当前市价</span>
+            <span class="value" id="res_vs_mkt">—</span>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="chart_dcf"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== Module 3: Reverse DCF ========== -->
+<div class="module fade-in">
+  <div class="module-head">
+    <div class="collapsible-head open" onclick="toggleModule(this)">
+      <span class="arrow">▶</span>
+      <h2>③ <span class="t" data-cn="反向DCF — 价格隐含了什么？" data-en="Reverse DCF — What Does the Price Imply?">反向DCF — 价格隐含了什么？</span></h2>
+    </div>
+    <span class="badge badge-red" id="rdcf_badge">—</span>
+  </div>
+  <div class="module-body collapsible-body" style="max-height:3000px">
+    <div class="grid-2">
+      <div>
+        <p style="font-size:.85rem;margin-bottom:16px" class="t"
+           data-cn="反向DCF将当前市价作为已知量，反推市场对未来业绩的隐含预期。如果隐含的增长/利润率在现实中不可能实现，则说明当前价格被高估。"
+           data-en="Reverse DCF treats the market price as given and solves for the implied future performance. If the implied growth/margin is unrealistic, the price is overvalued.">
+          反向DCF将当前市价作为已知量，反推市场对未来业绩的隐含预期。如果隐含的增长/利润率在现实中不可能实现，则说明当前价格被高估。
+        </p>
+        <div class="result-box">
+          <div class="result-row"><span class="label t" data-cn="隐含市值" data-en="Implied Market Cap">隐含市值</span><span class="value" id="res_imcap">—</span></div>
+          <div class="result-row"><span class="label t" data-cn="隐含企业价值 EV" data-en="Implied Enterprise Value">隐含企业价值 EV</span><span class="value" id="res_iev">—</span></div>
+          <div class="result-row"><span class="label t" data-cn="隐含2035年收入" data-en="Implied 2035 Revenue">隐含2035年收入</span><span class="value" id="res_irev">—</span></div>
+          <div class="result-row"><span class="label t" data-cn="隐含年复合增长率" data-en="Implied CAGR">隐含年复合增长率</span><span class="value" id="res_icagr">—</span></div>
+          <div class="result-row"><span class="label t" data-cn="可行性判断" data-en="Feasibility Verdict">可行性判断</span><span class="value" id="res_feasibility">—</span></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:.82rem;font-weight:600;margin-bottom:8px" class="t"
+           data-cn="敏感性分析：隐含2035收入 (US$B) — WACC × 末期利润率"
+           data-en="Sensitivity: Implied 2035 Revenue (US$B) — WACC × Terminal Margin">
+          敏感性分析：隐含2035收入 (US$B) — WACC × 末期利润率
+        </p>
+        <div id="sensitivity_grid" class="sensitivity-grid"></div>
+        <div class="chart-container" style="margin-top:16px">
+          <canvas id="chart_rdcf"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== Module 4: Revenue Multiples ========== -->
+<div class="module fade-in">
+  <div class="module-head">
+    <div class="collapsible-head open" onclick="toggleModule(this)">
+      <span class="arrow">▶</span>
+      <h2>④ <span class="t" data-cn="收入倍数比较" data-en="Revenue Multiples Comparison">收入倍数比较</span></h2>
+    </div>
+    <span class="badge badge-red" id="mult_badge">—</span>
+  </div>
+  <div class="module-body collapsible-body" style="max-height:3000px">
+    <div class="grid-2">
+      <div>
+        <p style="font-size:.82rem;margin-bottom:12px" class="t"
+           data-cn="添加可比公司，比较 EV/Revenue 倍数。IPO公司的倍数若远超同行，则打新风险较高。"
+           data-en="Add comparable firms to compare EV/Revenue multiples. If the IPO firm's multiple far exceeds peers, subscription risk is high.">
+          添加可比公司，比较 EV/Revenue 倍数。IPO公司的倍数若远超同行，则打新风险较高。
+        </p>
+        <div class="input-row-3" style="margin-bottom:12px">
+          <div class="input-group">
+            <label class="t" data-cn="公司名" data-en="Company">公司名</label>
+            <input id="comp_name" placeholder="e.g. OpenAI">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="估值 (US$B)" data-en="Valuation (US$B)">估值 (US$B)</label>
+            <input id="comp_val" type="number" placeholder="852">
+          </div>
+          <div class="input-group">
+            <label class="t" data-cn="年收入 (US$B)" data-en="Revenue (US$B)">年收入 (US$B)</label>
+            <input id="comp_rev" type="number" placeholder="24" step="0.1">
+          </div>
+        </div>
+        <button onclick="addComp()" style="padding:8px 20px;border-radius:8px;border:1px solid var(--accent);
+          background:var(--accent);color:#fff;cursor:pointer;font-weight:600;margin-bottom:12px">
+          <span class="t" data-cn="+ 添加可比公司" data-en="+ Add Comparable">+ 添加可比公司</span>
+        </button>
+        <div id="comp_table"></div>
+      </div>
+      <div>
+        <div class="result-box">
+          <div class="result-row"><span class="label t" data-cn="目标公司 EV/Rev" data-en="Target EV/Rev">目标公司 EV/Rev</span><span class="value" id="res_tmult">—</span></div>
+          <div class="result-row"><span class="label t" data-cn="可比公司中位数" data-en="Peer Median">可比公司中位数</span><span class="value" id="res_pmed">—</span></div>
+          <div class="result-row"><span class="label t" data-cn="溢价倍数" data-en="Premium Multiple">溢价倍数</span><span class="value" id="res_prem">—</span></div>
+          <div class="result-row"><span class="label t" data-cn="同行倍数推算合理价" data-en="Peer-Implied Fair Price">同行倍数推算合理价</span><span class="value" id="res_fair">—</span></div>
+        </div>
+        <div class="chart-container tall">
+          <canvas id="chart_mult"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== Module 5: IPO Scorecard ========== -->
+<div class="module fade-in">
+  <div class="module-head">
+    <h2>⑤ <span class="t" data-cn="港股打新综合评分卡" data-en="HK IPO Subscription Scorecard">港股打新综合评分卡</span></h2>
+    <span class="badge" id="score_badge">—</span>
+  </div>
+  <div class="module-body">
+    <div class="scorecard">
+      <div>
+        <div class="score-items" id="score_items"></div>
+      </div>
+      <div>
+        <div class="chart-container">
+          <canvas id="chart_radar"></canvas>
+        </div>
+        <div id="verdict_box" class="verdict-box" style="background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;margin-top:16px">
+          <div class="verdict-label t" data-cn="综合打新建议" data-en="IPO Subscription Verdict">综合打新建议</div>
+          <div class="verdict-text" id="verdict_text">计算中...</div>
+          <div class="verdict-sub" id="verdict_sub"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <span class="t" data-cn="方法论来源：许哲圣 (2026)《Valuing the First Listed Foundation-Model Company》— 西南财经大学公司金融课程论文"
+        data-en="Methodology Source: Xu (2026) 'Valuing the First Listed Foundation-Model Company' — SWUFE Corporate Finance Paper">
+    方法论来源：许哲圣 (2026)《Valuing the First Listed Foundation-Model Company》— 西南财经大学公司金融课程论文
+  </span>
+  <br>
+  <span class="t" data-cn="⚠️ 本工具仅供学术研究与教育用途，不构成任何投资建议。"
+        data-en="⚠️ This tool is for academic and educational purposes only. Not investment advice.">
+    ⚠️ 本工具仅供学术研究与教育用途，不构成任何投资建议。
+  </span>
+</div>
+
+<script>
+/* ============================================================
+   GLOBALS
+   ============================================================ */
+let LANG = 'cn';
+let comps = [
+  {name:'OpenAI', val:852, rev:24},
+  {name:'Anthropic', val:965, rev:47},
+  {name:'MiniMax', val:5, rev:0.3},
+];
+let charts = {};
+
+/* ============================================================
+   LANGUAGE
+   ============================================================ */
+function toggleLang(){
+  LANG = LANG==='cn'?'en':'cn';
+  document.getElementById('langBtn').textContent = LANG==='cn'?'English':'中文';
+  document.getElementById('title').textContent = LANG==='cn'?'港股打新估值评估工具':'HK IPO Valuation Tool';
+  document.getElementById('subtitle').textContent = LANG==='cn'
+    ?'基于多维估值框架的IPO申购决策支持 — 三情景DCF · 反向DCF · 可比倍数 · 综合评分卡'
+    :'Multi-dimensional IPO Subscription Decision Support — Scenario DCF · Reverse DCF · Comparable Multiples · Scorecard';
+  document.getElementById('exportBtn').textContent = LANG==='cn'?'📄 导出报告':'📄 Export';
+  document.getElementById('resetBtn').textContent = LANG==='cn'?'🔄 重置默认':'🔄 Reset';
+  document.querySelectorAll('.t').forEach(el=>{
+    const txt = el.getAttribute('data-'+LANG);
+    if(txt) el.textContent = txt;
+  });
+  document.querySelectorAll('[id^="lb_"]').forEach(el=>{
+    const map = {
+      lb_company:{cn:'公司名称',en:'Company'},lb_ticker:{cn:'股票代码',en:'Ticker'},
+      lb_sector:{cn:'行业板块',en:'Sector'},lb_ipoprice:{cn:'IPO发行价 (HK$)',en:'IPO Price (HK$)'},
+      lb_mktprice:{cn:'当前市价 (HK$)',en:'Market Price (HK$)'},lb_exchange:{cn:'上市板块',en:'Exchange'}
+    };
+    if(map[el.id]) el.textContent = map[el.id][LANG];
+  });
+  recalcAll();
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $=id=>document.getElementById(id);
+const val=id=>parseFloat($(id).value)||0;
+function fmtB(n){
+  if(Math.abs(n)>=1e6) return 'US$'+(n/1e6).toFixed(1)+'T';
+  if(Math.abs(n)>=1e3) return 'US$'+(n/1e3).toFixed(1)+'B';
+  return 'US$'+n.toFixed(0)+'M';
+}
+function debounce(fn,ms){let t;return function(){clearTimeout(t);t=setTimeout(fn,ms);};}
+
+/* ============================================================
+   MODULE TOGGLE
+   ============================================================ */
+function toggleModule(head){
+  head.classList.toggle('open');
+  const body = head.closest('.module').querySelector('.collapsible-body');
+  body.style.maxHeight = head.classList.contains('open')?'5000px':'0px';
+}
+
+/* ============================================================
+   SCENARIO TABS
+   ============================================================ */
+function switchScenario(s, btn){
+  document.querySelectorAll('.scenario-tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.scenario-panel').forEach(p=>p.classList.remove('active'));
+  $('panel_'+s).classList.add('active');
+}
+
+/* ============================================================
+   MODULE 1: CAPM / WACC
+   ============================================================ */
+function calcWACC(){
+  const rf=val('capm_rf'), erp=val('capm_erp'), beta=val('capm_beta');
+  const tax=val('capm_tax')/100, dv=val('capm_dv')/100, kd=val('capm_kd');
+  const ke = rf + beta*erp;
+  const kd_at = kd*(1-tax);
+  const wacc = ke*(1-dv) + kd_at*dv;
+  $('res_ke').textContent = ke.toFixed(1)+'%';
+  $('res_kd_at').textContent = dv>0?kd_at.toFixed(1)+'%':'—';
+  $('res_wacc').textContent = wacc.toFixed(1)+'%';
+  $('wacc_badge').textContent = 'WACC: '+wacc.toFixed(1)+'%';
+  drawWACCChart(ke, kd_at, dv, wacc);
+  return wacc;
+}
+
+function drawWACCChart(ke, kd_at, dv, wacc){
+  const ctx=$('chart_wacc');
+  if(charts.wacc) charts.wacc.destroy();
+  const labels = LANG==='cn'?['股权成本 Ke','税后债务 Kd(1-T)','WACC']:['Cost of Equity Ke','After-tax Debt Kd(1-T)','WACC'];
+  charts.wacc = new Chart(ctx,{
+    type:'bar',
+    data:{labels,datasets:[{
+      data:[ke, dv>0?kd_at:0, wacc],
+      backgroundColor:['#3b82f6','#94a3b8','#f59e0b'],
+      borderRadius:6,barPercentage:0.5
+    }]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toFixed(2)+'%'}}},
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#f1f5f9'}},x:{grid:{display:false}}}
+    }
+  });
+}
+
+/* ============================================================
+   MODULE 2: THREE-SCENARIO DCF
+   Matches Python project_scenario() exactly:
+   - Year 0 (2026): revenue stays at rev2026, no growth applied
+   - Years 1-9 (2027-2035): growth linearly interpolated
+   - EBIT margin: -30% → terminal margin, linear ramp
+   - NOL carryforward with proper begin-of-year tracking
+   - Year 0 reinvestment uses rev2025 as previous revenue
+   ============================================================ */
+function projectScenario(wacc, rev2026, rev2025, g1, gn, tm, sc, m0, gTerm, netCash, shares, fx, taxRate){
+  const years = 10;
+  const m0f = m0/100, tmf = tm/100;
+  const tax = taxRate/100;
+  let revenue = rev2026;
+  let previousRevenue = rev2025;
+  let nol = 0;
+  let fcffArr = [], revArr = [];
+
+  for(let i=0; i<years; i++){
+    // Revenue: year 0 = base (no growth), year 1+ = grown
+    if(i > 0){
+      const gi = g1/100 + (gn/100 - g1/100)*(i-1)/8;
+      revenue = previousRevenue * (1 + gi);
+    }
+    revArr.push(revenue);
+
+    // EBIT margin ramp
+    const margin = m0f + (tmf - m0f) * i / 9;
+    const ebit = revenue * margin;
+
+    // NOL tracking (beginning of year)
+    const beginNol = nol;
+    let cashTax = 0;
+    if(ebit < 0){
+      cashTax = 0;
+      nol = beginNol - ebit; // accumulate losses
+    } else {
+      const nolUsed = Math.min(beginNol, ebit);
+      const taxableIncome = ebit - nolUsed;
+      cashTax = taxableIncome * tax;
+      nol = beginNol - nolUsed;
+    }
+
+    const nopat = ebit - cashTax;
+    const reinvest = Math.max(revenue - previousRevenue, 0) / sc;
+    const fcff = nopat - reinvest;
+    fcffArr.push(fcff);
+    previousRevenue = revenue;
+  }
+
+  // Terminal value
+  const tv = fcffArr[years-1] * (1 + gTerm/100) / (wacc/100 - gTerm/100);
+  let pvSum = 0;
+  for(let i=0; i<years; i++){
+    pvSum += fcffArr[i] / Math.pow(1 + wacc/100, i+1);
+  }
+  const pvTV = tv / Math.pow(1 + wacc/100, years);
+  const ev = pvSum + pvTV;
+  const equity = ev + netCash;
+  const perShare = equity / shares * fx;
+
+  return {revArr, fcffArr, ev, equity, perShare, tv, pvSum, pvTV};
+}
+
+function calcDCF(){
+  const wacc = calcWACC();
+  const rev2025 = val('dcf_rev2025');
+  const rev2026 = val('dcf_rev');
+  const netCash = val('dcf_cash');
+  const shares = val('dcf_shares');
+  const fx = val('dcf_fx');
+  const gTerm = val('dcf_g');
+  const m0 = val('dcf_m0');
+  const taxRate = val('dcf_tax');
+
+  const bear = projectScenario(wacc, rev2026, rev2025, val('bear_g1'), val('bear_gn'), val('bear_tm'), val('bear_sc'), m0, gTerm, netCash, shares, fx, taxRate);
+  const base = projectScenario(wacc, rev2026, rev2025, val('base_g1'), val('base_gn'), val('base_tm'), val('base_sc'), m0, gTerm, netCash, shares, fx, taxRate);
+  const bull = projectScenario(wacc, rev2026, rev2025, val('bull_g1'), val('bull_gn'), val('bull_tm'), val('bull_sc'), m0, gTerm, netCash, shares, fx, taxRate);
+
+  const pp = val('bear_prob'), pb = val('base_prob'), pu = val('bull_prob');
+  const pw = bear.perShare*pp + base.perShare*pb + bull.perShare*pu;
+  const mkt = val('inp_mktprice');
+  const pct = pw/mkt*100;
+
+  $('res_bear').textContent = 'HK$'+Math.round(bear.perShare);
+  $('res_base').textContent = 'HK$'+Math.round(base.perShare);
+  $('res_bull').textContent = 'HK$'+Math.round(bull.perShare);
+  $('res_pw').textContent = 'HK$'+Math.round(pw);
+  $('res_vs_mkt').textContent = pct.toFixed(1)+'%';
+  $('res_vs_mkt').className = pct<50?'value value-red':pct<100?'value value-yellow':'value value-green';
+  $('dcf_badge').textContent = (LANG==='cn'?'加权: HK$':'PW: HK$')+Math.round(pw);
+
+  drawDCFChart(bear, base, bull);
+  return {bear, base, bull, pw, mkt};
+}
+
+function drawDCFChart(bear, base, bull){
+  const ctx=$('chart_dcf');
+  if(charts.dcf) charts.dcf.destroy();
+  const labels=[];for(let y=2026;y<=2035;y++)labels.push(y+'');
+  charts.dcf = new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[
+      {label:'🐻 '+(LANG==='cn'?'熊市 FCFF':'Bear FCFF'),data:bear.fcffArr,borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,.08)',fill:true,tension:.3,pointRadius:3},
+      {label:'📊 '+(LANG==='cn'?'基准 FCFF':'Base FCFF'),data:base.fcffArr,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.08)',fill:true,tension:.3,pointRadius:3},
+      {label:'🚀 '+(LANG==='cn'?'牛市 FCFF':'Bull FCFF'),data:bull.fcffArr,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.08)',fill:true,tension:.3,pointRadius:3}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': US$'+c.raw.toFixed(0)+'M'}}},
+      scales:{y:{title:{display:true,text:'US$M'},grid:{color:'#f1f5f9'}},x:{grid:{display:false}}}
+    }
+  });
+}
+
+/* ============================================================
+   MODULE 3: REVERSE DCF
+   Builds a unit revenue path (forward, year 0 = 1.0, no growth
+   in year 0, growth in years 1-9) and scales so that
+   EV_per_unit * scale = target_EV.
+   Year 0 reinvestment = rev[0] / SC (matching Python).
+   ============================================================ */
+function computeRev2035(waccPct, tmPct, rev2026, g1Pct, gnPct, sc, m0Pct, gTermPct, targetEV, taxRate){
+  const wacc = waccPct/100, tm = tmPct/100, m0 = m0Pct/100, gTerm = gTermPct/100;
+  const g1 = g1Pct/100, gn = gnPct/100;
+  const tax = taxRate/100;
+
+  // Build unit revenue path forward (same structure as projectScenario)
+  let unitRevs = [1.0]; // year 0 = 2026
+  for(let i=1; i<=9; i++){
+    const gi = g1 + (gn - g1)*(i-1)/8;
+    unitRevs.push(unitRevs[i-1]*(1+gi));
+  }
+  // unitRevs: [2026=1, 2027, ..., 2035] → 10 elements
+
+  // Margins: -30% → terminal margin
+  const n = unitRevs.length;
+  const margins = [];
+  for(let i=0; i<n; i++) margins.push(m0 + (tm - m0)*i/(n-1));
+
+  // Compute unit FCF and PV
+  let pvUnit = 0;
+  let fcfUnit = [];
+  for(let i=0; i<n; i++){
+    const ebit = unitRevs[i] * margins[i];
+    // Simplified tax (no NOL in reverse DCF, matching Python)
+    const taxAmt = Math.max(0, ebit * tax);
+    const nopat = ebit - taxAmt;
+    let reinvest;
+    if(i === 0) reinvest = unitRevs[0] / sc; // year 0: full rev / SC
+    else reinvest = Math.max(unitRevs[i] - unitRevs[i-1], 0) / sc;
+    const fcf = nopat - reinvest;
+    pvUnit += fcf / Math.pow(1+wacc, i+1);
+    fcfUnit.push(fcf);
+  }
+
+  // Terminal value
+  if(wacc <= gTerm) return {rev2035:Infinity, cagr:Infinity, unitRevs};
+  const tvUnit = fcfUnit[n-1] * (1+gTerm) / (wacc - gTerm);
+  pvUnit += tvUnit / Math.pow(1+wacc, n);
+
+  if(pvUnit <= 0) return {rev2035:Infinity, cagr:Infinity, unitRevs};
+
+  const scale = targetEV / pvUnit; // US$M (since targetEV is in US$M)
+  const rev2035 = scale * unitRevs[n-1];
+  const cagr = (Math.pow(rev2035/rev2026, 1/10) - 1) * 100; // 10-year horizon
+
+  return {rev2035, cagr, unitRevs};
+}
+
+function calcReverseDCF(){
+  const wacc = calcWACC(); // percentage
+  const rev2026 = val('dcf_rev'); // US$M
+  const rev2025 = val('dcf_rev2025');
+  const netCash = val('dcf_cash'); // US$M
+  const shares = val('dcf_shares');
+  const fx = val('dcf_fx');
+  const gTerm = val('dcf_g');
+  const m0 = val('dcf_m0');
+  const taxRate = val('dcf_tax');
+  const mkt = val('inp_mktprice');
+
+  // Target EV in US$M
+  const mktCapUSDM = mkt * shares / fx; // HK$ * M / (HK$/US$) = US$M
+  const targetEV = mktCapUSDM - netCash; // US$M
+
+  const result = computeRev2035(wacc, val('base_tm'), rev2026, val('base_g1'), val('base_gn'),
+    val('base_sc'), m0, gTerm, targetEV, taxRate);
+
+  const rev2035M = result.rev2035; // US$M
+  const cagr = result.cagr;
+
+  $('res_imcap').textContent = fmtB(mktCapUSDM);
+  $('res_iev').textContent = fmtB(targetEV);
+
+  if(rev2035M === Infinity){
+    $('res_irev').textContent = '∞';
+    $('res_icagr').textContent = '∞';
+    $('res_feasibility').textContent = LANG==='cn'?'无法计算':'N/A';
+    $('res_feasibility').className = 'value value-red';
+  } else {
+    $('res_irev').textContent = fmtB(rev2035M);
+    $('res_icagr').textContent = cagr.toFixed(0)+'%';
+
+    let feasibility, feasClass;
+    if(cagr>80){feasibility=LANG==='cn'?'极不可行':'Highly Implausible';feasClass='value value-red';}
+    else if(cagr>50){feasibility=LANG==='cn'?'高度激进':'Very Aggressive';feasClass='value value-red';}
+    else if(cagr>30){feasibility=LANG==='cn'?'偏乐观':'Optimistic';feasClass='value value-yellow';}
+    else{feasibility=LANG==='cn'?'基本可行':'Plausible';feasClass='value value-green';}
+    $('res_feasibility').textContent = feasibility;
+    $('res_feasibility').className = feasClass;
+  }
+  $('rdcf_badge').textContent = rev2035M===Infinity?'N/A':
+    (LANG==='cn'?'隐含2035收入: ':'Impl. 2035: ')+fmtB(rev2035M);
+
+  buildSensitivityGrid(wacc, rev2026, m0, gTerm, taxRate, targetEV);
+  drawReverseDCFChart(rev2026, rev2035M, cagr, result.unitRevs);
+  return {rev2035:rev2035M, cagr};
+}
+
+function buildSensitivityGrid(waccBase, rev2026, m0, gTerm, taxRate, targetEV){
+  const waccRange = [10,11.5,13,13.5,15,17,20];
+  const tmRange = [20,28,35,40,50];
+  const grid = $('sensitivity_grid');
+  grid.style.gridTemplateColumns = `60px repeat(${tmRange.length},1fr)`;
+  let html = '<div class="cell header-cell">WACC↓ TM→</div>';
+  tmRange.forEach(tm=>html+=`<div class="cell header-cell">${tm}%</div>`);
+
+  waccRange.forEach(w=>{
+    html += `<div class="cell header-cell">${w}%</div>`;
+    tmRange.forEach(tm=>{
+      const r = computeRev2035(w, tm, rev2026, val('base_g1'), val('base_gn'),
+        val('base_sc'), m0, gTerm, targetEV, taxRate);
+      const rev2035B = r.rev2035/1000; // US$B
+      const cagr = r.cagr;
+      let bg;
+      if(cagr>80||cagr===Infinity) bg='#fecaca';
+      else if(cagr>50) bg='#fed7aa';
+      else if(cagr>30) bg='#fef08a';
+      else bg='#bbf7d0';
+      const isBase = Math.abs(w-13.5)<0.1 && tm===28;
+      html += `<div class="cell" style="background:${bg};${isBase?'outline:2px solid var(--accent);':''}">
+        ${cagr===Infinity?'∞':rev2035B.toFixed(0)+'B'}<br>
+        <small>${cagr===Infinity?'—':cagr.toFixed(0)+'%'}</small></div>`;
+    });
+  });
+  grid.innerHTML = html;
+}
+
+function drawReverseDCFChart(rev2026, rev2035M, cagr, unitRevs){
+  const ctx = $('chart_rdcf');
+  if(charts.rdcf) charts.rdcf.destroy();
+  const labels = [];for(let y=2026;y<=2035;y++)labels.push(y+'');
+  // Scale unit revs to actual implied path
+  const scale = rev2035M===Infinity?1:(rev2035M / unitRevs[unitRevs.length-1]);
+  const implied = unitRevs.map(v=>v*scale/1000); // US$B
+
+  charts.rdcf = new Chart(ctx,{
+    type:'bar',
+    data:{labels,datasets:[{
+      label:LANG==='cn'?'隐含收入路径 (US$B)':'Implied Revenue Path (US$B)',
+      data:implied,
+      backgroundColor:implied.map((_,i)=>i===0?'rgba(59,130,246,.6)':i<5?'rgba(59,130,246,.4)':'rgba(239,68,68,.5)'),
+      borderRadius:4
+    }]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        title:{display:true,text:(LANG==='cn'?'市场隐含收入预期 — ':'Market-Implied Revenue — ')+
+          (cagr===Infinity?'∞':cagr.toFixed(0)+'% CAGR'),
+          font:{size:13,weight:'bold'},color:'#dc2626'}},
+      scales:{y:{title:{display:true,text:'US$B'},grid:{color:'#f1f5f9'}},x:{grid:{display:false}}}
+    }
+  });
+}
+
+/* ============================================================
+   MODULE 4: REVENUE MULTIPLES
+   ============================================================ */
+function addComp(){
+  const name=$('comp_name').value.trim();
+  const v=parseFloat($('comp_val').value);
+  const r=parseFloat($('comp_rev').value);
+  if(!name||!v||!r){alert(LANG==='cn'?'请填写完整信息':'Please fill all fields');return;}
+  comps.push({name,val:v,rev:r});
+  $('comp_name').value='';$('comp_val').value='';$('comp_rev').value='';
+  calcMultiples();
+}
+
+function removeComp(idx){
+  comps.splice(idx,1);
+  calcMultiples();
+}
+
+function calcMultiples(){
+  const mkt=val('inp_mktprice'), fx=val('dcf_fx'), shares=val('dcf_shares');
+  const netCash=val('dcf_cash'); // US$M
+  const rev2026=val('dcf_rev'); // US$M
+  const mktCapUSDM = mkt*shares/fx; // US$M
+  const targetEV = mktCapUSDM - netCash;
+  const targetMult = targetEV/rev2026;
+
+  // Render comp table
+  const tbl=$('comp_table');
+  let html='';
+  comps.forEach((c,i)=>{
+    const mult=c.val/c.rev;
+    html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;
+      border-bottom:1px solid var(--border);font-size:.85rem">
+      <span style="font-weight:600">${c.name}</span>
+      <span>US$${c.val}B / US$${c.rev}B = <b>${mult.toFixed(0)}x</b></span>
+      <button onclick="removeComp(${i})" style="border:none;background:none;color:var(--danger);cursor:pointer;font-size:1rem">✕</button>
+    </div>`;
+  });
+  tbl.innerHTML=html;
+
+  const peerMults=comps.map(c=>c.val/c.rev).sort((a,b)=>a-b);
+  const median=peerMults.length>0?peerMults[Math.floor(peerMults.length/2)]:0;
+  const premium=median>0?(targetMult/median):0;
+  const fairEV=median*rev2026; // US$M
+  const fairEq=fairEV+netCash; // US$M
+  const fairPrice=fairEq*fx/shares; // HK$ per share
+
+  $('res_tmult').textContent=targetMult.toFixed(0)+'x';
+  $('res_pmed').textContent=median.toFixed(0)+'x';
+  $('res_prem').textContent=premium.toFixed(1)+'x';
+  $('res_prem').className=premium>5?'value value-red':premium>2?'value value-yellow':'value value-green';
+  $('res_fair').textContent='HK$'+Math.round(fairPrice);
+  $('mult_badge').textContent=targetMult.toFixed(0)+'x';
+
+  drawMultChart(targetMult,comps);
+}
+
+function drawMultChart(targetMult,comps){
+  const ctx=$('chart_mult');
+  if(charts.mult) charts.mult.destroy();
+  const allComps=[{name:LANG==='cn'?'目标公司':'Target',mult:targetMult,isTarget:true},
+    ...comps.map(c=>({name:c.name,mult:c.val/c.rev,isTarget:false}))];
+  allComps.sort((a,b)=>b.mult-a.mult);
+  charts.mult = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:allComps.map(c=>c.name),
+      datasets:[{
+        label:'EV/Revenue',
+        data:allComps.map(c=>c.mult),
+        backgroundColor:allComps.map(c=>c.isTarget?'#dc2626':'#3b82f6'),
+        borderRadius:6,barPercentage:0.6
+      }]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toFixed(0)+'x'}}},
+      scales:{x:{type:'logarithmic',title:{display:true,text:'EV/Revenue (log scale)'},
+        grid:{color:'#f1f5f9'}},y:{grid:{display:false}}}
+    }
+  });
+}
+
+/* ============================================================
+   MODULE 5: SCORECARD
+   ============================================================ */
+function calcScorecard(dcfResult, rdcfResult){
+  const pw=dcfResult.pw, mkt=dcfResult.mkt, ipo=val('inp_ipoprice');
+  const cagr=rdcfResult.cagr;
+
+  const mktCapUSDM=mkt*val('dcf_shares')/val('dcf_fx');
+  const targetEV=mktCapUSDM-val('dcf_cash');
+  const rev2026=val('dcf_rev');
+  const targetMult=targetEV/rev2026;
+  const peerMults=comps.map(c=>c.val/c.rev).sort((a,b)=>a-b);
+  const median=peerMults.length>0?peerMults[Math.floor(peerMults.length/2)]:35;
+  const premium=median>0?(targetMult/median):99;
+
+  const dims = [];
+
+  // 1. DCF Fair Value vs IPO Price
+  const dcfVsIPO = ((pw-ipo)/ipo)*100;
+  let dcfScore;
+  if(dcfVsIPO>50) dcfScore=20;
+  else if(dcfVsIPO>0) dcfScore=14;
+  else if(dcfVsIPO>-30) dcfScore=8;
+  else if(dcfVsIPO>-70) dcfScore=4;
+  else dcfScore=1;
+  dims.push({
+    name:LANG==='cn'?'DCF基本面':'DCF Fundamentals',
+    desc:LANG==='cn'?`加权估值 HK$${Math.round(pw)} vs IPO价 HK$${ipo} (${dcfVsIPO>0?'+':''}${dcfVsIPO.toFixed(0)}%)`
+      :`PW Value HK$${Math.round(pw)} vs IPO HK$${ipo} (${dcfVsIPO>0?'+':''}${dcfVsIPO.toFixed(0)}%)`,
+    score:dcfScore,color:'#3b82f6'
+  });
+
+  // 2. Reverse DCF Feasibility
+  let rdcfScore;
+  if(cagr<20) rdcfScore=18;
+  else if(cagr<35) rdcfScore=14;
+  else if(cagr<55) rdcfScore=8;
+  else if(cagr<80) rdcfScore=3;
+  else rdcfScore=1;
+  dims.push({
+    name:LANG==='cn'?'反向DCF可行性':'Reverse DCF Feasibility',
+    desc:LANG==='cn'?`隐含CAGR ${cagr===Infinity?'∞':cagr.toFixed(0)+'%'} → ${$('res_feasibility').textContent}`
+      :`Implied CAGR ${cagr===Infinity?'∞':cagr.toFixed(0)+'%'} → ${$('res_feasibility').textContent}`,
+    score:rdcfScore,color:'#8b5cf6'
+  });
+
+  // 3. Multiple Premium
+  let multScore;
+  if(premium<1.5) multScore=18;
+  else if(premium<3) multScore=14;
+  else if(premium<8) multScore=8;
+  else if(premium<20) multScore=3;
+  else multScore=1;
+  dims.push({
+    name:LANG==='cn'?'可比倍数溢价':'Comparable Premium',
+    desc:LANG==='cn'?`${targetMult.toFixed(0)}x vs 同行中位数 ${median.toFixed(0)}x (${premium.toFixed(1)}倍溢价)`
+      :`${targetMult.toFixed(0)}x vs Peer Median ${median.toFixed(0)}x (${premium.toFixed(1)}x premium)`,
+    score:multScore,color:'#f59e0b'
+  });
+
+  // 4. Price Deviation (IPO → current gap)
+  const gap=((mkt-ipo)/ipo)*100;
+  let gapScore;
+  if(gap<20) gapScore=18;
+  else if(gap<100) gapScore=14;
+  else if(gap<500) gapScore=8;
+  else if(gap<1500) gapScore=3;
+  else gapScore=1;
+  dims.push({
+    name:LANG==='cn'?'价格偏离度':'Price Deviation',
+    desc:LANG==='cn'?`市价较IPO价偏离 +${gap.toFixed(0)}% → 追高风险`
+      :`Market +${gap.toFixed(0)}% vs IPO → chasing risk`,
+    score:gapScore,color:'#ef4444'
+  });
+
+  // 5. Margin of Safety
+  const mos = (1-pw/mkt)*100;
+  let mosScore;
+  if(mos<30) mosScore=18;
+  else if(mos<60) mosScore=14;
+  else if(mos<85) mosScore=8;
+  else if(mos<95) mosScore=3;
+  else mosScore=1;
+  dims.push({
+    name:LANG==='cn'?'安全边际':'Margin of Safety',
+    desc:LANG==='cn'?`基本面仅覆盖市价 ${(pw/mkt*100).toFixed(1)}%，MoS = ${mos.toFixed(0)}%`
+      :`Fundamentals cover ${(pw/mkt*100).toFixed(1)}% of price, MoS = ${mos.toFixed(0)}%`,
+    score:mosScore,color:'#10b981'
+  });
+
+  const total = dims.reduce((s,d)=>s+d.score,0);
+
+  // Render items
+  const items=$('score_items');
+  items.innerHTML='';
+  dims.forEach(d=>{
+    const pct=d.score/20*100;
+    const color=pct>=70?'#059669':pct>=40?'#d97706':'#dc2626';
+    items.innerHTML+=`<div class="score-item">
+      <div class="score-dot" style="background:${d.color}"></div>
+      <div class="info"><div class="name">${d.name}</div><div class="desc">${d.desc}</div></div>
+      <div class="score-val" style="color:${color}">${d.score}/20</div>
+    </div>`;
+  });
+
+  $('score_badge').textContent=(LANG==='cn'?'综合: ':'Score: ')+total+'/100';
+  $('score_badge').className='badge '+(total>=55?'badge-green':total>=35?'badge-yellow':'badge-red');
+
+  // Verdict
+  let vText,vSub,vBg;
+  if(total>=75){vText=LANG==='cn'?'✅ 建议积极申购':'✅ Subscribe';vSub=LANG==='cn'?'基本面扎实，估值合理，打新性价比较高':'Strong fundamentals, reasonable valuation';vBg='linear-gradient(135deg,#059669,#065f46)';}
+  else if(total>=55){vText=LANG==='cn'?'⚠️ 可少量参与':'⚠️ Cautious Subscribe';vSub=LANG==='cn'?'估值偏高但有一定基本面支撑，建议控制仓位':'Elevated valuation but some fundamental support';vBg='linear-gradient(135deg,#d97706,#92400e)';}
+  else if(total>=35){vText=LANG==='cn'?'⛔ 不建议申购':'⛔ Do Not Subscribe';vSub=LANG==='cn'?'估值显著偏离基本面，破发风险较高':'Valuation significantly exceeds fundamentals';vBg='linear-gradient(135deg,#dc2626,#991b1b)';}
+  else{vText=LANG==='cn'?'🚫 强烈不建议':'🚫 Strongly Avoid';vSub=LANG==='cn'?'市价远超任何合理估值情景，打新近乎赌博':'Market price far exceeds any reasonable scenario';vBg='linear-gradient(135deg,#7f1d1d,#450a0a)';}
+  $('verdict_text').textContent=vText;
+  $('verdict_sub').textContent=vSub;
+  $('verdict_box').style.background=vBg;
+
+  drawRadarChart(dims);
+}
+
+function drawRadarChart(dims){
+  const ctx=$('chart_radar');
+  if(charts.radar) charts.radar.destroy();
+  charts.radar = new Chart(ctx,{
+    type:'radar',
+    data:{
+      labels:dims.map(d=>d.name),
+      datasets:[{
+        label:LANG==='cn'?'评分':'Score',
+        data:dims.map(d=>d.score),
+        backgroundColor:'rgba(37,99,235,.15)',borderColor:'#2563eb',
+        pointBackgroundColor:dims.map(d=>d.color),pointRadius:6,borderWidth:2
+      },{
+        label:LANG==='cn'?'满分':'Max',
+        data:dims.map(()=>20),
+        backgroundColor:'rgba(0,0,0,.03)',borderColor:'#e2e8f0',
+        borderDash:[4,4],pointRadius:0,borderWidth:1
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{r:{min:0,max:20,ticks:{stepSize:5,font:{size:10}},
+        pointLabels:{font:{size:11,weight:'600'}},
+        grid:{color:'#e2e8f0'},angleLines:{color:'#e2e8f0'}}}
+    }
+  });
+}
+
+/* ============================================================
+   MASTER RECALCULATE
+   ============================================================ */
+function recalcAll(){
+  const dcf = calcDCF();
+  const rdcf = calcReverseDCF();
+  calcMultiples();
+  calcScorecard(dcf, rdcf);
+}
+
+/* ============================================================
+   PRESETS
+   ============================================================ */
+function loadPreset(key){
+  if(!key) return;
+  const presets={
+    zhipu:{company:'智谱 (Knowledge Atlas)',ticker:'2513.HK',sector:'AI / 大模型',ipo:116,mkt:2104,exchange:'HKEX 18C',
+      rf:4,erp:6,beta:1.6,tax:15,dv:0,kd:5,rev2025:102,rev:200,cash:550,shares:445.843,g:4,fx:7.8,m0:-30,dtax:15,
+      bear:{p:.35,g1:40,gn:6,tm:18,sc:2},base:{p:.45,g1:56,gn:8,tm:28,sc:1.8},bull:{p:.2,g1:85,gn:12,tm:35,sc:1.6},
+      comps:[{name:'OpenAI',val:852,rev:24},{name:'Anthropic',val:965,rev:47},{name:'MiniMax',val:5,rev:0.3}]},
+    generic_ai:{company:'Generic AI Startup',ticker:'XXXX.HK',sector:'AI SaaS',ipo:50,mkt:120,exchange:'HKEX Main',
+      rf:4,erp:6,beta:1.3,tax:15,dv:5,kd:6,rev2025:60,rev:100,cash:200,shares:500,g:3.5,fx:7.8,m0:-20,dtax:15,
+      bear:{p:.3,g1:30,gn:5,tm:15,sc:2.2},base:{p:.45,g1:45,gn:8,tm:25,sc:1.8},bull:{p:.25,g1:70,gn:12,tm:32,sc:1.5},
+      comps:[{name:'Palantir',val:250,rev:3},{name:'Snowflake',val:55,rev:3.8},{name:'Datadog',val:45,rev:2.7}]},
+    generic_biotech:{company:'BioTech Co.',ticker:'YYYY.HK',sector:'Biotech 18A',ipo:30,mkt:45,exchange:'HKEX 18A',
+      rf:4,erp:6,beta:1.1,tax:15,dv:10,kd:7,rev2025:30,rev:50,cash:100,shares:300,g:3,fx:7.8,m0:-50,dtax:15,
+      bear:{p:.35,g1:20,gn:4,tm:10,sc:2.5},base:{p:.4,g1:35,gn:7,tm:22,sc:2},bull:{p:.25,g1:60,gn:10,tm:30,sc:1.6},
+      comps:[{name:'BeiGene',val:30,rev:3.5},{name:'Zai Lab',val:4,rev:0.3},{name:'Innovent',val:8,rev:0.8}]}
+  };
+  const p=presets[key];if(!p)return;
+  $('inp_company').value=p.company;$('inp_ticker').value=p.ticker;$('inp_sector').value=p.sector;
+  $('inp_ipoprice').value=p.ipo;$('inp_mktprice').value=p.mkt;$('inp_exchange').value=p.exchange;
+  $('capm_rf').value=p.rf;$('capm_erp').value=p.erp;$('capm_beta').value=p.beta;
+  $('capm_tax').value=p.tax;$('capm_dv').value=p.dv;$('capm_kd').value=p.kd;
+  $('dcf_rev2025').value=p.rev2025;$('dcf_rev').value=p.rev;$('dcf_cash').value=p.cash;
+  $('dcf_shares').value=p.shares;$('dcf_g').value=p.g;$('dcf_fx').value=p.fx;
+  $('dcf_m0').value=p.m0;$('dcf_tax').value=p.dtax;
+  ['bear','base','bull'].forEach(s=>{
+    $(s+'_prob').value=p[s].p;$(s+'_g1').value=p[s].g1;$(s+'_gn').value=p[s].gn;
+    $(s+'_tm').value=p[s].tm;$(s+'_sc').value=p[s].sc;
+  });
+  comps=[...p.comps];
+  recalcAll();
+  $('presetSel').value='';
+}
+
+function resetDefaults(){loadPreset('zhipu');}
+
+/* ============================================================
+   EXPORT
+   ============================================================ */
+function exportPDF(){
+  const w=window.open('','','width=900,height=700');
+  const company=$('inp_company').value, ticker=$('inp_ticker').value;
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>IPO Valuation Report</title>
+  <style>body{font-family:Arial,'Microsoft YaHei',sans-serif;padding:40px;color:#1e293b;line-height:1.8}
+  h1{color:#1e3a5f;border-bottom:2px solid #1e3a5f;padding-bottom:8px}
+  h2{color:#2563eb;margin-top:28px}
+  table{width:100%;border-collapse:collapse;margin:12px 0}
+  td,th{border:1px solid #e2e8f0;padding:8px 12px;text-align:left;font-size:.9rem}
+  th{background:#f8fafc;font-weight:700}
+  .verdict{font-size:1.3rem;font-weight:800;text-align:center;padding:20px;border-radius:12px;margin-top:24px;
+    background:${$('verdict_box').style.background};color:#fff}
+  .footer{margin-top:30px;font-size:.75rem;color:#94a3b8;text-align:center}
+  @media print{body{padding:20px}}</style></head><body>`);
+  w.document.write(`<h1>${LANG==='cn'?'港股打新估值评估报告':'HK IPO Valuation Report'} — ${company} (${ticker})</h1>`);
+  w.document.write(`<p>${LANG==='cn'?'生成日期':'Generated'}: ${new Date().toLocaleDateString(LANG==='cn'?'zh-CN':'en-US')}</p>`);
+
+  w.document.write(`<h2>① ${LANG==='cn'?'资本成本':'Cost of Capital'}</h2>
+    <table><tr><th>Rf</th><th>Beta</th><th>ERP</th><th>Ke</th><th>WACC</th></tr>
+    <tr><td>${val('capm_rf')}%</td><td>${val('capm_beta')}</td><td>${val('capm_erp')}%</td>
+    <td>${$('res_ke').textContent}</td><td><b>${$('res_wacc').textContent}</b></td></tr></table>`);
+
+  w.document.write(`<h2>② ${LANG==='cn'?'三情景DCF':'Scenario DCF'}</h2>
+    <table><tr><th>${LANG==='cn'?'情景':'Scenario'}</th><th>${LANG==='cn'?'每股权益':'Per Share'}</th></tr>
+    <tr><td>🐻 Bear</td><td>${$('res_bear').textContent}</td></tr>
+    <tr><td>📊 Base</td><td>${$('res_base').textContent}</td></tr>
+    <tr><td>🚀 Bull</td><td>${$('res_bull').textContent}</td></tr>
+    <tr><th>${LANG==='cn'?'概率加权':'PW'}</th><th>${$('res_pw').textContent}</th></tr></table>`);
+
+  w.document.write(`<h2>③ ${LANG==='cn'?'反向DCF':'Reverse DCF'}</h2>
+    <table><tr><th>${LANG==='cn'?'隐含2035收入':'Implied 2035 Rev'}</th><th>${LANG==='cn'?'隐含CAGR':'Implied CAGR'}</th><th>${LANG==='cn'?'可行性':'Feasibility'}</th></tr>
+    <tr><td>${$('res_irev').textContent}</td><td>${$('res_icagr').textContent}</td><td>${$('res_feasibility').textContent}</td></tr></table>`);
+
+  w.document.write(`<h2>④ ${LANG==='cn'?'收入倍数':'Revenue Multiples'}</h2>
+    <table><tr><th>${LANG==='cn'?'目标 EV/Rev':'Target EV/Rev'}</th><th>${LANG==='cn'?'同行中位数':'Peer Median'}</th><th>${LANG==='cn'?'溢价':'Premium'}</th><th>${LANG==='cn'?'合理价':'Fair Price'}</th></tr>
+    <tr><td>${$('res_tmult').textContent}</td><td>${$('res_pmed').textContent}</td><td>${$('res_prem').textContent}</td><td>${$('res_fair').textContent}</td></tr></table>`);
+
+  w.document.write(`<h2>⑤ ${LANG==='cn'?'综合评分':'Scorecard'}</h2>
+    <p style="font-size:1.1rem"><b>${$('score_badge').textContent}</b></p>
+    <div class="verdict">${$('verdict_text').textContent}<br><small>${$('verdict_sub').textContent}</small></div>`);
+
+  w.document.write(`<div class="footer">${LANG==='cn'?'方法论来源：许哲圣 (2026) — 西南财经大学公司金融课程论文<br>⚠️ 仅供学术研究，不构成投资建议。':'Source: Xu (2026) — SWUFE Corporate Finance Paper<br>⚠️ For academic purposes only. Not investment advice.'}</div></body></html>`);
+  w.document.close();
+  setTimeout(()=>w.print(),500);
+}
+
+/* ============================================================
+   EVENT LISTENERS
+   ============================================================ */
+document.querySelectorAll('input[type="number"]').forEach(inp=>{
+  inp.addEventListener('input',debounce(recalcAll,300));
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+window.addEventListener('load', recalcAll);
+</script>
+</body>
+</html>

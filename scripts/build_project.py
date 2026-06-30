@@ -70,7 +70,10 @@ def main() -> int:
         copy_submission_pdf()
 
     if not args.skip_validate:
-        run_step("validate outputs", [sys.executable, "scripts/validate_outputs.py"])
+        validate_cmd = [sys.executable, "scripts/validate_outputs.py"]
+        if args.skip_tex:
+            validate_cmd.append("--skip-tex-checks")
+        run_step("validate outputs", validate_cmd)
 
     print("[OK] build complete", flush=True)
     return 0

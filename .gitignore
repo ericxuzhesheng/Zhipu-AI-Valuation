@@ -20,6 +20,7 @@ paper/p*.log
 # OS / editor
 .DS_Store
 Thumbs.db
+*.lnk
 .vscode/
 .idea/
 .claude/worktrees/

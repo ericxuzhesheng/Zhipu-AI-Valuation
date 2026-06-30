@@ -123,7 +123,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 ```text
 .
-├── paper/                 # 论文 XeLaTeX 源 (main.tex, refs.bib) 与 main.pdf
+├── paper/                 # 论文 XeLaTeX 源 (main.tex) 与 main.pdf
 ├── 42353012_许哲圣_*.pdf   # 按"学号_姓名_论文名"命名的提交版 PDF
 ├── model/                 # 活公式估值模型 valuation_model.xlsx
 ├── eventstudy/            # 事件研究 CAR 结果与 Base Case 预测 (csv)
@@ -215,7 +215,7 @@ Stock Connect). Treated as **preliminary, diagnostic** evidence — an undergrad
 
 ```text
 .
-├── paper/      # Thesis XeLaTeX source (main.tex, refs.bib) and main.pdf
+├── paper/      # Thesis XeLaTeX source (main.tex) and main.pdf
 ├── 42353012_许哲圣_*.pdf   # submission PDF named 学号_姓名_论文名
 ├── model/      # Live-formula valuation model
 ├── eventstudy/ # CAR results + Base-case projection (csv)

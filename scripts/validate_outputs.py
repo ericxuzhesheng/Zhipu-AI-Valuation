@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import csv
 import re
 import subprocess
@@ -133,6 +134,7 @@ def check_event_panel() -> None:
 
 def check_appendix_outputs() -> None:
     required = [
+        ROOT / "data" / "comps_beta_bridge_input.csv",
         ROOT / "data" / "comps_beta_bridge.csv",
         ROOT / "paper" / "beta_bridge_auto.tex",
         ROOT / "eventstudy" / "reverse_dcf_sensitivity.csv",
@@ -152,15 +154,27 @@ def check_appendix_outputs() -> None:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="Validate generated project outputs.")
+    parser.add_argument(
+        "--skip-tex-checks",
+        action="store_true",
+        help="Skip checks that require TeX tooling or freshly compiled PDFs.",
+    )
+    args = parser.parse_args()
+
     checks = [
-        ("texcount text words < 3000", lambda: texcount_words() < 3000),
-        ("abstract words < 400", lambda: abstract_words() < 400),
         ("price_summary dates match raw data", check_price_summary_dates),
         ("valuation_summary matches Excel Audit Summary", check_valuation_summary),
-        ("PDF files exist and have pages", check_pdfs),
         ("event panel outputs exist", check_event_panel),
         ("appendix outputs exist", check_appendix_outputs),
     ]
+    if not args.skip_tex_checks:
+        checks = [
+            ("texcount text words < 3000", lambda: texcount_words() < 3000),
+            ("abstract words < 400", lambda: abstract_words() < 400),
+            ("PDF files exist and have pages", check_pdfs),
+            *checks,
+        ]
     for label, check in checks:
         result = check()
         if result is False:

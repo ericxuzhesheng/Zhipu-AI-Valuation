@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FIGURES = ROOT / "figures"
 DATA = ROOT / "data"
 EVENTSTUDY = ROOT / "eventstudy"
+COMPS_INPUT = DATA / "comps_beta_bridge_input.csv"
 
 # ---- shared colour palette ----
 C_RED = "#B22222"
@@ -33,36 +34,23 @@ C_INK = "#222222"
 # PART 1 - Comparable-company beta bridge (CSV + LaTeX)
 # ============================================================
 
-# Comparable-company snapshot (last verified 2026-06-28).
-# Update these values when refreshing the beta bridge.
-COMPS = [
-    {"Company": "Salesforce", "Ticker": "CRM",  "Levered_beta": 1.151,
-     "Mcap_USD": 129_705_025_536, "Total_debt_USD": 42_547_998_720},
-    {"Company": "Palantir",   "Ticker": "PLTR", "Levered_beta": 1.515,
-     "Mcap_USD": 270_728_445_952, "Total_debt_USD": 211_976_992},
-    {"Company": "Snowflake",  "Ticker": "SNOW", "Levered_beta": 1.355,
-     "Mcap_USD": 86_289_539_072,  "Total_debt_USD": 2_772_094_976},
-    {"Company": "Datadog",    "Ticker": "DDOG", "Levered_beta": 1.553,
-     "Mcap_USD": 85_348_573_184,  "Total_debt_USD": 1_285_052_032},
-    {"Company": "MongoDB",    "Ticker": "MDB",  "Levered_beta": 1.553,
-     "Mcap_USD": 25_256_429_568,  "Total_debt_USD": 58_635_000},
-    {"Company": "Cloudflare", "Ticker": "NET",  "Levered_beta": 1.674,
-     "Mcap_USD": 84_205_862_912,  "Total_debt_USD": 3_524_536_064},
-    {"Company": "C3.ai",      "Ticker": "AI",   "Levered_beta": 2.033,
-     "Mcap_USD": 1_383_498_496,   "Total_debt_USD": 58_681_000},
-]
-
 TAX_RATE_BETA = 0.21
 
 
-def build_beta_bridge() -> pd.DataFrame:
+def build_beta_bridge() -> tuple[pd.DataFrame, float]:
     """Compute debt/equity and unlevered beta from the snapshot."""
+    required = {"Company", "Ticker", "Levered_beta", "Mcap_USD", "Total_debt_USD"}
+    df_input = pd.read_csv(COMPS_INPUT)
+    missing = sorted(required.difference(df_input.columns))
+    if missing:
+        raise ValueError(f"{COMPS_INPUT} missing required columns: {', '.join(missing)}")
+
     rows = []
-    for c in COMPS:
-        mcap = c["Mcap_USD"]
-        debt = c["Total_debt_USD"]
+    for c in df_input.to_dict("records"):
+        mcap = float(c["Mcap_USD"])
+        debt = float(c["Total_debt_USD"])
         de = debt / mcap if mcap > 0 else float("nan")
-        bu = c["Levered_beta"] / (1 + (1 - TAX_RATE_BETA) * de)
+        bu = float(c["Levered_beta"]) / (1 + (1 - TAX_RATE_BETA) * de)
         rows.append({**c, "Debt_Equity": de, "Unlevered_beta": bu})
     df = pd.DataFrame(rows)
     median_bu = df["Unlevered_beta"].median()
@@ -71,6 +59,13 @@ def build_beta_bridge() -> pd.DataFrame:
 
 def write_beta_latex(df: pd.DataFrame, median_bu: float, path: Path) -> None:
     """Emit a LaTeX tabular ready for \\input{}."""
+    accessed_dates = sorted({str(d) for d in df.get("Accessed_date", []) if pd.notna(d)})
+    accessed = accessed_dates[-1] if accessed_dates else "28 June 2026"
+    if accessed_dates:
+        accessed_day = pd.Timestamp(accessed)
+        accessed_tex = f"{accessed_day.day}~{accessed_day.strftime('%B')}~{accessed_day.year}"
+    else:
+        accessed_tex = accessed
     rows_tex = []
     for _, r in df.iterrows():
         de_pct = f"{r['Debt_Equity'] * 100:.1f}\\%" if r["Debt_Equity"] == r["Debt_Equity"] else "n/a"
@@ -82,7 +77,7 @@ def write_beta_latex(df: pd.DataFrame, median_bu: float, path: Path) -> None:
     tex = (
         "\\begin{table}[H]\n"
         "\\centering\n"
-        f"\\caption{{Comparable-company beta bridge (accessed 28~June~2026).}}\n"
+        f"\\caption{{Comparable-company beta bridge (accessed {accessed_tex}).}}\n"
         "\\label{tab:beta}\n"
         "\\begin{tabular}{lccc}\n"
         "\\toprule\n"
@@ -118,8 +113,15 @@ REV_2026_USDM = 200
 WACC_GRID = np.array([0.10, 0.115, 0.13, 0.135, 0.15, 0.17, 0.20])
 MARGIN_GRID = np.array([0.20, 0.28, 0.35, 0.40, 0.50])
 
-# Target equity value (market, 2026-06-26)
-TARGET_EQUITY_USDM = 114_000
+def target_equity_usdm() -> float:
+    """Derive target market equity from the latest local Zhipu price file."""
+    prices = pd.read_csv(DATA / "Zhipu_KnowledgeAtlas_daily.csv")
+    prices["date"] = pd.to_datetime(prices["trade_date"].astype(str))
+    latest = prices.sort_values("date").iloc[-1]
+    return float(latest["close"]) * SHARES_M / USD_HKD
+
+
+TARGET_EQUITY_USDM = target_equity_usdm()
 TARGET_EV_USDM = TARGET_EQUITY_USDM - NET_CASH_USDM
 
 
@@ -214,7 +216,7 @@ def plot_sensitivity_heatmap(df: pd.DataFrame, path: Path) -> None:
     cbar.set_label("Required 2035 revenue (US$bn)", fontsize=10)
 
     ax.set_title(
-        "Reverse-DCF sensitivity: 2035 revenue needed to justify US$114bn equity\n"
+        f"Reverse-DCF sensitivity: 2035 revenue needed to justify US${TARGET_EQUITY_USDM / 1000:.0f}bn equity\n"
         "(red box = base-case WACC 13.5% / terminal margin 40%)",
         fontsize=12, fontweight="bold", pad=12,
     )

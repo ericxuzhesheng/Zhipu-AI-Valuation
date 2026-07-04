@@ -720,6 +720,7 @@ FLOW_EVENTS = [
     ("Connect exp.", "2026-05-13"),
     ("HSTECH in", "2026-06-05"),
     ("Connect in", "2026-06-08"),
+    ("HKEX Tech 100", "2026-06-29"),
 ]
 CAP_COLOR = C_ORANGE   # capability-release markers
 FLOW_COLOR = C_GREEN   # index/flow markers
@@ -770,7 +771,7 @@ def write_price_paths() -> None:
         Line2D([], [], color=CAP_COLOR, linestyle="--", label="Capability release"),
         Line2D([], [], color=FLOW_COLOR, linestyle=":", label="Index / flow event"),
     ]
-    ax.legend(handles=handles, loc="lower right", fontsize=7.5, framealpha=0.9)
+    ax.legend(handles=handles, loc="upper left", fontsize=7.5, framealpha=0.9)
     fig.tight_layout()
     savefig(fig, FIGURES / "fig1_price_paths.png", bbox_inches="tight")
     plt.close(fig)

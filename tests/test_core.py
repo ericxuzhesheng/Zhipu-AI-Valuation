@@ -16,13 +16,16 @@ import rebuild_outputs
 class EventPanelTests(unittest.TestCase):
     def test_event_catalog_input_drives_panel(self) -> None:
         events = event_panel.load_panel_events()
-        self.assertEqual(len(events), 15)
+        self.assertEqual(len(events), 16)
         panel = event_panel.event_panel_rows(events)
-        self.assertEqual(len(panel), 15)
+        self.assertEqual(len(panel), 16)
         self.assertEqual(int(panel["included"].sum()), 9)
         zcode = panel.loc[panel["event"] == "ZCode IDE"].iloc[0]
         self.assertFalse(bool(zcode["included"]))
         self.assertIn("insufficient post-event window", zcode["exclusion_reason"])
+        tech100 = panel.loc[panel["event"] == "HKEX Tech 100 insight"].iloc[0]
+        self.assertFalse(bool(tech100["included"]))
+        self.assertIn("insufficient post-event window", tech100["exclusion_reason"])
 
         generated_catalog = pd.read_csv(ROOT / "eventstudy" / "event_catalog.csv")
         self.assertEqual(len(generated_catalog), len(events))

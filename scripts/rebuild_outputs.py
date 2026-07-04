@@ -661,7 +661,7 @@ def write_financial_profile() -> None:
 
 
 def write_glm_timeline() -> None:
-    """Company-introduction figure: milestones from founding (2019) to GLM-5.2 (2026).
+    """Company-introduction figure: milestones from founding (2019) to ZCode (2026).
 
     Events are evenly spaced (not on a proportional date axis) so the dense 2026 release
     cadence stays legible alongside the longer 2019--2025 build-up.
@@ -676,8 +676,10 @@ def write_glm_timeline() -> None:
         ("16 Mar 2026", "GLM-5-Turbo", C_ORANGE),
         ("8 Apr 2026", "GLM-5.1 · #1 SWE-Bench Pro", C_ORANGE),
         ("5–8 Jun 2026", "HSTECH index · Stock Connect", C_GREEN),
-        ("15 Jun 2026", "GLM-5.2 · MIT weights · 1M ctx", C_RED),
+        ("13 Jun 2026", "GLM-5.2 subscribers", C_RED),
+        ("16 Jun 2026", "GLM-5.2 open weights", C_RED),
         ("22 Jun 2026", "AGM · 445.8m shares · Z.AI name", C_TEAL),
+        ("1 Jul 2026", "ZCode IDE for GLM-5.2", C_ORANGE),
     ]
     n = len(events)
     fig, ax = plt.subplots(figsize=(13.0, 3.6), dpi=150)
@@ -694,7 +696,7 @@ def write_glm_timeline() -> None:
     ax.set_ylim(-1.55, 1.55)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("From a Tsinghua lab (2019) to GLM-5.2 (2026): the path to and beyond the IPO")
+    ax.set_title("From a Tsinghua lab (2019) to ZCode (2026): the path to and beyond the IPO")
     ax.spines[["top", "right", "left", "bottom"]].set_visible(False)
     fig.tight_layout()
     savefig(fig, FIGURES / "fig9_glm_timeline.png", bbox_inches="tight")
@@ -707,6 +709,10 @@ CAPABILITY_EVENTS = [
     ("GLM-5-Turbo", "2026-03-16"),
     ("GLM-5.1", "2026-04-08"),
     ("GLM-5.2", "2026-06-15"),
+]
+DISPLAY_CAPABILITY_EVENTS = [
+    *CAPABILITY_EVENTS,
+    ("ZCode IDE", "2026-07-02"),
 ]
 FLOW_EVENTS = [
     ("IPO", "2026-01-08"),
@@ -744,7 +750,7 @@ def write_price_paths() -> None:
     lo = min(zhipu["rebased"].min(), mmx["rebased"].min())
     hi = max(zhipu["rebased"].max(), mmx["rebased"].max())
     ax.set_ylim(lo * 0.7, hi * 1.9)
-    for name, day in CAPABILITY_EVENTS:
+    for name, day in DISPLAY_CAPABILITY_EVENTS:
         x = pd.Timestamp(day)
         ax.axvline(x, color=CAP_COLOR, linestyle="--", linewidth=1.0, alpha=0.9, zorder=1)
         ax.text(x, hi * 1.95, name, rotation=90, va="top", ha="center", fontsize=6.6,
@@ -773,7 +779,7 @@ def write_price_paths() -> None:
 def write_daily_returns() -> None:
     """Zhipu daily returns with capability- and flow-event days highlighted and labelled."""
     zhipu = _load_prices("Zhipu_KnowledgeAtlas_daily.csv", 116.2)
-    cap = {pd.Timestamp(d): n for n, d in CAPABILITY_EVENTS}
+    cap = {pd.Timestamp(d): n for n, d in DISPLAY_CAPABILITY_EVENTS}
     flow = {pd.Timestamp(d): n for n, d in FLOW_EVENTS}
     fig, ax = plt.subplots(figsize=(10.6, 4.7), dpi=150)
     colors = []

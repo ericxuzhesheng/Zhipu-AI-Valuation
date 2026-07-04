@@ -899,8 +899,8 @@ def write_reaction_vs_drift() -> None:
         "ERNIE 5.1": (7, 4, "left"),
         "Qwen3.5": (-72, -18, "right"),
         "Qwen3.6-35B-A3B": (7, -4, "left"),
-        "Qwen3.7-Max": (-6, -15, "right"),
-        "Qwen3.7-Plus": (-8, -13, "right"),
+        "Qwen3.7": (-6, -15, "right"),
+        "Qwen3.7-Plus": (-22, -12, "right"),
         "Hunyuan 3.0 preview": (-6, 8, "right"),
         "LongCat-2.0": (7, 4, "left"),
     }

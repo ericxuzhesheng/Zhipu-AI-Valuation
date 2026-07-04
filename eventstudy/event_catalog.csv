@@ -15,6 +15,10 @@ MiniMax,00100.HK,Music2.5+,,candidate_vertical,official model timeline; month-le
 MiniMax,00100.HK,Music-2.6,,candidate_vertical,official model timeline; month-level date only,False,month-only event date and vertical music model outside text-agent capability peer set,,,,,,,,,,
 MiniMax,00100.HK,M2.7,2026-03-18,capability_peer,official model release,True,,-44.71,-5.52,-49.08,-2.27,-37.71,19.85,5.0,2.0,9.0,True
 MiniMax,00100.HK,M3,2026-06-01,capability_peer,official model release; sparse attention; 1M context; native multimodality,True,,26.2,-21.09,-40.78,-9.66,-51.83,-15.71,5.0,2.0,9.0,True
+Baidu,9888.HK,ERNIE 5.0,2026-02-04,large_tech_peer,technical report; unified multimodal foundation model,True,,-11.35,-1.16,-9.16,11.15,-122.53,-2.97,5.0,2.0,9.0,True
+Alibaba,9988.HK,Qwen3.5,2026-02-16,large_tech_peer,launch report; core Qwen model series,True,,2.52,-4.48,-10.88,-52.82,13.69,-0.45,5.0,2.0,9.0,True
+Alibaba,9988.HK,Qwen3.6-35B-A3B,2026-04-15,large_tech_peer,model card; first open-weight Qwen3.6 variant,True,,8.48,10.19,2.1,15.59,2.15,3.29,5.0,2.0,9.0,True
+Tencent,0700.HK,HY-Embodied-0.5,2026-04-08,large_tech_peer,technical report; Hunyuan embodied foundation model,True,,-1.03,4.02,-0.34,-14.57,-7.56,3.84,5.0,2.0,9.0,True
 Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,True,,57.56,16.11,-20.8,18.79,-2.0,42.72,5.0,2.0,9.0,True
 Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,True,,-8.2,31.81,45.4,9.31,43.85,36.9,5.0,2.0,9.0,True
 Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,True,,-34.46,-16.68,30.95,17.06,47.28,-9.05,5.0,2.0,9.0,True

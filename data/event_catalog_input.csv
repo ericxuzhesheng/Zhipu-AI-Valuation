@@ -15,6 +15,10 @@ MiniMax,00100.HK,Music2.5+,,candidate_vertical,official model timeline; month-le
 MiniMax,00100.HK,Music-2.6,,candidate_vertical,official model timeline; month-level date only,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,month-only event date and vertical music model outside text-agent capability peer set
 MiniMax,00100.HK,M2.7,2026-03-18,capability_peer,official model release,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 MiniMax,00100.HK,M3,2026-06-01,capability_peer,official model release; sparse attention; 1M context; native multimodality,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Baidu,9888.HK,ERNIE 5.0,2026-02-04,large_tech_peer,technical report; unified multimodal foundation model,Baidu_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Alibaba,9988.HK,Qwen3.5,2026-02-16,large_tech_peer,launch report; core Qwen model series,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Alibaba,9988.HK,Qwen3.6-35B-A3B,2026-04-15,large_tech_peer,model card; first open-weight Qwen3.6 variant,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Tencent,0700.HK,HY-Embodied-0.5,2026-04-08,large_tech_peer,technical report; Hunyuan embodied foundation model,Tencent_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,

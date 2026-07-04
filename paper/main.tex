@@ -390,6 +390,7 @@ profiles, consistent with
 \centering
 \caption{Cumulative abnormal returns around capability events (mean-adjusted, \%).}
 \label{tab:car}
+\small
 \begin{tabular}{lcccc}
 \toprule
 Event & Day 0 & Reaction $[0,+1]$ & Drift $[+2,+10]$ & Reading \\
@@ -402,13 +403,21 @@ GLM-5.2 & 2026-06-15 & $+30.8$ & $+28.2$ & strong under-reaction \\
 \textit{MiniMax M2.7} & 2026-03-18 & $-5.5$ & $-49.1$ & de-rate \\
 \textit{MiniMax M3} & 2026-06-01 & $-21.1$ & $-40.8$ & failed catalyst \\
 \midrule
+\multicolumn{5}{l}{\emph{Large-tech AI comparators}}\\
+Baidu ERNIE 5.0 & 2026-02-04 & $-1.2$ & $-9.2$ & muted / de-rate \\
+Alibaba Qwen3.5 & 2026-02-16 & $-4.5$ & $-10.9$ & de-rate \\
+Alibaba Qwen3.6 & 2026-04-15 & $+10.2$ & $+2.1$ & modest under-reaction \\
+Tencent HY-Embodied & 2026-04-08 & $+4.0$ & $-0.3$ & neutral \\
+\midrule
 \textbf{Average (4 GLM)} & & $\mathbf{+18.7}$ & $\mathbf{+4.8}$ & \\
 \bottomrule
 \end{tabular}
 
 {\footnotesize Mean-adjusted abnormal return: $AR_t=R_t-\bar{R}_{[-20,-6]}$, where
 $\bar{R}_{[-20,-6]}$ is the average raw return over event days $-20$ through $-6$. GLM-5.2's
-$[+2,+10]$ window remains complete as of 2026-07-03 with all nine trading days.}
+$[+2,+10]$ window remains complete as of 2026-07-03 with all nine trading days. Large-tech comparator
+dates use public model-card, technical-report, or launch-report timestamps for ERNIE, Qwen, and Hunyuan
+releases \citep{ernie50,qwen35,qwen36,hyembodied}.}
 \end{table}
 
 \begin{figure}[H]
@@ -421,9 +430,9 @@ The average is plotted where all four GLM events have data through the full $[+2
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.60\textwidth]{fig4_reaction_vs_drift.png}
+\includegraphics[width=0.72\textwidth]{fig4_reaction_vs_drift.png}
 \caption{Reaction versus drift. SOTA leaps sit in the under-reaction quadrant; incremental upgrades in the
-over-reaction quadrant.}
+over-reaction quadrant. Triangle markers show large-tech AI comparators.}
 \label{fig:scatter}
 \end{figure}
 
@@ -682,6 +691,22 @@ GLM-V Team. (2026). \emph{GLM-5V-Turbo: Toward a native foundation model for mul
 MiniMax AI. (2026). \emph{MiniMax M3 model card and MiniMax Sparse Attention technical report}
 [Model card and technical report]. Hugging Face and arXiv.
 \url{https://huggingface.co/MiniMaxAI/MiniMax-M3}; \url{https://arxiv.org/abs/2606.13392}
+
+\bibitem{ernie50}
+Baidu ERNIE Team. (2026). \emph{ERNIE 5.0 technical report} (arXiv:2602.04705). arXiv.
+\url{https://arxiv.org/abs/2602.04705}
+
+\bibitem{qwen35}
+The Economic Times. (2026). \emph{Alibaba introduces advanced AI model Qwen 3.5} [16~February~2026].
+\url{https://economictimes.indiatimes.com/tech/artificial-intelligence/alibaba-introduces-advanced-ai-model-qwen-3-5/articleshow/119416845.cms}
+
+\bibitem{qwen36}
+Qwen Team. (2026). \emph{Qwen3.6-35B-A3B model card}. Hugging Face.
+\url{https://huggingface.co/Qwen/Qwen3.6-35B-A3B}
+
+\bibitem{hyembodied}
+Tencent Hunyuan Team. (2026). \emph{HY-Embodied-0.5: Towards vision-language-action foundation models for
+real-world embodied agents} (arXiv:2604.07430). arXiv. \url{https://arxiv.org/abs/2604.07430}
 
 \bibitem{prospectus20}
 SenseTime Group Inc. (2021). \emph{Global offering prospectus (Stock code 20)}. HKEXnews.

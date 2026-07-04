@@ -1,0 +1,399 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}[numbered]
+
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+\usepackage{hyperref}
+
+\setCJKmainfont[BoldFont=SimHei]{SimSun}
+\setmainfont{Times New Roman}
+\graphicspath{{../figures/}{../paper/}}
+
+\definecolor{ZhipuRed}{RGB}{178,34,34}
+\definecolor{DeepBlue}{RGB}{31,78,121}
+\definecolor{FlowGreen}{RGB}{46,125,50}
+\definecolor{EventOrange}{RGB}{230,126,34}
+\setbeamercolor{structure}{fg=DeepBlue}
+\setbeamercolor{title}{fg=white,bg=DeepBlue}
+\setbeamercolor{frametitle}{fg=white,bg=DeepBlue}
+\setbeamercolor{block title}{fg=white,bg=DeepBlue}
+\setbeamercolor{block body}{bg=gray!6}
+
+\newcommand{\zhipu}{Zhipu AI / Knowledge Atlas (2513.HK)}
+\newcommand{\minimax}{MiniMax (00100.HK)}
+\newcommand{\key}[1]{\textcolor{ZhipuRed}{\textbf{#1}}}
+
+\title[Zhipu AI Valuation]{Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab}
+\subtitle{Evidence from Zhipu AI (2513.HK)\\论文讲解版}
+\author{许哲圣 \quad 42353012}
+\institute{公司金融课程论文}
+\date{July 2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{汇报主线}
+  \tableofcontents
+\end{frame}
+
+\section{研究问题与核心结论}
+
+\begin{frame}{这篇论文研究什么}
+  \begin{block}{背景}
+    2026 年 1 月，智谱 AI 与 MiniMax 先后在港交所上市，成为全球最早进入公开市场的基础模型公司之一。
+  \end{block}
+  \vspace{0.3em}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \textbf{三个问题}
+      \begin{itemize}
+        \item 智谱 AI 的基本面价值是多少？
+        \item 当前市场价格反映的是效率、泡沫，还是期权价值？
+        \item 对早期 AI 实验室，市场到底在交易什么信息？
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{核心方法}
+      \begin{itemize}
+        \item DCF、反向 DCF、可比公司估值
+        \item 实物期权解释
+        \item 用 ``能力超预期'' 替代传统盈利超预期
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{一句话结论}
+  \begin{block}{论文主张}
+    智谱 AI 的市场价格不是普通现金流资产的定价，而是\key{把能力迭代动量定价为一个赢家通吃 AI 期权}。
+  \end{block}
+  \vspace{0.7em}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \textbf{估值层面}
+      \begin{itemize}
+        \item DCF 区间：HK\$12--80
+        \item 概率加权：HK\$32
+        \item 仅约为市场价 1.8\%
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \textbf{价格隐含}
+      \begin{itemize}
+        \item 2026-07-03 市价：HK\$1,793
+        \item 市值约 US\$102bn
+        \item EV / FY2026E Revenue：512x
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \textbf{事件研究}
+      \begin{itemize}
+        \item GLM 能力事件反应 CAR：+18.7\%
+        \item 市场区分智谱与 MiniMax
+        \item 指数/资金流事件另行识别
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{公司与行业背景}
+
+\begin{frame}{公司画像：高增长、深亏损、预盈利}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.54\textwidth}
+      \includegraphics[width=\textwidth]{fig8_financial_profile.png}
+    \end{column}
+    \begin{column}{0.42\textwidth}
+      \textbf{三个财务事实}
+      \begin{itemize}
+        \item 收入从 RMB 57.4m 增至 RMB 724.3m，增长很快但基数仍小。
+        \item 总毛利率仍为正，但云部署毛利率曾被价格战压到很低。
+        \item FY2025 净亏损 RMB 4.72bn，上市前净负债明显。
+      \end{itemize}
+      \vspace{0.4em}
+      \begin{block}{估值含义}
+        传统利润倍数和账面价值解释力弱，真正重要的是增长、云端变现、现金跑道和模型能力。
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{战略画像：开源权重 + 成本扰动}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.60\textwidth}
+      \includegraphics[width=\textwidth]{fig9_glm_timeline.png}
+    \end{column}
+    \begin{column}{0.36\textwidth}
+      \textbf{智谱的战略选择}
+      \begin{itemize}
+        \item 用开源权重和低 token 价格获取开发者心智。
+        \item 通过 GLM 系列持续展示模型能力。
+        \item 用 Z.ai、ZCode 等平台把开发者流量转化为用量。
+      \end{itemize}
+      \vspace{0.3em}
+      \textbf{风险}
+      \begin{itemize}
+        \item 开源也会压缩自己的定价权。
+        \item 算力供给与推理成本仍是核心约束。
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{上市后价格：从 IPO 到极端重估}
+  \centering
+  \includegraphics[height=0.66\textheight]{fig1_price_paths.png}
+  \vspace{0.2em}
+  \footnotesize
+  智谱 IPO 价 HK\$116.20，2026-07-03 收于 HK\$1,793，较 IPO 约 +1,443\%。\\
+  绿色虚线是指数/资金流事件；橙色虚线是模型能力事件；HKEX Tech 100 insight 属于 flow/index event。
+\end{frame}
+
+\section{估值框架}
+
+\begin{frame}{DCF：基本面价值远低于市场价}
+  \vspace{-0.4em}
+  \begin{table}
+    \centering
+    \scriptsize
+    \begin{tabular}{lrrrr}
+      \toprule
+      情景 & 2035 收入 & EBIT margin & Equity value & 每股价值 \\
+      & US\$bn & & US\$bn & HK\$ \\
+      \midrule
+      Bear & 1.0 & 5\% & 0.7 & 11.9 \\
+      Base & 3.8 & 15\% & 1.6 & 27.4 \\
+      Bull & 10.0 & 25\% & 4.6 & 79.7 \\
+      \midrule
+      概率加权 & -- & -- & 1.9 & 32.4 \\
+      市场价格 & -- & -- & 102.5 & 1,793.0 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  \vspace{-0.2em}
+  \textbf{读法：} 即使给出高速增长和较高长期利润率，现金流模型也只能解释市场价格的一小部分。
+\end{frame}
+
+\begin{frame}{反向 DCF：市场价要求什么未来}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \includegraphics[width=\textwidth]{fig11_reverse_dcf_heatmap.png}
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \textbf{关键发现}
+      \begin{itemize}
+        \item 在 WACC 13.5\%、终值增长 4\% 下，市场价约要求 2035 年收入 US\$118bn。
+        \item 即使更低折现率和更高终值增长，隐含收入仍然很高。
+        \item 这不是普通成长股定价，而是极端赢家情景定价。
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{可比估值与 football field}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \includegraphics[width=\textwidth]{fig5_football_field.png}
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \textbf{交叉验证}
+      \begin{itemize}
+        \item 可比收入倍数给出的每股价值约 HK\$70--123。
+        \item 仍显著低于 HK\$1,793 的市场价。
+        \item 因此估值缺口不是 DCF 参数小幅调整能消除的。
+      \end{itemize}
+      \vspace{0.4em}
+      \begin{block}{解释方向}
+        市场买的是右尾结果的概率，而不是中位数现金流。
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{实物期权解释：为什么不是简单泡沫}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \textbf{DCF 像什么}
+      \begin{itemize}
+        \item 衡量可见商业化路径。
+        \item 对收入、毛利率、WACC 极敏感。
+        \item 适合给出 ``底层现金流'' 价值。
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{市场价像什么}
+      \begin{itemize}
+        \item 对赢家通吃 AI 平台的看涨期权。
+        \item 能力突破提高右尾概率。
+        \item 若能力迭代停止，期权价值会迅速坍缩。
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{0.7em}
+  \begin{block}{桥接句}
+    所以论文下一步不是问 ``DCF 为何错''，而是问 ``什么新闻会改变这个期权的价值''。
+  \end{block}
+\end{frame}
+
+\section{能力超预期事件研究}
+
+\begin{frame}{为什么要用 capability surprise}
+  \begin{block}{传统 PEAD 的问题}
+    早期基础模型公司没有稳定盈利，盈利超预期无法捕捉真正的信息冲击。
+  \end{block}
+  \vspace{0.5em}
+  \textbf{论文替代方案}
+  \begin{itemize}
+    \item 把官方模型发布、benchmark 跳升定义为能力事件。
+    \item 使用 mean-adjusted abnormal return，并与 MiniMax 做 peer-adjusted 检查。
+    \item 窗口分为泄露期 $[-5,-1]$、反应期 $[0,+1]$、漂移期 $[+2,+10]$。
+    \item 同时单独标记指数/资金流事件，避免把流动性催化剂误认为模型能力。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{事件研究结果：市场快速定价能力}
+  \begin{table}
+    \centering
+    \small
+    \begin{tabular}{lrrrr}
+      \toprule
+      事件 & 日期 & 反应 CAR & 漂移 CAR & Peer-adjusted 反应 \\
+      \midrule
+      GLM-5 & 2026-02-11 & +22.5\% & +24.7\% & +17.2\% \\
+      GLM-5-Turbo & 2026-03-16 & +7.7\% & -19.3\% & +14.6\% \\
+      GLM-5.1 & 2026-04-08 & +13.8\% & -14.2\% & +13.4\% \\
+      GLM-5.2 & 2026-06-15 & +30.8\% & +28.2\% & +28.7\% \\
+      \midrule
+      平均 & -- & +18.7\% & +4.8\% & +18.5\% \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  \vspace{0.4em}
+  \begin{block}{结论}
+    四个 GLM 能力事件的短窗反应全部为正，说明市场确实在交易模型能力，而不只是交易 AI 板块标签。
+  \end{block}
+\end{frame}
+
+\begin{frame}{价格与日收益：能力事件和资金流事件要分开}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \includegraphics[width=\textwidth]{fig2_daily_returns.png}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \includegraphics[width=\textwidth]{fig4_reaction_vs_drift.png}
+    \end{column}
+  \end{columns}
+  \vspace{0.3em}
+  \begin{itemize}
+    \item 最大单日涨幅不一定来自模型发布，2 月和 5 月的尖峰更多对应指数/资金流预期。
+    \item 这也是为什么 2026-06-29 HKEX Tech 100 insight 被归类为 flow/index event。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{稳健性：样本小，所以用 bootstrap 保持克制}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \includegraphics[width=\textwidth]{fig10_block_bootstrap.png}
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \textbf{结果读法}
+      \begin{itemize}
+        \item 实际 peer-adjusted 反应均值约 +18.5\%。
+        \item 反应窗口高于 block-bootstrap 的 95\% null 区间。
+        \item 漂移窗口方向为正，但统计上不应过度声称。
+      \end{itemize}
+      \vspace{0.4em}
+      \begin{block}{诚实边界}
+        论文证明的是诊断性证据，不是大样本因果结论。
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{如何解释 2026-07-02 的下跌}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \textbf{事实}
+      \begin{itemize}
+        \item HKEX Tech 100 insight 发布于 2026-06-29。
+        \item 6 月 30 日智谱收涨约 +7.29\%。
+        \item 7 月 1 日港股休市。
+        \item 7 月 2 日高开后收跌 -16.63\%。
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{解释}
+      \begin{itemize}
+        \item 该事件是指数/生态/资金流叙事，不是新的模型能力突破。
+        \item 7 月 2 日更像高波动状态下的获利了结和利好兑现。
+        \item 因此它不推翻能力定价逻辑，而提醒我们要区分能力事件与资金流事件。
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{结论与答辩口径}
+
+\begin{frame}{最终结论}
+  \begin{block}{论文答案}
+    智谱 AI 的当前价格无法由中位数现金流解释；它反映的是市场把模型能力迭代当成右尾期权来定价。
+  \end{block}
+  \vspace{0.6em}
+  \textbf{三点 takeaway}
+  \begin{itemize}
+    \item \key{估值：} DCF 和可比公司都显示巨大基本面缺口。
+    \item \key{机制：} 能力发布带来显著短窗反应，市场并非完全盲目追逐板块。
+    \item \key{风险：} 如果能力 surprise 变弱，资金流和反身性无法长期支撑估值。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{答辩时可能被问的问题}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \textbf{Q1：DCF 太低，是不是参数太保守？}
+      \begin{itemize}
+        \item 回答：反向 DCF 已经说明，问题不是小幅调参，而是市场价要求极端赢家情景。
+      \end{itemize}
+      \vspace{0.4em}
+      \textbf{Q2：事件研究样本太少怎么办？}
+      \begin{itemize}
+        \item 回答：论文明确定位为诊断性证据，并用 peer-adjusted 和 bootstrap 降低误读。
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{Q3：为什么不是纯泡沫？}
+      \begin{itemize}
+        \item 回答：模型能力事件有可观察价格反应，说明市场在区分质量；但估值仍高度脆弱。
+      \end{itemize}
+      \vspace{0.4em}
+      \textbf{Q4：7 月 2 日为什么跌？}
+      \begin{itemize}
+        \item 回答：HKEX Tech 100 是 6 月 29 日资金流事件，6 月 30 日已上涨；7 月 2 日更像兑现和去风险。
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{结束页}
+  \centering
+  \vspace{1cm}
+  {\Large \textbf{Capability momentum priced as an option}}\par
+  \vspace{0.7cm}
+  {\large 能力迭代动量，被公开市场定价为右尾期权}\par
+  \vspace{1cm}
+  \small
+  Repository: \href{https://github.com/ericxuzhesheng/Zhipu-AI-Valuation}{github.com/ericxuzhesheng/Zhipu-AI-Valuation}
+\end{frame}
+
+\end{document}

@@ -879,7 +879,7 @@ def write_reaction_vs_drift() -> None:
     panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")
     minimax_rows = panel[panel["event_type"] == "capability_peer"].copy()
     large_tech_rows = panel[panel["event_type"] == "large_tech_peer"].copy()
-    fig, ax = plt.subplots(figsize=(8.6, 5.4), dpi=150)
+    fig, ax = plt.subplots(figsize=(9.4, 5.6), dpi=150)
     ax.axhline(0, color=C_GRAY, linewidth=1)
     ax.axvline(0, color=C_GRAY, linewidth=1)
     for name, rx, dy in glm:
@@ -896,9 +896,11 @@ def write_reaction_vs_drift() -> None:
                     xytext=(8, 4), fontsize=8.5, color=C_BLUE)
     label_offsets = {
         "ERNIE 5.0": (7, -16, "left"),
-        "Qwen3.5": (-64, -10, "right"),
+        "ERNIE 5.1": (7, 4, "left"),
+        "Qwen3.5": (-72, -18, "right"),
         "Qwen3.6-35B-A3B": (7, -4, "left"),
-        "HY-Embodied-0.5": (7, -15, "left"),
+        "Qwen3.7": (-74, -2, "right"),
+        "Hy3 preview": (-6, 8, "right"),
     }
     for row in large_tech_rows.itertuples(index=False):
         label = f"{row.company} {row.event}"

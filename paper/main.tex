@@ -405,19 +405,20 @@ GLM-5.2 & 2026-06-15 & $+30.8$ & $+28.2$ & strong under-reaction \\
 \midrule
 \multicolumn{5}{l}{\emph{Large-tech AI comparators}}\\
 Baidu ERNIE 5.0 & 2026-02-04 & $-1.2$ & $-9.2$ & muted / de-rate \\
+Baidu ERNIE 5.1 & 2026-04-29 & $-5.6$ & $+9.5$ & delayed reaction \\
 Alibaba Qwen3.5 & 2026-02-16 & $-4.5$ & $-10.9$ & de-rate \\
 Alibaba Qwen3.6 & 2026-04-15 & $+10.2$ & $+2.1$ & modest under-reaction \\
-Tencent HY-Embodied & 2026-04-08 & $+4.0$ & $-0.3$ & neutral \\
+Alibaba Qwen3.7 & 2026-05-11 & $-4.5$ & $-5.9$ & de-rate \\
+Tencent Hy3 preview & 2026-04-24 & $-3.9$ & $-5.3$ & de-rate \\
 \midrule
 \textbf{Average (4 GLM)} & & $\mathbf{+18.7}$ & $\mathbf{+4.8}$ & \\
 \bottomrule
 \end{tabular}
 
 {\footnotesize Mean-adjusted abnormal return: $AR_t=R_t-\bar{R}_{[-20,-6]}$, where
-$\bar{R}_{[-20,-6]}$ is the average raw return over event days $-20$ through $-6$. GLM-5.2's
-$[+2,+10]$ window remains complete as of 2026-07-03 with all nine trading days. Large-tech comparator
-dates use public model-card, technical-report, or launch-report timestamps for ERNIE, Qwen, and Hunyuan
-releases \citep{ernie50,qwen35,qwen36,hyembodied}.}
+$\bar{R}_{[-20,-6]}$ is the average raw return over event days $-20$ through $-6$. Large-tech comparator
+dates use public model-card, technical-report, launch-report, or user-provided release-table timestamps
+for ERNIE, Qwen, and Hunyuan releases \citep{ernie50,ernie51,qwen35,qwen36}.}
 \end{table}
 
 \begin{figure}[H]
@@ -696,6 +697,10 @@ MiniMax AI. (2026). \emph{MiniMax M3 model card and MiniMax Sparse Attention tec
 Baidu ERNIE Team. (2026). \emph{ERNIE 5.0 technical report} (arXiv:2602.04705). arXiv.
 \url{https://arxiv.org/abs/2602.04705}
 
+\bibitem{ernie51}
+Baidu ERNIE Team. (2026). \emph{ERNIE Bot release timeline: ERNIE 5.1}. Baidu ERNIE / public release index.
+\url{https://ernie.baidu.com/}
+
 \bibitem{qwen35}
 The Economic Times. (2026). \emph{Alibaba introduces advanced AI model Qwen 3.5} [16~February~2026].
 \url{https://economictimes.indiatimes.com/tech/artificial-intelligence/alibaba-introduces-advanced-ai-model-qwen-3-5/articleshow/119416845.cms}
@@ -703,10 +708,6 @@ The Economic Times. (2026). \emph{Alibaba introduces advanced AI model Qwen 3.5}
 \bibitem{qwen36}
 Qwen Team. (2026). \emph{Qwen3.6-35B-A3B model card}. Hugging Face.
 \url{https://huggingface.co/Qwen/Qwen3.6-35B-A3B}
-
-\bibitem{hyembodied}
-Tencent Hunyuan Team. (2026). \emph{HY-Embodied-0.5: Towards vision-language-action foundation models for
-real-world embodied agents} (arXiv:2604.07430). arXiv. \url{https://arxiv.org/abs/2604.07430}
 
 \bibitem{prospectus20}
 SenseTime Group Inc. (2021). \emph{Global offering prospectus (Stock code 20)}. HKEXnews.

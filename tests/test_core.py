@@ -16,10 +16,10 @@ import rebuild_outputs
 class EventPanelTests(unittest.TestCase):
     def test_event_catalog_input_drives_panel(self) -> None:
         events = event_panel.load_panel_events()
-        self.assertEqual(len(events), 30)
+        self.assertEqual(len(events), 32)
         panel = event_panel.event_panel_rows(events)
-        self.assertEqual(len(panel), 30)
-        self.assertEqual(int(panel["included"].sum()), 14)
+        self.assertEqual(len(panel), 32)
+        self.assertEqual(int(panel["included"].sum()), 16)
         zcode = panel.loc[panel["event"] == "ZCode IDE"].iloc[0]
         self.assertFalse(bool(zcode["included"]))
         self.assertIn("insufficient post-event window", zcode["exclusion_reason"])
@@ -46,13 +46,13 @@ class EventPanelTests(unittest.TestCase):
         included = panel[panel["included"] == True]
         summary = event_panel.summarize_event_panel(included)
         total = summary.loc[summary["event_type"] == "ALL_INCLUDED"].iloc[0]
-        self.assertEqual(int(total["n_events"]), 14)
-        self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 4.84)
-        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), 0.37)
+        self.assertEqual(int(total["n_events"]), 16)
+        self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 3.11)
+        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), 0.24)
         large_tech = summary.loc[summary["event_type"] == "large_tech_peer"].iloc[0]
-        self.assertEqual(int(large_tech["n_events"]), 4)
-        self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), 2.14)
-        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -4.57)
+        self.assertEqual(int(large_tech["n_events"]), 6)
+        self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), -1.57)
+        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -3.26)
 
 
 class ValuationTests(unittest.TestCase):

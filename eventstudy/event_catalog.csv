@@ -3,8 +3,18 @@ Zhipu,02513.HK,GLM-5,2026-02-11,capability,official model release,True,,22.33,22
 Zhipu,02513.HK,GLM-5-Turbo,2026-03-16,capability,official model release,True,,-21.53,7.7,-19.32,14.61,19.2,14.15,5.0,2.0,9.0,True
 Zhipu,02513.HK,GLM-5.1,2026-04-08,capability,official model release,True,,7.38,13.83,-14.21,13.4,12.88,11.49,5.0,2.0,9.0,True
 Zhipu,02513.HK,GLM-5.2,2026-06-15,capability,official model release,True,,-23.24,30.83,28.16,28.66,36.75,32.82,5.0,2.0,9.0,True
+Zhipu,02513.HK,GLM-Image,2026-01-14,candidate_capability,official model timeline,False,no pre-event estimation window after IPO,,,,,,,,,,
+Zhipu,02513.HK,GLM-4.7-Flash,2026-01-19,candidate_capability,official model timeline,False,no pre-event estimation window after IPO,,,,,,,,,,
+Zhipu,02513.HK,GLM-OCR,2026-02-03,candidate_capability,official model timeline,False,no pre-event estimation window after IPO,,,,,,,,,,
+Zhipu,02513.HK,GLM-5V-Turbo,2026-04-02,candidate_capability,official multimodal model release,False,excluded from core CAR because the drift window overlaps GLM-5.1 and the release is a multimodal branch,,,,,,,,,,
 Zhipu,02513.HK,ZCode IDE,2026-07-02,capability,official product release,False,insufficient post-event window after 2026-07-01 release,,,,,,,,,,
+MiniMax,00100.HK,M2.5 series,,candidate_capability,candidate model release; month-level date only,False,month-only event date in source screenshot; not included until official day-level source is pinned,,,,,,,,,,
+MiniMax,00100.HK,Speech-2.8,2026-01-23,candidate_vertical,official model timeline,False,vertical speech model outside text-agent capability peer set,,,,,,,,,,
+MiniMax,00100.HK,Music-2.5,2026-01-16,candidate_vertical,official model timeline,False,vertical music model outside text-agent capability peer set,,,,,,,,,,
+MiniMax,00100.HK,Music2.5+,,candidate_vertical,official model timeline; month-level date only,False,month-only event date and vertical music model outside text-agent capability peer set,,,,,,,,,,
+MiniMax,00100.HK,Music-2.6,,candidate_vertical,official model timeline; month-level date only,False,month-only event date and vertical music model outside text-agent capability peer set,,,,,,,,,,
 MiniMax,00100.HK,M2.7,2026-03-18,capability_peer,official model release,True,,-44.71,-5.52,-49.08,-2.27,-37.71,19.85,5.0,2.0,9.0,True
+MiniMax,00100.HK,M3,2026-06-01,capability_peer,official model release; sparse attention; 1M context; native multimodality,True,,26.2,-21.09,-40.78,-9.66,-51.83,-15.71,5.0,2.0,9.0,True
 Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,True,,57.56,16.11,-20.8,18.79,-2.0,42.72,5.0,2.0,9.0,True
 Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,True,,-8.2,31.81,45.4,9.31,43.85,36.9,5.0,2.0,9.0,True
 Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,True,,-34.46,-16.68,30.95,17.06,47.28,-9.05,5.0,2.0,9.0,True

@@ -3,8 +3,18 @@ Zhipu,02513.HK,GLM-5,2026-02-11,capability,official model release,Zhipu_Knowledg
 Zhipu,02513.HK,GLM-5-Turbo,2026-03-16,capability,official model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,GLM-5.1,2026-04-08,capability,official model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,GLM-5.2,2026-06-15,capability,official model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,GLM-Image,2026-01-14,candidate_capability,official model timeline,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,no pre-event estimation window after IPO
+Zhipu,02513.HK,GLM-4.7-Flash,2026-01-19,candidate_capability,official model timeline,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,no pre-event estimation window after IPO
+Zhipu,02513.HK,GLM-OCR,2026-02-03,candidate_capability,official model timeline,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,no pre-event estimation window after IPO
+Zhipu,02513.HK,GLM-5V-Turbo,2026-04-02,candidate_capability,official multimodal model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,excluded from core CAR because the drift window overlaps GLM-5.1 and the release is a multimodal branch
 Zhipu,02513.HK,ZCode IDE,2026-07-02,capability,official product release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,insufficient post-event window after 2026-07-01 release
+MiniMax,00100.HK,M2.5 series,,candidate_capability,candidate model release; month-level date only,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,month-only event date in source screenshot; not included until official day-level source is pinned
+MiniMax,00100.HK,Speech-2.8,2026-01-23,candidate_vertical,official model timeline,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,vertical speech model outside text-agent capability peer set
+MiniMax,00100.HK,Music-2.5,2026-01-16,candidate_vertical,official model timeline,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,vertical music model outside text-agent capability peer set
+MiniMax,00100.HK,Music2.5+,,candidate_vertical,official model timeline; month-level date only,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,month-only event date and vertical music model outside text-agent capability peer set
+MiniMax,00100.HK,Music-2.6,,candidate_vertical,official model timeline; month-level date only,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,month-only event date and vertical music model outside text-agent capability peer set
 MiniMax,00100.HK,M2.7,2026-03-18,capability_peer,official model release,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+MiniMax,00100.HK,M3,2026-06-01,capability_peer,official model release; sparse attention; 1M context; native multimodality,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,

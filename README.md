@@ -80,9 +80,10 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 | GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | 过度反应 |
 | GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | 强反应不足 |
 | *MiniMax M2.7* | 2026-03-18 | −5.5% | −49.1% | 哑火/去估值 |
+| *MiniMax M3* | 2026-06-01 | −21.1% | −40.8% | 催化失败/去估值 |
 | **均值(4)** | | **+18.7%** | **+4.8%** | |
 
-均值调整口径：`AR_t = R_t - average(R[-20,-6])`。截至 2026-07-03，GLM-5.2 的 [+2,+10] 窗口仍已覆盖完整 9 个交易日。
+均值调整口径：`AR_t = R_t - average(R[-20,-6])`。截至 2026-07-03，GLM-5.2 的 [+2,+10] 窗口仍已覆盖完整 9 个交易日。截图中的其他 Zhipu / MiniMax 模型已进入扩展事件目录，但因缺少估计窗口、日期仅到月份、垂类属性或窗口重叠，不进入主 CAR 表。
 
 **要点：** ① 事件日期独立取自官方发布公告（不靠股价倒推），图 2 仅作描述性交叉验证；② 反应一致为正（均值 +18.7%），漂移分化；③ **同业调整后漂移全部转正**（+4.8% → +20.5%），GLM-5.1 的"过度反应"翻为延续，说明其反转主要是板块效应；④ 2/20、5/13 两个尖峰为**非能力的指数/资金流事件**（恒生科技纳入、港股通预期）。结论定位为**初步诊断性证据**，4 个事件足以构成有趣的本科案例，但不足以确立普遍异象。
 
@@ -203,9 +204,10 @@ excluded from the multiple comparison** (different business model).
 | GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | over-reaction |
 | GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | strong under-reaction |
 | *MiniMax M2.7* | 2026-03-18 | −5.5% | −49.1% | muted / de-rate |
+| *MiniMax M3* | 2026-06-01 | −21.1% | −40.8% | failed catalyst / de-rate |
 | **Average (4)** | | **+18.7%** | **+4.8%** | |
 
-Mean-adjusted definition: `AR_t = R_t - average(R[-20,-6])`. As of 2026-07-03, GLM-5.2's [+2,+10] window remains complete with all 9 trading days.
+Mean-adjusted definition: `AR_t = R_t - average(R[-20,-6])`. As of 2026-07-03, GLM-5.2's [+2,+10] window remains complete with all 9 trading days. Other Zhipu / MiniMax models in the screenshots are retained in the expanded event catalogue, but excluded from the main CAR table when they lack a clean estimation window, have only month-level dating, are vertical audio/music models, or overlap another main event window.
 
 Independently-dated events; reaction is robust (mean-adj +18.7% vs peer-adj +18.5%),
 and drift **strengthens to +20.5%** once the falling sector is removed (PCAD survives, GLM-5.1's reversal flips

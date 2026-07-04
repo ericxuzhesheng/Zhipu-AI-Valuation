@@ -877,8 +877,7 @@ def write_reaction_vs_drift() -> None:
         for row in glm_rows.itertuples(index=False)
     ]
     panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")
-    minimax_row = panel[panel["event_type"] == "capability_peer"].iloc[0]
-    minimax = ("MiniMax M2.7", float(minimax_row["react_mean"]), float(minimax_row["drift_mean"]))
+    minimax_rows = panel[panel["event_type"] == "capability_peer"].copy()
     fig, ax = plt.subplots(figsize=(7.4, 5.0), dpi=150)
     ax.axhline(0, color=C_GRAY, linewidth=1)
     ax.axvline(0, color=C_GRAY, linewidth=1)
@@ -886,10 +885,14 @@ def write_reaction_vs_drift() -> None:
         ax.scatter([rx], [dy], s=62, color=C_RED, zorder=3)
         ax.annotate(name, (rx, dy), textcoords="offset points", xytext=(8, 4),
                     fontsize=8.5, color=C_RED)
-    ax.scatter([minimax[1]], [minimax[2]], s=62, facecolor=C_BLUE, edgecolor=C_INK,
-               linewidth=1.0, zorder=3)
-    ax.annotate(minimax[0], (minimax[1], minimax[2]), textcoords="offset points",
-                xytext=(8, 4), fontsize=8.5, color=C_BLUE)
+    for row in minimax_rows.itertuples(index=False):
+        label = f"MiniMax {row.event}"
+        rx = float(row.react_mean)
+        dy = float(row.drift_mean)
+        ax.scatter([rx], [dy], s=62, facecolor=C_BLUE, edgecolor=C_INK,
+                   linewidth=1.0, zorder=3)
+        ax.annotate(label, (rx, dy), textcoords="offset points",
+                    xytext=(8, 4), fontsize=8.5, color=C_BLUE)
     ax.text(0.02, 0.97, "UNDER-reaction\n(drift continues)", transform=ax.transAxes,
             va="top", ha="left", fontsize=8, color=C_GREEN)
     ax.text(0.02, 0.52, "OVER-reaction\n(reversal)", transform=ax.transAxes,

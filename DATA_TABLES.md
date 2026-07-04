@@ -73,14 +73,24 @@ Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity)
 | GLM-5.1 | 2026-04-08 | +13.8% | -14.2% | over-reaction (flips +12.9% peer-adj) |
 | GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | strong under-reaction |
 | MiniMax M2.7 | 2026-03-18 | -5.5% | -49.1% | muted / de-rate |
+| MiniMax M3 | 2026-06-01 | -21.1% | -40.8% | failed catalyst / de-rate |
 | **Avg (4 GLM)** | | **+18.7%** | **+4.8%** | peer-adj: +18.5% / +20.5% |
 
 Mean-adjusted abnormal return: `AR_t = R_t - average(R[-20,-6])`, where the average is the raw return over event days -20 through -6.
 GLM-5.2's [+2,+10] window remains complete through all 9 trading days as of 2026-07-03. Non-capability spikes:
 02-20 (+43%), 05-13 (+37%) = Hang Seng Tech inclusion / Stock Connect flow events.
 
+### Screened but not in core CAR
+
+| Event group | Treatment | Reason |
+|---|---|---|
+| Zhipu GLM-Image / GLM-4.7-Flash / GLM-OCR | catalog only | no clean pre-event estimation window after IPO |
+| Zhipu GLM-5V-Turbo | catalog only | multimodal branch; drift window overlaps GLM-5.1 |
+| MiniMax M2.5 series | catalog only | month-level date in source screenshot; wait for day-level source |
+| MiniMax Speech / Music releases | catalog only | vertical audio/music models, not text-agent peer events |
+
 ## Remaining / refresh items
-1. Expand `data/event_catalog_input.csv` as Wenge/Moonshot/Kimi obtain dated model events and enough listed-price history; `eventstudy/event_catalog.csv` and `eventstudy/event_panel.csv` are generated from that input, with the current computable CAR panel at n=9.
+1. Expand `data/event_catalog_input.csv` as Wenge/Moonshot/Kimi obtain dated model events and enough listed-price history; `eventstudy/event_catalog.csv` and `eventstudy/event_panel.csv` are generated from that input, with the current computable CAR panel at n=10.
 
 ---
 

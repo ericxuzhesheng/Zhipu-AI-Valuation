@@ -45,8 +45,8 @@ Average CAR across the four GLM events (mean-adjusted):
   complete nine-trading-day `[+2,+10]` window. A genuine SOTA jump (MIT open weights, 1M context) kept re-rating.
 - **GLM-5.1 (04-08) - over-reaction / reversal.** +13.8% reaction then **-14.2% drift**: an *incremental*
   upgrade was "buy the rumor, sell the news"; see the peer-adjusted result in Section 5.
-- **MiniMax M2.7 (03-18) - the cross-section test.** Negligible -5.5% reaction, -49.1% drift; MiniMax de-rated ~60%
-  from its high while Zhipu kept climbing (`fig1`). Same sector, opposite paths: **capability surprise, not
+- **MiniMax M2.7 / M3 - the cross-section test.** M2.7 had a -5.5% reaction and -49.1% drift; M3 had a
+  -21.1% reaction and -40.8% drift. MiniMax de-rated while Zhipu kept climbing (`fig1`). Same sector, opposite paths: **capability surprise, not
   sector beta, drives the cross-section.**
 
 ![Price paths](figures/fig1_price_paths.png)
@@ -63,11 +63,13 @@ the event study tells you *how price gets there*.
   to +20.5%** once the falling sector is removed. GLM-5.1's reversal flips to continuation (-14.2% to +12.9%).
   The under-reaction/PCAD pattern is reinforced, not weakened.
 - **Expanded event panel framework:** `data/event_catalog_input.csv` tracks Zhipu capability events,
-  Zhipu index/flow catalysts, MiniMax M2.7, listing events, and candidate Wenge/Moonshot/Kimi events. Only
-  events with enough local post-listing price history enter the generated `eventstudy/event_panel.csv`; excluded
-  candidates carry an explicit reason instead of being forced into the statistics.
+  Zhipu screened-but-excluded model releases, Zhipu index/flow catalysts, MiniMax M2.7/M3, MiniMax vertical
+  audio/music releases, listing events, and candidate Wenge/Moonshot/Kimi events. Only events with day-level
+  dating, enough local post-listing price history and a clean event window enter the generated
+  `eventstudy/event_panel.csv`; excluded candidates carry an explicit reason instead of being forced into the
+  statistics.
 - **Preliminary, diagnostic** evidence consistent with PCAD, *not* a proven anomaly: n = 4 single-firm events
-  (+1 peer) over ~5 months, and windows can overlap a fast release cadence or competing-lab news.
+  (+2 peer) over ~5 months, and windows can overlap a fast release cadence or competing-lab news.
   No statistical significance is claimed.
 - Extensions: multi-lab panel (MiniMax, Wenge releases), NLP-scored surprise magnitude.
 

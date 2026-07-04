@@ -170,7 +170,8 @@ dominance through \emph{cost disruption}: a mixture-of-experts GLM-5 line (GLM-4
 32B active, 200K context) that topped coding benchmarks---GLM-5.1 ranked \#1 on SWE-Bench Pro at 58.4\%, and
 GLM-5.2 (June~2026) shipped with MIT open weights and a one-million-token context---priced below closed
 competitors, now paired with nascent pricing power (8--17\% API price rises with each GLM-5.x release)
-\citep{glm_modelcard}. This cadence
+\citep{glm_modelcard}. Branch releases such as GLM-5V-Turbo are catalogued but excluded when they overlap
+a main GLM window \citep{glm5v}. This cadence
 defines the event taxonomy of Section~\ref{sec:event} (Figure~\ref{fig:timeline}). The main weakness is
 self-inflicted: the same cadence commoditises its own product, while cloud-margin pressure and compute
 dependence cap monetisation.
@@ -349,7 +350,7 @@ any systematic \emph{post-capability-announcement drift} (PCAD)---the analogue o
 post-earnings-announcement drift\citep{ball1968,bernard1989}---would indicate inefficiency.
 
 \textbf{Method.} Event dates are identified \emph{independently} from official model-release announcements and
-technical documentation \citep{glm_modelcard}, not from the price series. On daily prices \citep{tushare2026}
+technical documentation \citep{glm_modelcard,minimax_m3}, not from the price series. On daily prices \citep{tushare2026}
 we compute mean-adjusted abnormal returns and CARs over three windows---leakage $[-5,-1]$, reaction $[0,+1]$,
 and drift $[+2,+10]$---following standard event-study practice \citep{mackinlay1997} and the surprise-event
 design of Guosen Securities\citep{guosen2020}. For each event the expected daily return is Zhipu's mean return over the
@@ -380,8 +381,8 @@ dates are taken from official announcements and index/Connect schedules, not fro
 \textbf{Results.} Averaged across the four GLM events, the reaction window is $+18.7\%$ (the market prices
 capability, fast) and the drift averages only $+4.8\%$ but is strongly \emph{bimodal} (Table~\ref{tab:car}).
 The drift sign depends on the \emph{type} of release: a genuine SOTA leap (GLM-5.2) continues upward, whereas
-incremental upgrades (GLM-5-Turbo, GLM-5.1) reverse. MiniMax's M2.7 drew a negligible reaction and a sharp
-subsequent de-rating ($-49\%$, partly the unwinding of its own debut bubble), consistent with
+incremental upgrades (GLM-5-Turbo, GLM-5.1) reverse. MiniMax's M2.7 and M3 both drew negative reaction/drift
+profiles, consistent with
 \emph{capability surprise, not sector membership, driving the cross-section}
 (Figures~\ref{fig:car}--\ref{fig:scatter}).
 
@@ -399,6 +400,7 @@ GLM-5.1 & 2026-04-08 & $+13.8$ & $-14.2$ & over-reaction \\
 GLM-5.2 & 2026-06-15 & $+30.8$ & $+28.2$ & strong under-reaction \\
 \midrule
 \textit{MiniMax M2.7} & 2026-03-18 & $-5.5$ & $-49.1$ & de-rate \\
+\textit{MiniMax M3} & 2026-06-01 & $-21.1$ & $-40.8$ & failed catalyst \\
 \midrule
 \textbf{Average (4 GLM)} & & $\mathbf{+18.7}$ & $\mathbf{+4.8}$ & \\
 \bottomrule
@@ -439,10 +441,10 @@ Because Zhipu and MiniMax share sector and macro shocks, we re-run the study wit
 sector is removed, all four events drift positively, and GLM-5.1's apparent reversal flips to continuation
 ($-14.2\%\!\to\!+12.9\%$). The under-reaction pattern is reinforced, not weakened, by peer adjustment.
 
-We also maintain an expanded event catalogue as a guardrail against cherry-picking: four Zhipu capability
-events, one MiniMax peer event, four Zhipu index/flow events, three listing events and two candidate
-Wenge/Moonshot entries. Only the nine events with enough local price history enter the expanded CAR panel;
-excluded entries carry an explicit reason. In that panel, capability reactions remain positive, while flow
+We also maintain an expanded event catalogue as a guardrail against cherry-picking: it records screened
+Zhipu releases, MiniMax peer and vertical releases, flow catalysts, listings, and Wenge or Moonshot candidates.
+Only ten day-level, price-covered, clean-window events enter the CAR panel; excluded entries carry explicit
+reasons. In that panel, capability reactions remain positive, while flow
 events show weaker immediate reaction but strong subsequent drift, confirming why the paper separates
 capability from liquidity catalysts rather than pooling them mechanically.
 
@@ -668,9 +670,18 @@ Guosen Securities Economic Research Institute. (2020). \emph{A complete guide to
 [Special report on financial engineering]. Guosen Securities.
 
 \bibitem{glm_modelcard}
-Z.ai. (2026). \emph{GLM-4.6 and GLM-5 series model cards and technical reports} [Architecture, context
-length, and benchmark results]. Official repositories and model cards.
-\url{https://github.com/zai-org/GLM-5}; \url{https://huggingface.co/zai-org/GLM-4.6}
+Z.ai. (2026). \emph{GLM-5 and GLM-5.1 model cards and technical reports} [Architecture, context length,
+and benchmark results]. Hugging Face model cards and official technical blog.
+\url{https://huggingface.co/zai-org/GLM-5}; \url{https://huggingface.co/zai-org/GLM-5.1}
+
+\bibitem{glm5v}
+GLM-V Team. (2026). \emph{GLM-5V-Turbo: Toward a native foundation model for multimodal agents}
+(arXiv:2604.26752). arXiv. \url{https://arxiv.org/abs/2604.26752}
+
+\bibitem{minimax_m3}
+MiniMax AI. (2026). \emph{MiniMax M3 model card and MiniMax Sparse Attention technical report}
+[Model card and technical report]. Hugging Face and arXiv.
+\url{https://huggingface.co/MiniMaxAI/MiniMax-M3}; \url{https://arxiv.org/abs/2606.13392}
 
 \bibitem{prospectus20}
 SenseTime Group Inc. (2021). \emph{Global offering prospectus (Stock code 20)}. HKEXnews.

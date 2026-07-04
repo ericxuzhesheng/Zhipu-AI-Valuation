@@ -899,8 +899,10 @@ def write_reaction_vs_drift() -> None:
         "ERNIE 5.1": (7, 4, "left"),
         "Qwen3.5": (-72, -18, "right"),
         "Qwen3.6-35B-A3B": (7, -4, "left"),
-        "Qwen3.7": (-74, -2, "right"),
-        "Hy3 preview": (-6, 8, "right"),
+        "Qwen3.7-Max": (-6, -15, "right"),
+        "Qwen3.7-Plus": (-8, -13, "right"),
+        "Hunyuan 3.0 preview": (-6, 8, "right"),
+        "LongCat-2.0": (7, 4, "left"),
     }
     for row in large_tech_rows.itertuples(index=False):
         label = f"{row.company} {row.event}"
@@ -917,7 +919,7 @@ def write_reaction_vs_drift() -> None:
             va="top", ha="left", fontsize=8, color=C_RED)
     ax.set_xlabel("Immediate reaction CAR[0,+1] (%)")
     ax.set_ylabel("Post-event drift CAR[+2,+10] (%)")
-    ax.set_title("Reaction vs. Drift (mean-adjusted; full +10 windows)")
+    ax.set_title("Reaction vs. Drift (mean-adjusted; +10 where available)")
     ax.grid(alpha=0.2)
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()

@@ -350,7 +350,8 @@ any systematic \emph{post-capability-announcement drift} (PCAD)---the analogue o
 post-earnings-announcement drift\citep{ball1968,bernard1989}---would indicate inefficiency.
 
 \textbf{Method.} Event dates are identified \emph{independently} from official model-release announcements and
-technical documentation \citep{glm_modelcard,minimax_m3}, not from the price series. On daily prices \citep{tushare2026}
+technical documentation \citep{glm_modelcard,minimax_m3}, not from the price series. On daily prices
+\citep{tushare2026,yfinance2026}
 we compute mean-adjusted abnormal returns and CARs over three windows---leakage $[-5,-1]$, reaction $[0,+1]$,
 and drift $[+2,+10]$---following standard event-study practice \citep{mackinlay1997} and the surprise-event
 design of Guosen Securities\citep{guosen2020}. For each event the expected daily return is Zhipu's mean return over the
@@ -390,7 +391,9 @@ profiles, consistent with
 \centering
 \caption{Cumulative abnormal returns around capability events (mean-adjusted, \%).}
 \label{tab:car}
-\small
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{0.92}
 \begin{tabular}{lcccc}
 \toprule
 Event & Day 0 & Reaction $[0,+1]$ & Drift $[+2,+10]$ & Reading \\
@@ -412,6 +415,12 @@ Alibaba Qwen3.7 & 2026-05-19 & $+0.3$ & $-2.9$ & muted / reversal \\
 Alibaba Qwen3.7-Plus & 2026-06-01 & $+8.6$ & $-15.9$ & reversal \\
 Tencent Hunyuan 3.0 preview & 2026-04-22 & $-4.2$ & $-1.3$ & de-rate \\
 Meituan LongCat-2.0 & 2026-06-30 & $+4.8$ & $+1.1$ & partial window \\
+Google Gemini 3.1 Pro & 2026-02-19 & $+4.0$ & $-4.0$ & muted / reversal \\
+Google Gemini 3.5/Omni & 2026-05-19 & $-4.0$ & $-16.7$ & de-rate \\
+Meta Muse Spark & 2026-04-08 & $+11.5$ & $+18.2$ & under-reaction \\
+Microsoft/OpenAI GPT-5.5 proxy & 2026-04-23 & $-3.2$ & $-6.9$ & de-rate \\
+Tesla/xAI Grok 4.3 Beta proxy & 2026-04-17 & $+2.6$ & $+7.0$ & delayed reaction \\
+Tesla/xAI Grok 4.5 beta proxy & 2026-06-29 & $+11.8$ & $-5.2$ & partial reversal \\
 \midrule
 \textbf{Average (4 GLM)} & & $\mathbf{+18.7}$ & $\mathbf{+4.8}$ & \\
 \bottomrule
@@ -419,8 +428,12 @@ Meituan LongCat-2.0 & 2026-06-30 & $+4.8$ & $+1.1$ & partial window \\
 
 {\footnotesize Mean-adjusted abnormal return: $AR_t=R_t-\bar{R}_{[-20,-6]}$, where
 $\bar{R}_{[-20,-6]}$ is the average raw return over event days $-20$ through $-6$. Large-tech comparator
-dates use public model-card, technical-report, launch-report, or user-provided release-table timestamps
-for ERNIE, Qwen, Hunyuan, and LongCat releases \citep{ernie50,ernie51,qwen35,qwen36,meituanlongcat}.}
+dates use public model-card, technical-report, launch-report, news, or user-provided timestamps
+for ERNIE, Qwen, Hunyuan, LongCat, Gemini, Muse, OpenAI, and Grok releases
+\citep{ernie50,ernie51,qwen35,qwen36,meituanlongcat,geminiio2026,metamuse,gpt55,grokchatbot,grok45}. OpenAI
+and xAI rows use MSFT and TSLA as listed-equity proxies, respectively.}
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
 \end{table}
 
 \begin{figure}[H]
@@ -433,7 +446,7 @@ The average is plotted where all four GLM events have data through the full $[+2
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.72\textwidth]{fig4_reaction_vs_drift.png}
+\includegraphics[width=0.86\textwidth]{fig4_reaction_vs_drift.png}
 \caption{Reaction versus drift. SOTA leaps sit in the under-reaction quadrant; incremental upgrades in the
 over-reaction quadrant. Triangle markers show large-tech AI comparators.}
 \label{fig:scatter}
@@ -650,6 +663,10 @@ All figures assume $g=4\%$, sales-to-capital~1.8, 15\% tax, and the base-case gr
 Tushare. (2026). \emph{Tushare Pro financial data API: Hong Kong daily quotations} (hk\_daily) [Data set].
 \url{https://tushare.pro}
 
+\bibitem{yfinance2026}
+yfinance. (2026). \emph{Yahoo Finance market data downloader for Python} [Data set]. GitHub.
+\url{https://github.com/ranaroussi/yfinance}
+
 \bibitem{prospectus2513}
 Knowledge Atlas Technology Joint Stock Company Limited (Zhipu AI). (2025). \emph{Global offering prospectus
 (Stock code 2513)} [Chapter~18C listing document]. HKEXnews.
@@ -714,6 +731,26 @@ Qwen Team. (2026). \emph{Qwen3.6-35B-A3B model card}. Hugging Face.
 \bibitem{meituanlongcat}
 Omni / AFP. (2026). \emph{Meituan launches LongCat-2.0, an AI model trained on domestic chips}
 [30~June~2026]. \url{https://omni.se/kinesisk-ai-modell-sags-vara-tranad-pa-inhemska-chip/a/rrmjBR}
+
+\bibitem{geminiio2026}
+The Verge. (2026). \emph{The 13 biggest announcements at Google I/O 2026} [19~May~2026].
+\url{https://www.theverge.com/google-io/2026/5/19/24231950/google-io-2026-biggest-announcements-gemini-android}
+
+\bibitem{metamuse}
+Meta Superintelligence Labs. (2026). \emph{Muse Spark Safety \& Preparedness Report} (arXiv:2606.12429).
+\url{https://arxiv.org/abs/2606.12429}
+
+\bibitem{gpt55}
+OpenAI. (2026). \emph{Introducing GPT-5.5} [23~April~2026].
+\url{https://openai.com/index/introducing-gpt-5-5/}
+
+\bibitem{grokchatbot}
+Grok. (2026). \emph{Grok chatbot release record: Grok 4.3 Beta} [17~April~2026].
+\url{https://grok.com/}
+
+\bibitem{grok45}
+The Economic Times. (2026). \emph{Elon Musk says Grok 4.5 is now in private beta}
+[June~2026]. \href{https://m.economictimes.com/tech/technology/elon-musk-says-grok-4-5-is-now-in-private-beta-claims-performance-near-or-above-anthropics-opus/articleshow/132051646.cms}{Economic Times article}.
 
 \bibitem{prospectus20}
 SenseTime Group Inc. (2021). \emph{Global offering prospectus (Stock code 20)}. HKEXnews.

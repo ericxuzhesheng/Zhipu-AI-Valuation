@@ -16,10 +16,10 @@ import rebuild_outputs
 class EventPanelTests(unittest.TestCase):
     def test_event_catalog_input_drives_panel(self) -> None:
         events = event_panel.load_panel_events()
-        self.assertEqual(len(events), 34)
+        self.assertEqual(len(events), 40)
         panel = event_panel.event_panel_rows(events)
-        self.assertEqual(len(panel), 34)
-        self.assertEqual(int(panel["included"].sum()), 18)
+        self.assertEqual(len(panel), 40)
+        self.assertEqual(int(panel["included"].sum()), 24)
         zcode = panel.loc[panel["event"] == "ZCode IDE"].iloc[0]
         self.assertFalse(bool(zcode["included"]))
         self.assertIn("insufficient post-event window", zcode["exclusion_reason"])
@@ -46,14 +46,14 @@ class EventPanelTests(unittest.TestCase):
         included = panel[panel["included"] == True]
         summary = event_panel.summarize_event_panel(included)
         total = summary.loc[summary["event_type"] == "ALL_INCLUDED"].iloc[0]
-        self.assertEqual(int(total["n_events"]), 18)
-        self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 3.76)
-        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), -0.22)
+        self.assertEqual(int(total["n_events"]), 24)
+        self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 3.77)
+        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), -0.48)
         large_tech = summary.loc[summary["event_type"] == "large_tech_peer"].iloc[0]
-        self.assertEqual(int(large_tech["n_events"]), 8)
-        self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), 1.07)
-        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -3.42)
-        self.assertEqual(int(large_tech["full_drift_windows"]), 7)
+        self.assertEqual(int(large_tech["n_events"]), 14)
+        self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), 2.23)
+        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -2.49)
+        self.assertEqual(int(large_tech["full_drift_windows"]), 12)
 
 
 class ValuationTests(unittest.TestCase):

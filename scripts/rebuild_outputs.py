@@ -879,7 +879,7 @@ def write_reaction_vs_drift() -> None:
     panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")
     minimax_rows = panel[panel["event_type"] == "capability_peer"].copy()
     large_tech_rows = panel[panel["event_type"] == "large_tech_peer"].copy()
-    fig, ax = plt.subplots(figsize=(9.4, 5.6), dpi=150)
+    fig, ax = plt.subplots(figsize=(10.6, 6.1), dpi=150)
     ax.axhline(0, color=C_GRAY, linewidth=1)
     ax.axvline(0, color=C_GRAY, linewidth=1)
     for name, rx, dy in glm:
@@ -903,6 +903,12 @@ def write_reaction_vs_drift() -> None:
         "Qwen3.7-Plus": (-22, -12, "right"),
         "Hunyuan 3.0 preview": (-6, 8, "right"),
         "LongCat-2.0": (7, 4, "left"),
+        "Gemini 3.1 Pro": (7, 4, "left"),
+        "Gemini 3.5/Omni": (-8, -14, "right"),
+        "Muse Spark": (7, 6, "left"),
+        "GPT-5.5 proxy": (-7, -13, "right"),
+        "Grok 4.3 Beta proxy": (7, -12, "left"),
+        "Grok 4.5 beta proxy": (7, -12, "left"),
     }
     for row in large_tech_rows.itertuples(index=False):
         label = f"{row.company} {row.event}"
@@ -912,14 +918,14 @@ def write_reaction_vs_drift() -> None:
         ax.scatter([rx], [dy], s=58, marker="^", facecolor=C_TEAL,
                    edgecolor=C_INK, linewidth=0.8, zorder=3)
         ax.annotate(label, (rx, dy), textcoords="offset points",
-                    xytext=(dx, dy_text), ha=ha, fontsize=7.6, color=C_TEAL)
+                    xytext=(dx, dy_text), ha=ha, fontsize=6.9, color=C_TEAL)
     ax.text(0.02, 0.97, "UNDER-reaction\n(drift continues)", transform=ax.transAxes,
             va="top", ha="left", fontsize=8, color=C_GREEN)
     ax.text(0.02, 0.52, "OVER-reaction\n(reversal)", transform=ax.transAxes,
             va="top", ha="left", fontsize=8, color=C_RED)
     ax.set_xlabel("Immediate reaction CAR[0,+1] (%)")
     ax.set_ylabel("Post-event drift CAR[+2,+10] (%)")
-    ax.set_title("Reaction vs. Drift (mean-adjusted; +10 where available)")
+    ax.set_title("Reaction vs. Drift (mean-adjusted; +10 where available; 2026 AI launches)")
     ax.grid(alpha=0.2)
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()

@@ -23,6 +23,12 @@ Alibaba,9988.HK,Qwen3.7,2026-05-19,large_tech_peer,user-provided Qwen release ta
 Alibaba,9988.HK,Qwen3.7-Plus,2026-06-01,large_tech_peer,user-provided Qwen release table; next trading day for 2026-05-31 multimodal Qwen3.7-Plus release,True,,-3.1,8.56,-15.9,19.94,-27.16,1.57,5.0,2.0,9.0,True
 Tencent,0700.HK,Hunyuan 3.0 preview,2026-04-22,large_tech_peer,user-provided model timeline; Hunyuan 3.0 large language model preview,True,,6.42,-4.15,-1.32,-12.69,-0.43,-2.89,5.0,2.0,9.0,True
 Meituan,3690.HK,LongCat-2.0,2026-06-30,large_tech_peer,news report; domestic-chip-trained model; partial drift window,True,,-5.65,4.8,1.12,14.03,-1.16,1.26,5.0,2.0,1.0,False
+Google,GOOGL,Gemini 3.1 Pro,2026-02-19,large_tech_peer,public model release timeline; Gemini 3.1 Pro,True,,-4.55,3.97,-3.96,-38.71,24.03,-0.16,5.0,2.0,9.0,True
+Google,GOOGL,Gemini 3.5/Omni,2026-05-19,large_tech_peer,Google I/O 2026 launch; Gemini 3.5 Flash and Gemini Omni,True,,-2.72,-3.98,-16.72,4.68,-45.02,-2.34,5.0,2.0,9.0,True
+Meta,META,Muse Spark,2026-04-08,large_tech_peer,Meta Superintelligence Labs model release,True,,13.24,11.53,18.17,-9.41,0.41,6.5,5.0,2.0,9.0,True
+Microsoft/OpenAI,MSFT,GPT-5.5 proxy,2026-04-23,large_tech_peer,OpenAI model release; Microsoft listed-equity proxy,True,,1.83,-3.18,-6.86,2.95,-8.4,-3.97,5.0,2.0,9.0,True
+Tesla/xAI,TSLA,Grok 4.3 Beta proxy,2026-04-17,large_tech_peer,xAI Grok release; Tesla listed-equity proxy,True,,16.2,2.61,7.01,-9.35,7.21,3.01,5.0,2.0,9.0,True
+Tesla/xAI,TSLA,Grok 4.5 beta proxy,2026-06-29,large_tech_peer,xAI private beta reported inside Tesla and SpaceX; Tesla listed-equity proxy; partial drift window,True,,-2.08,11.81,-5.15,7.45,9.15,8.46,5.0,2.0,2.0,False
 Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,True,,57.56,16.11,-20.8,18.79,-2.0,42.72,5.0,2.0,9.0,True
 Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,True,,-8.2,31.81,45.4,9.31,43.85,36.9,5.0,2.0,9.0,True
 Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,True,,-34.46,-16.68,30.95,17.06,47.28,-9.05,5.0,2.0,9.0,True

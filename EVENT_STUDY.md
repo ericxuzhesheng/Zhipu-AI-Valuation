@@ -1,12 +1,12 @@
 # Capability Surprise, Not Earnings Surprise
 ### An event-driven read of how the market prices an early-commercial-stage AI lab (Zhipu, 2513.HK)
 
-> Data as of **2026-07-03**. A foundation-model lab has **no earnings to be surprised by**. So we replace the
+> Core market data as of **2026-07-10**. A foundation-model lab has **no earnings to be surprised by**. So we replace the
 > classic *earnings* surprise with a **capability surprise** - a model release or benchmark-leaderboard jump - and ask the only question that matters for market efficiency: *does the price react once and stop, or does it
 > keep drifting?* This is the AI analogue of post-earnings-announcement drift (PEAD) to **PCAD**.
 >
 > Method: mean-adjusted abnormal returns (`AR_t = R_t - average(R[-20,-6])`, where the average is the raw return
-> over event days -20 through -6) on Tushare/HKEX prices through 2026-07-03; three windows:
+> over event days -20 through -6) on market prices through 2026-07-10; three windows:
 > leakage `[-5,-1]`, reaction `[0,+1]`, drift `[+2,+10]`; robustness via peer-adjustment (benchmark = MiniMax).
 
 ---
@@ -54,7 +54,7 @@ Average CAR across the four GLM events (mean-adjusted):
 ## 4. Verdict
 The market is **neither efficient nor a blind bubble**. It prices capability *immediately and discriminately*
 (separating Zhipu from MiniMax on model quality, not sector) but **mis-times magnitude**: under-reacting to
-true SOTA leaps, over-reacting to incremental ones. The **~15x / ~512x equity-value-to-revenue** re-rating is best read as
+true SOTA leaps, over-reacting to incremental ones. The **~14x / ~469x equity-value-to-revenue** re-rating is best read as
 **capability momentum priced as an option**. The fundamental anchor (DCF + real options) tells you *the level*;
 the event study tells you *how price gets there*.
 
@@ -73,4 +73,4 @@ the event study tells you *how price gets there*.
   No statistical significance is claimed.
 - Extensions: multi-lab panel (MiniMax, Wenge releases), NLP-scored surprise magnitude.
 
-*Inputs: Tushare `hk_daily` through 2026-07-03 to `data/`; CAR tables to `eventstudy/car_robustness.csv`; charts to `figures/`.*
+*Inputs: market prices through 2026-07-10 for the core Zhipu/MiniMax series in `data/`; CAR tables to `eventstudy/car_robustness.csv`; charts to `figures/`.*

@@ -2,5 +2,5 @@ event_type,n_events,mean_reaction_car_pct,median_reaction_car_pct,positive_react
 capability,4,18.71,18.16,4,4.84,5.25,2,4
 capability_peer,2,-13.3,-13.3,0,-44.93,-44.93,0,2
 flow,4,2.73,-0.29,2,23.49,34.67,3,4
-large_tech_peer,14,2.23,1.47,8,-2.49,-3.42,5,12
-ALL_INCLUDED,24,3.77,3.29,14,-0.48,-3.42,10,22
+large_tech_peer,14,2.23,1.47,8,-0.95,-2.1,6,14
+ALL_INCLUDED,24,3.77,3.29,14,0.42,-2.1,11,24

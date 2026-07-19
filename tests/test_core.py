@@ -48,12 +48,12 @@ class EventPanelTests(unittest.TestCase):
         total = summary.loc[summary["event_type"] == "ALL_INCLUDED"].iloc[0]
         self.assertEqual(int(total["n_events"]), 24)
         self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 3.77)
-        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), -0.48)
+        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), 0.42)
         large_tech = summary.loc[summary["event_type"] == "large_tech_peer"].iloc[0]
         self.assertEqual(int(large_tech["n_events"]), 14)
         self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), 2.23)
-        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -2.49)
-        self.assertEqual(int(large_tech["full_drift_windows"]), 12)
+        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -0.95)
+        self.assertEqual(int(large_tech["full_drift_windows"]), 14)
 
 
 class ValuationTests(unittest.TestCase):

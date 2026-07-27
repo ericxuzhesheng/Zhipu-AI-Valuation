@@ -35,9 +35,11 @@ TODAY = pd.Timestamp.now().strftime("%Y%m%d")
 for csv_name, ts_code, market in STOCKS:
     csv_path = os.path.join(DATA_DIR, csv_name)
     
-    # 读取已有数据确定起始日期
+    # 读取已有数据确定起始日期并统一类型
     existing = pd.read_csv(csv_path)
-    last_date = str(existing["trade_date"].max())
+    # 将 trade_date 转为字符串，避免类型混合导致比较错误
+    existing["trade_date"] = existing["trade_date"].astype(str)
+    last_date = existing["trade_date"].max()
     # 从最后一天的下一天开始取
     start_date = (pd.Timestamp(last_date) + pd.Timedelta(days=1)).strftime("%Y%m%d")
     
@@ -60,7 +62,13 @@ for csv_name, ts_code, market in STOCKS:
         # Tushare 返回倒序，需排序
         new_data = new_data.sort_values("trade_date").reset_index(drop=True)
         
-        # 确保列与已有数据一致
+        # 确保 trade_date 为字符串，保持与 existing 一致
+        new_data["trade_date"] = new_data["trade_date"].astype(str)
+        
+        # 确保列与已有数据一致；若部分列缺失（如 US 数据），使用已有列进行选择
+        missing_cols = set(existing.columns) - set(new_data.columns)
+        for col in missing_cols:
+            new_data[col] = pd.NA
         new_data = new_data[existing.columns]
         
         # 追加

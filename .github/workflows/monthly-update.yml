@@ -37,12 +37,16 @@ jobs:
         run: |
           python scripts/rebuild_outputs.py
 
+      - name: Update docs (README, DATA_TABLES, paper tex)
+        run: |
+          python scripts/update_docs.py
+
       - name: Commit and push if changes exist
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add data/ figures/ eventstudy/ model/valuation_model.xlsx
+          git add data/ figures/ eventstudy/ model/valuation_model.xlsx README.md DATA_TABLES.md paper/main.tex
 
           if git diff --staged --quiet; then
             echo "No changes to commit — data already up to date."

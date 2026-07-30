@@ -1,0 +1,53 @@
+name: Monthly Data Update
+
+on:
+  schedule:
+    # 每月1号 UTC 00:00 运行 / Runs at 00:00 UTC on the 1st of every month
+    - cron: "0 0 1 * *"
+  workflow_dispatch:  # 允许手动触发 / Allow manual trigger
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 需要写入权限以推送变更 / Need write permission to push changes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch latest market data
+        env:
+          TUSHARE_TOKEN: ${{ secrets.TUSHARE_TOKEN }}
+        run: |
+          python tmp/fetch_latest_data.py
+
+      - name: Rebuild outputs (figures, tables, model)
+        run: |
+          python scripts/rebuild_outputs.py
+
+      - name: Commit and push if changes exist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data/ figures/ eventstudy/ model/valuation_model.xlsx
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit — data already up to date."
+          else
+            git commit -m "chore: monthly data refresh $(date +%Y-%m-%d)"
+            git push
+            echo "Changes committed and pushed."
+          fi

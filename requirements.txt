@@ -4,3 +4,4 @@ matplotlib
 openpyxl
 pypdf
 pytest
+tushare

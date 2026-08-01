@@ -1,7 +1,7 @@
 # Data Tables - Zhipu (2513.HK), MiniMax (00100.HK), Wenge AI (01956.HK)
 
-Market data via **Tushare `hk_daily`** plus public-market cross-checks, **as of 2026-07-29** for Zhipu and MiniMax (CSV in `data/`).
-The two core event-study series now cover the latest available Hong Kong trading day, 2026-07-29.
+Market data via **Tushare `hk_daily`** plus public-market cross-checks, **as of 2026-07-31** for Zhipu and MiniMax (CSV in `data/`).
+The two core event-study series now cover the latest available Hong Kong trading day, 2026-07-31.
 Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report** (stock code 2513). All figures are consistent with the paper.
 
 ---
@@ -25,17 +25,17 @@ Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report**
 |---|---|---|---|
 | IPO price (HK$) | 116.20 | 165.00 | 60.70 |
 | Day-1 close (HK$) | 131.5 | 345.0 (+109%) | 111.7 (+84%) |
-| Latest close (HK$) | 1033.0 (2026-07-29) | 212.8 (2026-07-29) | 62.0 (2026-07-29) |
-| Return vs IPO | **+789% (~8.9x)** | +29% | +2% |
+| Latest close (HK$) | 987.5 (2026-07-31) | 230.6 (2026-07-31) | 62.0 (2026-07-31) |
+| Return vs IPO | **+750% (~8.5x)** | +40% | +2% |
 | Period high / low (close) | 2,410 / 131.5 | 1,238 / 193.1 | 111.7 / 62.7 |
 | **~HK$460.6B (~US$59.0B)** | lower than Zhipu | ~HK$6.0B |
-| Equity value / revenue (FY26E US$200M) | **~295x** | far lower than Zhipu | n/a (different model) |
+| Equity value / revenue (FY26E US$200M) | **~282x** | far lower than Zhipu | n/a (different model) |
 
 ## Table D3 - Risk / Volatility
 
 | Metric | Zhipu | MiniMax |
 |---|---|---|
-| Annualized volatility (daily x sqrt(252)) | **~200%** | ~157% |
+| Annualized volatility (daily x sqrt(252)) | **~201%** | ~157% |
 | Pattern | peaked ~HK$2,410 then sharp pullback to ~HK$1,237 | boom-bust (peaked 1,238 to ~196) |
 | Beta | bottom-up/comparable **beta ~= 1.6** (HK index not in feed; global AI-software comps, unlever-to-relever) |
 
@@ -51,7 +51,7 @@ Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report**
 
 Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity), net current liabilities
 **-RMB 8,834.8M**, cash and cash equivalents RMB 2,259.1M. Shares outstanding ~445.8M (per AGM circular 2026-06-22). FX: HK$7.8/US$, RMB 7.1/US$.
-**Implied market equity value / revenue ~= 295x FY26E** (US$59.0B / US$200M).
+**Implied market equity value / revenue ~= 282x FY26E** (US$56.4B / US$200M).
 
 ## Table D5 - Product / Competitive Data (leaderboard thread)
 
@@ -64,7 +64,7 @@ Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity)
 | Pricing power | 8-17% API price rises with each GLM-5.x release |
 | Strategy | open-weight + low token price = cost-disruption / developer flywheel |
 
-## Table D6 - Capability-Event CAR (mean-adjusted, through 2026-07-29)
+## Table D6 - Capability-Event CAR (mean-adjusted, through 2026-07-31)
 
 | Event | Day 0 | React [0,+1] | Drift [+2,+10] | Note |
 |---|---|---:|---:|---|
@@ -77,7 +77,7 @@ Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity)
 | **Avg (4 GLM)** | | **+18.7%** | **+4.8%** | peer-adj: +18.5% / +20.5% |
 
 Mean-adjusted abnormal return: `AR_t = R_t - average(R[-20,-6])`, where the average is the raw return over event days -20 through -6.
-GLM-5.2's [+2,+10] window remains complete through all 9 trading days as of 2026-07-29. Non-capability spikes:
+GLM-5.2's [+2,+10] window remains complete through all 9 trading days as of 2026-07-31. Non-capability spikes:
 02-20 (+43%), 05-13 (+37%) = Hang Seng Tech inclusion / Stock Connect flow events.
 
 ### Screened but not in core CAR

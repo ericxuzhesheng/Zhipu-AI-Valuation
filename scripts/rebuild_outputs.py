@@ -317,7 +317,8 @@ def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
             draws[i] = float(np.mean(cars))
         return draws
 
-    react_draws = sampled_block_cars([2, 2, 2, 2])
+    reaction_lengths = [2] * len(events)
+    react_draws = sampled_block_cars(reaction_lengths)
     drift_draws = sampled_block_cars(drift_lengths)
     distribution = pd.DataFrame(
         {
@@ -344,7 +345,9 @@ def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
                 "bootstrap_ci_2_5_pct": round(float(lo), 2),
                 "bootstrap_ci_97_5_pct": round(float(hi), 2),
                 "actual_percentile": round(float(percentile), 2),
-                "block_lengths_days": ",".join(str(length) for length in ([2, 2, 2, 2] if "reaction" in window else drift_lengths)),
+                "block_lengths_days": ",".join(
+                    str(length) for length in (reaction_lengths if "reaction" in window else drift_lengths)
+                ),
                 "excluded_event_window_days": len(excluded_dates),
             }
         )
@@ -383,6 +386,31 @@ def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
     fig.tight_layout()
     savefig(fig, FIGURES / "fig10_block_bootstrap.png", bbox_inches="tight")
     plt.close(fig)
+
+
+def valuation_audit_rows() -> list[tuple[str, str | float]]:
+    results = {scenario.name: project_scenario(scenario) for scenario in SCENARIOS}
+    weighted_equity = sum(s.probability * results[s.name]["equity_value"] for s in SCENARIOS)
+    weighted_share = sum(s.probability * results[s.name]["per_share_hkd"] for s in SCENARIOS)
+    return [
+        ("Market date", MARKET.date.strftime("%Y-%m-%d")),
+        ("Market price (HK$)", round(MARKET.price_hkd, 1)),
+        ("Market equity value (US$m)", round(MARKET.equity_value_usdm, 1)),
+        ("Market EV / FY2026E revenue", round(MARKET.revenue_multiple, 1)),
+        ("Bear per share (HK$)", round(results["Bear"]["per_share_hkd"], 1)),
+        ("Base per share (HK$)", round(results["Base"]["per_share_hkd"], 1)),
+        ("Bull per share (HK$)", round(results["Bull"]["per_share_hkd"], 1)),
+        ("Probability-weighted equity (US$m)", round(weighted_equity, 1)),
+        ("Probability-weighted per share (HK$)", round(weighted_share, 1)),
+        ("DCF value as % of market", round(weighted_share / MARKET.price_hkd, 4)),
+    ]
+
+
+def write_valuation_summary_csv() -> None:
+    summary_df = pd.DataFrame(
+        [{"metric": metric, "value": value} for metric, value in valuation_audit_rows()]
+    )
+    write_csv(summary_df, EVENTSTUDY / "valuation_summary.csv")
 
 
 def write_workbook() -> None:
@@ -492,28 +520,11 @@ def write_workbook() -> None:
     ws.append(["Market equity value / revenue", "=(Assumptions!B9*Assumptions!B5/Assumptions!B6)/Assumptions!B11"])
 
     audit = wb.create_sheet("Audit Summary")
-    results = {scenario.name: project_scenario(scenario) for scenario in SCENARIOS}
-    weighted_equity = sum(s.probability * results[s.name]["equity_value"] for s in SCENARIOS)
-    weighted_share = sum(s.probability * results[s.name]["per_share_hkd"] for s in SCENARIOS)
-    audit_rows = [
-        ("Market date", MARKET.date.strftime("%Y-%m-%d")),
-        ("Market price (HK$)", round(MARKET.price_hkd, 1)),
-        ("Market equity value (US$m)", round(MARKET.equity_value_usdm, 1)),
-        ("Market EV / FY2026E revenue", round(MARKET.revenue_multiple, 1)),
-        ("Bear per share (HK$)", round(results["Bear"]["per_share_hkd"], 1)),
-        ("Base per share (HK$)", round(results["Base"]["per_share_hkd"], 1)),
-        ("Bull per share (HK$)", round(results["Bull"]["per_share_hkd"], 1)),
-        ("Probability-weighted equity (US$m)", round(weighted_equity, 1)),
-        ("Probability-weighted per share (HK$)", round(weighted_share, 1)),
-        ("DCF value as % of market", round(weighted_share / MARKET.price_hkd, 4)),
-    ]
+    audit_rows = valuation_audit_rows()
     for row in audit_rows:
         audit.append(row)
 
-    summary_df = pd.DataFrame(
-        [{"metric": metric, "value": value} for metric, value in audit_rows]
-    )
-    write_csv(summary_df, EVENTSTUDY / "valuation_summary.csv")
+    write_valuation_summary_csv()
 
     for sheet in wb.worksheets:
         for col in range(1, sheet.max_column + 1):
@@ -661,7 +672,7 @@ def write_financial_profile() -> None:
 
 
 def write_glm_timeline() -> None:
-    """Company-introduction figure: milestones from founding (2019) to ZCode (2026).
+    """Company-introduction figure: milestones from founding (2019) to GLM-5.3-Flash (2026).
 
     Events are evenly spaced (not on a proportional date axis) so the dense 2026 release
     cadence stays legible alongside the longer 2019--2025 build-up.
@@ -680,6 +691,8 @@ def write_glm_timeline() -> None:
         ("16 Jun 2026", "GLM-5.2 open weights", C_RED),
         ("22 Jun 2026", "AGM · 445.8m shares · Z.AI name", C_TEAL),
         ("1 Jul 2026", "ZCode IDE for GLM-5.2", C_ORANGE),
+        ("14 Aug 2026", "GLM-5.3", C_RED),
+        ("26 Aug 2026", "GLM-5.3-Flash", C_ORANGE),
     ]
     n = len(events)
     fig, ax = plt.subplots(figsize=(13.0, 3.6), dpi=150)
@@ -696,7 +709,7 @@ def write_glm_timeline() -> None:
     ax.set_ylim(-1.55, 1.55)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("From a Tsinghua lab (2019) to ZCode (2026): the path to and beyond the IPO")
+    ax.set_title("From a Tsinghua lab (2019) to GLM-5.3-Flash (2026): the path to and beyond the IPO")
     ax.spines[["top", "right", "left", "bottom"]].set_visible(False)
     fig.tight_layout()
     savefig(fig, FIGURES / "fig9_glm_timeline.png", bbox_inches="tight")
@@ -709,6 +722,7 @@ CAPABILITY_EVENTS = [
     ("GLM-5-Turbo", "2026-03-16"),
     ("GLM-5.1", "2026-04-08"),
     ("GLM-5.2", "2026-06-15"),
+    ("GLM-5.3", "2026-08-14"),
 ]
 DISPLAY_CAPABILITY_EVENTS = [
     *CAPABILITY_EVENTS,
@@ -819,12 +833,7 @@ def event_car_series() -> dict[str, pd.Series]:
     prices = pd.read_csv(ROOT / "data" / "Zhipu_KnowledgeAtlas_daily.csv")
     prices["trade_date"] = pd.to_datetime(prices["trade_date"].astype(str))
     prices["ret"] = prices["close"].pct_change()
-    events = {
-        "GLM-5": "2026-02-11",
-        "GLM-5-Turbo": "2026-03-16",
-        "GLM-5.1": "2026-04-08",
-        "GLM-5.2": "2026-06-15",
-    }
+    events = dict(CAPABILITY_EVENTS)
     series = {}
     for name, date in events.items():
         idx = prices.index[prices["trade_date"] == pd.Timestamp(date)][0]
@@ -845,10 +854,10 @@ def write_event_chart() -> None:
     full_days = [day for day in range(-5, 11) if all(day in s.index for s in series.values())]
     avg = pd.concat([s.loc[full_days] for s in series.values()], axis=1).mean(axis=1)
     fig, ax = plt.subplots(figsize=(8.5, 5.0), dpi=150)
-    event_colors = [C_BLUE, C_ORANGE, C_GREEN, C_RED]
+    event_colors = [C_BLUE, C_ORANGE, C_GREEN, C_RED, C_TEAL]
     for (name, s), shade in zip(series.items(), event_colors):
         ax.plot(s.index, s.values, color=shade, alpha=0.9, linewidth=1.3, label=name)
-    ax.plot(avg.index, avg.values, color=C_INK, linewidth=2.6, label="Average (n=4)")
+    ax.plot(avg.index, avg.values, color=C_INK, linewidth=2.6, label=f"Average (n={len(series)})")
     ax.axvline(0, color=C_GRAY, linestyle="--", linewidth=1)
     ax.axhline(0, color=C_GRAY, linewidth=0.8)
     ax.set_xlim(-5, 10)
@@ -935,6 +944,7 @@ def write_reaction_vs_drift() -> None:
 
 def main() -> None:
     write_price_summary_csv()
+    write_valuation_summary_csv()
     write_base_projection_csv()
     write_event_panel_outputs(write_csv)
     panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")

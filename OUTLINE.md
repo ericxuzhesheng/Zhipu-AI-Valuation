@@ -3,7 +3,7 @@
 **Title:** *Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab:
 Evidence from Zhipu AI (2513.HK).*  
 **Author:** Zhesheng Xu (42353012), Corporate Finance, 2025-2026-2.  
-**Build:** XeLaTeX (`paper/main.tex` to `main.pdf`, 17 pp). **Data as of 2026-06-30.**
+**Build:** XeLaTeX (`paper/main.tex` to `main.pdf`). **Data as of 2026-08-28.**
 
 > Term-paper rules satisfied: title carries core concept (*capability surprise*) + mechanism (price discovery
 > and drift); abstract is below the 400-word limit; full reference list at end.
@@ -31,12 +31,12 @@ Evidence from Zhipu AI (2513.HK).*
 3. **Fundamental value vs option value** - not "above DCF therefore bubble," but a right-tail option.
 4. **Capability vs flow catalysts** - model releases separated from index/Stock-Connect flows.
 
-## Headline numbers (2026-06-30)
-- Price HK$2,104 (~+1,711%, ~18x); mcap ~US$120B; **equity value / revenue ~601x**; vol ~192%.
-- DCF (net cash US$0.55bn, with NOL carryforward): bear/base/bull HK$12/27/80; prob-weighted **HK$32 (~1.5% of price)**.
-- Reverse DCF: price implies **~US$139B revenue by 2035 (~107% annual, 2026-2035)**.
-- Event study (mean-adjusted, `[-20,-6]` estimation window): reaction **+18.7%**, drift **+4.8%** (bimodal); peer-adj drift **+20.5%**.
-  GLM-5.2's `[+2,+10]` drift window is now complete through all 9 trading days.
+## Headline numbers (2026-08-28)
+- Price HK$1,090 (+838%, 9.4x IPO); mcap ~US$62.3B; **equity value / revenue ~312x**; vol ~193%.
+- DCF (net cash US$0.55bn, with NOL carryforward): bear/base/bull HK$12/27/80; prob-weighted **HK$32 (~3.0% of price)**.
+- Reverse DCF: price implies **~US$71B revenue by 2035 (~92% annual, 2026-2035)**.
+- Event study (mean-adjusted, `[-20,-6]` estimation window): reaction **+13.7%**, drift **+4.6%** (bimodal);
+  peer-adjusted reaction/drift **+15.3% / +16.8%** across five GLM events.
 
 ## Sourcing policy (granular; primary > news)
 Key data cite, via the bibliography:
@@ -46,13 +46,12 @@ Key data cite, via the bibliography:
 - **Official model cards / technical reports** - `glm_modelcard`.
 - **Hang Seng Indexes Company announcements** - `hsi2026`.
 - **Formal market database** - `tushare2026` (HK daily prices, cross-checked with HKEX).
-- **Manual close record** - 2026-06-30 closes were entered from East Money screenshots pending the Tushare database refresh.
+- **Market data fallback** - Tencent Finance supplies Hong Kong daily bars and Nasdaq supplies US daily bars when Tushare frequency or permission limits bind.
 - News media corroborate only; they do not carry the most important numbers.
 
 ## Remaining items
-1. Tushare data refreshed through 2026-06-29; 2026-06-30 close still from East Money screenshots.
-2. Optionally extend the event panel with MiniMax / Wenge (Decitron, Yayi) releases for a multi-lab study once enough post-listing price history exists.
-3. Rerun `texcount -inc -sum paper/main.tex` if a hard word-count audit is required after final formatting.
+1. Optionally extend the event panel with Wenge (Decitron, Yayi) releases for a multi-lab study once dated events are pinned.
+2. Rerun `texcount -inc -sum paper/main.tex` if a hard word-count audit is required after final formatting.
 
 ## Repo
 ```

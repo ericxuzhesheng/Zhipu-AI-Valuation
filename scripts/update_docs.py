@@ -57,7 +57,7 @@ def _load_snapshot() -> dict:
     dcf_gap_pct = round((1 - float(dcf_gap)) * 100, 0)
 
     # Reverse DCF: approximate required 2035 revenue
-    # From rebuild: at WACC 13.5%, terminal margin 40%, equity ~US$102bn-equivalent
+    # From rebuild: at WACC 13.5% and terminal margin 40%, solve for required 2035 revenue.
     # The reverse DCF grid is in eventstudy/reverse_dcf_sensitivity.csv
     rev_req = None
     rev_grid_path = ROOT / "eventstudy" / "reverse_dcf_sensitivity.csv"
@@ -86,6 +86,8 @@ def _load_snapshot() -> dict:
         "ret_vs_ipo_fmt": f"{round(ret_pct):+d}%",
         "ann_vol_pct": ann_vol,
         "ann_vol_fmt": f"{ann_vol:.0f}",
+        "zhipu_high": float(zhipu["high"]),
+        "zhipu_low": float(zhipu["low"]),
         "equity_value_usdm": equity_value_usdm,
         "equity_value_usdb": equity_value_usdm / 1000,
         "equity_value_fmt": f"US${equity_value_usdm/1000:.1f}B",
@@ -99,13 +101,19 @@ def _load_snapshot() -> dict:
         "rev_req_usd_bn": rev_req,
         "rev_req_fmt": f"US${rev_req:.0f} 亿" if rev_req else "N/A",
         # CAGR to reach rev_req over 2026-2035 (9 years from US$200M base)
-        "cagr_fmt": f"{((rev_req * 1000 / 0.2) ** (1/9) - 1) * 100:.0f}%" if rev_req else "N/A",
+        "cagr_fmt": f"{((rev_req / 0.2) ** (1/9) - 1) * 100:.0f}%" if rev_req else "N/A",
+        "rev_req_multiple_fmt": f"{rev_req / 0.2:.0f}" if rev_req else "N/A",
         # MiniMax data
         "minimax_price": float(minimax["latest_close"]),
         "minimax_ret": (float(minimax["latest_close"]) / float(minimax["ipo_price"]) - 1) * 100,
+        "minimax_high": float(minimax["high"]),
+        "minimax_low": float(minimax["low"]),
+        "minimax_vol": float(minimax["ann_vol_pct"]),
         # Wenge data
         "wenge_price": float(wenge["latest_close"]),
         "wenge_ret": (float(wenge["latest_close"]) / float(wenge["ipo_price"]) - 1) * 100,
+        "wenge_high": float(wenge["high"]),
+        "wenge_low": float(wenge["low"]),
     }
 
 
@@ -165,12 +173,12 @@ def update_readme(snap: dict) -> None:
 
     # Reverse DCF paragraph — Chinese
     # "2035 年收入约 US$730 亿" → update
-    content = re.sub(
-        r'2035 年收入约 \*\*US\$\d+ 亿\*\*（约 \*\*\d+%\*\* 的年复合增速，约 \d+ 倍 FY26E）',
-        f'2035 年收入约 **US${snap["rev_req_usd_bn"]:.0f} 亿**（约 **{snap["cagr_fmt"]}** 的年复合增速，约 {snap["revenue_multiple_fmt"]} 倍 FY26E）'
-        if snap["rev_req_usd_bn"] else content,
-        content,
-    )
+    if snap["rev_req_usd_bn"]:
+        content = re.sub(
+            r'2035 年收入约 \*\*US\$\d+ 亿\*\*（约 \*\*\d+%\*\* 的年复合增速，约 \d+ 倍 FY26E）',
+            f'2035 年收入约 **US${snap["rev_req_usd_bn"]:.0f} 亿**（约 **{snap["cagr_fmt"]}** 的年复合增速，约 {snap["rev_req_multiple_fmt"]} 倍 FY26E）',
+            content,
+        )
 
     # "市场股权价值/收入约 354×"
     content = re.sub(
@@ -203,10 +211,16 @@ def update_readme(snap: dict) -> None:
     )
 
     # Reverse DCF English
+    if snap["rev_req_usd_bn"]:
+        content = re.sub(
+            r'requires ~US\$\d+\.?\d*[Bb] revenue by 2035 \(~\d+% annual over 2026–2035, ~\d+×FY26E\)',
+            f'requires ~US${snap["rev_req_usd_bn"]:.0f}B revenue by 2035 (~{snap["cagr_fmt"]} annual over 2026–2035, ~{snap["rev_req_multiple_fmt"]}×FY26E)',
+            content,
+        )
+
     content = re.sub(
-        r'requires ~US\$\d+\.?\d*[Bb] revenue by 2035 \(~\d+% annual over 2026–2035, ~\d+×FY26E\)',
-        f'requires ~US${snap["rev_req_usd_bn"]:.0f}B revenue by 2035 (~{snap["cagr_fmt"]} annual over 2026–2035, ~{snap["revenue_multiple_fmt"]}×FY26E)'
-        if snap["rev_req_usd_bn"] else content,
+        r'### Valuation Summary \(market row at \d{4}-\d{2}-\d{2}\)',
+        f'### Valuation Summary (market row at {snap["date_display"]})',
         content,
     )
 
@@ -265,8 +279,8 @@ def update_data_tables(snap: dict) -> None:
 
     # Table D2 title
     content = re.sub(
-        r'### Table D2 - Market Performance \(IPO to \d{4}-\d{2}-\d{2}\)',
-        f'### Table D2 - Market Performance (IPO to {snap["date_display"]})',
+        r'##+ Table D2 - Market Performance \(IPO to \d{4}-\d{2}-\d{2}\)',
+        f'## Table D2 - Market Performance (IPO to {snap["date_display"]})',
         content,
     )
 
@@ -315,13 +329,20 @@ def update_data_tables(snap: dict) -> None:
         content,
     )
 
-    # Period high/low — Zhipu
-    # We don't recalculate these from historical data easily, keep manual
+    content = re.sub(
+        r'\| Period high / low \(close\) \|[^\n]+',
+        (
+            f'| Period high / low (close) | {snap["zhipu_high"]:,.1f} / {snap["zhipu_low"]:,.1f} '
+            f'| {snap["minimax_high"]:,.1f} / {snap["minimax_low"]:,.1f} '
+            f'| {snap["wenge_high"]:,.1f} / {snap["wenge_low"]:,.1f} |'
+        ),
+        content,
+    )
 
     # Latest market cap — Zhipu
     content = re.sub(
-        r'(Latest market cap\s*\|\s*\*\*~HK\$\d+\.?\d*[Bb]\s*\(~US\$\d+\.?\d*[Bb]\)\*\*\s*\|)',
-        f'**~{snap["market_cap_hkd_fmt"]} (~{snap["equity_value_fmt"]})** |',
+        r'(Latest market cap\s*\|)\s*\*\*~HK\$\d+\.?\d*[Bb]\s*\(~US\$\d+\.?\d*[Bb]\)\*\*\s*\|',
+        f'\\g<1> **~{snap["market_cap_hkd_fmt"]} (~{snap["equity_value_fmt"]})** |',
         content,
     )
 
@@ -341,6 +362,11 @@ def update_data_tables(snap: dict) -> None:
     content = re.sub(
         r'(Annualized volatility[^|]*\|\s*\*\*~)\d+%\*\*\s*\|',
         f'\\g<1>{snap["ann_vol_fmt"]}%** |',
+        content,
+    )
+    content = re.sub(
+        r'(Annualized volatility[^|]*\|[^|]+\|)\s*~?\d+%\s*\|',
+        f'\\g<1> ~{snap["minimax_vol"]:.0f}% |',
         content,
     )
 

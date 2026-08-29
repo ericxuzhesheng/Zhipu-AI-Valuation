@@ -1,5 +1,5 @@
 window,n_events,positive_events,mean_car_pct,median_car_pct,sign_test_p_one_sided,bootstrap_mean_ci_2_5_pct,bootstrap_mean_ci_97_5_pct
-"Mean-adjusted reaction [0,+1]",4,4,18.7,18.1,0.0625,10.8,26.6
-"Mean-adjusted drift [+2,+10]",4,2,4.8,5.2,0.6875,-16.8,26.4
-"Peer-adjusted reaction [0,+1]",4,4,18.5,15.9,0.0625,14.0,25.2
-"Peer-adjusted drift [+2,+10]",4,4,20.5,16.2,0.0625,13.1,30.9
+"Mean-adjusted reaction [0,+1]",5,4,13.7,13.8,0.1875,2.1,24.2
+"Mean-adjusted drift [+2,+10]",5,3,4.6,3.8,0.5,-12.6,21.9
+"Peer-adjusted reaction [0,+1]",5,5,15.3,14.6,0.0312,7.8,22.8
+"Peer-adjusted drift [+2,+10]",5,5,16.8,13.3,0.0312,7.6,27.3

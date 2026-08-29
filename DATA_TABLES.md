@@ -1,7 +1,7 @@
 # Data Tables - Zhipu (2513.HK), MiniMax (00100.HK), Wenge AI (01956.HK)
 
-Market data via **Tushare `hk_daily`** plus public-market cross-checks, **as of 2026-07-31** for Zhipu and MiniMax (CSV in `data/`).
-The two core event-study series now cover the latest available Hong Kong trading day, 2026-07-31.
+Market data via **Tushare `hk_daily`** with public-source fallback/cross-checks from **Tencent Finance** (Hong Kong) and **Nasdaq** (US), **as of 2026-08-28** (CSV in `data/`).
+The two core event-study series now cover the latest available Hong Kong trading day, 2026-08-28.
 Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report** (stock code 2513). All figures are consistent with the paper.
 
 ---
@@ -19,24 +19,24 @@ Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report**
 | HQ / founded | Beijing, 2019 (Tsinghua KEG) | Shanghai, 2021 | Beijing, 2017 (CAS Inst. of Automation) |
 | Positioning | general foundation-model lab | general/multimodal foundation lab | enterprise decision-intelligence (DIOS/Decitron/Yayi) |
 
-## Table D2 - Market Performance (IPO to 2026-07-24)
+## Table D2 - Market Performance (IPO to 2026-08-28)
 
 | Metric | Zhipu | MiniMax | Wenge AI |
 |---|---|---|---|
 | IPO price (HK$) | 116.20 | 165.00 | 60.70 |
 | Day-1 close (HK$) | 131.5 | 345.0 (+109%) | 111.7 (+84%) |
-| Latest close (HK$) | 987.5 (2026-07-31) | 230.6 (2026-07-31) | 62.0 (2026-07-31) |
-| Return vs IPO | **+750% (~8.5x)** | +40% | +2% |
+| Latest close (HK$) | 1090.0 (2026-08-28) | 300.4 (2026-08-28) | 87.8 (2026-08-28) |
+| Return vs IPO | **+838% (~9.4x)** | +82% | +45% |
 | Period high / low (close) | 2,410 / 131.5 | 1,238 / 193.1 | 111.7 / 62.7 |
-| **~HK$460.6B (~US$59.0B)** | lower than Zhipu | ~HK$6.0B |
-| Equity value / revenue (FY26E US$200M) | **~282x** | far lower than Zhipu | n/a (different model) |
+| Latest market cap | **~HK$486.0B (~US$62.3B)** | lower than Zhipu | n/a |
+| Equity value / revenue (FY26E US$200M) | **~312x** | far lower than Zhipu | n/a (different model) |
 
 ## Table D3 - Risk / Volatility
 
 | Metric | Zhipu | MiniMax |
 |---|---|---|
-| Annualized volatility (daily x sqrt(252)) | **~201%** | ~157% |
-| Pattern | peaked ~HK$2,410 then sharp pullback to ~HK$1,237 | boom-bust (peaked 1,238 to ~196) |
+| Annualized volatility (daily x sqrt(252)) | **~193%** | ~154% |
+| Pattern | peaked ~HK$2,410 then pulled back to HK$1,090 | boom-bust (peaked 1,238; latest 300.4) |
 | Beta | bottom-up/comparable **beta ~= 1.6** (HK index not in feed; global AI-software comps, unlever-to-relever) |
 
 ## Table D4 - Fundamentals (Zhipu, from prospectus and annual report; RMB unless noted)
@@ -51,20 +51,20 @@ Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report**
 
 Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity), net current liabilities
 **-RMB 8,834.8M**, cash and cash equivalents RMB 2,259.1M. Shares outstanding ~445.8M (per AGM circular 2026-06-22). FX: HK$7.8/US$, RMB 7.1/US$.
-**Implied market equity value / revenue ~= 282x FY26E** (US$56.4B / US$200M).
+**Implied market equity value / revenue ~= 312x FY26E** (US$62.3B / US$200M).
 
 ## Table D5 - Product / Competitive Data (leaderboard thread)
 
 | Item | Detail |
 |---|---|
 | GLM-4.6 | ~355B params / 32B active (MoE), 200K context, open-weight |
-| GLM-5 family (2026) | GLM-5 (02-11), GLM-5-Turbo (03-15), GLM-5.1 (~04-07/08), GLM-5.2 (06-13) |
+| GLM-5 family (2026) | GLM-5 (02-11), GLM-5-Turbo (03-16), GLM-5.1 (04-08), GLM-5.2 (06-15 trading day), GLM-5.3 (08-14), GLM-5.3-Flash (08-26) |
 | GLM-5.1 | #1 SWE-Bench Pro (58.4%); within ~2.6 pts of leading closed model |
 | GLM-5.2 | MIT open weights, 1M-token context, at unchanged pricing |
 | Pricing power | 8-17% API price rises with each GLM-5.x release |
 | Strategy | open-weight + low token price = cost-disruption / developer flywheel |
 
-## Table D6 - Capability-Event CAR (mean-adjusted, through 2026-07-31)
+## Table D6 - Capability-Event CAR (mean-adjusted, through 2026-08-28)
 
 | Event | Day 0 | React [0,+1] | Drift [+2,+10] | Note |
 |---|---|---:|---:|---|
@@ -72,12 +72,13 @@ Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity)
 | GLM-5-Turbo | 2026-03-16 | +7.7% | -19.3% | reversal |
 | GLM-5.1 | 2026-04-08 | +13.8% | -14.2% | over-reaction (flips +12.9% peer-adj) |
 | GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | strong under-reaction |
+| GLM-5.3 | 2026-08-14 | -6.5% | +3.8% | anticipated; +2.4% / +1.8% peer-adjusted |
 | MiniMax M2.7 | 2026-03-18 | -5.5% | -49.1% | muted / de-rate |
 | MiniMax M3 | 2026-06-01 | -21.1% | -40.8% | failed catalyst / de-rate |
-| **Avg (4 GLM)** | | **+18.7%** | **+4.8%** | peer-adj: +18.5% / +20.5% |
+| **Avg (5 GLM)** | | **+13.7%** | **+4.6%** | peer-adj: +15.3% / +16.8% |
 
 Mean-adjusted abnormal return: `AR_t = R_t - average(R[-20,-6])`, where the average is the raw return over event days -20 through -6.
-GLM-5.2's [+2,+10] window remains complete through all 9 trading days as of 2026-07-31. Non-capability spikes:
+GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of 2026-08-28. Non-capability spikes:
 02-20 (+43%), 05-13 (+37%) = Hang Seng Tech inclusion / Stock Connect flow events.
 
 ### Screened but not in core CAR
@@ -86,11 +87,13 @@ GLM-5.2's [+2,+10] window remains complete through all 9 trading days as of 2026
 |---|---|---|
 | Zhipu GLM-Image / GLM-4.7-Flash / GLM-OCR | catalog only | no clean pre-event estimation window after IPO |
 | Zhipu GLM-5V-Turbo | catalog only | multimodal branch; drift window overlaps GLM-5.1 |
+| Zhipu GLM-5.3-Flash | catalog only | 08-26 release has only two post-event trading days by the cutoff |
+| Zhipu ZCode IDE | catalog only | product launch outside the core foundation-model capability set |
 | MiniMax M2.5 series | catalog only | month-level date in source screenshot; wait for day-level source |
-| MiniMax Speech / Music releases | catalog only | vertical audio/music models, not text-agent peer events |
+| MiniMax H3 / Speech / Music releases | catalog only | video/audio/music models, not text-agent peer events |
 
 ## Remaining / refresh items
-1. Expand `data/event_catalog_input.csv` as Wenge/Moonshot/Kimi obtain dated model events and enough listed-price history; `eventstudy/event_catalog.csv` and `eventstudy/event_panel.csv` are generated from that input, with the current computable CAR panel at n=10.
+1. Expand `data/event_catalog_input.csv` as Wenge/Moonshot/Kimi obtain dated model events and enough listed-price history; `eventstudy/event_catalog.csv` and `eventstudy/event_panel.csv` are generated from that input, with the current computable CAR panel at n=26.
 
 ---
 
@@ -100,5 +103,5 @@ GLM-5.2's [+2,+10] window remains complete through all 9 trading days as of 2026
 - **AGM poll results** (stock code 2513, 2026-06-22) - confirmed total issued shares 445,843,090; all 20 resolutions passed.
 - **Official model cards / technical reports** (Z.ai; Hugging Face `zai-org/GLM-4.6`) - architecture, benchmarks.
 - **Hang Seng Indexes Company** announcements - index inclusion / Stock Connect flows.
-- **Tushare `hk_daily`** (cross-checked with HKEX) - daily prices to `data/*.csv`.
+- **Tushare `hk_daily`**, with Tencent Finance (Hong Kong) and Nasdaq (US) public fallbacks - daily prices to `data/*.csv`.
 - News (Caixin, CNBC, SCMP, Bloomberg, Investing.com) - corroboration only.

@@ -102,6 +102,149 @@ def check_valuation_summary() -> None:
             fail(f"valuation_summary mismatch for {metric}: csv {value}, workbook {sheet_value}")
 
 
+def check_valuation_comps() -> None:
+    input_path = ROOT / "data" / "valuation_comps_input.csv"
+    output_path = ROOT / "data" / "valuation_comps.csv"
+    for path in [input_path, output_path]:
+        if not path.exists():
+            fail(f"valuation comps file missing: {path}")
+        if path.stat().st_size <= 0:
+            fail(f"valuation comps file is empty: {path}")
+
+    inputs = pd.read_csv(input_path, keep_default_na=False)
+    comps = pd.read_csv(output_path, keep_default_na=False)
+    required_input_columns = {
+        "company",
+        "ticker",
+        "cohort",
+        "valuation_date",
+        "valuation_basis",
+        "equity_value_bn",
+        "revenue_bn",
+        "currency",
+        "revenue_basis",
+        "include_in_private_range",
+        "valuation_source_url",
+        "revenue_source_url",
+        "comparability_note",
+    }
+    missing_input = required_input_columns - set(inputs.columns)
+    if missing_input:
+        fail(f"valuation comps input missing columns: {sorted(missing_input)}")
+    missing_output = required_input_columns.union({"multiple_x"}) - set(comps.columns)
+    if missing_output:
+        fail(f"valuation comps output missing columns: {sorted(missing_output)}")
+    if "multiple_x" in inputs.columns:
+        fail("valuation comps input must not hard-code multiple_x")
+    if len(inputs) < 10 or len(comps) < 10:
+        fail(f"valuation comps has too few rows: input {len(inputs)}, output {len(comps)}")
+    if len(inputs) != len(comps):
+        fail(f"valuation comps row-count mismatch: input {len(inputs)}, output {len(comps)}")
+
+    required_companies = {
+        "Zhipu",
+        "MiniMax",
+        "OpenAI",
+        "Anthropic",
+        "Mistral",
+        "SenseTime",
+        "Phancy",
+        "Wenge AI",
+        "Palantir",
+        "Snowflake",
+        "Cloudflare",
+    }
+    input_companies = set(inputs["company"].astype(str).str.strip())
+    companies = set(comps["company"].astype(str).str.strip())
+    if companies != input_companies:
+        fail("valuation comps output company set does not match its input")
+    missing_companies = required_companies - companies
+    if missing_companies:
+        fail(f"valuation comps missing companies: {sorted(missing_companies)}")
+    if comps["company"].astype(str).str.strip().duplicated().any():
+        fail("valuation comps contains duplicate company names")
+
+    for column in ["equity_value_bn", "revenue_bn", "multiple_x", "include_in_private_range"]:
+        comps[column] = pd.to_numeric(comps[column], errors="coerce")
+        if comps[column].isna().any():
+            fail(f"valuation comps has non-numeric {column}")
+    if (comps[["equity_value_bn", "revenue_bn", "multiple_x"]] <= 0).any().any():
+        fail("valuation comps equity value, revenue, and multiple must be positive")
+
+    expected_multiples = comps["equity_value_bn"] / comps["revenue_bn"]
+    multiple_error = (comps["multiple_x"] - expected_multiples).abs()
+    if (multiple_error > 0.051).any():
+        company = comps.loc[multiple_error.idxmax(), "company"]
+        fail(f"valuation comps multiple_x is not equity_value_bn / revenue_bn for {company}")
+
+    include_values = set(comps["include_in_private_range"])
+    if not include_values.issubset({0, 1}):
+        fail("include_in_private_range must contain only 0 or 1")
+    included = set(
+        comps.loc[comps["include_in_private_range"] == 1, "company"].astype(str).str.strip()
+    )
+    expected_included = {"OpenAI", "Anthropic", "Mistral"}
+    if included != expected_included:
+        fail(
+            "private valuation range must include exactly OpenAI, Anthropic, and Mistral; "
+            f"found {sorted(included)}"
+        )
+    secondary_included = comps.loc[
+        (comps["cohort"] != "core_frontier") & (comps["include_in_private_range"] == 1),
+        "company",
+    ]
+    if not secondary_included.empty:
+        fail(
+            "secondary valuation cohorts must not enter the private range: "
+            f"{sorted(secondary_included.astype(str))}"
+        )
+    private_multiples = comps.loc[comps["include_in_private_range"] == 1, "multiple_x"]
+    expected_stats = {"min": 20.5, "median": 34.1, "max": 39.0}
+    actual_stats = {
+        "min": float(private_multiples.min()),
+        "median": float(private_multiples.median()),
+        "max": float(private_multiples.max()),
+    }
+    for statistic, expected in expected_stats.items():
+        if abs(actual_stats[statistic] - expected) > 0.15:
+            fail(
+                f"private valuation range {statistic} mismatch: "
+                f"expected about {expected}, found {actual_stats[statistic]:.1f}"
+            )
+
+    minimax = comps.loc[comps["company"] == "MiniMax", "multiple_x"]
+    if len(minimax) != 1 or abs(float(minimax.iloc[0]) - 81.4) > 0.15:
+        fail("MiniMax valuation multiple should be about 81.4x")
+
+    with (ROOT / "eventstudy" / "valuation_summary.csv").open(newline="", encoding="utf-8") as f:
+        valuation_summary = {row["metric"]: row["value"] for row in csv.DictReader(f)}
+    summary_metric = next(
+        (
+            metric
+            for metric in [
+                "Market equity value / FY2026E revenue",
+                "Market EV / FY2026E revenue",
+            ]
+            if metric in valuation_summary
+        ),
+        None,
+    )
+    if summary_metric is None:
+        fail("valuation_summary.csv missing market equity value / FY2026E revenue metric")
+    zhipu = comps.loc[comps["company"] == "Zhipu", "multiple_x"]
+    if len(zhipu) != 1:
+        fail("valuation comps must contain exactly one Zhipu row")
+    if abs(float(zhipu.iloc[0]) - float(valuation_summary[summary_metric])) > 0.051:
+        fail("Zhipu valuation comp does not match valuation_summary market multiple")
+
+    for table_name, table in [("input", inputs), ("output", comps)]:
+        for column in ["valuation_source_url", "revenue_source_url"]:
+            blank = table[column].astype(str).str.strip().eq("")
+            if blank.any():
+                company = table.loc[blank, "company"].iloc[0]
+                fail(f"valuation comps {table_name} {column} is blank for {company}")
+
+
 def check_pdfs() -> None:
     for path in [ROOT / "paper" / "main.pdf", submission_pdf_path()]:
         if not path.exists():
@@ -165,6 +308,7 @@ def main() -> int:
     checks = [
         ("price_summary dates match raw data", check_price_summary_dates),
         ("valuation_summary matches Excel Audit Summary", check_valuation_summary),
+        ("valuation comps are complete and auditable", check_valuation_comps),
         ("event panel outputs exist", check_event_panel),
         ("appendix outputs exist", check_appendix_outputs),
     ]

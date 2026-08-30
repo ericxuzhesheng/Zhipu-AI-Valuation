@@ -19,7 +19,10 @@ from event_panel import write_event_panel_outputs
 ROOT = Path(__file__).resolve().parents[1]
 FIGURES = ROOT / "figures"
 EVENTSTUDY = ROOT / "eventstudy"
+DATA = ROOT / "data"
 MODEL = ROOT / "model" / "valuation_model.xlsx"
+VALUATION_COMPS_INPUT = DATA / "valuation_comps_input.csv"
+VALUATION_COMPS_OUTPUT = DATA / "valuation_comps.csv"
 
 
 WACC = 0.135
@@ -106,6 +109,89 @@ def market_snapshot() -> MarketSnapshot:
 
 
 MARKET = market_snapshot()
+
+
+def build_valuation_comps() -> pd.DataFrame:
+    """Load, validate, and calculate the layered valuation-comparable table."""
+    required = {
+        "company",
+        "ticker",
+        "cohort",
+        "valuation_date",
+        "valuation_basis",
+        "equity_value_bn",
+        "revenue_bn",
+        "currency",
+        "revenue_basis",
+        "include_in_private_range",
+        "valuation_source_url",
+        "revenue_source_url",
+        "comparability_note",
+    }
+    comps = pd.read_csv(VALUATION_COMPS_INPUT, keep_default_na=False)
+    missing = sorted(required.difference(comps.columns))
+    if missing:
+        raise ValueError(f"{VALUATION_COMPS_INPUT} missing columns: {', '.join(missing)}")
+    if comps["company"].duplicated().any():
+        duplicates = sorted(comps.loc[comps["company"].duplicated(), "company"].unique())
+        raise ValueError(f"duplicate valuation comparable: {', '.join(duplicates)}")
+
+    allowed_cohorts = {"core_frontier", "hk_adjacent", "commercialization_reference"}
+    unknown_cohorts = sorted(set(comps["cohort"]) - allowed_cohorts)
+    if unknown_cohorts:
+        raise ValueError(f"unknown valuation-comparable cohort: {', '.join(unknown_cohorts)}")
+
+    comps["include_in_private_range"] = pd.to_numeric(
+        comps["include_in_private_range"], errors="raise"
+    ).astype(int)
+    if not comps["include_in_private_range"].isin([0, 1]).all():
+        raise ValueError("include_in_private_range must contain only 0 or 1")
+
+    for column in ["equity_value_bn", "revenue_bn"]:
+        comps[column] = pd.to_numeric(comps[column], errors="coerce")
+
+    subject = comps["company"].eq("Zhipu")
+    if int(subject.sum()) != 1:
+        raise ValueError("valuation-comparable input must contain exactly one Zhipu row")
+    comps.loc[subject, "valuation_date"] = MARKET.date.strftime("%Y-%m-%d")
+    comps.loc[subject, "equity_value_bn"] = MARKET.equity_value_usdm / 1000
+    comps.loc[subject, "revenue_bn"] = REV_2026_USDM / 1000
+
+    if comps[["equity_value_bn", "revenue_bn"]].isna().any().any():
+        raise ValueError("valuation comparables contain missing equity-value or revenue inputs")
+    if (comps[["equity_value_bn", "revenue_bn"]] <= 0).any().any():
+        raise ValueError("valuation-comparable equity values and revenues must be positive")
+    if pd.to_datetime(comps["valuation_date"], errors="coerce").isna().any():
+        raise ValueError("valuation comparables contain an invalid valuation_date")
+    if (comps["valuation_source_url"].str.strip().eq("") | comps["revenue_source_url"].str.strip().eq("")).any():
+        raise ValueError("valuation comparables require valuation and revenue sources")
+
+    comps["multiple_x"] = comps["equity_value_bn"] / comps["revenue_bn"]
+    return comps[
+        [
+            "company",
+            "ticker",
+            "cohort",
+            "valuation_date",
+            "valuation_basis",
+            "equity_value_bn",
+            "revenue_bn",
+            "currency",
+            "revenue_basis",
+            "include_in_private_range",
+            "valuation_source_url",
+            "revenue_source_url",
+            "comparability_note",
+            "multiple_x",
+        ]
+    ].copy()
+
+
+def write_valuation_comps_csv(comps: pd.DataFrame) -> None:
+    output = comps.copy()
+    for column in ["equity_value_bn", "revenue_bn", "multiple_x"]:
+        output[column] = output[column].astype(float).round(6)
+    write_csv(output, VALUATION_COMPS_OUTPUT)
 
 
 def write_price_summary_csv() -> None:
@@ -396,7 +482,7 @@ def valuation_audit_rows() -> list[tuple[str, str | float]]:
         ("Market date", MARKET.date.strftime("%Y-%m-%d")),
         ("Market price (HK$)", round(MARKET.price_hkd, 1)),
         ("Market equity value (US$m)", round(MARKET.equity_value_usdm, 1)),
-        ("Market EV / FY2026E revenue", round(MARKET.revenue_multiple, 1)),
+        ("Market equity value / FY2026E revenue", round(MARKET.revenue_multiple, 1)),
         ("Bear per share (HK$)", round(results["Bear"]["per_share_hkd"], 1)),
         ("Base per share (HK$)", round(results["Base"]["per_share_hkd"], 1)),
         ("Bull per share (HK$)", round(results["Bull"]["per_share_hkd"], 1)),
@@ -413,7 +499,7 @@ def write_valuation_summary_csv() -> None:
     write_csv(summary_df, EVENTSTUDY / "valuation_summary.csv")
 
 
-def write_workbook() -> None:
+def write_workbook(valuation_comps: pd.DataFrame) -> None:
     wb = openpyxl.Workbook()
     ws = wb.active
     ws.title = "Assumptions"
@@ -519,6 +605,47 @@ def write_workbook() -> None:
     ws.append(["DCF value as % of market", "=D6/B7"])
     ws.append(["Market equity value / revenue", "=(Assumptions!B9*Assumptions!B5/Assumptions!B6)/Assumptions!B11"])
 
+    ws = wb.create_sheet("Valuation Comps")
+    comp_headers = [
+        "Company",
+        "Ticker",
+        "Cohort",
+        "Valuation date",
+        "Valuation basis",
+        "Equity value (bn)",
+        "Revenue (bn)",
+        "Currency",
+        "Revenue basis",
+        "Private range flag",
+        "Valuation source",
+        "Revenue source",
+        "Comparability note",
+        "Equity value / revenue (x)",
+    ]
+    ws.append(comp_headers)
+    for output_row, comp in enumerate(valuation_comps.itertuples(index=False), start=2):
+        ws.append(
+            [
+                comp.company,
+                comp.ticker,
+                comp.cohort,
+                comp.valuation_date,
+                comp.valuation_basis,
+                comp.equity_value_bn,
+                comp.revenue_bn,
+                comp.currency,
+                comp.revenue_basis,
+                comp.include_in_private_range,
+                comp.valuation_source_url,
+                comp.revenue_source_url,
+                comp.comparability_note,
+                f"=F{output_row}/G{output_row}",
+            ]
+        )
+    for cell in ws[1]:
+        cell.font = Font(bold=True)
+        cell.fill = PatternFill("solid", fgColor="D9EAF7")
+
     audit = wb.create_sheet("Audit Summary")
     audit_rows = valuation_audit_rows()
     for row in audit_rows:
@@ -580,30 +707,63 @@ def write_sensitivity_chart() -> None:
     plt.close(fig)
 
 
-def write_football_field() -> None:
+def write_football_field(valuation_comps: pd.DataFrame) -> None:
     results = {s.name: project_scenario(s) for s in SCENARIOS}
     weighted = sum(s.probability * results[s.name]["per_share_hkd"] for s in SCENARIOS)
+    private_refs = valuation_comps.loc[
+        valuation_comps["include_in_private_range"].eq(1), "multiple_x"
+    ].astype(float)
+    private_low = float(private_refs.min())
+    private_high = float(private_refs.max())
+    private_mid = float(private_refs.median())
+    minimax_multiple = float(
+        valuation_comps.loc[valuation_comps["company"].eq("MiniMax"), "multiple_x"].iloc[0]
+    )
+
+    def multiple_to_per_share(multiple: float) -> float:
+        return multiple * REV_2026_USDM / SHARES_M * USD_HKD
+
     rows = [
         ("Scenario DCF", results["Bear"]["per_share_hkd"], results["Bull"]["per_share_hkd"]),
-        ("Valuation / revenue", 30 * REV_2026_USDM / SHARES_M * USD_HKD, 40 * REV_2026_USDM / SHARES_M * USD_HKD),
+        ("Private frontier deals", multiple_to_per_share(private_low), multiple_to_per_share(private_high)),
+        ("MiniMax (LTM)", multiple_to_per_share(minimax_multiple), multiple_to_per_share(minimax_multiple)),
         ("Market", MARKET.price_hkd, MARKET.price_hkd),
     ]
-    fig, ax = plt.subplots(figsize=(8.6, 3.6), dpi=150)
+    fig, ax = plt.subplots(figsize=(8.8, 4.2), dpi=150)
     y = np.arange(len(rows))
     for i, (label, low, high) in enumerate(rows):
-        ax.hlines(i, low, high, color=(C_RED if label == "Market" else C_BLUE), linewidth=9)
-        ax.text(low, i + 0.18, f"HK${low:.0f}", ha="center", fontsize=8)
-        if high != low:
+        color = C_RED if label == "Market" else C_BLUE
+        if np.isclose(low, high):
+            ax.scatter([low], [i], s=76, color=color, edgecolor="white", linewidth=0.8, zorder=3)
+            ax.text(low, i + 0.22, f"HK${low:.0f}", ha="center", fontsize=8)
+        else:
+            ax.hlines(i, low, high, color=color, linewidth=9)
+            ax.text(low, i + 0.18, f"HK${low:.0f}", ha="center", fontsize=8)
             ax.text(high, i + 0.18, f"HK${high:.0f}", ha="center", fontsize=8)
-    ax.scatter([weighted], [0], marker="D", color=C_ORANGE, zorder=3, label="Prob.-weighted DCF")
-    comp_mid = 35 * REV_2026_USDM / SHARES_M * USD_HKD
-    ax.scatter([comp_mid], [1], marker="D", color=C_GREEN, zorder=3, label="Multiple midpoint")
+    ax.scatter(
+        [weighted],
+        [0],
+        marker="D",
+        facecolor="white",
+        edgecolor=C_INK,
+        linewidth=1.2,
+        zorder=4,
+        label="Prob.-weighted DCF",
+    )
+    ax.scatter(
+        [multiple_to_per_share(private_mid)],
+        [1],
+        marker="D",
+        color=C_INK,
+        zorder=4,
+        label=f"Private-deal median ({private_mid:.1f}x)",
+    )
     ax.set_xscale("log")
     ax.set_yticks(y)
     ax.set_yticklabels([row[0] for row in rows])
     ax.invert_yaxis()
     ax.set_xlabel("HK$ per share (log scale)")
-    ax.set_title("Valuation football field")
+    ax.set_title("Valuation football field: layered revenue-multiple checks")
     ax.grid(axis="x", which="both", alpha=0.25)
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.legend(loc="lower right", fontsize=8)
@@ -612,20 +772,109 @@ def write_football_field() -> None:
     plt.close(fig)
 
 
-def write_comps_chart() -> None:
-    names = ["MiniMax", "OpenAI / Anthropic", "Zhipu"]
-    values = [35, 35, MARKET.revenue_multiple]
-    colors = [C_BLUE, C_GREEN, C_RED]
-    fig, ax = plt.subplots(figsize=(7.8, 4.0), dpi=150)
-    ax.bar(names, values, color=colors)
-    ax.set_yscale("log")
-    ax.set_ylabel("Equity value / revenue (x, log scale)")
-    ax.set_title("Revenue multiple comparison")
-    for i, v in enumerate(values):
-        ax.text(i, v * 1.12, f"{v:.0f}x", ha="center", fontsize=9)
-    ax.grid(axis="y", which="both", alpha=0.25)
-    ax.spines[["top", "right"]].set_visible(False)
-    fig.tight_layout()
+def write_comps_chart(valuation_comps: pd.DataFrame) -> None:
+    cohort_specs = [
+        (
+            "core_frontier",
+            "Frontier AI peers",
+            ["Zhipu", "MiniMax", "Mistral", "OpenAI", "Anthropic"],
+            "o",
+        ),
+        (
+            "hk_adjacent",
+            "Hong Kong adjacent AI",
+            ["Wenge AI", "SenseTime", "Phancy"],
+            "s",
+        ),
+        (
+            "commercialization_reference",
+            "Commercialization references",
+            ["Palantir", "Cloudflare", "Snowflake"],
+            "^",
+        ),
+    ]
+    private_refs = valuation_comps.loc[
+        valuation_comps["include_in_private_range"].eq(1), "multiple_x"
+    ].astype(float)
+    private_low = float(private_refs.min())
+    private_high = float(private_refs.max())
+
+    fig, axes = plt.subplots(
+        3,
+        1,
+        figsize=(8.8, 7.2),
+        dpi=150,
+        sharex=True,
+        gridspec_kw={"height_ratios": [5, 3, 3]},
+    )
+    for ax, (cohort, title, company_order, marker) in zip(axes, cohort_specs):
+        subset = valuation_comps.loc[valuation_comps["cohort"].eq(cohort)].copy()
+        subset["sort_order"] = subset["company"].map({name: i for i, name in enumerate(company_order)})
+        subset = subset.sort_values("sort_order")
+        y = np.arange(len(subset))
+
+        if cohort == "core_frontier":
+            ax.axvspan(private_low, private_high, color=C_GRAY, alpha=0.16, zorder=0)
+            ax.text(
+                np.sqrt(private_low * private_high),
+                -0.68,
+                f"private deals {private_low:.1f}-{private_high:.1f}x",
+                ha="center",
+                va="center",
+                fontsize=7.7,
+                color=C_INK,
+            )
+
+        for yi, comp in enumerate(subset.itertuples(index=False)):
+            value = float(comp.multiple_x)
+            is_subject = comp.company == "Zhipu"
+            is_core = cohort == "core_frontier"
+            line_color = C_RED if is_subject else (C_BLUE if is_core else C_GRAY)
+            face_color = C_RED if is_subject else (C_BLUE if is_core else "white")
+            edge_color = C_RED if is_subject else (C_BLUE if is_core else C_INK)
+            ax.hlines(yi, 1.0, value, color=line_color, linewidth=2.6, alpha=0.9, zorder=2)
+            ax.scatter(
+                [value],
+                [yi],
+                s=62,
+                marker=("D" if is_subject else marker),
+                facecolor=face_color,
+                edgecolor=edge_color,
+                linewidth=1.1,
+                zorder=3,
+            )
+            ax.text(value * 1.08, yi, f"{value:.1f}x", va="center", fontsize=8.2, color=C_INK)
+
+        ax.set_yticks(y)
+        ax.set_yticklabels(subset["company"].tolist())
+        ax.invert_yaxis()
+        ax.set_xscale("log")
+        ax.set_xlim(1, 500)
+        ax.set_title(title, loc="left", fontsize=10, fontweight="bold")
+        ax.grid(axis="x", which="both", alpha=0.22)
+        ax.spines[["top", "right", "left"]].set_visible(False)
+        ax.tick_params(axis="y", length=0)
+
+    axes[-1].set_xlabel("Equity value / revenue (x, log scale; lollipops start at 1x)")
+    fig.suptitle("Revenue multiple comparison by peer cohort", y=0.995, fontsize=13)
+    fig.text(
+        0.5,
+        0.963,
+        "Private deal dates and revenue bases vary; only the shaded private-deal range feeds the football field.",
+        ha="center",
+        va="top",
+        fontsize=8.2,
+        color=C_INK,
+    )
+    fig.text(
+        0.5,
+        0.02,
+        "Bases: Zhipu FY26E; MiniMax/HK peers LTM through 2026H1; private labs annualized run-rate; software latest full year.",
+        ha="center",
+        fontsize=7.6,
+        color=C_INK,
+    )
+    fig.subplots_adjust(left=0.20, right=0.94, top=0.90, bottom=0.11, hspace=0.48)
     savefig(fig, FIGURES / "fig6_ps_comps.png", bbox_inches="tight")
     plt.close(fig)
 
@@ -945,6 +1194,8 @@ def write_reaction_vs_drift() -> None:
 def main() -> None:
     write_price_summary_csv()
     write_valuation_summary_csv()
+    valuation_comps = build_valuation_comps()
+    write_valuation_comps_csv(valuation_comps)
     write_base_projection_csv()
     write_event_panel_outputs(write_csv)
     panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")
@@ -958,10 +1209,10 @@ def main() -> None:
     write_csv(robustness, EVENTSTUDY / "car_robustness.csv")
     write_nonparametric_robustness_csv()
     write_block_bootstrap_outputs()
-    write_workbook()
+    write_workbook(valuation_comps)
     write_sensitivity_chart()
-    write_football_field()
-    write_comps_chart()
+    write_football_field(valuation_comps)
+    write_comps_chart(valuation_comps)
     write_financial_profile()
     write_glm_timeline()
     write_price_paths()

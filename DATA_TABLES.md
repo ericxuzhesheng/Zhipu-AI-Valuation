@@ -28,10 +28,30 @@ Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report**
 | Latest close (HK$) | 1090.0 (2026-08-28) | 300.4 (2026-08-28) | 87.8 (2026-08-28) |
 | Return vs IPO | **+838% (~9.4x)** | +82% | +45% |
 | Period high / low (close) | 2,410 / 131.5 | 1,238 / 193.1 | 111.7 / 62.7 |
-| Latest market cap | **~HK$486.0B (~US$62.3B)** | lower than Zhipu | n/a |
-| Equity value / revenue (FY26E US$200M) | **~312x** | far lower than Zhipu | n/a (different model) |
+| Latest market cap | **~HK$486.0B (~US$62.3B)** | ~HK$104.9B (~US$13.45B) | ~HK$15.3B (~US$1.96B) |
+| Equity value / revenue | **311.5x (FY26E)** | 81.4x (LTM 2026H1) | 28.8x (LTM 2026H1; different model) |
 
-## Table D3 - Risk / Volatility
+## Table D3 - Layered Valuation Comparables
+
+The cohorts are deliberately separated because private funding marks, listed-company market caps, and revenue periods are not mechanically interchangeable. Only the private-lab transaction range is used in the relative-valuation football field; the listed cohorts are display-only context.
+
+| Cohort | Company | Equity-value / revenue | Measurement basis | Use in valuation |
+|---|---|---:|---|---|
+| Core frontier labs | Zhipu | **311.5x** | 2026-08-28 market equity value / FY2026E revenue | subject company; not in peer median |
+| Core frontier labs | MiniMax | 81.4x | 2026-08-28 market equity value / LTM 2026H1 revenue | direct listed cross-check; not in private-round range |
+| Core frontier labs | OpenAI | 34.1x | 2026 financing-round value / 2026 revenue run-rate | primary private transaction |
+| Core frontier labs | Anthropic | 20.5x | 2026 financing-round value / 2026 revenue run-rate | primary private transaction |
+| Core frontier labs | Mistral | 39.0x | older 2025 financing mark / contemporaneous revenue estimate | secondary private transaction |
+| Hong Kong adjacent | SenseTime | 9.7x | 2026-08-28 market equity value / LTM 2026H1 revenue | display only |
+| Hong Kong adjacent | PHANCY | 1.6x | 2026-08-28 market equity value / LTM 2026H1 revenue | display only |
+| Hong Kong adjacent | Wenge AI | 28.8x | 2026-08-28 market equity value / LTM 2026H1 revenue | display only |
+| Commercialization reference | Palantir | 100.0x | 2026-08-28 market equity value / latest complete fiscal-year revenue | display only |
+| Commercialization reference | Cloudflare | 49.1x | 2026-08-28 market equity value / latest complete fiscal-year revenue | display only |
+| Commercialization reference | Snowflake | 24.3x | 2026-08-28 market equity value / latest complete fiscal-year revenue | display only |
+
+Private-lab transaction range: **20.5-39.0x**, median **34.1x** (OpenAI, Anthropic, Mistral). MiniMax, the Hong Kong adjacent group, and the commercialization references are shown to explain market context, not pooled into that range.
+
+## Table D4 - Risk / Volatility
 
 | Metric | Zhipu | MiniMax |
 |---|---|---|
@@ -39,7 +59,7 @@ Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report**
 | Pattern | peaked ~HK$2,410 then pulled back to HK$1,090 | boom-bust (peaked 1,238; latest 300.4) |
 | Beta | bottom-up/comparable **beta ~= 1.6** (HK index not in feed; global AI-software comps, unlever-to-relever) |
 
-## Table D4 - Fundamentals (Zhipu, from prospectus and annual report; RMB unless noted)
+## Table D5 - Fundamentals (Zhipu, from prospectus and annual report; RMB unless noted)
 
 | Period | Revenue | Gross margin | Net loss |
 |---|---|---|---|
@@ -51,9 +71,9 @@ Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report**
 
 Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity), net current liabilities
 **-RMB 8,834.8M**, cash and cash equivalents RMB 2,259.1M. Shares outstanding ~445.8M (per AGM circular 2026-06-22). FX: HK$7.8/US$, RMB 7.1/US$.
-**Implied market equity value / revenue ~= 312x FY26E** (US$62.3B / US$200M).
+**Implied market equity value / revenue = 311.5x FY26E** (US$62.3B / US$200M).
 
-## Table D5 - Product / Competitive Data (leaderboard thread)
+## Table D6 - Product / Competitive Data (leaderboard thread)
 
 | Item | Detail |
 |---|---|
@@ -64,7 +84,7 @@ Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity)
 | Pricing power | 8-17% API price rises with each GLM-5.x release |
 | Strategy | open-weight + low token price = cost-disruption / developer flywheel |
 
-## Table D6 - Capability-Event CAR (mean-adjusted, through 2026-08-28)
+## Table D7 - Capability-Event CAR (mean-adjusted, through 2026-08-28)
 
 | Event | Day 0 | React [0,+1] | Drift [+2,+10] | Note |
 |---|---|---:|---:|---|
@@ -101,7 +121,10 @@ GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of 2026-08-2
 - **HKEX prospectus** (stock code 2513; and 1956 for Wenge) - offering terms, financials, market share.
 - **2025 annual report** (stock code 2513) - FY2025 revenue, margins, net loss, and balance-sheet data.
 - **AGM poll results** (stock code 2513, 2026-06-22) - confirmed total issued shares 445,843,090; all 20 resolutions passed.
+- **HKEX interim / annual reports** (stock codes 00100, 00020, 06682, and 01956) - revenue periods and issued-share cross-checks for MiniMax and the Hong Kong adjacent cohort.
+- **Company financing announcements and primary investor materials** (OpenAI, Anthropic, Mistral) - private transaction values and disclosed or contemporaneous revenue run-rates.
+- **SEC filings and company annual reports** (Palantir, Cloudflare, Snowflake) - latest complete fiscal-year revenue for the commercialization-reference cohort.
 - **Official model cards / technical reports** (Z.ai; Hugging Face `zai-org/GLM-4.6`) - architecture, benchmarks.
 - **Hang Seng Indexes Company** announcements - index inclusion / Stock Connect flows.
-- **Tushare `hk_daily`**, with Tencent Finance (Hong Kong) and Nasdaq (US) public fallbacks - daily prices to `data/*.csv`.
+- **Tushare `hk_daily`**, with Tencent Finance (Hong Kong), Nasdaq (US), and public exchange quotes as fallbacks - 2026-08-28 prices and daily series to `data/*.csv`.
 - News (Caixin, CNBC, SCMP, Bloomberg, Investing.com) - corroboration only.

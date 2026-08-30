@@ -23,9 +23,9 @@
 
 ### 一句话概览
 
-本项目对全球**首家上市的基础大模型公司**——智谱AI（Knowledge Atlas，2513.HK，2026-01-08 经港交所第18C章上市）——做公司金融估值与定价机制研究。核心不是"算出一个目标价"，而是回答一个反直觉的问题：**一家 2025 年收入仅约 1.02 亿美元、2026 年预计收入约 2 亿美元、深度亏损、净权益为负的"早期商业化、尚未盈利"公司，为何上市约六个月暴涨约 10 倍、市值达约 623 亿美元（股权价值/收入约 312 倍）？**
+本项目研究全球**首家上市的基础大模型公司**智谱 AI。公司以 Knowledge Atlas 为上市主体，代码 2513.HK，2026 年 1 月 8 日经港交所第 18C 章上市。它 2025 年收入约 1.02 亿美元，2026 年预计收入约 2 亿美元，仍在深度亏损，净权益也为负。到了 2026 年 8 月 28 日，公司市值已经升到约 623 亿美元，股权价值约为 FY2026E 收入的 312 倍。本项目要解释这段价格如何形成，以及当前价格要求公司将来做到多大。
 
-**主结论：** 这既不是单纯的泡沫，也不是有效定价，而是 **"对赢家通吃 AGI 结局的看涨期权 + 能力动量定价"**。基本面 DCF 概率加权约 HK$32/股（约为市价的 3.0%）；现价隐含 2035 年收入约 710 亿美元、2026–2035 年约 92% 的年增速（9 个增长区间）。市场的价格发现已从"盈余惊喜"转向**"能力惊喜"**——围绕模型发布与榜单登顶定价。
+**主结论** 市场把智谱当作一张押注赢家通吃结果的长期看涨期权，并随模型能力的变化重新定价。基本面 DCF 的概率加权值约为 HK$32 每股，只占市价的 3.0%。现价要求 2035 年收入达到约 710 亿美元，2026 至 2035 年连续九个增长区间的年复合增速约为 92%。模型发布和榜单跃升已经成为这只股票最重要的信息事件。
 
 ### 快速导航
 
@@ -44,7 +44,7 @@
 
 > 当一家公司**没有盈余可被"惊喜"**时，如何用公司金融理论为它估值，又如何检验市场对它的定价是否有效？
 
-经典市场有效性检验依赖"盈余惊喜"事件研究（Ball-Brown 1968；Bernard-Thomas 1989）。但前沿大模型公司处于深度亏损、尚未盈利阶段，盈余无从"惊喜"。本文的处理方式：把信息事件由"盈余惊喜"替换为 **"能力惊喜"（capability surprise）**——即模型发布与基准榜单跃迁，并迁移国信证券《超预期投资全攻略》(2020) 的事件研究框架（CAR 三窗口）到这一新资产类别。
+经典市场有效性检验依赖"盈余惊喜"事件研究（Ball-Brown 1968；Bernard-Thomas 1989）。前沿大模型公司仍在深度亏损，短期盈余很难承载市场最关心的信息。本文把模型发布和基准榜单跃迁定义为 **"能力惊喜"（capability surprise）**，再把国信证券《超预期投资全攻略》(2020) 的 CAR 三窗口框架迁移到这个新资产类别。
 
 ### 核心论点
 
@@ -67,7 +67,13 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 | **概率加权** | — | — | **$1.9B** | **32** |
 | *市价 (2026-08-28)* | — | — | *$62.3B* | *1,090* |
 
-**反向 DCF：** 要支撑现价，需相信 2035 年收入约 **US$710 亿**（约 **92%** 的年复合增速，约 355 倍 FY26E）——超级算力巨头级别。市场股权价值/收入约 **312×**，而 OpenAI/Anthropic 一级市场约 30–40×；**MiniMax 是最合适的直接可比对象，中科闻歌因商业模式不同而排除在倍数比较之外**。
+**反向 DCF** 要支撑现价，需相信 2035 年收入约 **US$710 亿**，对应 2026 至 2035 年约 **92%** 的年复合增速和约 355 倍 FY26E 收入。
+
+**分层可比** MiniMax 按 2026 年 8 月 28 日市值和截至 2026H1 的 LTM 收入重算为 **81.4×**；智谱为 **311.5× FY2026E 收入**。
+
+OpenAI、Anthropic 与 Mistral 的私有交易参照落在 **20.5 至 39.0×**，中位数为 **34.1×**。只有这个区间进入 football field，对应智谱每股约 HK$72 至 136。MiniMax 的上市倍数单独计算，对应约 HK$285。两种结果都明显低于 HK$1,090。
+
+SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 和 Snowflake 放在商业化参照组。它们能帮助读者判断港股 AI 资产和成熟 AI 软件的估值位置，商业模式与收入结构却和基础模型实验室差别很大，因此不参与核心中位数。逐行口径、估值日和来源见 [`data/valuation_comps.csv`](data/valuation_comps.csv)。
 
 ### 事件研究
 
@@ -88,25 +94,27 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 **要点：** ① 事件日期独立取自官方发布公告（不靠股价倒推）；② 原始短窗 5 次中 4 次为正，均值 +13.7%；③ **同业调整后 5/5 的反应与漂移均为正**，均值分别为 +15.3% / +16.8%，GLM-5.1 的"过度反应"翻为延续，GLM-5.3 的原始负反应也翻为 +2.4%；④ 2/20、5/13 两个尖峰为**非能力的指数/资金流事件**。结论定位为**初步诊断性证据**，5 个事件足以构成有趣的本科案例，但不足以确立普遍异象。
 
-### 港股AI新股
+### 港股 AI 参照公司
 
-2026 年港股 AI 新股分两类商业模式：
+截至 2026 年 8 月 28 日，港股 AI 参照公司可按业务分为基础模型实验室和企业 AI 平台。
 
 | 公司 | 代码 | 定位 | 上市表现 |
 |---|---|---|---|
 | 智谱AI | 2513.HK | 通用基础大模型实验室 | IPO HK$116.20 → HK$1,090（+838%） |
 | MiniMax | 00100.HK | 通用/多模态基础模型公司 | IPO HK$165 → HK$300.4（+82%，首日翻倍后大幅回落） |
-| 中科闻歌 Wenge AI | 01956.HK | 企业级决策大模型与 AI 解决方案商 | 2026-06-26 上市，IPO HK$60.70 → HK$87.8（+45%） |
+| SenseTime 商汤 | 00020.HK | 生成式 AI、计算机视觉与解决方案平台 | 2026-08-28 收盘 HK$1.48，约 9.7× LTM 收入 |
+| Phancy 范式智能 | 06682.HK | 企业 AI 平台与智能体服务 | 2026-08-28 收盘 HK$27.76，约 1.6× LTM 收入 |
+| 中科闻歌 Wenge AI | 01956.HK | 企业级决策大模型与 AI 解决方案商 | 2026-06-26 上市，IPO HK$60.70 → HK$87.8；约 28.8× LTM 收入 |
 
-> *Recent Hong Kong AI listings include foundation-model laboratories such as Zhipu AI and MiniMax, as well as enterprise-focused AI platforms such as Wenge AI. However, Wenge AI is better classified as a decision-intelligence solution provider than as a direct frontier-model comparable.*
+> *Recent Hong Kong AI listings include foundation-model laboratories such as Zhipu AI and MiniMax, as well as enterprise-focused AI platforms. Wenge AI is an enterprise decision-intelligence provider and belongs in the Hong Kong-adjacent cohort.*
 
-中科闻歌由中科院自动化所团队 2017 年创立，主打 DIOS 决策智能操作系统与 Decitron、雅意等模型，2025 年中国企业级决策智能大模型市场收入第一（~10.2% 份额）。因此它进入论文作为**港股 AI 新股横向语境**，而非估值倍数可比对象。
+中科闻歌由中科院自动化所团队 2017 年创立，主打 DIOS 决策智能操作系统与 Decitron、雅意等模型，2025 年中国企业级决策智能大模型市场收入第一（~10.2% 份额）。SenseTime、Phancy 和中科闻歌都保留在港股邻近组。它们的收入结构与基础模型实验室差别很大，因此只展示倍数，不参与核心中位数。
 
 ### 关键图表
 
 <p align="center"><img src="figures/fig1_price_paths.png" width="800" alt="价格路径"></p>
 <p align="center"><img src="figures/fig5_football_field.png" width="720" alt="估值足球场"></p>
-<p align="center"><img src="figures/fig6_ps_comps.png" width="640" alt="收入倍数对比"></p>
+<p align="center"><img src="figures/fig6_ps_comps.png" width="760" alt="分层收入倍数对比"></p>
 <p align="center"><img src="figures/fig3_car_eventtime.png" width="640" alt="平均CAR"></p>
 <p align="center"><img src="figures/fig4_reaction_vs_drift.png" width="560" alt="反应vs漂移"></p>
 
@@ -116,6 +124,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 
 - **行情：** Tushare `hk_daily`；受频率/权限限制时以腾讯财经（港股）和 Nasdaq（美股）公开日线补齐并交叉核对，见 [`data/`](data/)。
 - **财务：** 港交所第18C章招股书及 2025 年度报告（论文附录 A）。
+- **估值可比** 输入表与生成表分别见 [`data/valuation_comps_input.csv`](data/valuation_comps_input.csv) 和 [`data/valuation_comps.csv`](data/valuation_comps.csv)，逐行保留估值日、收入周期、币种和来源。
 - **AGM 通函：** 2026年6月22日股东大会投票结果公告（确认总股本 445,843,090 股、股权激励方案等 20 项决议全票通过）。
 - **能力事件：** GLM/MiniMax 官方模型卡、ZCode 发布与 SWE-Bench Pro 等榜单。
 - **指数/资金流：** 恒生指数公司指数调整公告、HKEX/SSE 港股通名单。
@@ -131,7 +140,7 @@ WACC ≈ 13.5%（CAPM，自下而上 β≈1.6，Rf 4%，ERP 6%）；口径统一
 ├── model/                 # 活公式估值模型 valuation_model.xlsx
 ├── eventstudy/            # 事件研究 CAR 结果与 Base Case 预测 (csv)
 ├── figures/               # 论文/README 图表
-├── data/                  # Tushare / 腾讯财经 / Nasdaq 行情 CSV
+├── data/                  # 行情与分层估值可比口径 CSV
 ├── OUTLINE.md / DATA_TABLES.md / EVENT_STUDY.md  # 过程文档
 ```
 
@@ -193,8 +202,10 @@ WACC ≈ 13.5% (CAPM, bottom-up β≈1.6). Conventions: HK$7.8/US$, RMB 7.1/US$,
 | *Market (2026-08-28)* | — | — | *$62.3B* | *1,090* |
 
 **Reverse DCF:** justifying the price requires ~US$71B revenue by 2035 (~92% annual over 2026–2035, ~355×FY26E).
-Market equity value / revenue ≈ 312× vs ~30–40× for OpenAI/Anthropic; **MiniMax is the appropriate direct comparable; Wenge AI is
-excluded from the multiple comparison** (different business model).
+Zhipu trades at about **311.5× FY2026E revenue**. The closest listed peer, MiniMax, is **81.4× LTM revenue**.
+Paired private-market references for OpenAI, Anthropic, and Mistral run from **20.5× to 39.0×**, with a **34.1× median**.
+That private range implies about HK$72 to HK$136 per Zhipu share, while the MiniMax multiple implies about HK$285; both remain well below HK$1,090.
+SenseTime, Phancy, and Wenge AI form a separate Hong Kong-adjacent cohort, while Palantir, Cloudflare, and Snowflake are commercialization references. Neither cohort enters the private-deal range. Row-level bases and sources are in [`data/valuation_comps.csv`](data/valuation_comps.csv).
 
 ### Event Study
 

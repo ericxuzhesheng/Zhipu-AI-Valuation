@@ -283,7 +283,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{可比公司估值提供第二个下限检查}
+\begin{frame}{可比估值先把收入口径分开}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.58\textwidth}
       \includegraphics[width=\textwidth]{fig5_football_field.png}
@@ -291,13 +291,31 @@
     \begin{column}{0.38\textwidth}
       \textbf{交叉验证}
       \begin{itemize}
-        \item 可比收入倍数给出的每股价值约 HK\$70--123。
-        \item 它高于 DCF 概率加权值，但仍远低于市场价。
-        \item 所以结论不依赖单一 DCF 模型。
+        \item OpenAI、Anthropic 与 Mistral 的私有交易区间为 20.5--39.0x，对应每股约 HK\$72--136。
+        \item MiniMax 的可审计倍数为 81.4x LTM，对应约 HK\$285。
+        \item 两种检查都明显低于 HK\$1,090，估值缺口没有消失。
       \end{itemize}
       \begin{block}{估值含义}
-        市场价格主要来自右尾概率，不来自中位数现金流。
+        市场价格仍要依靠很大的右尾结果才能成立。
       \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{三层可比回答三个不同的问题}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \includegraphics[width=\textwidth,height=0.68\textheight,keepaspectratio]{fig6_ps_comps.png}
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \small
+      \textbf{读图顺序}
+      \begin{itemize}
+        \item 先看基础模型同行。智谱为 311.5x，MiniMax 为 81.4x；私有交易中位数约 34.1x。
+        \item 港股邻近组帮助判断本地 AI 资产的估值位置，但收入结构不同。
+        \item 商业化参照组显示成熟 AI 软件的收入倍数，不参与核心中位数。
+      \end{itemize}
+      \smallnote{图中每家公司都保留估值日、收入周期和来源，倍数由数据表计算。}
     \end{column}
   \end{columns}
 \end{frame}

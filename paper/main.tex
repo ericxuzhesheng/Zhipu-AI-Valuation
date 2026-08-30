@@ -192,8 +192,8 @@ Hong Kong--listed AI firms, SenseTime (0020.HK) has pivoted toward generative AI
 Fourth Paradigm (6682.HK) provides enterprise ML infrastructure, and Wenge AI (01956.HK, listed 26~June~2026,
 $+84\%$ on debut) focuses on decision intelligence \citep{prospectus20,prospectus6682,prospectus1956}---none is a direct frontier-model
 comparable. In the upcoming IPO pipeline, Moonshot AI (Kimi) is reportedly preparing a Hong Kong listing, and
-other Chinese frontier labs (StepStar, 01.AI) may similarly seek public capital. These listings reinforce Zhipu's Chapter~18C first-mover premium. \emph{For this paper's valuation, only MiniMax is a
-direct comparable} (Section~\ref{sec:rel}).
+other Chinese frontier labs (StepStar, 01.AI) may similarly seek public capital. These listings reinforce Zhipu's Chapter~18C first-mover premium. \emph{For this paper's valuation, MiniMax is the only
+direct listed comparable} (Section~\ref{sec:rel}).
 
 \textbf{Macro and flows.} Chinese AI is a policy priority (state/SOE demand); U.S. compute-export controls
 force the architectural efficiency that doubles as Zhipu's cost edge; and Hong Kong's market structure sets
@@ -217,19 +217,10 @@ shares that convert to ordinary equity on listing, so it is not post-IPO debt; t
 would only lower equity value and reinforce our conclusion. Appendix~\ref{sec:beta} lists the comparable set
 and unlevering bridge.
 
-\textbf{Two caveats, deliberately retained.} We keep this single comparables-based WACC for transparency, but
-two simplifications deserve flagging. \emph{(i) The beta source.} The bottom-up $\beta$ is built from mature
-global AI-software names (Salesforce-, Palantir-type firms) with healthy margins and conventional cash-flow
-profiles, whereas Zhipu today behaves more like a high-capex frontier ``hard-tech'' lab; a $\beta$ drawn from
-pre-profit infrastructure or biotech comparables---asset classes with the same binary payoff
-structure---would be higher, so the software-based WACC is generous to valuation. \emph{(ii) A static WACC.} Holding WACC fixed at 13.5\%
-across the full 2026--2035 horizon is mechanical: under the reflexivity logic developed later in this section,
-a break in the high-valuation loop would push Zhipu's cost of capital up non-linearly, so a fuller model would
-attach a dynamic risk premium or an explicit distress/default probability to the discount rate. We do not do so
-here because both refinements push value in the \emph{same} direction---a higher or state-dependent WACC lowers
-the DCF---and the sensitivity analysis (Figure~\ref{fig:tornado}) already shows that even a markedly \emph{lower}
-WACC cannot close the gap to the market price. The binary tail that these adjustments would proxy is, in any
-case, handled more naturally by the real-options reading below.
+\textbf{Two caveats remain.} First, the beta set consists of mature software firms, while Zhipu resembles a
+pre-profit, capital-intensive lab; the resulting WACC is generous. Second, fixing WACC at 13.5\% through 2035
+ignores the risk-premium increase that could follow a break in the valuation loop. Both refinements would lower
+DCF value. Figure~\ref{fig:tornado} tests rate sensitivity, while the real-options section treats the binary tail.
 
 \subsection{Scenario DCF}
 We project FCFF over 2026--2035 from a US\$200m base, with revenue growth fading from a scenario-specific
@@ -258,7 +249,7 @@ Bull ($p=0.20$) & 46\% & 35\% & US\$4.6B & 80 \\
 \end{tabular}
 \end{table}
 
-The probability-weighted intrinsic value is about HK\$32 per share---roughly \textbf{1.8\% of the market
+The probability-weighted intrinsic value is about HK\$32 per share---roughly \textbf{3.0\% of the market
 price}. No reasonable point estimate of fundamentals approaches the quote.
 
 \subsection{Reverse DCF: what the price requires}
@@ -280,21 +271,27 @@ Table~\ref{tab:revheat} in Appendix~\ref{sec:revheat}.}
 
 \subsection{Relative valuation}
 \label{sec:rel}
-On FY2026E revenue Zhipu trades near \textbf{312$\times$ equity value / revenue}. For context, reported
-2026 private-market reference points put OpenAI at about \$852bn of value and roughly \$24bn annualised revenue,
-and Anthropic near \$965bn of value and about \$47bn annualised revenue \citep{openai2026,anthropic2026}.
-Those figures imply low-tens revenue multiples, not hundreds. MiniMax---the most appropriate direct comparable---trades far lower.
-We deliberately \emph{exclude} Wenge AI: its government/enterprise project-delivery model is not
-comparable to a frontier-model-API business. Zhipu is priced roughly an order of magnitude above even
-the richest private peers---consistent with the reverse-DCF reading
-(Figure~\ref{fig:comps}).
+On FY2026E revenue Zhipu trades near \textbf{312$\times$ equity value / revenue}. We use three groups because
+their businesses and revenue bases differ. MiniMax, the closest listed lab, has a 28~August~2026 equity value of
+US\$13.45bn and US\$165.2m of LTM revenue, or \textbf{81.4$\times$}. Private transactions imply
+\textbf{34.1$\times$} for OpenAI, \textbf{20.5$\times$} for Anthropic, and \textbf{39.0$\times$} for Mistral
+\citep{minimax2026h1,openai2026,anthropic2026,mistral2025}. This private range, with a 34.1$\times$ median, is
+the only one carried into the football field. It gives HK\$72 to HK\$136 per Zhipu share; MiniMax's multiple
+gives HK\$285.
+
+SenseTime, Phancy, and Wenge AI form a Hong Kong adjacent-AI group; Palantir, Cloudflare, and Snowflake are
+commercialisation references \citep{hkcomps2026,softwarecomps2026}. Their economics and revenue periods differ
+from frontier-model labs, so both groups are diagnostic context only. Even so,
+Zhipu stands at 3.8 times MiniMax and about nine times the private-reference median, consistent with the
+reverse-DCF reading (Figure~\ref{fig:comps}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{fig6_ps_comps.png}
-\caption{Equity value / revenue multiples (log scale). Zhipu's $\approx$312$\times$ is roughly an order of magnitude above
-the 20--35$\times$ at which leading private frontier labs have transacted in recent funding rounds
-(Section~\ref{sec:rel}); even MiniMax sits far below. Private-lab multiples are private-market reference points, not liquid-market prices.}
+\includegraphics[width=0.96\textwidth]{fig6_ps_comps.png}
+\caption{Layered equity value / revenue multiples (log scale). The chart shows core frontier peers, Hong
+Kong adjacent-AI firms, and commercialisation references in separate groups. Only the shaded private-deal
+range from 20.5$\times$ to 39.0$\times$ feeds the football field; MiniMax uses LTM revenue, Zhipu uses FY2026E, and each
+other revenue period is recorded in \texttt{data/valuation\_comps.csv}.}
 \label{fig:comps}
 \end{figure}
 
@@ -321,10 +318,10 @@ The conclusion is not an artefact of any single assumption. Figure~\ref{fig:torn
 against its main drivers: even the most favorable one-at-a-time changes---lower WACC, a higher terminal margin,
 or stronger 2027 growth---raise estimated value only to the mid-HK\$30s, still about two orders of magnitude
 below the market. Figure~\ref{fig:ff} draws the whole picture together as a valuation football field: scenario
-DCF (HK\$12--80) and an equity-value-to-revenue cross-check (HK\$70--123 at 20--35$\times$ revenue) both sit
-far to the left of the HK\$1,090 quote, a gap of roughly 9--34$\times$, depending on the valuation anchor.
-The market is not pricing a different point on the same distribution; it is pricing a
-different distribution---the right-tail option of Section~\ref{sec:val}.
+DCF spans HK\$12--80, the 20.5--39.0$\times$ private-deal range gives HK\$72--136, and MiniMax's 81.4$\times$
+LTM multiple gives about HK\$285. Every anchor remains far left of the HK\$1,090 quote; even the highest
+listed-peer cross-check is about 74\% below the market. The quote therefore depends on the right-tail option
+of Section~\ref{sec:val}, not a modest change to a conventional multiple.
 
 \begin{figure}[H]
 \centering
@@ -337,8 +334,8 @@ HK\$28 base; no single input moves value near the market price.}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.86\textwidth]{fig5_football_field.png}
-\caption{Valuation football field (log scale). Fundamental approaches cluster two orders of magnitude below
-the market price; the diamonds mark the probability-weighted DCF and the comparables midpoint.}
+\caption{Valuation football field (log scale). The private-deal range and MiniMax's public LTM multiple are
+shown separately; the diamonds mark probability-weighted DCF and the private-deal median.}
 \label{fig:ff}
 \end{figure}
 
@@ -785,12 +782,32 @@ Yahoo Finance. (2026). \emph{Company beta, market capitalisation, and total debt
 28~June~2026]. \url{https://finance.yahoo.com}
 
 \bibitem{openai2026}
-The Guardian. (2026). \emph{OpenAI nearly triples in value to \$852bn after investment round}
-[31~March~2026]. \url{https://www.theguardian.com/technology/2026/mar/31/openai-raises-122-billion-ai-boom}
+OpenAI. (2026). \emph{Accelerating the next phase of AI} [31~March~2026]; Reuters. (2026).
+\emph{OpenAI tops US\$25bn annualised revenue}. \url{https://openai.com/index/accelerating-the-next-phase-ai/};
+\url{https://finance.yahoo.com/news/openai-tops-25-billion-annualized-033836274.html}
 
 \bibitem{anthropic2026}
-Axios. (2026). \emph{CEOs go bargain hunting for AI} [29~May~2026].
-\url{https://www.axios.com/2026/05/29/ceos-ai-cheaper-tokens}
+Anthropic. (2026). \emph{Announcing our Series H} [28~May~2026].
+\url{https://www.anthropic.com/news/series-h}
+
+\bibitem{minimax2026h1}
+MiniMax Group Inc. (2026). \emph{Interim results for the six months ended 30~June~2026}.
+HKEXnews. \url{https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0826/2026082600680.pdf}
+
+\bibitem{mistral2025}
+Mistral AI. (2025). \emph{Series C financing}; Le Monde. (2025). \emph{Mistral AI: incarnation de
+l'intelligence artificielle}. \url{https://mistral.ai/news/mistral-ai-raises-1-7-b-to-accelerate-technological-progress-with-ai/};
+\url{https://www.lemonde.fr/economie/article/2025/09/26/mistral-ai-incarnation-de-l-intelligence-artificielle_6643087_3234.html}
+
+\bibitem{hkcomps2026}
+SenseTime Group, Phancy Group, and Wenge Technology. (2026). \emph{2025 annual and 2026 interim reports}.
+HKEXnews. \url{https://www1.hkexnews.hk}; calculations and document links in
+\texttt{data/valuation\_comps.csv}.
+
+\bibitem{softwarecomps2026}
+Palantir Technologies, Cloudflare, and Snowflake. (2026). \emph{2025/FY2026 annual reports and
+28~August~2026 market-capitalisation snapshots}. SEC, company investor relations, and public market data;
+document links in \texttt{data/valuation\_comps.csv}.
 
 \bibitem{black1973}
 Black, F., \& Scholes, M. (1973). The pricing of options and corporate liabilities. \emph{Journal of

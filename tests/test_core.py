@@ -65,6 +65,26 @@ class ValuationTests(unittest.TestCase):
         result = rebuild_outputs.project_scenario(rebuild_outputs.SCENARIOS[1])
         self.assertAlmostEqual(result["per_share_hkd"], 27.4, places=1)
 
+    def test_valuation_comps_are_built_from_input(self) -> None:
+        comps = rebuild_outputs.build_valuation_comps()
+        input_path = ROOT / "data" / "valuation_comps_input.csv"
+        self.assertTrue(input_path.exists())
+
+        inputs = pd.read_csv(input_path, keep_default_na=False)
+        self.assertNotIn("multiple_x", inputs.columns)
+        self.assertGreaterEqual(len(comps), 10)
+
+        expected = comps["equity_value_bn"] / comps["revenue_bn"]
+        self.assertTrue(((comps["multiple_x"] - expected).abs() <= 0.051).all())
+        included = comps.loc[comps["include_in_private_range"] == 1]
+        self.assertEqual(set(included["company"]), {"OpenAI", "Anthropic", "Mistral"})
+        self.assertAlmostEqual(float(included["multiple_x"].min()), 20.5, delta=0.15)
+        self.assertAlmostEqual(float(included["multiple_x"].median()), 34.1, delta=0.15)
+        self.assertAlmostEqual(float(included["multiple_x"].max()), 39.0, delta=0.15)
+
+        minimax = comps.loc[comps["company"] == "MiniMax", "multiple_x"].iloc[0]
+        self.assertAlmostEqual(float(minimax), 81.4, delta=0.15)
+
 
 if __name__ == "__main__":
     unittest.main()

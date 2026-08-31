@@ -143,8 +143,8 @@ def update_readme(snap: dict) -> None:
 
     # Core data as of date
     content = re.sub(
-        r'\*\*核心数据截至 / Core data as of:\*\* \d{4}-\d{2}-\d{2}',
-        f'**核心数据截至 / Core data as of:** {snap["date_display"]}',
+        r'<strong>核心数据截至 / Core data through</strong> \d{4}-\d{2}-\d{2}',
+        f'<strong>核心数据截至 / Core data through</strong> {snap["date_display"]}',
         content,
     )
 
@@ -167,7 +167,7 @@ def update_readme(snap: dict) -> None:
     # | *市价 (2026-07-24)* | — | — | *$70.7B* | *1,237* |
     content = re.sub(
         r'\|\s*\*市价\s*\(\d{4}-\d{2}-\d{2}\)\*\s*\|[^|]*\|[^|]*\|\s*\*\$[\d.]+B\*\s*\|\s*\*[\d,]+\*\s*\|',
-        f'| *市价 ({snap["date_display"]})* | — | — | *${snap["equity_value_usdb"]:.1f}B* | *{snap["price_hkd_fmt"]}* |',
+        f'| *市价 ({snap["date_display"]})* | N/A | N/A | *${snap["equity_value_usdb"]:.1f}B* | *{snap["price_hkd_fmt"]}* |',
         content,
     )
 
@@ -206,15 +206,15 @@ def update_readme(snap: dict) -> None:
     # Market row in DCF table
     content = re.sub(
         r'\|\s*\*Market\s*\(\d{4}-\d{2}-\d{2}\)\*\s*\|[^|]*\|[^|]*\|\s*\*\$[\d.]+B\*\s*\|\s*\*[\d,]+\*\s*\|',
-        f'| *Market ({snap["date_display"]})* | — | — | *${snap["equity_value_usdb"]:.1f}B* | *{snap["price_hkd_fmt"]}* |',
+        f'| *Market ({snap["date_display"]})* | N/A | N/A | *${snap["equity_value_usdb"]:.1f}B* | *{snap["price_hkd_fmt"]}* |',
         content,
     )
 
     # Reverse DCF English
     if snap["rev_req_usd_bn"]:
         content = re.sub(
-            r'requires ~US\$\d+\.?\d*[Bb] revenue by 2035 \(~\d+% annual over 2026–2035, ~\d+×FY26E\)',
-            f'requires ~US${snap["rev_req_usd_bn"]:.0f}B revenue by 2035 (~{snap["cagr_fmt"]} annual over 2026–2035, ~{snap["rev_req_multiple_fmt"]}×FY26E)',
+            r'\*\*Reverse DCF\*\* indicates that the price requires about US\$\d+\.?\d* billion in revenue by 2035, equivalent to roughly \d+\.?\d* percent annual growth from 2026 through 2035 and about \d+\.?\d* times FY2026E revenue\.',
+            f'**Reverse DCF** indicates that the price requires about US${snap["rev_req_usd_bn"]:.0f} billion in revenue by 2035, equivalent to roughly {snap["cagr_fmt"].rstrip("%")} percent annual growth from 2026 through 2035 and about {snap["rev_req_multiple_fmt"]} times FY2026E revenue.',
             content,
         )
 

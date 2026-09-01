@@ -9,7 +9,7 @@
 <p align="center">
   <strong>Zhesheng Xu（许哲圣）</strong><br>
   Corporate Finance Final Project<br>
-  <strong>核心数据截至 / Core data through</strong> 2026-08-28
+  <strong>核心数据截至 / Core data through</strong> 2026-08-31
 </p>
 
 <p align="center">
@@ -74,7 +74,7 @@ WACC 约为 13.5%，其中自下而上 β 约为 1.6，Rf 为 4%，ERP 为 6%。
 | 中性 (p=0.45) | 31% | 28% | $1.6B | 27 |
 | 乐观 (p=0.20) | 46% | 35% | $4.6B | 80 |
 | **概率加权** | N/A | N/A | **$1.9B** | **32** |
-| *市价 (2026-08-28)* | N/A | N/A | *$62.3B* | *1,090* |
+| *市价 (2026-08-31)* | N/A | N/A | *$68.3B* | *1,195* |
 
 **反向 DCF** 要支撑现价，需相信 2035 年收入约 **US$710 亿**，对应 2026 至 2035 年约 **92%** 的年复合增速和约 355 倍 FY26E 收入。
 
@@ -99,7 +99,7 @@ SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 
 | *MiniMax M3* | 2026-06-01 | −21.1% | −40.8% | 发布后估值收缩 |
 | **均值(5)** | | **+13.7%** | **+4.6%** | |
 
-均值调整采用 `AR_t = R_t - average(R[-20,-6])`。截至 2026-08-28，GLM-5.2 与 GLM-5.3 的 [+2,+10] 窗口均覆盖完整 9 个交易日。GLM-5.3-Flash 的后续窗口不足，因此只进入扩展目录。
+均值调整采用 `AR_t = R_t - average(R[-20,-6])`。截至 2026-08-31，GLM-5.2 与 GLM-5.3 的 [+2,+10] 窗口均覆盖完整 9 个交易日。GLM-5.3-Flash 的后续窗口不足，因此只进入扩展目录。
 
 事件日期独立取自官方发布公告，没有按股价走势倒推。原始短窗五次中有四次为正，均值为 +13.7%。同业调整后，五次反应与后续漂移均为正，均值分别为 +15.3% 和 +16.8%。2 月 20 日与 5 月 13 日的尖峰来自指数调整和资金流事件，未计为能力事件。
 
@@ -111,7 +111,7 @@ SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 
 
 | 公司 | 代码 | 定位 | 上市表现 |
 |---|---|---|---|
-| 智谱AI | 2513.HK | 通用基础大模型实验室 | IPO HK$116.20 → HK$1,090（+838%） |
+| 智谱AI | 2513.HK | 通用基础大模型实验室 | IPO HK$116.20 → HK$1,195（+928%） |
 | MiniMax | 00100.HK | 通用/多模态基础模型公司 | IPO HK$165 → HK$300.4（+82%，首日翻倍后大幅回落） |
 | SenseTime 商汤 | 00020.HK | 生成式 AI、计算机视觉与解决方案平台 | 2026-08-28 收盘 HK$1.48，约 9.7× LTM 收入 |
 | Phancy 范式智能 | 06682.HK | 企业 AI 平台与智能体服务 | 2026-08-28 收盘 HK$27.76，约 1.6× LTM 收入 |
@@ -215,7 +215,7 @@ How can a defensible valuation range be built for a foundation-model company wit
 | Fundamental valuation | CAPM/WACC, three-scenario DCF, reverse DCF, comparables and real options | Establish a cash-flow range and recover the operating path embedded in the market price |
 | Capability event study | Five events from GLM-5 through GLM-5.3 with MiniMax peer adjustment | Observe the immediate reaction and subsequent drift following capability information |
 
-### Valuation Summary (market row at 2026-08-28)
+### Valuation Summary (market row at 2026-08-31)
 
 WACC is approximately 13.5 percent, using a bottom-up beta of about 1.6. The model applies HK$7.8/US$, RMB 7.1/US$ and approximately 446 million shares. The live workbook is [`model/valuation_model.xlsx`](model/valuation_model.xlsx), and the paper's Appendix B contains the full ten-year Base case.
 
@@ -225,7 +225,7 @@ WACC is approximately 13.5 percent, using a bottom-up beta of about 1.6. The mod
 | Base (p=0.45) | 31% | 28% | $1.6B | 27 |
 | Bull (p=0.20) | 46% | 35% | $4.6B | 80 |
 | **Probability weighted** | N/A | N/A | **$1.9B** | **32** |
-| *Market (2026-08-28)* | N/A | N/A | *$62.3B* | *1,090* |
+| *Market (2026-08-31)* | N/A | N/A | *$68.3B* | *1,195* |
 
 **Reverse DCF** indicates that the price requires about US$71 billion in revenue by 2035, equivalent to roughly 92 percent annual growth from 2026 through 2035 and about 355 times FY2026E revenue.
 Zhipu trades at about **311.5× FY2026E revenue**. The closest listed peer, MiniMax, is **81.4× LTM revenue**.
@@ -246,7 +246,7 @@ SenseTime, Phancy, and Wenge AI form a separate Hong Kong-adjacent cohort, while
 | *MiniMax M3* | 2026-06-01 | −21.1% | −40.8% | failed catalyst / de-rate |
 | **Average (5)** | | **+13.7%** | **+4.6%** | |
 
-The mean-adjusted return is defined as `AR_t = R_t - average(R[-20,-6])`. As of 2026-08-28, GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows. GLM-5.3-Flash remains in the extended catalog because its post-event window is incomplete.
+The mean-adjusted return is defined as `AR_t = R_t - average(R[-20,-6])`. As of 2026-08-31, GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows. GLM-5.3-Flash remains in the extended catalog because its post-event window is incomplete.
 
 The event dates come from official release announcements and were set independently of the share-price path. Mean reaction rises from +13.7 percent before adjustment to +15.3 percent after peer adjustment. Subsequent drift rises from +4.6 percent to +16.8 percent, and all five adjusted reaction and drift windows are positive. The spikes on 20 February and 13 May are index and flow events linked to Hang Seng Tech inclusion and Stock Connect.
 

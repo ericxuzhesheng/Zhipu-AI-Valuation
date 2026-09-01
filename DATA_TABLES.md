@@ -1,7 +1,7 @@
 # Data Tables - Zhipu (2513.HK), MiniMax (00100.HK), Wenge AI (01956.HK)
 
-Market data via **Tushare `hk_daily`** with public-source fallback/cross-checks from **Tencent Finance** (Hong Kong) and **Nasdaq** (US), **as of 2026-08-28** (CSV in `data/`).
-The two core event-study series now cover the latest available Hong Kong trading day, 2026-08-28.
+Market data via **Tushare `hk_daily`** with public-source fallback/cross-checks from **Tencent Finance** (Hong Kong) and **Nasdaq** (US), **as of 2026-08-31** (CSV in `data/`).
+The two core event-study series now cover the latest available Hong Kong trading day, 2026-08-31.
 Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report** (stock code 2513). All figures are consistent with the paper.
 
 ---
@@ -19,16 +19,16 @@ Fundamentals from the **HKEX Chapter-18C prospectus** and **2025 Annual Report**
 | HQ / founded | Beijing, 2019 (Tsinghua KEG) | Shanghai, 2021 | Beijing, 2017 (CAS Inst. of Automation) |
 | Positioning | general foundation-model lab | general/multimodal foundation lab | enterprise decision-intelligence (DIOS/Decitron/Yayi) |
 
-## Table D2 - Market Performance (IPO to 2026-08-28)
+## Table D2 - Market Performance (IPO to 2026-08-31)
 
 | Metric | Zhipu | MiniMax | Wenge AI |
 |---|---|---|---|
 | IPO price (HK$) | 116.20 | 165.00 | 60.70 |
 | Day-1 close (HK$) | 131.5 | 345.0 (+109%) | 111.7 (+84%) |
-| Latest close (HK$) | 1090.0 (2026-08-28) | 300.4 (2026-08-28) | 87.8 (2026-08-28) |
-| Return vs IPO | **+838% (~9.4x)** | +82% | +45% |
-| Period high / low (close) | 2,410 / 131.5 | 1,238 / 193.1 | 111.7 / 62.7 |
-| Latest market cap | **~HK$486.0B (~US$62.3B)** | ~HK$104.9B (~US$13.45B) | ~HK$15.3B (~US$1.96B) |
+| Latest close (HK$) | 1195.0 (2026-08-31) | 349.0 (2026-08-31) | 86.0 (2026-08-31) |
+| Return vs IPO | **+928% (~10.3x)** | +112% | +42% |
+| Period high / low (close) | 2,410.0 / 131.5 | 1,238.0 / 193.1 | 111.7 / 60.0 |
+| Latest market cap | **~HK$532.8B (~US$68.3B)** | ~HK$104.9B (~US$13.45B) | ~HK$15.3B (~US$1.96B) |
 | Equity value / revenue | **311.5x (FY26E)** | 81.4x (LTM 2026H1) | 28.8x (LTM 2026H1; different model) |
 
 ## Table D3 - Layered Valuation Comparables
@@ -55,7 +55,7 @@ Private-lab transaction range: **20.5-39.0x**, median **34.1x** (OpenAI, Anthrop
 
 | Metric | Zhipu | MiniMax |
 |---|---|---|
-| Annualized volatility (daily x sqrt(252)) | **~193%** | ~154% |
+| Annualized volatility (daily x sqrt(252)) | **~192%** | ~155% |
 | Pattern | peaked ~HK$2,410 then pulled back to HK$1,090 | boom-bust (peaked 1,238; latest 300.4) |
 | Beta | bottom-up/comparable **beta ~= 1.6** (HK index not in feed; global AI-software comps, unlever-to-relever) |
 
@@ -84,7 +84,7 @@ Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity)
 | Pricing power | 8-17% API price rises with each GLM-5.x release |
 | Strategy | open-weight + low token price = cost-disruption / developer flywheel |
 
-## Table D7 - Capability-Event CAR (mean-adjusted, through 2026-08-28)
+## Table D7 - Capability-Event CAR (mean-adjusted, through 2026-08-31)
 
 | Event | Day 0 | React [0,+1] | Drift [+2,+10] | Note |
 |---|---|---:|---:|---|
@@ -98,7 +98,7 @@ Balance sheet @ 31-Dec-2025: net liabilities **-RMB 8,111.0M** (negative equity)
 | **Avg (5 GLM)** | | **+13.7%** | **+4.6%** | peer-adj: +15.3% / +16.8% |
 
 Mean-adjusted abnormal return: `AR_t = R_t - average(R[-20,-6])`, where the average is the raw return over event days -20 through -6.
-GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of 2026-08-28. Non-capability spikes:
+GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of 2026-08-31. Non-capability spikes:
 02-20 (+43%), 05-13 (+37%) = Hang Seng Tech inclusion / Stock Connect flow events.
 
 ### Screened but not in core CAR

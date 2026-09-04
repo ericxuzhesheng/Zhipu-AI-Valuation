@@ -80,6 +80,10 @@
 
 收入结构已经从本地部署转向调用和订阅，API 毛利率也转正。与此同时，应收款、算力预付款和研发投入继续上升。报告中的净亏损收窄来自毛利增加和投资者金融工具相关损失大幅下降，经营亏损和经调整净亏损仍在扩大，因此本文没有把 headline 写成“盈利改善”。公告未呈列经营现金流，相关指标在数据表和模型中保留为空缺。
 
+### MiniMax 2026H1 同业更新
+
+[MiniMax 中期业绩公告](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0826/2026082600680.pdf)于 8 月 26 日收盘后发布。H1 收入同比增长 283.1% 至 US$116.6M，开放平台和企业服务收入增长 703.1% 至 US$73.9M、占收入 63.4%；毛利率由 12.1% 升至 17.9%。但经调整净亏损从 US$138.7M 扩大到 US$293.0M，说明商业化提速仍伴随高研发投入。估值可比中的 US$165.2M LTM 收入，按 FY2025 收入减去 2025H1、再加 2026H1 计算，而不是把半年收入简单年化。
+
 ### 估值结论
 
 WACC 约为 13.5%，其中自下而上 β 以截至 8 月 31 日的 60 个月月度回归为起点，去杠杆中位数 1.55 后取约 1.6；Rf 为 4%，ERP 为 6%。模型统一采用 HK$7.8/US$、RMB 7.1/US$ 和配售后的 4.656 亿股。净现金采用可复核的 pro forma 桥接。6 月末现金与短期投资扣除银行借款及租赁负债，再加 7 月配售净款，合计约 42.89 亿美元。公司截至 8 月末的现金余额尚未披露，因此模型保留这项期后调整的口径说明。活公式见 [`model/valuation_model.xlsx`](model/valuation_model.xlsx)，十年完整 Base Case 见论文附录 B。
@@ -111,15 +115,18 @@ SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 
 | GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | 过度反应 |
 | GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | 强反应不足 |
 | GLM-5.3 | 2026-08-14 | −6.5% | +3.8% | 信息可能提前进入价格，同业调整后为正 |
-| *MiniMax M2.7* | 2026-03-18 | −5.5% | −49.1% | 反应较弱，随后估值收缩 |
-| *MiniMax M3* | 2026-06-01 | −21.1% | −40.8% | 发布后估值收缩 |
+| MiniMax M2.5 | 2026-02-12 | +24.2% | −2.1% | 发布当期获正面定价，后续基本持平 |
+| MiniMax M2.7 | 2026-03-18 | −5.5% | −49.1% | 反应较弱，随后估值收缩 |
+| MiniMax M3 | 2026-06-01 | −21.1% | −40.8% | 发布后估值收缩 |
 | **均值(5)** | | **+13.7%** | **+4.6%** | |
 
 均值调整采用 `AR_t = R_t - average(R[-20,-6])`。截至 2026-08-31，GLM-5.2 与 GLM-5.3 的 [+2,+10] 窗口均覆盖完整 9 个交易日。GLM-5.3-Flash 只有三个后续交易日，因此只进入扩展目录。H1 业绩公告于 8 月 31 日 18:56 收盘后发布，也只列入财务披露目录；当天 +9.63% 的涨幅不能写成“财报发布后的反应”。
 
 事件日期独立取自官方发布公告，没有按股价走势倒推。原始短窗五次中有四次为正，均值为 +13.7%。同业调整后，五次反应与后续漂移均为正，均值分别为 +15.3% 和 +16.8%。2 月 20 日与 5 月 13 日的尖峰来自指数调整和资金流事件，未计为能力事件。
 
-论文 Table 2 另列出 22 个具备完整窗口的大型科技厂商事件。7—8 月新增腾讯 Hy3、阿里 Qwen3.8-Max、Google Gemini 3.6/3.7 Flash、Meta Muse Spark 1.1、OpenAI GPT-5.6 的两次公开部署，以及 xAI Grok 4.5 正式版和 Grok 4.6。ERNIE、Qwen 与 Grok 的旧日期也按官方公告重新校准。没有完整后窗的 Qwen3.8-Flash、腾讯 Hy4 和 Gemini Transcribe/Omni 1.1 只进入事件目录，不用残缺数据凑一张“更全”的表。
+MiniMax 的主线事件现补齐 M2.5（2 月 12 日）、M2.7 和 M3。H3（7 月 31 日）与 Music 3.0（8 月 13 日）保留在扩展目录，但不进入 Table 2：前者以音视频生成作为主要输出，后者是音乐垂类模型，与文本、编码和 Agent 能力事件不在同一口径。MiniMax 半年报也作为财务披露事件列入目录；由于 8 月 26 日收盘后发布，截至 8 月 31 日没有完整漂移窗口，不计算 CAR。
+
+论文 Table 2 另列出 16 个具备完整窗口、且模型发布方本身存在可交易股票的大型科技厂商事件。7—8 月新增腾讯 Hy3、阿里 Qwen3.8-Max、Google Gemini 3.6/3.7 Flash 和 Meta Muse Spark 1.1。Microsoft 代 OpenAI、Tesla 代 xAI 的 6 条代理事件已从 CAR 表和均值中移除，只留在审计目录；没有完整后窗的 Qwen3.8-Flash、腾讯 Hy4 和 Gemini Transcribe/Omni 1.1 同样只进入目录。
 
 五个事件能够支撑一个有意思的本科案例。样本数量和上市历史仍然有限，结论只作为初步诊断性证据，不用于证明普遍异象。
 
@@ -152,7 +159,7 @@ SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 
 来源按以下顺序取舍。**HKEX 招股书与公告 > 官方模型卡和技术报告 > 恒生指数公司公告 > 正式市场数据库**。新闻媒体只作交叉核对。
 
 - **行情** 使用 Tushare `hk_daily`。频率或权限受限时，以腾讯财经港股日线和 Nasdaq 美股日线补齐并交叉核对，见 [`data/`](data/)。
-- **财务** 使用港交所第 18C 章招股书、2025 年报和 2026H1 中期业绩公告；结构化口径见 [`data/zhipu_financials_input.csv`](data/zhipu_financials_input.csv)。截至 8 月 31 日，正式中期报告尚待发布，业绩公告也未呈列经营现金流量表。
+- **财务** 使用港交所第 18C 章招股书、2025 年报和 2026H1 中期业绩公告；智谱与 MiniMax 的结构化口径分别见 [`data/zhipu_financials_input.csv`](data/zhipu_financials_input.csv) 和 [`data/minimax_financials_input.csv`](data/minimax_financials_input.csv)。智谱截至 8 月 31 日的正式中期报告尚待发布，业绩公告也未呈列经营现金流量表。
 - **估值可比** 输入表与生成表分别见 [`data/valuation_comps_input.csv`](data/valuation_comps_input.csv) 和 [`data/valuation_comps.csv`](data/valuation_comps.csv)，逐行保留估值日、收入周期、币种和来源。
 - **股本与配售** 使用 6 月月报及 7 月 13 日配售完成公告。配售新增 19,780,000 股后，总股本为 465,623,090 股；约 313.75 亿港元净募资在估值桥中单列为期后 pro forma 调整。
 - **能力事件** 使用 GLM 和 MiniMax 官方模型卡、ZCode 发布记录与 SWE-Bench Pro 等榜单。
@@ -249,6 +256,10 @@ The [HKEX interim-results announcement](https://www1.hkexnews.hk/listedco/listco
 
 The mix has shifted decisively from on-premise deployment toward API usage and subscriptions, and API gross margin turned positive. Receivables, compute-service prepayments and R&D spending also increased. Reported net loss narrowed as gross profit rose and investor-instrument losses fell sharply; operating loss and adjusted net loss both widened. The announcement did not present an operating-cash-flow statement, so the project leaves that field undisclosed rather than inferring it from the change in cash.
 
+### MiniMax H1 2026 Peer Update
+
+MiniMax released its [interim results](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0826/2026082600680.pdf) after the 26 August close. Revenue rose 283.1 percent to US$116.6 million, while Open Platform and enterprise-service revenue rose 703.1 percent to US$73.9 million, or 63.4 percent of the total. Gross margin improved from 12.1 to 17.9 percent, but adjusted net loss widened from US$138.7 million to US$293.0 million. The US$165.2 million LTM revenue used in the peer multiple equals FY2025 revenue less H1 2025 plus H1 2026; it is not a simple annualisation of the latest half.
+
 ### Valuation Summary (market row at 2026-08-31)
 
 WACC is approximately 13.5 percent. The bottom-up beta starts from 60 monthly regressions through 31 August, with the 1.55 unlevered median rounded to 1.6. The model applies HK$7.8/US$, RMB7.1/US$ and 465.6 million post-placement shares. Its US$4.289 billion pro forma net-cash bridge starts with reported 30 June cash and short-term investments, deducts bank loans and leases, and adds July placement proceeds. It is not presented as a reported 31 August cash balance. The live workbook is [`model/valuation_model.xlsx`](model/valuation_model.xlsx), and the paper's Appendix B contains the full ten-year Base case.
@@ -276,15 +287,18 @@ SenseTime, Phancy, and Wenge AI form a separate Hong Kong-adjacent cohort, while
 | GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | over-reaction |
 | GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | strong under-reaction |
 | GLM-5.3 | 2026-08-14 | −6.5% | +3.8% | anticipated; positive peer-adjusted reaction |
-| *MiniMax M2.7* | 2026-03-18 | −5.5% | −49.1% | muted / de-rate |
-| *MiniMax M3* | 2026-06-01 | −21.1% | −40.8% | failed catalyst / de-rate |
+| MiniMax M2.5 | 2026-02-12 | +24.2% | −2.1% | positive launch reaction; little subsequent drift |
+| MiniMax M2.7 | 2026-03-18 | −5.5% | −49.1% | muted / de-rate |
+| MiniMax M3 | 2026-06-01 | −21.1% | −40.8% | failed catalyst / de-rate |
 | **Average (5)** | | **+13.7%** | **+4.6%** | |
 
 The mean-adjusted return is defined as `AR_t = R_t - average(R[-20,-6])`. As of 2026-08-31, GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows. GLM-5.3-Flash has only three subsequent trading days and remains in the extended catalog. The H1 results announcement was released at 18:56 after the 31 August close, so that day's 9.63 percent gain predates the disclosure and is not treated as an earnings reaction.
 
 The event dates come from official release announcements and were set independently of the share-price path. Mean reaction rises from +13.7 percent before adjustment to +15.3 percent after peer adjustment. Subsequent drift rises from +4.6 percent to +16.8 percent, and all five adjusted reaction and drift windows are positive. The spikes on 20 February and 13 May are index and flow events linked to Hang Seng Tech inclusion and Stock Connect.
 
-Paper Table 2 also reports 22 large-tech events with complete windows. The July-August refresh adds Tencent Hy3, Alibaba Qwen3.8-Max, Google Gemini 3.6/3.7 Flash, Meta Muse Spark 1.1, two public GPT-5.6 deployments, and the official Grok 4.5 and 4.6 releases. Earlier ERNIE, Qwen and Grok dates were repinned to primary-source announcements. Qwen3.8-Flash, Tencent Hy4 and Gemini Transcribe/Omni 1.1 remain in the catalog but outside the return table because their post-event windows are incomplete at the cutoff.
+The MiniMax peer series now includes M2.5 (12 February), M2.7 and M3. H3 (31 July) and Music 3.0 (13 August) remain in the extended catalog but outside Table 2 because their audio-video and music outputs are not comparable with the text, coding and agent events in the core sample. MiniMax's results announcement is also catalogued as a financial disclosure, but its post-event window is incomplete at the cutoff.
+
+Paper Table 2 also reports 16 complete-window large-tech events for which the model issuer itself has a traded security. The July-August refresh adds Tencent Hy3, Alibaba Qwen3.8-Max, Google Gemini 3.6/3.7 Flash and Meta Muse Spark 1.1. Six Microsoft-for-OpenAI and Tesla-for-xAI proxy events have been removed from the CAR table and its average, while remaining visible in the audit catalog. Qwen3.8-Flash, Tencent Hy4 and Gemini Transcribe/Omni 1.1 also remain catalog-only because their post-event windows are incomplete.
 
 The five events support a focused undergraduate case. The small sample and short listing history limit the result to preliminary diagnostic evidence and do not support a general market anomaly.
 

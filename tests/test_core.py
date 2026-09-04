@@ -16,10 +16,10 @@ import rebuild_outputs
 class EventPanelTests(unittest.TestCase):
     def test_event_catalog_input_drives_panel(self) -> None:
         events = event_panel.load_panel_events()
-        self.assertEqual(len(events), 61)
+        self.assertEqual(len(events), 62)
         panel = event_panel.event_panel_rows(events)
-        self.assertEqual(len(panel), 61)
-        self.assertEqual(int(panel["included"].sum()), 34)
+        self.assertEqual(len(panel), 62)
+        self.assertEqual(int(panel["included"].sum()), 29)
         zcode = panel.loc[panel["event"] == "ZCode IDE"].iloc[0]
         self.assertFalse(bool(zcode["included"]))
         self.assertIn("outside the core foundation-model capability event set", zcode["exclusion_reason"])
@@ -33,9 +33,26 @@ class EventPanelTests(unittest.TestCase):
         glm53flash = panel.loc[panel["event"] == "GLM-5.3-Flash"].iloc[0]
         self.assertFalse(bool(glm53flash["included"]))
         self.assertIn("insufficient post-event window", glm53flash["exclusion_reason"])
-        interim = panel.loc[panel["event"] == "2026 H1 results announcement"].iloc[0]
+        interim = panel.loc[
+            (panel["company"] == "Zhipu") & (panel["event"] == "2026 H1 results announcement")
+        ].iloc[0]
         self.assertFalse(bool(interim["included"]))
         self.assertIn("same-day return predates disclosure", interim["exclusion_reason"])
+        minimax_m25 = panel.loc[(panel["company"] == "MiniMax") & (panel["event"] == "M2.5")].iloc[0]
+        self.assertTrue(bool(minimax_m25["included"]))
+        self.assertAlmostEqual(float(minimax_m25["react_mean"]), 24.20)
+        self.assertAlmostEqual(float(minimax_m25["drift_mean"]), -2.09)
+        minimax_h3 = panel.loc[(panel["company"] == "MiniMax") & (panel["event"] == "H3")].iloc[0]
+        self.assertFalse(bool(minimax_h3["included"]))
+        self.assertIn("outside the text-agent capability peer set", minimax_h3["exclusion_reason"])
+        minimax_interim = panel.loc[
+            (panel["company"] == "MiniMax") & (panel["event"] == "2026 H1 results announcement")
+        ].iloc[0]
+        self.assertFalse(bool(minimax_interim["included"]))
+        self.assertIn("next trading day after disclosure", minimax_interim["exclusion_reason"])
+        openai_proxy = panel.loc[panel["event"] == "GPT-5.6 proxy"].iloc[0]
+        self.assertFalse(bool(openai_proxy["included"]))
+        self.assertIn("not the model issuer", openai_proxy["exclusion_reason"])
         msci = panel.loc[panel["event"] == "MSCI Emerging Markets inclusion rebalance"].iloc[0]
         self.assertFalse(bool(msci["included"]))
         self.assertIn("closing-auction flows", msci["exclusion_reason"])
@@ -56,14 +73,14 @@ class EventPanelTests(unittest.TestCase):
         included = panel[panel["included"] == True]
         summary = event_panel.summarize_event_panel(included)
         total = summary.loc[summary["event_type"] == "ALL_INCLUDED"].iloc[0]
-        self.assertEqual(int(total["n_events"]), 34)
-        self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 2.80)
-        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), -2.02)
+        self.assertEqual(int(total["n_events"]), 29)
+        self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 3.87)
+        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), -2.28)
         large_tech = summary.loc[summary["event_type"] == "large_tech_peer"].iloc[0]
-        self.assertEqual(int(large_tech["n_events"]), 22)
-        self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), 2.01)
-        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -2.42)
-        self.assertEqual(int(large_tech["full_drift_windows"]), 22)
+        self.assertEqual(int(large_tech["n_events"]), 16)
+        self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), 2.32)
+        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -3.04)
+        self.assertEqual(int(large_tech["full_drift_windows"]), 16)
 
 
 class ValuationTests(unittest.TestCase):

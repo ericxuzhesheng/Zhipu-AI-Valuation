@@ -253,6 +253,25 @@ def check_valuation_comps() -> None:
                 company = table.loc[blank, "company"].iloc[0]
                 fail(f"valuation comps {table_name} {column} is blank for {company}")
 
+    minimax_financials_path = ROOT / "data" / "minimax_financials_input.csv"
+    if not minimax_financials_path.exists():
+        fail("MiniMax financial input is missing")
+    minimax_financials = pd.read_csv(minimax_financials_path)
+    by_period = minimax_financials.set_index("period")
+    required_periods = {"FY2025", "H1 2025", "H1 2026"}
+    if not required_periods.issubset(by_period.index):
+        fail("MiniMax financial input must contain FY2025, H1 2025, and H1 2026")
+    minimax_ltm_usdm = (
+        float(by_period.loc["FY2025", "revenue_usdm"])
+        - float(by_period.loc["H1 2025", "revenue_usdm"])
+        + float(by_period.loc["H1 2026", "revenue_usdm"])
+    )
+    minimax_revenue_usdm = float(
+        comps.loc[comps["company"] == "MiniMax", "revenue_bn"].iloc[0]
+    ) * 1000
+    if abs(minimax_ltm_usdm - minimax_revenue_usdm) > 0.001:
+        fail("MiniMax LTM revenue does not reconcile to FY2025 - H1 2025 + H1 2026")
+
 
 def check_pdfs() -> None:
     for path in [ROOT / "paper" / "main.pdf", submission_pdf_path()]:

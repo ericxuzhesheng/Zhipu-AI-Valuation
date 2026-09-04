@@ -18,7 +18,7 @@ Evidence from Zhipu AI (2513.HK).*
 | Cover | SWUFE official template | official course-paper cover and crest watermark |
 | Abstract | summary | subject, dual method, headline valuation gap, takeaway |
 | 1. Introduction | setup | 3 research questions; capability-surprise reframing; frontier-AI financing moving into public price discovery |
-| 2. Background | condensed | open-weight model; H1 2026 API-led growth and loss profile; IPO, July placement, re-rating, and MiniMax divergence |
+| 2. Background | condensed | open-weight model; Zhipu H1 2026 API-led growth and loss profile; IPO, July placement, re-rating, and MiniMax H1/model-event comparison |
 | 3. Industry, Macro, Strategy | condensed | Porter + leaderboard cost-disruption; HK AI-IPO landscape; macro + flow events |
 | 4. Valuation | main line | WACC; 3-scenario DCF; reverse DCF + heatmap; layered relative valuation; real-options reading |
 | 5. Capability Surprise | original contribution | CAR results; flow vs capability events; peer-adjusted + block-bootstrap checks; honesty box |
@@ -65,7 +65,7 @@ paper/        main.tex, refs.bib, beta_bridge_auto.tex, crest_watermark.png, mai
 model/        valuation_model.xlsx (live formulas)
 eventstudy/   car_robustness.csv, nonparametric_robustness.csv, block_bootstrap_summary.csv, block_bootstrap_distribution.csv, base_projection.csv, zhipu_car.csv, reverse_dcf_sensitivity.csv
 figures/      fig1-11
-data/         Zhipu_/MiniMax_/WengeAI_daily.csv, price_summary.csv, valuation_comps_input.csv, valuation_comps.csv, comps_beta_bridge.csv
+data/         Zhipu_/MiniMax_/WengeAI_daily.csv, zhipu_financials_input.csv, minimax_financials_input.csv, price_summary.csv, valuation_comps_input.csv, valuation_comps.csv
 scripts/      rebuild_outputs.py, validate_outputs.py, comps_beta_and_reverse_dcf.py
 DATA_TABLES.md, EVENT_STUDY.md, README.md, LICENSE
 ```

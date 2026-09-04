@@ -1,6 +1,6 @@
 event_type,n_events,mean_reaction_car_pct,median_reaction_car_pct,positive_reaction_events,mean_drift_car_pct,median_drift_car_pct,positive_drift_events,full_drift_windows
 capability,5,13.66,13.83,4,4.62,3.76,3,5
-capability_peer,2,-13.3,-13.3,0,-44.93,-44.93,0,2
+capability_peer,3,-0.8,-5.52,1,-30.65,-40.78,0,3
 flow,5,1.85,-1.69,2,10.27,30.95,3,5
-large_tech_peer,22,2.01,2.0,13,-2.42,-4.47,7,22
-ALL_INCLUDED,34,2.8,2.0,19,-2.02,-4.47,13,34
+large_tech_peer,16,2.32,2.43,9,-3.04,-4.73,4,16
+ALL_INCLUDED,29,3.87,3.97,16,-2.28,-3.96,10,29

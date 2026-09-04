@@ -75,6 +75,21 @@ Balance sheet @ 30-Jun-2026: cash RMB 3,993.7M, short-term FVPL investments RMB 
 
 **Implied market equity value / revenue = 101.9x FY26E** (US$71.3B / US$700M model estimate).
 
+### MiniMax H1 2026 peer financials (USD, unless noted)
+
+| Metric | H1 2026 | H1 2025 | Change |
+|---|---:|---:|---:|
+| Revenue | US$116.6M | US$30.4M | +283.1% |
+| Gross profit | US$20.8M | US$3.7M | +464.8% |
+| Gross margin | 17.9% | 12.1% | +5.8ppt |
+| AI-native products revenue | US$42.6M | US$21.2M | +100.9% |
+| Open Platform and enterprise-service revenue | US$73.9M (63.4%) | US$9.2M (30.3%) | +703.1% |
+| R&D expense | US$296.9M | US$124.3M | +138.8% |
+| Net loss | US$358.0M | US$402.2M | narrowed 11.0% |
+| Adjusted net loss | US$293.0M | US$138.7M | widened 111.2% |
+
+MiniMax reported a 30-Jun-2026 cash balance of US$1,322.8M and bank borrowings of US$133.6M. Its US$165.2M LTM revenue denominator is FY2025 revenue US$79.0M less H1 2025 US$30.4M plus H1 2026 US$116.6M. The 26-Aug announcement was released after the close; the next trading day is catalogued as a financial-disclosure event, but the full [+2,+10] window is unavailable at the cutoff. Source and row-level figures are retained in `data/minimax_financials_input.csv`.
+
 ## Table D6 - Product / Competitive Data (leaderboard thread)
 
 | Item | Detail |
@@ -95,6 +110,7 @@ Balance sheet @ 30-Jun-2026: cash RMB 3,993.7M, short-term FVPL investments RMB 
 | GLM-5.1 | 2026-04-08 | +13.8% | -14.2% | over-reaction (flips +12.9% peer-adj) |
 | GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | strong under-reaction |
 | GLM-5.3 | 2026-08-14 | -6.5% | +3.8% | anticipated; +2.4% / +1.8% peer-adjusted |
+| MiniMax M2.5 | 2026-02-12 | +24.2% | -2.1% | positive launch reaction; little subsequent drift |
 | MiniMax M2.7 | 2026-03-18 | -5.5% | -49.1% | muted / de-rate |
 | MiniMax M3 | 2026-06-01 | -21.1% | -40.8% | failed catalyst / de-rate |
 | **Avg (5 GLM)** | | **+13.7%** | **+4.6%** | peer-adj: +15.3% / +16.8% |
@@ -109,14 +125,10 @@ GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of 2026-08-3
 |---|---|---:|---:|---|
 | Tencent Hy3 | 2026-07-06 | +8.2% | +9.8% | under-reaction |
 | Meta Muse Spark 1.1 | 2026-07-09 | +11.1% | -7.6% | reversal |
-| Microsoft/OpenAI GPT-5.6 proxy | 2026-07-09 | +1.7% | +4.9% | muted continuation |
-| Tesla/xAI Grok 4.5 proxy | 2026-07-20 | -1.0% | -17.3% | de-rate |
 | Google Gemini 3.6 Flash | 2026-07-21 | -2.3% | +13.0% | delayed reaction |
 | Alibaba Qwen3.8-Max | 2026-08-03 | +5.3% | -12.8% | reversal |
-| Microsoft/OpenAI GPT-5.6 August proxy | 2026-08-06 | +2.3% | -5.0% | reversal |
-| Tesla/xAI Grok 4.6 proxy | 2026-08-12 | +4.6% | +12.6% | under-reaction |
 | Google Gemini 3.7 Flash | 2026-08-13 | +0.9% | -0.7% | muted |
-| **Average (22 large-tech events, full panel)** | | **+2.0%** | **-2.4%** | descriptive listed-proxy evidence |
+| **Average (16 large-tech events, full panel)** | | **+2.3%** | **-3.0%** | issuer-level listed-equity evidence |
 
 ### Screened but not in core CAR
 
@@ -128,14 +140,15 @@ GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of 2026-08-3
 | Zhipu H1 2026 results | financial-disclosure catalog only | released at 18:56 after the 08-31 close; no post-announcement price window by the cutoff |
 | Zhipu MSCI inclusion | flow catalog only | effective after the 08-31 close; same-day closing flow may be visible, but no post-event window exists by the cutoff |
 | Zhipu ZCode IDE | catalog only | product launch outside the core foundation-model capability set |
-| MiniMax M2.5 series | catalog only | month-level date in source screenshot; wait for day-level source |
-| MiniMax H3 / Speech / Music releases | catalog only | video/audio/music models, not text-agent peer events |
+| MiniMax H3 / Speech / Music releases | catalog only | dated official releases, but audio-video/music/speech outputs are not comparable with the text-agent peer set |
+| MiniMax H1 2026 results | financial-disclosure catalog only | released after the 08-26 close; full post-event window is unavailable by 08-31 |
+| OpenAI and xAI releases | catalog only | Microsoft and Tesla are not the model issuers; their share returns are excluded rather than treated as issuer proxies |
 | Alibaba Qwen3.8 open-weight variants / Qwen3.8-Flash | catalog only | same release cluster as Qwen3.8-Max; Flash also lacks a full post-event window |
 | Tencent Hy4 preview | catalog only | 08-28 release lacks a full post-event window |
 | Google Gemini Transcribe / Omni 1.1 | catalog only | vertical models released 08-26/27 and lack full post-event windows |
 
 ## Remaining / refresh items
-1. Expand `data/event_catalog_input.csv` as Wenge/Moonshot/Kimi obtain dated model events and enough listed-price history; `eventstudy/event_catalog.csv` and `eventstudy/event_panel.csv` are generated from that input, with the current computable CAR panel at n=34, including 22 large-tech releases.
+1. Expand `data/event_catalog_input.csv` as Wenge/Moonshot/Kimi obtain dated model events and enough listed-price history; `eventstudy/event_catalog.csv` and `eventstudy/event_panel.csv` are generated from that input. The catalog now has 62 rows and the computable CAR panel has n=29, including three MiniMax text/agent releases and 16 issuer-level large-tech releases.
 
 ---
 
@@ -143,7 +156,7 @@ GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of 2026-08-3
 - **HKEX prospectus** (stock code 2513; and 1956 for Wenge) - offering terms, financials, market share.
 - **2025 annual report and H1 2026 interim-results announcement** (stock code 2513) - revenue, margins, losses, balance sheet, and disclosure limitations.
 - **June monthly return and 13-Jul placement completion announcement** (stock code 2513) - 465,623,090 post-placement shares and HK$31,374.95M net proceeds.
-- **HKEX interim / annual reports** (stock codes 00100, 00020, 06682, and 01956) - revenue periods and issued-share cross-checks for MiniMax and the Hong Kong adjacent cohort.
+- **HKEX interim / annual reports** (stock codes 00100, 00020, 06682, and 01956) - MiniMax H1 financials, revenue-period construction, and issued-share cross-checks for the Hong Kong peer cohorts.
 - **Company financing announcements and primary investor materials** (OpenAI, Anthropic, Mistral) - private transaction values and disclosed or contemporaneous revenue run-rates.
 - **SEC filings and company annual reports** (Palantir, Cloudflare, Snowflake) - latest complete fiscal-year revenue for the commercialization-reference cohort.
 - **Official model cards / technical reports** (Z.ai; Hugging Face `zai-org/GLM-4.6`) - architecture, benchmarks.

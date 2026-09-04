@@ -67,14 +67,15 @@ The 31 August boundary also prevents a tempting causal mistake. Zhipu rose 9.63%
   (-14.2% to +12.9%), while GLM-5.3's raw negative reaction becomes +2.4%.
   The under-reaction/PCAD pattern is reinforced, not weakened.
 - **Expanded event panel framework:** `data/event_catalog_input.csv` tracks Zhipu capability events,
-  Zhipu screened-but-excluded model releases, Zhipu index/flow catalysts, MiniMax M2.7/M3, MiniMax vertical
-  audio/music releases, 22 complete-window releases from listed large-tech proxies, listing events, and candidate
-  Wenge/Moonshot/Kimi events. The July-August refresh adds Hy3, Qwen3.8-Max, Gemini 3.6/3.7 Flash,
-  Muse Spark 1.1, GPT-5.6 and Grok 4.5/4.6. Only events with day-level dating, enough local price history and a clean event window enter the generated
+  Zhipu screened-but-excluded model releases, Zhipu index/flow catalysts, MiniMax M2.5/M2.7/M3, MiniMax vertical
+  audio/music releases, 16 complete-window releases from model issuers with their own traded securities, listing events,
+  financial disclosures, and candidate Wenge/Moonshot/Kimi events. The July-August refresh adds Hy3,
+  Qwen3.8-Max, Gemini 3.6/3.7 Flash and Muse Spark 1.1. Microsoft-for-OpenAI and Tesla-for-xAI observations
+  remain auditable catalog entries but are excluded as issuer proxies. Only events with day-level dating, enough local price history and a clean event window enter the generated
   `eventstudy/event_panel.csv`; excluded candidates carry an explicit reason instead of being forced into the
-  statistics. The input catalog now has 61 rows; 34 enter the computable panel.
+  statistics. The input catalog now has 62 rows; 29 enter the computable panel.
 - **Preliminary, diagnostic** evidence consistent with PCAD, *not* a proven anomaly: n = 5 single-firm events
-  (+2 direct peer events) over seven months. The peer-adjusted reaction mean is at the 99.2nd percentile of the
+  (+3 direct peer events) over seven months. The peer-adjusted reaction mean is at the 99.2nd percentile of the
   block-bootstrap null; drift is positive but only at the 88.0th percentile. Windows can overlap a fast release
   cadence or competing-lab news, so no general anomaly is claimed.
 - Extensions: multi-lab panel (MiniMax, Wenge releases), NLP-scored surprise magnitude.

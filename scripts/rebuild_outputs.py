@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 from typing import NamedTuple
 import os
 
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import openpyxl
@@ -20,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FIGURES = ROOT / "figures"
 EVENTSTUDY = ROOT / "eventstudy"
 DATA = ROOT / "data"
+PAPER = ROOT / "paper"
 MODEL = ROOT / "model" / "valuation_model.xlsx"
 VALUATION_COMPS_INPUT = DATA / "valuation_comps_input.csv"
 VALUATION_COMPS_OUTPUT = DATA / "valuation_comps.csv"
@@ -28,11 +32,29 @@ VALUATION_COMPS_OUTPUT = DATA / "valuation_comps.csv"
 WACC = 0.135
 TERMINAL_G = 0.04
 TAX_RATE = 0.15
-SHARES_M = 445.843  # 445,843,090 total issued shares per AGM circular 2026-06-22
+SHARES_M = 465.62309  # 445,843,090 at 2026-06-30 plus 19,780,000 placed on 2026-07-13
 USD_HKD = 7.8
-NET_CASH_USDM = 550
+USD_CNY = 7.1
+H1_CASH_RMBM = 3993.722
+H1_SHORT_INVESTMENTS_RMBM = 506.139
+H1_BANK_LOANS_RMBM = 2224.789
+H1_LEASE_LIABILITIES_RMBM = 379.410
+JULY_PLACEMENT_NET_HKDM = 31374.95
+NET_CASH_USDM = (
+    H1_CASH_RMBM
+    + H1_SHORT_INVESTMENTS_RMBM
+    - H1_BANK_LOANS_RMBM
+    - H1_LEASE_LIABILITIES_RMBM
+) / USD_CNY + JULY_PLACEMENT_NET_HKDM / USD_HKD
 REV_2025_USDM = 102
-REV_2026_USDM = 200
+REV_2026_H1_RMBM = 953.892
+REV_2026_USDM = 700  # Model estimate, not company guidance; see paper Section 4
+START_OP_MARGIN = -1.00  # FY2026E model assumption; H1 actual operating margin was about -225%
+H1_GROSS_MARGIN = 251.611 / REV_2026_H1_RMBM
+H1_API_REVENUE_SHARE = 825.176 / REV_2026_H1_RMBM
+H1_API_GROSS_MARGIN = 202.871 / 825.176
+H1_OP_MARGIN = -2146.552 / REV_2026_H1_RMBM
+H1_ADJUSTED_NET_LOSS_RMBM = 1964.138
 
 # ---- Coordinated high-contrast palette: deep blue / deep red + orange & green accents ----
 C_BLUE = "#1F4E79"    # deep blue   — peer series (MiniMax), main bars, history
@@ -251,7 +273,7 @@ def project_scenario(
             growth = growth_start_2027 + (scenario.growth_end_2035 - growth_start_2027) * (i - 1) / 8
             revenue = previous_revenue * (1 + growth)
 
-        ebit_margin = -0.30 + (terminal_margin + 0.30) * i / 9
+        ebit_margin = START_OP_MARGIN + (terminal_margin - START_OP_MARGIN) * i / 9
         ebit = revenue * ebit_margin
         beginning_nol = nol
         if ebit < 0:
@@ -511,14 +533,29 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
         ("Shares outstanding (m)", SHARES_M, None),
         ("USD/HKD", USD_HKD, None),
         (
-            "Net cash (US$m)",
+            "Net cash + ST investments (US$m, pro forma)",
             NET_CASH_USDM,
-            "net IPO proceeds plus pre-IPO cash; preferred shares convert at IPO",
+            "2026-06-30 cash + short-term FVPL investments less bank loans and leases, plus July placement net proceeds; not a reported 2026-08-31 cash balance",
         ),
         ("Market date", MARKET.date.strftime("%Y-%m-%d"), "derived from data/Zhipu_KnowledgeAtlas_daily.csv"),
         ("Market price (HK$)", MARKET.price_hkd, None),
         ("2025 revenue (US$m)", REV_2025_USDM, None),
-        ("2026E revenue (US$m)", REV_2026_USDM, None),
+        (
+            "2026E revenue (US$m)",
+            REV_2026_USDM,
+            "model estimate anchored to H1 actual and August run-rate; not company guidance",
+        ),
+        ("2026H1 revenue (RMB m)", REV_2026_H1_RMBM, "unaudited; reviewed by KPMG"),
+        ("2026H1 total gross margin", H1_GROSS_MARGIN, None),
+        ("2026H1 API revenue share", H1_API_REVENUE_SHARE, None),
+        ("2026H1 API gross margin", H1_API_GROSS_MARGIN, None),
+        ("2026H1 operating margin", H1_OP_MARGIN, None),
+        ("2026E operating margin", START_OP_MARGIN, "model assumption; H1 actual shown above"),
+        ("2026H1 adjusted net loss (RMB m)", H1_ADJUSTED_NET_LOSS_RMBM, None),
+        ("2026-06-30 cash + ST investments (RMB m)", H1_CASH_RMBM + H1_SHORT_INVESTMENTS_RMBM, None),
+        ("2026-06-30 bank loans + leases (RMB m)", H1_BANK_LOANS_RMBM + H1_LEASE_LIABILITIES_RMBM, None),
+        ("July placement net proceeds (HKD m)", JULY_PLACEMENT_NET_HKDM, None),
+        ("2026H1 operating cash flow", "Not disclosed", "interim results announcement did not include a cash-flow statement"),
     ]
     for row in assumptions:
         ws.append(row)
@@ -529,7 +566,7 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
         ws.append([f"DCF - {scenario.name} scenario"])
         ws.append(["growth start (2027)", scenario.growth_start_2027])
         ws.append(["growth end (2035)", scenario.growth_end_2035])
-        ws.append(["start op margin", -0.30])
+        ws.append(["start op margin", START_OP_MARGIN])
         ws.append(["terminal op margin", scenario.terminal_margin])
         ws.append(["sales-to-capital", scenario.sales_to_capital])
         ws.append([])
@@ -880,22 +917,25 @@ def write_comps_chart(valuation_comps: pd.DataFrame) -> None:
 
 
 def write_financial_profile() -> None:
-    """Company-introduction figure: revenue compounding vs cloud-margin compression."""
-    labels = ["FY2022", "FY2023", "FY2024", "FY2025"]
+    """Company-introduction figure: revenue scale and evolving unit economics."""
+    labels = ["FY2022", "FY2023", "FY2024", "FY2025", "H1 2026"]
+    financials = pd.read_csv(DATA / "zhipu_financials_input.csv").set_index("period").loc[labels]
     x = np.arange(len(labels))
-    revenue = np.array([57.4, 124.5, 312.4, 724.3])  # RMB millions
-    total_margin = np.array([54.6, 64.6, 56.3, 41.0])
-    cloud_margin = np.array([76.1, 31.0, 3.4, 18.9])
+    revenue = financials["revenue_rmbm"].to_numpy(dtype=float)
+    total_margin = financials["total_gross_margin"].to_numpy(dtype=float) * 100
+    cloud_margin = financials["cloud_api_gross_margin"].to_numpy(dtype=float) * 100
 
     fig, ax1 = plt.subplots(figsize=(8.2, 4.2), dpi=150)
     rev_mask = ~np.isnan(revenue)
-    ax1.bar(x[rev_mask], revenue[rev_mask], width=0.55, color=C_BLUE, zorder=2,
-            label="Revenue (RMB m)")
+    bar_colors = [C_BLUE] * 4 + [C_RED]
+    bars = ax1.bar(x[rev_mask], revenue[rev_mask], width=0.55, color=bar_colors, zorder=2,
+                   label="Revenue (RMB m)")
+    bars[-1].set_hatch("///")
     for xi, rv in zip(x[rev_mask], revenue[rev_mask]):
         ax1.text(xi, rv + 18, f"{rv:.0f}", ha="center", fontsize=8, color=C_BLUE)
     ax1.set_ylabel("Revenue (RMB millions)", color=C_BLUE)
     ax1.tick_params(axis="y", labelcolor=C_BLUE)
-    ax1.set_ylim(0, 840)
+    ax1.set_ylim(0, 1100)
     ax1.set_xticks(x)
     ax1.set_xticklabels(labels)
     ax1.spines[["top"]].set_visible(False)
@@ -914,8 +954,10 @@ def write_financial_profile() -> None:
     ax2.spines[["top"]].set_visible(False)
     ax2.legend(loc="upper right", fontsize=7.5, framealpha=0.9)
 
-    ax1.set_title("Revenue scales while cloud deployment margins compress")
-    fig.tight_layout()
+    ax1.set_title("Revenue scales sharply; API unit economics recover while mix dilutes total margin")
+    fig.text(0.5, 0.01, "H1 2026 is a six-month period and is not directly comparable with full-year bars.",
+             ha="center", fontsize=7.6, color=C_INK)
+    fig.tight_layout(rect=[0, 0.04, 1, 1])
     savefig(fig, FIGURES / "fig8_financial_profile.png", bbox_inches="tight")
     plt.close(fig)
 
@@ -938,10 +980,11 @@ def write_glm_timeline() -> None:
         ("5–8 Jun 2026", "HSTECH index · Stock Connect", C_GREEN),
         ("13 Jun 2026", "GLM-5.2 subscribers", C_RED),
         ("16 Jun 2026", "GLM-5.2 open weights", C_RED),
-        ("22 Jun 2026", "AGM · 445.8m shares · Z.AI name", C_TEAL),
         ("1 Jul 2026", "ZCode IDE for GLM-5.2", C_ORANGE),
+        ("13 Jul 2026", "Placement · 19.78m shares · HK$31.4bn gross", C_GREEN),
         ("14 Aug 2026", "GLM-5.3", C_RED),
         ("26 Aug 2026", "GLM-5.3-Flash", C_ORANGE),
+        ("31 Aug 2026", "H1 revenue +400% · API 86.5%", C_GREEN),
     ]
     n = len(events)
     fig, ax = plt.subplots(figsize=(13.0, 3.6), dpi=150)
@@ -958,7 +1001,7 @@ def write_glm_timeline() -> None:
     ax.set_ylim(-1.55, 1.55)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("From a Tsinghua lab (2019) to GLM-5.3-Flash (2026): the path to and beyond the IPO")
+    ax.set_title("From a Tsinghua lab to a listed, API-led model company: milestones through 31 August 2026")
     ax.spines[["top", "right", "left", "bottom"]].set_visible(False)
     fig.tight_layout()
     savefig(fig, FIGURES / "fig9_glm_timeline.png", bbox_inches="tight")
@@ -984,6 +1027,7 @@ FLOW_EVENTS = [
     ("HSTECH in", "2026-06-05"),
     ("Connect in", "2026-06-08"),
     ("HKEX Tech 100", "2026-06-29"),
+    ("MSCI rebalance", "2026-08-31"),
 ]
 CAP_COLOR = C_ORANGE   # capability-release markers
 FLOW_COLOR = C_GREEN   # index/flow markers
@@ -1153,30 +1197,26 @@ def write_reaction_vs_drift() -> None:
         ax.annotate(label, (rx, dy), textcoords="offset points",
                     xytext=(8, 4), fontsize=8.5, color=C_BLUE)
     label_offsets = {
-        "ERNIE 5.0": (7, -16, "left"),
-        "ERNIE 5.1": (7, 4, "left"),
-        "Qwen3.5": (-72, -18, "right"),
-        "Qwen3.6-35B-A3B": (7, -4, "left"),
-        "Qwen3.7": (-6, -15, "right"),
-        "Qwen3.7-Plus": (-22, -12, "right"),
-        "Hunyuan 3.0 preview": (-6, 8, "right"),
-        "LongCat-2.0": (7, 4, "left"),
-        "Gemini 3.1 Pro": (7, 4, "left"),
-        "Gemini 3.5/Omni": (-8, -14, "right"),
-        "Muse Spark": (7, 6, "left"),
-        "GPT-5.5 proxy": (-7, -13, "right"),
-        "Grok 4.3 Beta proxy": (7, -12, "left"),
-        "Grok 4.5 beta proxy": (7, -12, "left"),
+        "Qwen3.8-Max": (-8, -15, "right"),
+        "Hy3 official": (7, 5, "left"),
+        "Gemini 3.6 Flash": (-8, 7, "right"),
+        "Gemini 3.7 Flash": (7, -14, "left"),
+        "Muse Spark 1.1": (7, -12, "left"),
+        "GPT-5.6 proxy": (-8, 7, "right"),
+        "GPT-5.6 August update proxy": (7, -14, "left"),
+        "Grok 4.5 release proxy": (-8, -15, "right"),
+        "Grok 4.6 release proxy": (7, 5, "left"),
     }
     for row in large_tech_rows.itertuples(index=False):
         label = f"{row.company} {row.event}"
         rx = float(row.react_mean)
         dy = float(row.drift_mean)
-        dx, dy_text, ha = label_offsets.get(row.event, (7, -10, "left"))
         ax.scatter([rx], [dy], s=58, marker="^", facecolor=C_TEAL,
                    edgecolor=C_INK, linewidth=0.8, zorder=3)
-        ax.annotate(label, (rx, dy), textcoords="offset points",
-                    xytext=(dx, dy_text), ha=ha, fontsize=6.9, color=C_TEAL)
+        if row.event in label_offsets:
+            dx, dy_text, ha = label_offsets[row.event]
+            ax.annotate(label, (rx, dy), textcoords="offset points",
+                        xytext=(dx, dy_text), ha=ha, fontsize=6.9, color=C_TEAL)
     ax.text(0.02, 0.97, "UNDER-reaction\n(drift continues)", transform=ax.transAxes,
             va="top", ha="left", fontsize=8, color=C_GREEN)
     ax.text(0.02, 0.52, "OVER-reaction\n(reversal)", transform=ax.transAxes,
@@ -1191,6 +1231,57 @@ def write_reaction_vs_drift() -> None:
     plt.close(fig)
 
 
+def write_table2_large_tech_tex() -> None:
+    """Generate the large-tech block of paper Table 2 from the event panel."""
+    panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")
+    rows = panel[panel["event_type"] == "large_tech_peer"].copy()
+
+    def display_name(row: pd.Series) -> str:
+        event = str(row["event"])
+        event = event.replace("-35B-A3B", "")
+        event = event.replace(" official", "")
+        event = event.replace(" release proxy", " proxy")
+        event = event.replace(" August update proxy", " Aug. proxy")
+        return f"{row['company']} {event}"
+
+    def reading(react: float, drift: float) -> str:
+        if drift >= 3:
+            if react >= 3:
+                return "under-reaction"
+            if react < 0:
+                return "delayed reaction"
+            return "muted continuation"
+        if drift <= -3:
+            return "reversal" if react > 0 else "de-rate"
+        if react <= -3 and drift <= 0:
+            return "de-rate"
+        if react >= 3 and drift < 0:
+            return "muted / reversal"
+        return "muted"
+
+    def signed(value: float) -> str:
+        rounded = Decimal(str(value)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP)
+        return f"{rounded:+.1f}"
+
+    lines = []
+    for _, row in rows.iterrows():
+        react = float(row["react_mean"])
+        drift = float(row["drift_mean"])
+        lines.append(
+            f"{display_name(row)} & {row['day0']} & ${signed(react)}$ & "
+            f"${signed(drift)}$ & {reading(react, drift)} \\\\"
+        )
+    lines.extend(
+        [
+            r"\midrule",
+            rf"\textbf{{Average ({len(rows)} large-tech)}} & & "
+            rf"$\mathbf{{{signed(float(rows['react_mean'].mean()))}}}$ & "
+            rf"$\mathbf{{{signed(float(rows['drift_mean'].mean()))}}}$ & \\",
+        ]
+    )
+    (PAPER / "table2_large_tech_auto.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     write_price_summary_csv()
     write_valuation_summary_csv()
@@ -1198,6 +1289,7 @@ def main() -> None:
     write_valuation_comps_csv(valuation_comps)
     write_base_projection_csv()
     write_event_panel_outputs(write_csv)
+    write_table2_large_tech_tex()
     panel = pd.read_csv(EVENTSTUDY / "event_panel.csv")
     capability = panel[panel["event_type"] == "capability"].copy()
     robustness = capability[
@@ -1207,6 +1299,17 @@ def main() -> None:
         robustness[col] = robustness[col].astype(float).round(1)
     robustness["drift_days"] = robustness["drift_days"].astype(int)
     write_csv(robustness, EVENTSTUDY / "car_robustness.csv")
+    legacy_car = robustness[["event", "day0", "react_mean", "drift_mean"]].copy()
+    car_series = event_car_series()
+    leakage_lookup = {
+        event: float(car_series[event].loc[-1])
+        for event, _ in CAPABILITY_EVENTS
+    }
+    legacy_car.insert(2, "leak_-5_-1", legacy_car["event"].map(leakage_lookup))
+    legacy_car = legacy_car.rename(
+        columns={"react_mean": "react_0_1", "drift_mean": "drift_2_10"}
+    )
+    write_csv(legacy_car, EVENTSTUDY / "zhipu_car.csv")
     write_nonparametric_robustness_csv()
     write_block_bootstrap_outputs()
     write_workbook(valuation_comps)

@@ -15,6 +15,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -59,13 +61,13 @@ def build_beta_bridge() -> tuple[pd.DataFrame, float]:
 
 def write_beta_latex(df: pd.DataFrame, median_bu: float, path: Path) -> None:
     """Emit a LaTeX tabular ready for \\input{}."""
-    accessed_dates = sorted({str(d) for d in df.get("Accessed_date", []) if pd.notna(d)})
-    accessed = accessed_dates[-1] if accessed_dates else "28 June 2026"
-    if accessed_dates:
-        accessed_day = pd.Timestamp(accessed)
-        accessed_tex = f"{accessed_day.day}~{accessed_day.strftime('%B')}~{accessed_day.year}"
+    snapshot_dates = sorted({str(d) for d in df.get("Snapshot_date", []) if pd.notna(d)})
+    snapshot = snapshot_dates[-1] if snapshot_dates else "2026-08-31"
+    if snapshot_dates:
+        snapshot_day = pd.Timestamp(snapshot)
+        snapshot_tex = f"{snapshot_day.day}~{snapshot_day.strftime('%B')}~{snapshot_day.year}"
     else:
-        accessed_tex = accessed
+        snapshot_tex = snapshot
     rows_tex = []
     for _, r in df.iterrows():
         de_pct = f"{r['Debt_Equity'] * 100:.1f}\\%" if r["Debt_Equity"] == r["Debt_Equity"] else "n/a"
@@ -77,7 +79,7 @@ def write_beta_latex(df: pd.DataFrame, median_bu: float, path: Path) -> None:
     tex = (
         "\\begin{table}[H]\n"
         "\\centering\n"
-        f"\\caption{{Comparable-company beta bridge (accessed {accessed_tex}).}}\n"
+        f"\\caption{{Comparable-company beta bridge (60-month beta window ended {snapshot_tex}).}}\n"
         "\\label{tab:beta}\n"
         "\\begin{tabular}{lccc}\n"
         "\\toprule\n"
@@ -104,10 +106,16 @@ WACC_BASE = 0.135
 TERM_G = 0.04
 TAX = 0.15
 SALES_TO_CAP = 1.8
-SHARES_M = 445.843  # 445,843,090 total issued shares per AGM circular 2026-06-22
+SHARES_M = 465.62309
 USD_HKD = 7.8
-NET_CASH_USDM = 550
-REV_2026_USDM = 200
+USD_CNY = 7.1
+NET_CASH_USDM = (
+    3993.722 + 506.139 - 2224.789 - 379.410
+) / USD_CNY + 31374.95 / USD_HKD
+REV_2025_USDM = 102
+REV_2026_USDM = 700
+START_OP_MARGIN = -1.00
+GROWTH_END_2035 = 0.08
 
 # Grid
 WACC_GRID = np.array([0.10, 0.115, 0.13, 0.135, 0.15, 0.17, 0.20])
@@ -125,46 +133,72 @@ TARGET_EQUITY_USDM = target_equity_usdm()
 TARGET_EV_USDM = TARGET_EQUITY_USDM - NET_CASH_USDM
 
 
-def growth_path(base_rev: float) -> list[float]:
-    """Base-case revenue growth rates 2026-2035 (9 intervals)."""
-    return [0.56, 0.50, 0.44, 0.38, 0.32, 0.26, 0.20, 0.14, 0.08]
+def enterprise_value_for_growth_start(
+    wacc: float,
+    term_margin: float,
+    growth_start_2027: float,
+) -> tuple[float, float]:
+    """Return enterprise value and 2035 revenue with FY2026E fixed at the model base."""
+    revenue = REV_2026_USDM
+    previous_revenue = REV_2025_USDM
+    nol = 0.0
+    rows: list[tuple[float, float]] = []
+
+    for i, year in enumerate(range(2026, 2036)):
+        if year > 2026:
+            growth = growth_start_2027 + (GROWTH_END_2035 - growth_start_2027) * (i - 1) / 8
+            revenue = previous_revenue * (1 + growth)
+        margin = START_OP_MARGIN + (term_margin - START_OP_MARGIN) * i / 9
+        ebit = revenue * margin
+        beginning_nol = nol
+        if ebit < 0:
+            cash_tax = 0.0
+            nol = beginning_nol - ebit
+        else:
+            nol_used = min(beginning_nol, ebit)
+            cash_tax = (ebit - nol_used) * TAX
+            nol = beginning_nol - nol_used
+        nopat = ebit - cash_tax
+        reinvestment = max(revenue - previous_revenue, 0) / SALES_TO_CAP
+        fcff = nopat - reinvestment
+        discount_factor = 1 / (1 + wacc) ** (i + 1)
+        rows.append((fcff, discount_factor))
+        previous_revenue = revenue
+
+    if wacc <= TERM_G:
+        return float("inf"), revenue
+    terminal_value = rows[-1][0] * (1 + TERM_G) / (wacc - TERM_G)
+    enterprise_value = sum(fcff * df for fcff, df in rows) + terminal_value * rows[-1][1]
+    return enterprise_value, revenue
+
+
+def solve_required_path(wacc: float, term_margin: float) -> tuple[float, float]:
+    """Solve the 2027 growth rate and 2035 revenue that match observed enterprise value."""
+    low = -0.50
+    high = 1.00
+    high_value, _ = enterprise_value_for_growth_start(wacc, term_margin, high)
+    while high_value < TARGET_EV_USDM and high < 10:
+        high = high * 1.5 + 0.10
+        high_value, _ = enterprise_value_for_growth_start(wacc, term_margin, high)
+    if high_value < TARGET_EV_USDM:
+        return float("inf"), float("inf")
+
+    for _ in range(160):
+        mid = (low + high) / 2
+        mid_value, _ = enterprise_value_for_growth_start(wacc, term_margin, mid)
+        if mid_value < TARGET_EV_USDM:
+            low = mid
+        else:
+            high = mid
+
+    required_growth = (low + high) / 2
+    _, required_revenue = enterprise_value_for_growth_start(wacc, term_margin, required_growth)
+    return required_growth, required_revenue
 
 
 def compute_required_2035_rev(wacc: float, term_margin: float) -> float:
-    """Solve for 2035 revenue (US$m) that makes EV = TARGET_EV_USDM."""
-    g_path = growth_path(1.0)
-    revs = [1.0]
-    for g in reversed(g_path):
-        revs.insert(0, revs[0] / (1 + g))
-
-    n = len(revs)
-    margins = np.linspace(-0.30, term_margin, n)
-    fcf_unit = []
-    pv_unit = 0.0
-    for i in range(n):
-        rev_i = revs[i]
-        ebit_i = rev_i * margins[i]
-        tax_i = max(0, ebit_i * TAX)
-        nopat_i = ebit_i - tax_i
-        if i == 0:
-            reinvest_i = rev_i / SALES_TO_CAP
-        else:
-            reinvest_i = (rev_i - revs[i - 1]) / SALES_TO_CAP
-        fcff_i = nopat_i - reinvest_i
-        pv_unit += fcff_i / (1 + wacc) ** (i + 1)
-        fcf_unit.append(fcff_i)
-
-    fcff_term = fcf_unit[-1]
-    if wacc <= TERM_G:
-        return float("inf")
-    tv_unit = fcff_term * (1 + TERM_G) / (wacc - TERM_G)
-    pv_tv_unit = tv_unit / (1 + wacc) ** n
-
-    ev_per_unit = pv_unit + pv_tv_unit
-    if ev_per_unit <= 0:
-        return float("inf")
-
-    return TARGET_EV_USDM / ev_per_unit
+    """Return required 2035 revenue (US$m), anchored to the FY2026E revenue assumption."""
+    return solve_required_path(wacc, term_margin)[1]
 
 
 def build_sensitivity_grid() -> pd.DataFrame:
@@ -172,8 +206,16 @@ def build_sensitivity_grid() -> pd.DataFrame:
     rows = []
     for w in WACC_GRID:
         for m in MARGIN_GRID:
-            rev = compute_required_2035_rev(w, m)
-            rows.append({"WACC": w, "Term_margin": m, "Req_rev_2035_USDm": rev})
+            growth_start, rev = solve_required_path(w, m)
+            rows.append(
+                {
+                    "WACC": w,
+                    "Term_margin": m,
+                    "Required_2027_growth": growth_start,
+                    "Req_rev_2035_USDm": rev,
+                    "Required_CAGR_2026_2035": (rev / REV_2026_USDM) ** (1 / 9) - 1,
+                }
+            )
     df = pd.DataFrame(rows)
     df["Req_rev_2035_USDbn"] = df["Req_rev_2035_USDm"] / 1000
     return df
@@ -255,9 +297,9 @@ def main() -> None:
     fig_path = FIGURES / "fig11_reverse_dcf_heatmap.png"
     plot_sensitivity_heatmap(df_sens, fig_path)
 
-    base_rev = compute_required_2035_rev(WACC_BASE, 0.40)
+    base_growth, base_rev = solve_required_path(WACC_BASE, 0.40)
     print(f"\n[Summary] Base case (WACC={WACC_BASE:.1%}, margin=40%): "
-          f"required 2035 rev = US${base_rev / 1000:.0f}B")
+          f"required 2027 growth = {base_growth:.1%}; 2035 rev = US${base_rev / 1000:.0f}B")
     for w in [0.10, 0.15, 0.20]:
         r = compute_required_2035_rev(w, 0.40)
         print(f"  WACC={w:.0%}, margin=40%: US${r / 1000:.0f}B")

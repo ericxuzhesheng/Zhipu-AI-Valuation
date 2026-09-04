@@ -16,10 +16,10 @@ import rebuild_outputs
 class EventPanelTests(unittest.TestCase):
     def test_event_catalog_input_drives_panel(self) -> None:
         events = event_panel.load_panel_events()
-        self.assertEqual(len(events), 44)
+        self.assertEqual(len(events), 61)
         panel = event_panel.event_panel_rows(events)
-        self.assertEqual(len(panel), 44)
-        self.assertEqual(int(panel["included"].sum()), 26)
+        self.assertEqual(len(panel), 61)
+        self.assertEqual(int(panel["included"].sum()), 34)
         zcode = panel.loc[panel["event"] == "ZCode IDE"].iloc[0]
         self.assertFalse(bool(zcode["included"]))
         self.assertIn("outside the core foundation-model capability event set", zcode["exclusion_reason"])
@@ -33,6 +33,12 @@ class EventPanelTests(unittest.TestCase):
         glm53flash = panel.loc[panel["event"] == "GLM-5.3-Flash"].iloc[0]
         self.assertFalse(bool(glm53flash["included"]))
         self.assertIn("insufficient post-event window", glm53flash["exclusion_reason"])
+        interim = panel.loc[panel["event"] == "2026 H1 results announcement"].iloc[0]
+        self.assertFalse(bool(interim["included"]))
+        self.assertIn("same-day return predates disclosure", interim["exclusion_reason"])
+        msci = panel.loc[panel["event"] == "MSCI Emerging Markets inclusion rebalance"].iloc[0]
+        self.assertFalse(bool(msci["included"]))
+        self.assertIn("closing-auction flows", msci["exclusion_reason"])
 
         generated_catalog = pd.read_csv(ROOT / "eventstudy" / "event_catalog.csv")
         self.assertEqual(len(generated_catalog), len(events))
@@ -50,20 +56,20 @@ class EventPanelTests(unittest.TestCase):
         included = panel[panel["included"] == True]
         summary = event_panel.summarize_event_panel(included)
         total = summary.loc[summary["event_type"] == "ALL_INCLUDED"].iloc[0]
-        self.assertEqual(int(total["n_events"]), 26)
-        self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 3.16)
-        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), -1.11)
+        self.assertEqual(int(total["n_events"]), 34)
+        self.assertAlmostEqual(float(total["mean_reaction_car_pct"]), 2.80)
+        self.assertAlmostEqual(float(total["mean_drift_car_pct"]), -2.02)
         large_tech = summary.loc[summary["event_type"] == "large_tech_peer"].iloc[0]
-        self.assertEqual(int(large_tech["n_events"]), 14)
-        self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), 2.23)
-        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -0.95)
-        self.assertEqual(int(large_tech["full_drift_windows"]), 14)
+        self.assertEqual(int(large_tech["n_events"]), 22)
+        self.assertAlmostEqual(float(large_tech["mean_reaction_car_pct"]), 2.01)
+        self.assertAlmostEqual(float(large_tech["mean_drift_car_pct"]), -2.42)
+        self.assertEqual(int(large_tech["full_drift_windows"]), 22)
 
 
 class ValuationTests(unittest.TestCase):
     def test_base_case_per_share_value_is_stable(self) -> None:
         result = rebuild_outputs.project_scenario(rebuild_outputs.SCENARIOS[1])
-        self.assertAlmostEqual(result["per_share_hkd"], 27.4, places=1)
+        self.assertAlmostEqual(result["per_share_hkd"], 72.8, places=1)
 
     def test_valuation_comps_are_built_from_input(self) -> None:
         comps = rebuild_outputs.build_valuation_comps()
@@ -83,7 +89,7 @@ class ValuationTests(unittest.TestCase):
         self.assertAlmostEqual(float(included["multiple_x"].max()), 39.0, delta=0.15)
 
         minimax = comps.loc[comps["company"] == "MiniMax", "multiple_x"].iloc[0]
-        self.assertAlmostEqual(float(minimax), 81.4, delta=0.15)
+        self.assertAlmostEqual(float(minimax), 94.6, delta=0.15)
 
 
 if __name__ == "__main__":

@@ -35,7 +35,7 @@
 \subtitle{Evidence from Zhipu AI (2513.HK)\\论文讲解版}
 \author{许哲圣 \quad 42353012}
 \institute{公司金融课程论文}
-\date{August 2026}
+\date{31 August 2026}
 
 \begin{document}
 
@@ -60,15 +60,17 @@
       \begin{itemize}
         \item 智谱 AI 是 2026 年 1 月上市的基础模型公司，股票代码 2513.HK。
         \item 它以 Chapter 18C 规则进入港股市场，上市时仍处于预盈利阶段。
-        \item 到 2026-08-28，股价从 IPO 价 HK\$116.20 升至 HK\$1,090。
+        \item 截至 2026-08-31 收市，股价从 IPO 价 HK\$116.20 升至 HK\$1,195。
+        \item 7 月配售净募资 HK\$31.375bn，显著延长了资金跑道。
       \end{itemize}
     \end{column}
     \begin{column}{0.48\textwidth}
       \textbf{为什么传统分析会卡住}
       \begin{itemize}
         \item 盈利为负，市盈率没有解释力。
-        \item 账面权益为负，市净率也不合适。
-        \item 收入仍小，但市场已经给出约 US\$62.3bn 的 equity value。
+        \item 6 月末账面权益虽因融资转正，市净率主要反映融资而非商业化质量。
+        \item H1 2026 收入虽同比增长 399.7\%，经营亏损仍达 RMB 2.147bn。
+        \item 市场已给出约 US\$71.3bn 的股权市值。
       \end{itemize}
     \end{column}
   \end{columns}
@@ -110,17 +112,17 @@
     \begin{column}{0.32\textwidth}
       \textbf{估值结论}
       \begin{itemize}
-        \item DCF 每股 HK\$12--80。
-        \item 概率加权值 HK\$32。
-        \item 约等于市价的 3.0\%。
+        \item DCF 每股 HK\$25--233。
+        \item 概率加权值 HK\$88。
+        \item 约等于市价的 7.4\%。
       \end{itemize}
     \end{column}
     \begin{column}{0.32\textwidth}
       \textbf{预期结论}
       \begin{itemize}
-        \item 市价隐含约 312x FY2026E revenue。
-        \item 反向 DCF 指向赢家通吃情景。
-        \item 需要非常大的 2035 年收入。
+        \item 市价隐含约 102x FY2026E revenue。
+        \item 基准反向 DCF 要求 2035 年收入 US\$91.9bn。
+        \item 2026--2035 年收入 CAGR 约 71.9\%。
       \end{itemize}
     \end{column}
     \begin{column}{0.32\textwidth}
@@ -128,7 +130,7 @@
       \begin{itemize}
         \item 五个 GLM 能力事件平均反应 CAR +13.7\%，peer-adjusted 为 +15.3\%。
         \item 市场区分智谱与 MiniMax。
-        \item 资金流事件不能与能力事件混在一起。
+        \item 财报事件与指数资金流也不能和能力事件混在一起。
       \end{itemize}
     \end{column}
   \end{columns}
@@ -163,19 +165,55 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{财务图显示增长很快，但商业化还很早}
+\begin{frame}{半年报把“高增长、高投入”同时推到台前}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.55\textwidth}
       \includegraphics[width=\textwidth]{fig8_financial_profile.png}
     \end{column}
     \begin{column}{0.41\textwidth}
-      \textbf{图上要看三件事}
+      \textbf{H1 2026 要看三件事}
       \begin{itemize}
-        \item 收入从 RMB 57.4m 增至 RMB 724.3m，增速高但规模仍小。
-        \item 总毛利率为正，说明商业化并非完全没有基础。
-        \item 云部署毛利率曾明显压缩，说明低价获客和推理成本会直接伤害盈利路径。
+        \item 半年收入 RMB 953.9m，已超过 FY2025 全年 RMB 724.3m。
+        \item API 收入 RMB 825.2m，占比 86.5\%，同比增长 2,735.7\%。
+        \item 毛利率由 50.0\% 降至 26.4\%，规模增长尚未转化为经营杠杆。
       \end{itemize}
-      \smallnote{这也是 DCF 中最敏感的地方：长期 revenue scale 和 EBIT margin。}
+      \smallnote{增长是真实的，单位经济性与费用强度同样真实；这正是估值分歧的来源。}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{H1 2026：收入跃升，亏损仍是核心约束}
+  \vspace{-0.3em}
+  \begin{table}
+    \centering
+    \scriptsize
+    \begin{tabular}{lrrr}
+      \toprule
+      RMB m & H1 2025 & H1 2026 & 同比变化 \\
+      \midrule
+      收入 & 190.9 & 953.9 & +399.7\% \\
+      毛利 & 95.4 & 251.6 & +163.7\% \\
+      经营亏损 & 1,899.2 & 2,146.6 & +13.0\% \\
+      净亏损 & 2,357.9 & 2,072.0 & -12.1\% \\
+      调整后亏损 & 1,752.0 & 1,964.1 & +12.1\% \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  \smallnote{研发开支 RMB 2,131.2m，同比增长 33.6\%；净亏损收窄含金融工具公允价值变动影响，调整后亏损仍在扩大。}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \textbf{资产负债表（2026-06-30）}
+      \begin{itemize}
+        \item 现金 RMB 3,993.7m；短期投资 RMB 506.1m。
+        \item 银行借款 RMB 2,224.8m；租赁负债 RMB 379.4m。
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{读数边界}
+      \begin{itemize}
+        \item 7 月配售净募资 HK\$31.375bn，配售后股份 465.623m。
+        \item 半年报于 8 月 31 日收市后发布，不能用来解释当日涨幅。
+      \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
@@ -190,6 +228,7 @@
       \begin{itemize}
         \item GLM-5、Turbo、5.1、5.2、5.3 形成连续能力事件。
         \item 能力事件来自官方模型发布和 benchmark 变化，不从股价反推。
+        \item 7 月配售和 8 月半年报另行归类，不和能力新闻混算。
         \item 这保证事件研究不是挑涨幅最大的日子。
       \end{itemize}
     \end{column}
@@ -201,7 +240,7 @@
   \includegraphics[height=0.66\textheight]{fig1_price_paths.png}
   \vspace{0.2em}
   \footnotesize
-  智谱股价较 IPO 约 +838\%，而 MiniMax 上市后明显回落。橙色线是能力事件，绿色线是 IPO、指数纳入、Stock Connect、HKEX Tech 100 等资金流或生态事件。
+  截至 8 月 31 日，智谱较 IPO 上涨约 928\%，MiniMax 上涨约 112\%。当日智谱收涨 9.6\%；半年报在收市后发布，不能解释这段涨幅，MSCI 月末再平衡则可能贡献了部分收盘资金流。
 \end{frame}
 
 \section{估值框架与隐含预期}
@@ -209,23 +248,24 @@
 \begin{frame}{估值先从一个透明的 DCF 框架开始}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.48\textwidth}
-      \textbf{主要输入}
+      \textbf{已披露事实与资金桥}
       \begin{itemize}
-        \item FY2025 收入基数约 RMB 724m。
-        \item WACC 约 13.5\%，由 bottom-up beta 得到。
-        \item 汇率假设：HK\$7.8/US\$，RMB 7.1/US\$。
-        \item 股本约 446m 股。
+        \item H1 2026 收入 RMB 953.9m，经营利润率约 -225\%。
+        \item 配售后股份 465.623m 股。
+        \item 现金加短投、扣除借款与租赁，再加 7 月配售净额，pro forma 净现金约 US\$4.289bn。
       \end{itemize}
     \end{column}
     \begin{column}{0.48\textwidth}
-      \textbf{为什么用情景法}
+      \textbf{模型假设，不是公司指引}
       \begin{itemize}
-        \item 公司历史太短，单点预测会制造虚假精确。
-        \item 早期 AI 商业化结果高度分叉。
-        \item Bear/Base/Bull 更适合表达右尾和下行风险。
+        \item FY2026E 收入 US\$700m。
+        \item 起始经营利润率 -100\%，意味着 H2 经营效率显著改善。
+        \item WACC 约 13.5\%，由 bottom-up beta 得到。
+        \item 汇率假设：HK\$7.8/US\$，RMB 7.1/US\$。
       \end{itemize}
     \end{column}
   \end{columns}
+  \smallnote{US\$4.289bn 并非 8 月 31 日公司披露余额，而是基于 6 月末资产负债表和后续配售的估值桥。}
 \end{frame}
 
 \begin{frame}{DCF 的结果只解释了市价的一小部分}
@@ -238,16 +278,16 @@
       情景 & 2035 收入 & EBIT margin & Equity value & 每股价值 \\
       & US\$bn & & US\$bn & HK\$ \\
       \midrule
-      Bear & 1.0 & 5\% & 0.7 & 11.9 \\
-      Base & 3.8 & 15\% & 1.6 & 27.4 \\
-      Bull & 10.0 & 25\% & 4.6 & 79.7 \\
+      Bear & 4.4 & 18\% & 1.5 & 24.6 \\
+      Base & 8.0 & 28\% & 4.3 & 72.8 \\
+      Bull & 21.9 & 35\% & 13.9 & 233.1 \\
       \midrule
-      概率加权 & -- & -- & 1.9 & 32.4 \\
-      市场价格 & -- & -- & 62.3 & 1,090.0 \\
+      概率加权 & -- & -- & 5.3 & 88.0 \\
+      市场价格（8/31） & -- & -- & 71.3 & 1,195.0 \\
       \bottomrule
     \end{tabular}
   \end{table}
-  \textbf{讲解重点：} Bear/Base/Bull 不是为了精确预测，而是为了说明即使在较乐观的现金流路径下，传统估值仍远低于市场价格。
+  \textbf{讲解重点：} 概率加权 DCF 约为市价的 7.4\%。这不是在宣告“正确价格”，而是在量化市场价格中有多少依赖尚未兑现的右尾结果。
 \end{frame}
 
 \begin{frame}{敏感性分析说明估值缺口不是小幅调参能解决}
@@ -260,7 +300,7 @@
       \begin{itemize}
         \item 每个条形表示一个关键假设变化对每股价值的影响。
         \item 收入规模、长期利润率和 WACC 是最核心变量。
-        \item 即使把这些变量调得更乐观，也难以靠普通 DCF 接近 HK\$1,090。
+        \item 典型单变量区间约 HK\$43--104，仍难以靠常规调参接近 HK\$1,195。
       \end{itemize}
     \end{column}
   \end{columns}
@@ -275,10 +315,11 @@
       \textbf{关键读法}
       \begin{itemize}
         \item 横轴和纵轴分别改变终值利润率和 WACC。
-        \item 每个格子显示要支撑 US\$62.3bn equity value 所需的 2035 年收入。
-        \item 在 WACC 13.5\%、终值利润率 40\% 下，隐含 2035 年收入约 US\$71bn。
+        \item 每个格子显示要支撑 US\$71.3bn equity value 所需的 2035 年收入。
+        \item 基准组合（13.5\% WACC、40\% 终值利润率）要求 2035 年收入 US\$91.9bn。
+        \item 这相当于 2027 年增长 147.8\%，2026--2035 年 CAGR 71.9\%。
       \end{itemize}
-      \smallnote{这一步把“市场很贵”变成“市场在赌极大规模商业化”。}
+      \smallnote{FY2026E 收入固定为 US\$700m；反向 DCF 求解的是此后增长路径。}
     \end{column}
   \end{columns}
 \end{frame}
@@ -291,12 +332,12 @@
     \begin{column}{0.38\textwidth}
       \textbf{交叉验证}
       \begin{itemize}
-        \item OpenAI、Anthropic 与 Mistral 的私有交易区间为 20.5--39.0x，对应每股约 HK\$72--136。
-        \item MiniMax 的可审计倍数为 81.4x LTM，对应约 HK\$285。
-        \item 两种检查都明显低于 HK\$1,090，估值缺口没有消失。
+        \item 私募基础模型交易区间为 20.5--39.0x，对应每股约 HK\$240--457。
+        \item MiniMax 以 94.6x 收入倍数映射，对应智谱约 HK\$1,109。
+        \item 因此，私募交易与市价仍有大幅折价；最近的上市同行却已接近市价。
       \end{itemize}
       \begin{block}{估值含义}
-        市场价格仍要依靠很大的右尾结果才能成立。
+        可比法不是“一致判贵”：它揭示公开市场已给中国基础模型公司共同的高期权溢价。
       \end{block}
     \end{column}
   \end{columns}
@@ -311,11 +352,11 @@
       \small
       \textbf{读图顺序}
       \begin{itemize}
-        \item 先看基础模型同行。智谱为 311.5x，MiniMax 为 81.4x；私有交易中位数约 34.1x。
+        \item 先看基础模型同行：智谱为 101.9x，MiniMax 为 94.6x，私募交易中位数为 34.1x。
         \item 港股邻近组帮助判断本地 AI 资产的估值位置，但收入结构不同。
         \item 商业化参照组显示成熟 AI 软件的收入倍数，不参与核心中位数。
       \end{itemize}
-      \smallnote{图中每家公司都保留估值日、收入周期和来源，倍数由数据表计算。}
+      \smallnote{智谱倍数约为 MiniMax 的 1.08 倍，却是私募中位数的 2.99 倍；估值口径会改变结论强度。}
     \end{column}
   \end{columns}
 \end{frame}
@@ -375,7 +416,8 @@
       \textbf{事件分类}
       \begin{itemize}
         \item Capability：GLM 模型发布和 benchmark 跳升。
-        \item Flow：HSTECH、Stock Connect、HKEX Tech 100 等指数或资金流事件。
+        \item Flow：HSTECH、Stock Connect、HKEX Tech 100、MSCI 等指数或资金流事件。
+        \item Financial disclosure：半年报等财务披露，和模型能力分开识别。
         \item Listing：IPO 相关事件。
         \item Peer：MiniMax 的通用/旗舰模型事件；音乐、语音等垂类模型只保留在扩展目录中。
       \end{itemize}
@@ -390,7 +432,7 @@
       \end{itemize}
     \end{column}
   \end{columns}
-  \smallnote{扩展事件目录会保留被排除事件和排除原因，避免只展示“好看”的事件。}
+  \smallnote{完整窗口样本含 22 个 large-tech 发布；半年报和 8 月下旬窗口不完整的 Qwen3.8-Flash、Hy4、Gemini Transcribe/Omni 1.1 只留目录，不强算 CAR。}
 \end{frame}
 
 \begin{frame}{五个 GLM 能力事件：四个原始短窗为正}
@@ -446,7 +488,7 @@
   \end{columns}
   \vspace{0.3em}
   \footnotesize
-  最大日收益并不一定来自模型发布。2 月和 5 月的尖峰更多对应 HSTECH 与 Stock Connect 预期。把这些事件单独归类，才能避免把流动性催化剂误读为能力进步。
+  最大日收益并不一定来自模型发布。2 月和 5 月的尖峰更多对应 HSTECH 与 Stock Connect 预期；8 月 31 日收涨 9.6\% 时，半年报尚未发布，MSCI 收盘再平衡则与交易时点重合。把流动性催化剂单独归类，才能避免把资金流误读为能力进步。
 \end{frame}
 
 \begin{frame}{MiniMax 对照帮助区分公司能力和板块情绪}
@@ -511,13 +553,14 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{投资含义是跟踪能力日历，而不是只看财报}
+\begin{frame}{投资含义是同时跟踪财务与能力两只时钟}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.32\textwidth}
       \textbf{对投资者}
       \begin{itemize}
         \item 区分模型能力事件和资金流事件。
-        \item 关注 benchmark 质量、价格策略和开发者采用。
+        \item 用半年报检验收入质量、毛利率与费用杠杆。
+        \item 用能力日历跟踪 benchmark、价格策略和开发者采用。
         \item 对高估值保持止损纪律。
       \end{itemize}
     \end{column}
@@ -525,7 +568,7 @@
       \textbf{对公司}
       \begin{itemize}
         \item 能力发布是资本市场的核心沟通货币。
-        \item 但长期仍必须落到收入规模和毛利率。
+        \item API 已成为主收入来源且自身毛利率转正；总毛利率因收入结构变化而下降。
         \item 开源低价策略需要证明可变现。
       \end{itemize}
     \end{column}
@@ -545,8 +588,9 @@
     \begin{column}{0.32\textwidth}
       \textbf{DCF 是否太保守}
       \begin{itemize}
-        \item 回答重点不是“我的 DCF 一定正确”。
-        \item 重点是反向 DCF 显示市场价要求极端商业化路径。
+        \item FY2026E 收入 US\$700m 已远高于 H1 年化水平。
+        \item -100\% 起始利润率也假设 H2 较 H1 的 -225\% 显著改善。
+        \item 即便如此，反向 DCF 仍显示市价要求极端增长路径。
       \end{itemize}
     \end{column}
     \begin{column}{0.32\textwidth}
@@ -560,9 +604,9 @@
     \begin{column}{0.32\textwidth}
       \textbf{为什么不是纯泡沫}
       \begin{itemize}
-        \item 如果是纯泡沫，能力事件不应有稳定正反应。
-        \item 但高估值仍可能快速回撤。
-        \item 所以结论是 option-like，而不是无风险成长。
+        \item 稳定正反应说明市场至少会分辨能力新闻。
+        \item MiniMax 的 94.6x 倍数显示板块确有共同期权溢价。
+        \item 但小样本事件研究不能排除泡沫，高估值仍可能快速回撤。
       \end{itemize}
     \end{column}
   \end{columns}
@@ -570,14 +614,14 @@
 
 \begin{frame}{最后的结论}
   \begin{block}{一句话}
-    智谱 AI 的股票价格把能力迭代动量定价为右尾期权，而不是把当前财务报表定价为稳定现金流资产。
+    H1 2026 显示 API 收入已形成显著商业化牵引，却尚未证明规模能转化为利润；HK\$1,195 的股价仍主要在定价能力迭代带来的右尾期权。
   \end{block}
   \vspace{0.4em}
   \textbf{论文的三个贡献}
   \begin{itemize}
-    \item 用 DCF、可比估值和反向 DCF 明确市场价格的隐含未来。
+    \item 把半年报、配售与市场价格拆成事实，再把预测明确标成模型假设。
+    \item 用 DCF、可比估值和反向 DCF 明确市价所要求的未来。
     \item 用 capability surprise 替代 earnings surprise，适配早期基础模型公司。
-    \item 把能力事件和资金流事件分开，给出更谨慎的价格形成解释。
   \end{itemize}
   \vspace{0.5em}
   \centering

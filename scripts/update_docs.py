@@ -17,6 +17,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from rebuild_outputs import REV_2026_USDM, SHARES_M, USD_HKD
+
 ROOT = Path(__file__).resolve().parents[1]
 
 # ---- helpers ----
@@ -42,11 +44,6 @@ def _load_snapshot() -> dict:
     ann_vol = float(zhipu["ann_vol_pct"])
     latest_date = str(zhipu["latest_date"])
     date_display = f"{latest_date[:4]}-{latest_date[4:6]}-{latest_date[6:8]}"
-
-    # Shares and FX from rebuild_outputs.py constants
-    SHARES_M = 445.843
-    USD_HKD = 7.8
-    REV_2026_USDM = 200
 
     equity_value_usdm = price_hkd * SHARES_M / USD_HKD
     revenue_multiple = equity_value_usdm / REV_2026_USDM
@@ -100,9 +97,9 @@ def _load_snapshot() -> dict:
         "prob_weighted_hkd": round(float(prob_weighted)),
         "rev_req_usd_bn": rev_req,
         "rev_req_fmt": f"US${rev_req:.0f} 亿" if rev_req else "N/A",
-        # CAGR to reach rev_req over 2026-2035 (9 years from US$200M base)
-        "cagr_fmt": f"{((rev_req / 0.2) ** (1/9) - 1) * 100:.0f}%" if rev_req else "N/A",
-        "rev_req_multiple_fmt": f"{rev_req / 0.2:.0f}" if rev_req else "N/A",
+        # CAGR to reach rev_req over 2026-2035 (nine intervals from the model's FY2026E base)
+        "cagr_fmt": f"{((rev_req / (REV_2026_USDM / 1000)) ** (1/9) - 1) * 100:.0f}%" if rev_req else "N/A",
+        "rev_req_multiple_fmt": f"{rev_req / (REV_2026_USDM / 1000):.0f}" if rev_req else "N/A",
         # MiniMax data
         "minimax_price": float(minimax["latest_close"]),
         "minimax_ret": (float(minimax["latest_close"]) / float(minimax["ipo_price"]) - 1) * 100,
@@ -386,8 +383,10 @@ def update_data_tables(snap: dict) -> None:
 
     # Implied market equity line
     content = re.sub(
-        r'\*\*Implied market equity value / revenue ~= \d+x FY26E\*\* \(US\$\d+\.?\d*B / US\$200M\)',
-        f'**Implied market equity value / revenue ~= {snap["revenue_multiple_fmt"]}x FY26E** (US${snap["equity_value_usdb"]:.1f}B / US$200M)',
+        r'\*\*Implied market equity value / revenue (?:~=|=) \d+\.?\d*x FY26E\*\* '
+        r'\(US\$\d+\.?\d*B / US\$\d+\.?\d*M(?: model estimate)?\)\.?',
+        f'**Implied market equity value / revenue = {snap["revenue_multiple_fmt"]}x FY26E** '
+        f'(US${snap["equity_value_usdb"]:.1f}B / US${REV_2026_USDM:.0f}M model estimate).',
         content,
     )
 

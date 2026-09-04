@@ -9,7 +9,8 @@ Zhipu,02513.HK,GLM-OCR,2026-02-03,candidate_capability,official model timeline,Z
 Zhipu,02513.HK,GLM-5V-Turbo,2026-04-02,candidate_capability,official multimodal model release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,excluded from core CAR because the drift window overlaps GLM-5.1 and the release is a multimodal branch
 Zhipu,02513.HK,ZCode IDE,2026-07-02,candidate_product,official product release,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,product launch outside the core foundation-model capability event set
 Zhipu,02513.HK,GLM-5.3,2026-08-14,capability,official Z.ai model release; frontier coding and cyber capabilities,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
-Zhipu,02513.HK,GLM-5.3-Flash,2026-08-26,candidate_capability,official Z.ai model release; native multimodality and efficient hybrid attention,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,insufficient post-event window through 2026-08-28
+Zhipu,02513.HK,GLM-5.3-Flash,2026-08-26,candidate_capability,official Z.ai model release; native multimodality and efficient hybrid attention,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,insufficient post-event window through 2026-08-31
+Zhipu,02513.HK,2026 H1 results announcement,2026-08-31,financial_disclosure,HKEX interim results announcement released at 18:56 after market close,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,insufficient post-announcement price window through 2026-08-31; same-day return predates disclosure
 MiniMax,00100.HK,M2.5 series,,candidate_capability,candidate model release; month-level date only,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,month-only event date in source screenshot; not included until official day-level source is pinned
 MiniMax,00100.HK,Speech-2.8,2026-01-23,candidate_vertical,official model timeline,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,vertical speech model outside text-agent capability peer set
 MiniMax,00100.HK,Music-2.5,2026-01-16,candidate_vertical,official model timeline,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,vertical music model outside text-agent capability peer set
@@ -19,25 +20,41 @@ MiniMax,00100.HK,M2.7,2026-03-18,capability_peer,official model release,MiniMax_
 MiniMax,00100.HK,M3,2026-06-01,capability_peer,official model release; sparse attention; 1M context; native multimodality,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 MiniMax,00100.HK,H3 open source,2026-08-03,candidate_vertical,official MiniMax release; general-purpose omni-modal video generation,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,video-generation model outside the text-agent capability peer set
 MiniMax,00100.HK,Music 3.0,2026-08-13,candidate_vertical,official MiniMax release; open-weights music generation,MiniMax_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,music-generation model outside the text-agent capability peer set
-Baidu,9888.HK,ERNIE 5.0,2026-02-04,large_tech_peer,technical report; unified multimodal foundation model,Baidu_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
-Baidu,9888.HK,ERNIE 5.1,2026-04-29,large_tech_peer,public model timeline; ERNIE 5.1 release,Baidu_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Baidu,9888.HK,ERNIE 5.0,2026-02-06,large_tech_peer,official ERNIE release; unified multimodal foundation model,Baidu_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Baidu,9888.HK,ERNIE 5.1,2026-05-11,large_tech_peer,official 2026-05-09 ERNIE release; next trading day used,Baidu_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Alibaba,9988.HK,Qwen3.5,2026-02-16,large_tech_peer,launch report; core Qwen model series,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
-Alibaba,9988.HK,Qwen3.6-35B-A3B,2026-04-15,large_tech_peer,model card; first open-weight Qwen3.6 variant,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
-Alibaba,9988.HK,Qwen3.7,2026-05-19,large_tech_peer,user-provided Qwen release table; agent frontier,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Alibaba,9988.HK,Qwen3.6-35B-A3B,2026-04-16,large_tech_peer,official Qwen model release; first open-weight Qwen3.6 variant,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Alibaba,9988.HK,Qwen3.7-Max,2026-05-21,large_tech_peer,official Model Studio launch; agent frontier,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Alibaba,9988.HK,Qwen3.7-Plus,2026-06-01,large_tech_peer,user-provided Qwen release table; next trading day for 2026-05-31 multimodal Qwen3.7-Plus release,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Alibaba,9988.HK,Qwen3.8-Max,2026-08-03,large_tech_peer,official Alibaba Cloud launch; first public Qwen3.8 flagship release,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Alibaba,9988.HK,Qwen3.8-2.4T-A95B open weights,2026-08-12,candidate_capability,official Qwen open-weight release,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,excluded to avoid double-counting the Qwen3.8 release cluster already represented by Qwen3.8-Max
+Alibaba,9988.HK,Qwen3.8-27B open weights,2026-08-14,candidate_capability,official Qwen open-weight release,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,excluded to avoid double-counting the Qwen3.8 release cluster already represented by Qwen3.8-Max
+Alibaba,9988.HK,Qwen3.8-Flash,2026-08-26,candidate_capability,official Alibaba Cloud model release,Alibaba_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,insufficient post-event window through 2026-08-31 and overlaps the Qwen3.8 release cluster
 Tencent,0700.HK,Hunyuan 3.0 preview,2026-04-22,large_tech_peer,user-provided model timeline; Hunyuan 3.0 large language model preview,Tencent_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
-Meituan,3690.HK,LongCat-2.0,2026-06-30,large_tech_peer,news report; domestic-chip-trained model; partial drift window,Meituan_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Tencent,0700.HK,Hy3 official,2026-07-06,large_tech_peer,official Tencent foundation-model release,Tencent_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Tencent,0700.HK,Hy4 preview,2026-08-28,candidate_capability,official Tencent open-source preview,Tencent_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,insufficient post-event window through 2026-08-31
+Meituan,3690.HK,LongCat-2.0,2026-06-30,large_tech_peer,news report; domestic-chip-trained model,Meituan_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Google,GOOGL,Gemini 3.1 Pro,2026-02-19,large_tech_peer,public model release timeline; Gemini 3.1 Pro,Google_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Google,GOOGL,Gemini 3.5/Omni,2026-05-19,large_tech_peer,Google I/O 2026 launch; Gemini 3.5 Flash and Gemini Omni,Google_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Google,GOOGL,Gemini 3.6 Flash,2026-07-21,large_tech_peer,official Google model launch; released with Gemini 3.5 Flash-Lite,Google_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Google,GOOGL,Gemini 3.7 Flash,2026-08-13,large_tech_peer,official Google model launch; coding and agent workhorse,Google_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Google,GOOGL,Gemini 3.5 Transcribe,2026-08-26,candidate_vertical,official Google speech-to-text model launch,Google_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,vertical speech model outside the text-agent capability set and insufficient post-event window
+Google,GOOGL,Gemini Omni 1.1 Flash,2026-08-27,candidate_vertical,official Google video model update,Google_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,vertical video model outside the text-agent capability set and insufficient post-event window
 Meta,META,Muse Spark,2026-04-08,large_tech_peer,Meta Superintelligence Labs model release,Meta_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Meta,META,Muse Spark 1.1,2026-07-09,large_tech_peer,official Meta multimodal reasoning model release,Meta_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Microsoft/OpenAI,MSFT,GPT-5.5 proxy,2026-04-23,large_tech_peer,OpenAI model release; Microsoft listed-equity proxy,Microsoft_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Microsoft/OpenAI,MSFT,GPT-5.6 proxy,2026-07-09,large_tech_peer,official OpenAI flagship-family release; Microsoft listed-equity proxy,Microsoft_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Microsoft/OpenAI,MSFT,GPT-5.6 August update proxy,2026-08-06,large_tech_peer,official OpenAI deployment update with new August model versions; Microsoft listed-equity proxy,Microsoft_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Tesla/xAI,TSLA,Grok 4.3 Beta proxy,2026-04-17,large_tech_peer,xAI Grok release; Tesla listed-equity proxy,Tesla_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
-Tesla/xAI,TSLA,Grok 4.5 beta proxy,2026-06-29,large_tech_peer,xAI private beta reported inside Tesla and SpaceX; Tesla listed-equity proxy; partial drift window,Tesla_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Tesla/xAI,TSLA,Grok 4.5 private-beta report proxy,2026-06-29,candidate_capability,reported private beta; Tesla listed-equity proxy,Tesla_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,excluded to avoid double-counting the official Grok 4.5 public release
+Tesla/xAI,TSLA,Grok 4.5 release proxy,2026-07-20,large_tech_peer,official xAI public model release; Tesla listed-equity proxy,Tesla_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
+Tesla/xAI,TSLA,Grok 4.6 release proxy,2026-08-12,large_tech_peer,official xAI public model release; Tesla listed-equity proxy,Tesla_daily.csv,Zhipu_KnowledgeAtlas_daily.csv,
 Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,Stock Connect inclusion,2026-06-08,flow,index/flow catalyst,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
 Zhipu,02513.HK,HKEX Tech 100 insight,2026-06-29,flow,index/flow ecosystem article,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,
+Zhipu,02513.HK,MSCI Emerging Markets inclusion rebalance,2026-08-31,flow,MSCI August 2026 index review changes effective after the market close,Zhipu_KnowledgeAtlas_daily.csv,MiniMax_daily.csv,insufficient post-event window through 2026-08-31; same-day move may include closing-auction flows
 Zhipu,02513.HK,IPO listing,2026-01-08,listing,HKEX listing,Zhipu_KnowledgeAtlas_daily.csv,,no pre-event estimation window
 MiniMax,00100.HK,IPO listing,2026-01-09,listing,HKEX listing,MiniMax_daily.csv,,no pre-event estimation window
 Wenge AI,01956.HK,IPO listing,2026-06-26,listing,HKEX listing,WengeAI_daily.csv,,no pre-event estimation window

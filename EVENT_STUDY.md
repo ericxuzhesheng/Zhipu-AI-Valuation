@@ -1,12 +1,13 @@
 # Capability Surprise, Not Earnings Surprise
 ### An event-driven read of how the market prices an early-commercial-stage AI lab (Zhipu, 2513.HK)
 
-> Core market data as of **2026-08-28**. A foundation-model lab has **no earnings to be surprised by**. So we replace the
+> Core market data as of **2026-08-31**. For a foundation-model lab still spending more than twice its revenue on R&D,
+> near-term earnings do not carry the same information as they do for a mature company. We therefore replace the
 > classic *earnings* surprise with a **capability surprise** - a model release or benchmark-leaderboard jump - and ask the only question that matters for market efficiency: *does the price react once and stop, or does it
 > keep drifting?* This is the AI analogue of post-earnings-announcement drift (PEAD) to **PCAD**.
 >
 > Method: mean-adjusted abnormal returns (`AR_t = R_t - average(R[-20,-6])`, where the average is the raw return
-> over event days -20 through -6) on market prices through 2026-08-28; three windows:
+> over event days -20 through -6) on market prices through 2026-08-31; three windows:
 > leakage `[-5,-1]`, reaction `[0,+1]`, drift `[+2,+10]`; robustness via peer-adjustment (benchmark = MiniMax).
 
 ---
@@ -55,11 +56,10 @@ Average CAR across the five GLM events (mean-adjusted):
 ![Price paths](figures/fig1_price_paths.png)
 
 ## 4. Verdict
-The market is **neither efficient nor a blind bubble**. It prices capability *immediately and discriminately*
-(separating Zhipu from MiniMax on model quality, not sector) but **mis-times magnitude**: under-reacting to
-true SOTA leaps, over-reacting to incremental ones. The **~9.4x / ~312x equity-value-to-revenue** re-rating is best read as
-**capability momentum priced as an option**. The fundamental anchor (DCF + real options) tells you *the level*;
+The market prices capability *quickly and discriminately* in this small sample, separating Zhipu from MiniMax on model quality rather than sector membership. It also appears to mis-time magnitude, under-reacting to genuine SOTA leaps and over-reacting to incremental releases. At the 31 August close, Zhipu traded at about **10.3x the IPO price and 102x FY2026E model revenue**. We read that re-rating as **capability momentum priced as an option**. The fundamental anchor (DCF + real options) tells you *the level*;
 the event study tells you *how price gets there*.
+
+The 31 August boundary also prevents a tempting causal mistake. Zhipu rose 9.63% that day, while MSCI's August index changes took effect at the close. The H1 results announcement arrived at 18:56, after trading ended. The same-day return therefore cannot be treated as a response to the results; both the financial disclosure and MSCI rebalance stay in the extended catalog until a valid post-event window exists.
 
 ## 5. Robustness & honesty box
 - **Peer-adjusted** (benchmark = MiniMax): all five reactions are positive and the mean rises from **+13.7% to
@@ -68,14 +68,15 @@ the event study tells you *how price gets there*.
   The under-reaction/PCAD pattern is reinforced, not weakened.
 - **Expanded event panel framework:** `data/event_catalog_input.csv` tracks Zhipu capability events,
   Zhipu screened-but-excluded model releases, Zhipu index/flow catalysts, MiniMax M2.7/M3, MiniMax vertical
-  audio/music releases, listing events, and candidate Wenge/Moonshot/Kimi events. Only events with day-level
-  dating, enough local post-listing price history and a clean event window enter the generated
+  audio/music releases, 22 complete-window releases from listed large-tech proxies, listing events, and candidate
+  Wenge/Moonshot/Kimi events. The July-August refresh adds Hy3, Qwen3.8-Max, Gemini 3.6/3.7 Flash,
+  Muse Spark 1.1, GPT-5.6 and Grok 4.5/4.6. Only events with day-level dating, enough local price history and a clean event window enter the generated
   `eventstudy/event_panel.csv`; excluded candidates carry an explicit reason instead of being forced into the
-  statistics.
+  statistics. The input catalog now has 61 rows; 34 enter the computable panel.
 - **Preliminary, diagnostic** evidence consistent with PCAD, *not* a proven anomaly: n = 5 single-firm events
   (+2 direct peer events) over seven months. The peer-adjusted reaction mean is at the 99.2nd percentile of the
   block-bootstrap null; drift is positive but only at the 88.0th percentile. Windows can overlap a fast release
   cadence or competing-lab news, so no general anomaly is claimed.
 - Extensions: multi-lab panel (MiniMax, Wenge releases), NLP-scored surprise magnitude.
 
-*Inputs: market prices through 2026-08-28 for the core Zhipu/MiniMax series in `data/`; CAR tables to `eventstudy/car_robustness.csv`; charts to `figures/`.*
+*Inputs: market prices through 2026-08-31 for the core Zhipu/MiniMax series in `data/`; CAR tables to `eventstudy/car_robustness.csv`; charts to `figures/`.*

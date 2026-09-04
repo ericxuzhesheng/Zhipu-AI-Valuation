@@ -6,20 +6,28 @@ Zhipu,02513.HK,GLM-5.2,2026-06-15,capability,official model release,True,,-23.24
 Zhipu,02513.HK,GLM-5.3,2026-08-14,capability,official Z.ai model release; frontier coding and cyber capabilities,True,,26.45,-6.54,3.76,2.38,1.81,-3.57,5.0,2.0,9.0,True
 MiniMax,00100.HK,M2.7,2026-03-18,capability_peer,official model release,True,,-44.71,-5.52,-49.08,-2.27,-37.71,19.85,5.0,2.0,9.0,True
 MiniMax,00100.HK,M3,2026-06-01,capability_peer,official model release; sparse attention; 1M context; native multimodality,True,,26.2,-21.09,-40.78,-9.66,-51.83,-15.71,5.0,2.0,9.0,True
-Baidu,9888.HK,ERNIE 5.0,2026-02-04,large_tech_peer,technical report; unified multimodal foundation model,True,,-11.35,-1.16,-9.16,11.15,-122.53,-2.97,5.0,2.0,9.0,True
-Baidu,9888.HK,ERNIE 5.1,2026-04-29,large_tech_peer,public model timeline; ERNIE 5.1 release,True,,-5.45,-5.57,9.54,-12.13,-11.83,-2.76,5.0,2.0,9.0,True
+Baidu,9888.HK,ERNIE 5.0,2026-02-06,large_tech_peer,official ERNIE release; unified multimodal foundation model,True,,-13.17,-0.43,-15.83,-29.21,-97.96,-2.2,5.0,2.0,9.0,True
+Baidu,9888.HK,ERNIE 5.1,2026-05-11,large_tech_peer,official 2026-05-09 ERNIE release; next trading day used,True,,17.75,-4.95,-13.56,5.35,-65.47,-2.96,5.0,2.0,9.0,True
 Alibaba,9988.HK,Qwen3.5,2026-02-16,large_tech_peer,launch report; core Qwen model series,True,,2.52,-4.48,-10.88,-52.82,13.69,-0.45,5.0,2.0,9.0,True
-Alibaba,9988.HK,Qwen3.6-35B-A3B,2026-04-15,large_tech_peer,model card; first open-weight Qwen3.6 variant,True,,8.48,10.19,2.1,15.59,2.15,3.29,5.0,2.0,9.0,True
-Alibaba,9988.HK,Qwen3.7,2026-05-19,large_tech_peer,user-provided Qwen release table; agent frontier,True,,-1.07,0.34,-2.89,6.86,-40.81,1.21,5.0,2.0,9.0,True
+Alibaba,9988.HK,Qwen3.6-35B-A3B,2026-04-16,large_tech_peer,official Qwen model release; first open-weight Qwen3.6 variant,True,,3.0,6.53,-5.5,3.29,-7.22,5.6,5.0,2.0,9.0,True
+Alibaba,9988.HK,Qwen3.7-Max,2026-05-21,large_tech_peer,official Model Studio launch; agent frontier,True,,0.17,-3.41,-2.1,-26.07,-6.57,-4.47,5.0,2.0,9.0,True
 Alibaba,9988.HK,Qwen3.7-Plus,2026-06-01,large_tech_peer,user-provided Qwen release table; next trading day for 2026-05-31 multimodal Qwen3.7-Plus release,True,,-3.1,8.56,-15.9,19.94,-27.16,1.57,5.0,2.0,9.0,True
+Alibaba,9988.HK,Qwen3.8-Max,2026-08-03,large_tech_peer,official Alibaba Cloud launch; first public Qwen3.8 flagship release,True,,0.74,5.26,-12.76,4.85,-22.06,7.01,5.0,2.0,9.0,True
 Tencent,0700.HK,Hunyuan 3.0 preview,2026-04-22,large_tech_peer,user-provided model timeline; Hunyuan 3.0 large language model preview,True,,6.42,-4.15,-1.32,-12.69,-0.43,-2.89,5.0,2.0,9.0,True
-Meituan,3690.HK,LongCat-2.0,2026-06-30,large_tech_peer,news report; domestic-chip-trained model; partial drift window,True,,-5.65,4.8,17.29,14.03,14.32,1.26,5.0,2.0,9.0,True
+Tencent,0700.HK,Hy3 official,2026-07-06,large_tech_peer,official Tencent foundation-model release,True,,5.64,8.17,9.81,16.3,51.61,4.82,5.0,2.0,9.0,True
+Meituan,3690.HK,LongCat-2.0,2026-06-30,large_tech_peer,news report; domestic-chip-trained model,True,,-5.65,4.8,17.29,14.03,14.32,1.26,5.0,2.0,9.0,True
 Google,GOOGL,Gemini 3.1 Pro,2026-02-19,large_tech_peer,public model release timeline; Gemini 3.1 Pro,True,,-4.55,3.97,-3.96,-38.71,24.03,-0.16,5.0,2.0,9.0,True
 Google,GOOGL,Gemini 3.5/Omni,2026-05-19,large_tech_peer,Google I/O 2026 launch; Gemini 3.5 Flash and Gemini Omni,True,,-2.72,-3.98,-16.72,4.68,-45.02,-2.34,5.0,2.0,9.0,True
+Google,GOOGL,Gemini 3.6 Flash,2026-07-21,large_tech_peer,official Google model launch; released with Gemini 3.5 Flash-Lite,True,,1.39,-2.3,12.95,-36.11,20.58,-1.38,5.0,2.0,9.0,True
+Google,GOOGL,Gemini 3.7 Flash,2026-08-13,large_tech_peer,official Google model launch; coding and agent workhorse,True,,-4.79,0.88,-0.65,-4.77,4.36,0.82,5.0,2.0,9.0,True
 Meta,META,Muse Spark,2026-04-08,large_tech_peer,Meta Superintelligence Labs model release,True,,13.24,11.53,18.17,-9.41,0.41,6.5,5.0,2.0,9.0,True
+Meta,META,Muse Spark 1.1,2026-07-09,large_tech_peer,official Meta multimodal reasoning model release,True,,8.57,11.14,-7.61,18.63,10.49,4.7,5.0,2.0,9.0,True
 Microsoft/OpenAI,MSFT,GPT-5.5 proxy,2026-04-23,large_tech_peer,OpenAI model release; Microsoft listed-equity proxy,True,,1.83,-3.18,-6.86,2.95,-8.4,-3.97,5.0,2.0,9.0,True
+Microsoft/OpenAI,MSFT,GPT-5.6 proxy,2026-07-09,large_tech_peer,official OpenAI flagship-family release; Microsoft listed-equity proxy,True,,5.93,1.71,4.88,8.41,19.41,0.27,5.0,2.0,9.0,True
+Microsoft/OpenAI,MSFT,GPT-5.6 August update proxy,2026-08-06,large_tech_peer,official OpenAI deployment update with new August model versions; Microsoft listed-equity proxy,True,,22.75,2.3,-4.98,-16.48,14.22,2.54,5.0,2.0,9.0,True
 Tesla/xAI,TSLA,Grok 4.3 Beta proxy,2026-04-17,large_tech_peer,xAI Grok release; Tesla listed-equity proxy,True,,16.2,2.61,7.01,-9.35,7.21,3.01,5.0,2.0,9.0,True
-Tesla/xAI,TSLA,Grok 4.5 beta proxy,2026-06-29,large_tech_peer,xAI private beta reported inside Tesla and SpaceX; Tesla listed-equity proxy; partial drift window,True,,-2.08,11.81,0.22,7.45,16.73,8.46,5.0,2.0,9.0,True
+Tesla/xAI,TSLA,Grok 4.5 release proxy,2026-07-20,large_tech_peer,official xAI public model release; Tesla listed-equity proxy,True,,-8.09,-0.97,-17.32,-17.76,6.2,-2.96,5.0,2.0,9.0,True
+Tesla/xAI,TSLA,Grok 4.6 release proxy,2026-08-12,large_tech_peer,official xAI public model release; Tesla listed-equity proxy,True,,7.57,4.55,12.58,-8.16,24.08,-1.59,5.0,2.0,9.0,True
 Zhipu,02513.HK,HSTECH expectation,2026-02-20,flow,index/flow catalyst,True,,57.56,16.11,-20.8,18.79,-2.0,42.72,5.0,2.0,9.0,True
 Zhipu,02513.HK,Stock Connect expectation,2026-05-13,flow,index/flow catalyst,True,,-8.2,31.81,45.4,9.31,43.85,36.9,5.0,2.0,9.0,True
 Zhipu,02513.HK,HSTECH inclusion,2026-06-05,flow,index/flow catalyst,True,,-34.46,-16.68,30.95,17.06,47.28,-9.05,5.0,2.0,9.0,True

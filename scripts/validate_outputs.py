@@ -5,6 +5,7 @@ import csv
 import re
 import subprocess
 import sys
+from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 
 import openpyxl
@@ -15,6 +16,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "paper" / "main.tex"
 SUBMISSION_GLOB = "42353012_*.pdf"
+DATA_CUTOFF = 20260831
 
 
 def fail(message: str) -> None:
@@ -67,12 +69,19 @@ def check_price_summary_dates() -> None:
     for code, path in specs.items():
         raw = pd.read_csv(path)
         expected = int(raw["trade_date"].max())
+        if expected != DATA_CUTOFF:
+            fail(f"{code} data cutoff should be {DATA_CUTOFF}, found {expected}")
         actual_rows = summary.loc[summary["code"] == code, "latest_date"]
         if actual_rows.empty:
             fail(f"price_summary.csv missing {code}")
         actual = int(actual_rows.iloc[0])
         if actual != expected:
             fail(f"{code} latest_date mismatch: summary {actual}, raw {expected}")
+    for path in sorted((ROOT / "data").glob("*_daily.csv")):
+        raw = pd.read_csv(path, usecols=["trade_date"])
+        latest = int(raw["trade_date"].max())
+        if latest != DATA_CUTOFF:
+            fail(f"{path.name} data cutoff should be {DATA_CUTOFF}, found {latest}")
 
 
 def check_valuation_summary() -> None:
@@ -213,8 +222,8 @@ def check_valuation_comps() -> None:
             )
 
     minimax = comps.loc[comps["company"] == "MiniMax", "multiple_x"]
-    if len(minimax) != 1 or abs(float(minimax.iloc[0]) - 81.4) > 0.15:
-        fail("MiniMax valuation multiple should be about 81.4x")
+    if len(minimax) != 1 or abs(float(minimax.iloc[0]) - 94.6) > 0.15:
+        fail("MiniMax valuation multiple should be about 94.6x")
 
     with (ROOT / "eventstudy" / "valuation_summary.csv").open(newline="", encoding="utf-8") as f:
         valuation_summary = {row["metric"]: row["value"] for row in csv.DictReader(f)}
@@ -274,6 +283,34 @@ def check_event_panel() -> None:
     if len(catalog_rows) != len(input_rows):
         fail(f"event catalog row count {len(catalog_rows)} does not match input {len(input_rows)}")
 
+    table2_path = ROOT / "paper" / "table2_large_tech_auto.tex"
+    if not table2_path.exists():
+        fail(f"generated Table 2 block missing: {table2_path}")
+    table2_lines = [
+        line for line in table2_path.read_text(encoding="utf-8").splitlines()
+        if line and not line.startswith("\\")
+    ]
+    comparator_rows = panel_rows.loc[panel_rows["event_type"] == "large_tech_peer"].reset_index(drop=True)
+    if len(table2_lines) != len(comparator_rows):
+        fail("Table 2 large-tech row count does not match event_panel.csv")
+
+    def signed(value: float) -> str:
+        rounded = Decimal(str(value)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP)
+        return f"{rounded:+.1f}"
+
+    for line, (_, row) in zip(table2_lines, comparator_rows.iterrows()):
+        event = str(row["event"]).replace("-35B-A3B", "").replace(" official", "")
+        event = event.replace(" release proxy", " proxy").replace(" August update proxy", " Aug. proxy")
+        expected = [
+            f"{row['company']} {event}",
+            str(row["day0"]),
+            f"${signed(float(row['react_mean']))}$",
+            f"${signed(float(row['drift_mean']))}$",
+        ]
+        cells = [cell.strip() for cell in line.removesuffix("\\\\").split("&")]
+        if cells[:4] != expected:
+            fail(f"Table 2 row is stale for {row['event']}: {cells[:4]} != {expected}")
+
 
 def check_appendix_outputs() -> None:
     required = [
@@ -282,6 +319,7 @@ def check_appendix_outputs() -> None:
         ROOT / "paper" / "beta_bridge_auto.tex",
         ROOT / "eventstudy" / "reverse_dcf_sensitivity.csv",
         ROOT / "figures" / "fig11_reverse_dcf_heatmap.png",
+        ROOT / "data" / "zhipu_financials_input.csv",
     ]
     for path in required:
         if not path.exists():
@@ -294,6 +332,10 @@ def check_appendix_outputs() -> None:
     reverse = pd.read_csv(ROOT / "eventstudy" / "reverse_dcf_sensitivity.csv")
     if len(reverse) < 20:
         fail(f"reverse DCF grid has too few rows: {len(reverse)}")
+    financials = pd.read_csv(ROOT / "data" / "zhipu_financials_input.csv")
+    h1 = financials.loc[financials["period"] == "H1 2026"]
+    if len(h1) != 1 or abs(float(h1.iloc[0]["revenue_rmbm"]) - 953.892) > 1e-6:
+        fail("zhipu_financials_input.csv missing the H1 2026 revenue disclosure")
 
 
 def main() -> int:

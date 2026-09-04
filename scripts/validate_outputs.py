@@ -227,19 +227,9 @@ def check_valuation_comps() -> None:
 
     with (ROOT / "eventstudy" / "valuation_summary.csv").open(newline="", encoding="utf-8") as f:
         valuation_summary = {row["metric"]: row["value"] for row in csv.DictReader(f)}
-    summary_metric = next(
-        (
-            metric
-            for metric in [
-                "Market equity value / FY2026E revenue",
-                "Market EV / FY2026E revenue",
-            ]
-            if metric in valuation_summary
-        ),
-        None,
-    )
-    if summary_metric is None:
-        fail("valuation_summary.csv missing market equity value / FY2026E revenue metric")
+    summary_metric = "Market equity value / LTM revenue"
+    if summary_metric not in valuation_summary:
+        fail("valuation_summary.csv missing market equity value / LTM revenue metric")
     zhipu = comps.loc[comps["company"] == "Zhipu", "multiple_x"]
     if len(zhipu) != 1:
         fail("valuation comps must contain exactly one Zhipu row")
@@ -271,6 +261,18 @@ def check_valuation_comps() -> None:
     ) * 1000
     if abs(minimax_ltm_usdm - minimax_revenue_usdm) > 0.001:
         fail("MiniMax LTM revenue does not reconcile to FY2025 - H1 2025 + H1 2026")
+
+    zhipu_financials = pd.read_csv(ROOT / "data" / "zhipu_financials_input.csv").set_index("period")
+    zhipu_ltm_usdm = (
+        float(zhipu_financials.loc["FY2025", "revenue_rmbm"])
+        - float(zhipu_financials.loc["H1 2025", "revenue_rmbm"])
+        + float(zhipu_financials.loc["H1 2026", "revenue_rmbm"])
+    ) / 7.1
+    zhipu_revenue_usdm = float(
+        comps.loc[comps["company"] == "Zhipu", "revenue_bn"].iloc[0]
+    ) * 1000
+    if abs(zhipu_ltm_usdm - zhipu_revenue_usdm) > 0.001:
+        fail("Zhipu LTM revenue does not reconcile to FY2025 - H1 2025 + H1 2026")
 
 
 def check_pdfs() -> None:

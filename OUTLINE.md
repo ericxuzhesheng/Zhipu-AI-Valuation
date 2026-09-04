@@ -32,7 +32,7 @@ Evidence from Zhipu AI (2513.HK).*
 4. **Capability vs flow catalysts** - model releases separated from index/Stock-Connect flows.
 
 ## Headline numbers (2026-08-31)
-- Price HK$1,195 (+928%, 10.3x IPO); post-placement market cap ~US$71.3B; **equity value / FY2026E model revenue 101.9x**; vol ~192%.
+- Price HK$1,195 (+928%, 10.3x IPO); post-placement market cap ~US$71.3B; **equity value / LTM 2026H1 revenue 340.5x**; vol ~192%.
 - H1 2026 revenue RMB953.9M (+399.7%); open platform/API 86.5% of revenue and 24.6% gross margin; operating loss widened to RMB2.15B and adjusted net loss widened 12.1%.
 - The results announcement was released at 18:56 after the 31-Aug close; the same-day +9.63% return predates disclosure and overlaps an MSCI closing rebalance.
 - Layered comps: private-lab transaction range **20.5-39.0x** (median **34.1x**) is the only peer range used in the football field; MiniMax, Hong Kong adjacent names, and commercialization references remain display-only context.

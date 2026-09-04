@@ -29,7 +29,7 @@ Fundamentals come from the **HKEX Chapter-18C prospectus**, **2025 Annual Report
 | Return vs IPO | **+928% (~10.3x)** | +112% | +42% |
 | Period high / low (close) | 2,410 / 131.5 | 1,238 / 193.1 | 111.7 / 62.7 |
 | Latest market cap | **~HK$556.4B (~US$71.3B)** | ~HK$121.9B (~US$15.63B) | ~RMB13.0B (~US$1.83B) |
-| Equity value / revenue | **101.9x (FY26E model estimate)** | 94.6x (LTM 2026H1) | 28.2x (LTM 2026H1; different model) |
+| Equity value / revenue | **340.5x (LTM 2026H1)** | 94.6x (LTM 2026H1) | 28.2x (LTM 2026H1; different model) |
 
 ## Table D3 - Layered Valuation Comparables
 
@@ -37,7 +37,7 @@ The cohorts are deliberately separated because private funding marks, listed-com
 
 | Cohort | Company | Equity-value / revenue | Measurement basis | Use in valuation |
 |---|---|---:|---|---|
-| Core frontier labs | Zhipu | **101.9x** | 2026-08-31 market equity value / FY2026E model estimate | subject company; not in peer median |
+| Core frontier labs | Zhipu | **340.5x** | 2026-08-31 market equity value / LTM 2026H1 revenue | subject company; same listed-peer denominator rule as MiniMax |
 | Core frontier labs | MiniMax | 94.6x | 2026-08-31 market equity value / LTM 2026H1 revenue | direct listed cross-check; not in private-round range |
 | Core frontier labs | OpenAI | 34.1x | 2026 financing-round value / 2026 revenue run-rate | primary private transaction |
 | Core frontier labs | Anthropic | 20.5x | 2026 financing-round value / 2026 revenue run-rate | primary private transaction |
@@ -69,11 +69,12 @@ Private-lab transaction range: **20.5-39.0x**, median **34.1x** (OpenAI, Anthrop
 | FY2025 | RMB 724.3M (~US$102M) | total 41.0%; cloud 18.9% | RMB 4,718M |
 | H1 2025 | RMB 190.9M | total 50.0%; API/cloud −0.4% | RMB 2,357.9M; adjusted RMB 1,752.0M |
 | H1 2026 | **RMB 953.9M (+399.7%)** | total 26.4%; API/cloud 24.6% | RMB 2,072.0M; adjusted **RMB 1,964.1M** |
+| LTM through 2026H1 | **RMB 1,487.3M (~US$209.5M)** | n/a | n/a |
 | FY2026E | **US$700M (RMB 4.97B)** | model assumption; 2026E operating margin −100% | n/a |
 
 Balance sheet @ 30-Jun-2026: cash RMB 3,993.7M, short-term FVPL investments RMB 506.1M, bank loans RMB 2,224.8M, lease liabilities RMB 379.4M, and positive equity RMB 4,429.6M. The 13-Jul placement added 19.78M shares and HK$31,374.95M of net proceeds after the reporting date. The model therefore uses 465.62309M shares and a conservative US$4,289.4M pro forma net-cash-and-investment bridge. This is not a reported 31-Aug cash balance. The interim-results announcement does not present operating cash flow.
 
-**Implied market equity value / revenue = 101.9x FY26E** (US$71.3B / US$700M model estimate).
+**Implied market equity value / LTM revenue = 340.5x** (US$71.3B / US$209.5M). The LTM denominator is FY2025 revenue less H1 2025 plus H1 2026, translated at RMB7.1/US$. The US$700M FY2026E estimate remains a DCF assumption and no longer enters the listed-company trading-multiple comparison.
 
 ### MiniMax H1 2026 peer financials (USD, unless noted)
 

@@ -56,7 +56,7 @@ Average CAR across the five GLM events (mean-adjusted):
 ![Price paths](figures/fig1_price_paths.png)
 
 ## 4. Verdict
-The market prices capability *quickly and discriminately* in this small sample, separating Zhipu from MiniMax on model quality rather than sector membership. It also appears to mis-time magnitude, under-reacting to genuine SOTA leaps and over-reacting to incremental releases. At the 31 August close, Zhipu traded at about **10.3x the IPO price and 102x FY2026E model revenue**. We read that re-rating as **capability momentum priced as an option**. The fundamental anchor (DCF + real options) tells you *the level*;
+The market prices capability *quickly and discriminately* in this small sample, separating Zhipu from MiniMax on model quality rather than sector membership. It also appears to mis-time magnitude, under-reacting to genuine SOTA leaps and over-reacting to incremental releases. At the 31 August close, Zhipu traded at about **10.3x the IPO price and 340.5x LTM revenue through 2026H1**. We read that re-rating as **capability momentum priced as an option**. The fundamental anchor (DCF + real options) tells you *the level*;
 the event study tells you *how price gets there*.
 
 The 31 August boundary also prevents a tempting causal mistake. Zhipu rose 9.63% that day, while MSCI's August index changes took effect at the close. The H1 results announcement arrived at 18:56, after trading ended. The same-day return therefore cannot be treated as a response to the results; both the financial disclosure and MSCI rebalance stay in the extended catalog until a valid post-event window exists.

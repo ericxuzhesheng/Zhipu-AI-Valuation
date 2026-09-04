@@ -48,6 +48,10 @@ NET_CASH_USDM = (
 ) / USD_CNY + JULY_PLACEMENT_NET_HKDM / USD_HKD
 REV_2025_USDM = 102
 REV_2026_H1_RMBM = 953.892
+REV_2025_RMBM = 724.3
+REV_2025_H1_RMBM = 190.877
+REV_LTM_RMBM = REV_2025_RMBM - REV_2025_H1_RMBM + REV_2026_H1_RMBM
+REV_LTM_USDM = REV_LTM_RMBM / USD_CNY
 REV_2026_USDM = 700  # Model estimate, not company guidance; see paper Section 4
 START_OP_MARGIN = -1.00  # FY2026E model assumption; H1 actual operating margin was about -225%
 H1_GROSS_MARGIN = 251.611 / REV_2026_H1_RMBM
@@ -118,7 +122,7 @@ def market_snapshot() -> MarketSnapshot:
     latest = zhipu.iloc[-1]
     price = float(latest["close"])
     equity_value_usdm = price * SHARES_M / USD_HKD
-    revenue_multiple = equity_value_usdm / REV_2026_USDM
+    revenue_multiple = equity_value_usdm / REV_LTM_USDM
     ann_vol_pct = float(zhipu["daily_return"].dropna().std(ddof=1) * np.sqrt(252) * 100)
     return MarketSnapshot(
         date=pd.Timestamp(latest["date"]),
@@ -177,7 +181,7 @@ def build_valuation_comps() -> pd.DataFrame:
         raise ValueError("valuation-comparable input must contain exactly one Zhipu row")
     comps.loc[subject, "valuation_date"] = MARKET.date.strftime("%Y-%m-%d")
     comps.loc[subject, "equity_value_bn"] = MARKET.equity_value_usdm / 1000
-    comps.loc[subject, "revenue_bn"] = REV_2026_USDM / 1000
+    comps.loc[subject, "revenue_bn"] = REV_LTM_USDM / 1000
 
     if comps[["equity_value_bn", "revenue_bn"]].isna().any().any():
         raise ValueError("valuation comparables contain missing equity-value or revenue inputs")
@@ -504,7 +508,7 @@ def valuation_audit_rows() -> list[tuple[str, str | float]]:
         ("Market date", MARKET.date.strftime("%Y-%m-%d")),
         ("Market price (HK$)", round(MARKET.price_hkd, 1)),
         ("Market equity value (US$m)", round(MARKET.equity_value_usdm, 1)),
-        ("Market equity value / FY2026E revenue", round(MARKET.revenue_multiple, 1)),
+        ("Market equity value / LTM revenue", round(MARKET.revenue_multiple, 1)),
         ("Bear per share (HK$)", round(results["Bear"]["per_share_hkd"], 1)),
         ("Base per share (HK$)", round(results["Base"]["per_share_hkd"], 1)),
         ("Bull per share (HK$)", round(results["Bull"]["per_share_hkd"], 1)),
@@ -544,6 +548,11 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
             "2026E revenue (US$m)",
             REV_2026_USDM,
             "model estimate anchored to H1 actual and August run-rate; not company guidance",
+        ),
+        (
+            "LTM revenue through 2026H1 (US$m)",
+            REV_LTM_USDM,
+            "FY2025 less 2025H1 plus 2026H1, translated at USD/CNY 7.1",
         ),
         ("2026H1 revenue (RMB m)", REV_2026_H1_RMBM, "unaudited; reviewed by KPMG"),
         ("2026H1 total gross margin", H1_GROSS_MARGIN, None),
@@ -640,7 +649,7 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
     ws.append(["PROB-WEIGHTED", None, "=SUMPRODUCT(B3:B5,C3:C5)/SUM(B3:B5)", "=SUMPRODUCT(B3:B5,D3:D5)/SUM(B3:B5)"])
     ws.append(["Market price (HK$)", "=Assumptions!B9"])
     ws.append(["DCF value as % of market", "=D6/B7"])
-    ws.append(["Market equity value / revenue", "=(Assumptions!B9*Assumptions!B5/Assumptions!B6)/Assumptions!B11"])
+    ws.append(["Market equity value / LTM revenue", "=(Assumptions!B9*Assumptions!B5/Assumptions!B6)/Assumptions!B12"])
 
     ws = wb.create_sheet("Valuation Comps")
     comp_headers = [
@@ -757,13 +766,21 @@ def write_football_field(valuation_comps: pd.DataFrame) -> None:
         valuation_comps.loc[valuation_comps["company"].eq("MiniMax"), "multiple_x"].iloc[0]
     )
 
-    def multiple_to_per_share(multiple: float) -> float:
-        return multiple * REV_2026_USDM / SHARES_M * USD_HKD
+    def multiple_to_per_share(multiple: float, revenue_usdm: float) -> float:
+        return multiple * revenue_usdm / SHARES_M * USD_HKD
 
     rows = [
         ("Scenario DCF", results["Bear"]["per_share_hkd"], results["Bull"]["per_share_hkd"]),
-        ("Private frontier deals", multiple_to_per_share(private_low), multiple_to_per_share(private_high)),
-        ("MiniMax (LTM)", multiple_to_per_share(minimax_multiple), multiple_to_per_share(minimax_multiple)),
+        (
+            "Private frontier deals (FY26E)",
+            multiple_to_per_share(private_low, REV_2026_USDM),
+            multiple_to_per_share(private_high, REV_2026_USDM),
+        ),
+        (
+            "MiniMax (LTM)",
+            multiple_to_per_share(minimax_multiple, REV_LTM_USDM),
+            multiple_to_per_share(minimax_multiple, REV_LTM_USDM),
+        ),
         ("Market", MARKET.price_hkd, MARKET.price_hkd),
     ]
     fig, ax = plt.subplots(figsize=(8.8, 4.2), dpi=150)
@@ -788,7 +805,7 @@ def write_football_field(valuation_comps: pd.DataFrame) -> None:
         label="Prob.-weighted DCF",
     )
     ax.scatter(
-        [multiple_to_per_share(private_mid)],
+        [multiple_to_per_share(private_mid, REV_2026_USDM)],
         [1],
         marker="D",
         color=C_INK,
@@ -906,7 +923,7 @@ def write_comps_chart(valuation_comps: pd.DataFrame) -> None:
     fig.text(
         0.5,
         0.02,
-        "Bases: Zhipu FY26E; MiniMax/HK peers LTM through 2026H1; private labs annualized run-rate; software latest full year.",
+        "Bases: Zhipu and listed HK peers LTM through 2026H1; private labs annualized run-rate; software latest full year.",
         ha="center",
         fontsize=7.6,
         color=C_INK,

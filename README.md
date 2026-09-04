@@ -98,9 +98,9 @@ WACC 约为 13.5%，其中自下而上 β 以截至 8 月 31 日的 60 个月月
 
 **反向 DCF** 固定 FY2026E 收入后重新求解增长路径。要支撑现价，2035 年收入需接近 **US$920 亿**，对应 2026 至 2035 年约 **72%** 的年复合增速。这项结果只用于呈现市价隐含条件。
 
-**分层可比** MiniMax 按 2026 年 8 月 31 日市值和截至 2026H1 的 LTM 收入重算为 **94.6×**；智谱为 **101.9× FY2026E 收入**。
+**分层可比** 对两家上市基础模型公司采用同一规则：2026 年 8 月 31 日市值除以截至 2026H1 的 LTM 实际收入。智谱 LTM 收入为人民币 14.87 亿元（FY2025 减 2025H1、再加 2026H1），按 RMB7.1/US$ 折合 US$209.5M，对应 **340.5×**；MiniMax LTM 收入为 US$165.2M，对应 **94.6×**。
 
-OpenAI、Anthropic 与 Mistral 的私有交易参照更接近基础模型实验室的业务形态，因此它们构成 football field 的核心交易区间。倍数落在 **20.5 至 39.0×**，中位数为 **34.1×**，对应智谱每股约 HK$240 至 457。MiniMax 使用上市公司市值和 LTM 收入口径，单独换算后对应约 HK$1,109，距离市价约 7%。这个结果带来一条更谨慎的结论：最接近的上市同业可以解释相当一部分价格，但 DCF 与私募交易参照仍留下很大的右尾溢价。
+OpenAI、Anthropic 与 Mistral 的私有交易参照更接近基础模型实验室的业务形态，因此它们构成 football field 的核心交易区间。倍数落在 **20.5 至 39.0×**，中位数为 **34.1×**；由于私企只能取得同期收入 run-rate，这组交易参照仍单独应用于智谱 FY2026E，得到每股约 HK$240 至 457。统一 LTM 口径后，MiniMax 倍数对应智谱约 HK$332，较市价低 72%。最接近的上市同业不再能解释智谱的大部分市值，智谱相对 MiniMax 仍有约 3.6 倍的收入倍数溢价。
 
 SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 和 Snowflake 放在商业化参照组。它们能帮助读者判断港股 AI 资产和成熟 AI 软件的估值位置，商业模式与收入结构却和基础模型实验室差别很大，因此不参与核心中位数。逐行口径、估值日和来源见 [`data/valuation_comps.csv`](data/valuation_comps.csv)。
 
@@ -273,9 +273,9 @@ WACC is approximately 13.5 percent. The bottom-up beta starts from 60 monthly re
 | *Market (2026-08-31, pre-results close)* | N/A | N/A | *$71.3B* | *1,195* |
 
 **Reverse DCF** fixes the FY2026E base and solves for the growth path required by the observed price. It points to approximately US$92 billion of 2035 revenue, equivalent to roughly 72 percent annual growth from 2026 through 2035.
-Zhipu trades at about **101.9× FY2026E revenue**. The closest listed peer, MiniMax, is **94.6× LTM revenue**.
+For the two listed foundation-model companies, the comparison now uses one rule: 31 August 2026 equity value divided by LTM revenue through 2026H1. Zhipu's RMB1,487.3 million LTM revenue, equal to FY2025 less H1 2025 plus H1 2026, translates to US$209.5 million at RMB7.1/US$ and gives **340.5×**. MiniMax remains at **94.6×** on US$165.2 million of LTM revenue.
 Paired private-market references for OpenAI, Anthropic, and Mistral run from **20.5× to 39.0×**, with a **34.1× median**.
-That private range implies approximately HK$240 to HK$457 per Zhipu share. Applying the MiniMax multiple gives about HK$1,109, only 7 percent below the market. The listed peer therefore explains much more of the quote than either the DCF or private transactions, while the different revenue periods prevent treating it as a mechanical price target.
+The private range still applies to Zhipu's FY2026E revenue because the private-company observations use contemporaneous revenue run-rates; it implies approximately HK$240 to HK$457 per share. Applying MiniMax's LTM multiple to Zhipu's LTM revenue gives about HK$332, 72 percent below the market. On the uniform listed-company basis, Zhipu trades at roughly 3.6 times MiniMax's revenue multiple, so the peer no longer explains most of the quote.
 SenseTime, Phancy, and Wenge AI form a separate Hong Kong-adjacent cohort, while Palantir, Cloudflare, and Snowflake are commercialization references. Neither cohort enters the private-deal range. Row-level bases and sources are in [`data/valuation_comps.csv`](data/valuation_comps.csv).
 
 ### Event Study

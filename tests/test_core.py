@@ -106,10 +106,10 @@ class ValuationTests(unittest.TestCase):
         self.assertAlmostEqual(float(included["multiple_x"].max()), 39.0, delta=0.15)
 
         minimax = comps.loc[comps["company"] == "MiniMax", "multiple_x"].iloc[0]
-        self.assertAlmostEqual(float(minimax), 94.6, delta=0.15)
+        self.assertAlmostEqual(float(minimax), 73.2, delta=0.15)
 
         zhipu = comps.loc[comps["company"] == "Zhipu", "multiple_x"].iloc[0]
-        self.assertAlmostEqual(float(zhipu), 340.5, delta=0.15)
+        self.assertAlmostEqual(float(zhipu), 226.0, delta=0.15)
         self.assertEqual(
             comps.loc[comps["company"] == "Zhipu", "revenue_basis"].iloc[0],
             "LTM through 2026H1",

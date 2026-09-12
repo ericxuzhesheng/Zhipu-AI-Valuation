@@ -9,7 +9,7 @@
 <p align="center">
   <strong>Zhesheng Xu（许哲圣）</strong><br>
   Corporate Finance Final Project<br>
-  <strong>核心数据截至 / Core data through</strong> 2026-08-31
+  <strong>核心数据截至 / Core data through</strong> 2026-09-11
 </p>
 
 <p align="center">
@@ -25,9 +25,9 @@
 
 ### 项目概览
 
-这个项目从一个具体的估值难题开始。智谱 AI 于 2026 年 1 月 8 日成为全球首家上市的基础模型公司。8 月 31 日收盘，公司市值约为 713 亿美元。当天收盘后发布的半年业绩显示，H1 收入同比增长 399.7% 至人民币 9.54 亿元，开放平台与 API 已占收入的 86.5%。商业化正在加速，但经营亏损仍扩大至人民币 21.47 亿元，经调整净亏损也同比扩大 12.1%。研究重点随之落在市场为这种增长预付了多少。
+这个项目从一个具体的估值难题开始。智谱 AI 于 2026 年 1 月 8 日成为全球首家上市的基础模型公司。9 月 11 日收盘，公司市值约为 473 亿美元。8 月 31 日收盘后发布的半年业绩显示，H1 收入同比增长 399.7% 至人民币 9.54 亿元，开放平台与 API 已占收入的 86.5%。商业化正在加速，但经营亏损仍扩大至人民币 21.47 亿元，经调整净亏损也同比扩大 12.1%。研究重点随之落在市场为这种增长预付了多少。
 
-我把披露事实与预测假设分开。公司没有提供全年收入指引；FY2026E 的 7 亿美元来自 H1 实际收入和 8 月经营节奏，属于模型估计。2026 年经营利润率取 −100%，较 H1 的 −225% 假定了明显改善。在此基础上，我用 CAPM/WACC、三情景 DCF、反向 DCF 与分层可比估值交叉检验。概率加权 DCF 约为每股 HK$88，8 月 31 日收盘价为 HK$1,195。反向 DCF 显示，若要支撑现价，2035 年收入需接近 920 亿美元。
+我把披露事实与预测假设分开。公司没有提供全年收入指引；FY2026E 的 7 亿美元来自 H1 实际收入和 8 月经营节奏，属于模型估计。2026 年经营利润率取 −100%，较 H1 的 −225% 假定了明显改善。在此基础上，我用 CAPM/WACC、三情景 DCF、反向 DCF 与分层可比估值交叉检验。概率加权 DCF 约为每股 HK$88，9 月 11 日收盘价为 HK$793。反向 DCF 显示，若要支撑现价，2035 年收入需接近 605 亿美元。
 
 估值结果说明市场预期有多高，事件研究继续考察价格怎样吸收新信息。我把模型发布和榜单跃升定义为“能力惊喜”，独立确定五个 GLM 事件日期，再用 MiniMax 做同业调整。五次事件的原始两日平均反应为 13.7%，同业调整后为 15.3%。
 
@@ -86,6 +86,8 @@
 
 ### 估值结论
 
+行情更新至 9 月 11 日；经营假设、净现金桥和 8 月末 beta 保持原口径。MiniMax、闻歌市值按原股本及汇率基础重估，其余参照保留逐行日期。收盘后融资消息未计入已完成股本或现金，详见 [更新说明](UPDATE_2026-09-11.md)。
+
 WACC 约为 13.5%，其中自下而上 β 以截至 8 月 31 日的 60 个月月度回归为起点，去杠杆中位数 1.55 后取约 1.6；Rf 为 4%，ERP 为 6%。模型统一采用 HK$7.8/US$、RMB 7.1/US$ 和配售后的 4.656 亿股。净现金采用可复核的 pro forma 桥接。6 月末现金与短期投资扣除银行借款及租赁负债，再加 7 月配售净款，合计约 42.89 亿美元。公司截至 8 月末的现金余额尚未披露，因此模型保留这项期后调整的口径说明。活公式见 [`model/valuation_model.xlsx`](model/valuation_model.xlsx)，十年完整 Base Case 见论文附录 B。
 
 | 情景 | 收入 CAGR 2026 至 2035 | 终期利润率 | 股权价值 | 每股（HK$） |
@@ -94,17 +96,19 @@ WACC 约为 13.5%，其中自下而上 β 以截至 8 月 31 日的 60 个月月
 | 中性 (p=0.45) | 31% | 28% | $4.3B | 73 |
 | 乐观 (p=0.20) | 47% | 35% | $13.9B | 233 |
 | **概率加权** | N/A | N/A | **$5.3B** | **88** |
-| *市价 (2026-08-31，业绩公告前收盘)* | N/A | N/A | *$71.3B* | *1,195* |
+| *市价 (2026-09-11，收盘)* | N/A | N/A | *$47.3B* | *793* |
 
-**反向 DCF** 固定 FY2026E 收入后重新求解增长路径。要支撑现价，2035 年收入需接近 **US$920 亿**，对应 2026 至 2035 年约 **72%** 的年复合增速。这项结果只用于呈现市价隐含条件。
+**反向 DCF** 固定 FY2026E 收入后重新求解增长路径。要支撑现价，2035 年收入需接近 **US$605 亿**，对应 2026 至 2035 年约 **64%** 的年复合增速。这项结果只用于呈现市价隐含条件。
 
-**分层可比** 对两家上市基础模型公司采用同一规则：2026 年 8 月 31 日市值除以截至 2026H1 的 LTM 实际收入。智谱 LTM 收入为人民币 14.87 亿元（FY2025 减 2025H1、再加 2026H1），按 RMB7.1/US$ 折合 US$209.5M，对应 **340.5×**；MiniMax LTM 收入为 US$165.2M，对应 **94.6×**。
+**分层可比** 对两家上市基础模型公司采用同一规则：2026 年 9 月 11 日市值除以截至 2026H1 的 LTM 实际收入。智谱 LTM 收入为人民币 14.87 亿元（FY2025 减 2025H1、再加 2026H1），按 RMB7.1/US$ 折合 US$209.5M，对应 **226.0×**；MiniMax LTM 收入为 US$165.2M，对应 **73.2×**。
 
-OpenAI、Anthropic 与 Mistral 的私有交易参照更接近基础模型实验室的业务形态，因此它们构成 football field 的核心交易区间。倍数落在 **20.5 至 39.0×**，中位数为 **34.1×**；由于私企只能取得同期收入 run-rate，这组交易参照仍单独应用于智谱 FY2026E，得到每股约 HK$240 至 457。统一 LTM 口径后，MiniMax 倍数对应智谱约 HK$332，较市价低 72%。最接近的上市同业不再能解释智谱的大部分市值，智谱相对 MiniMax 仍有约 3.6 倍的收入倍数溢价。
+OpenAI、Anthropic 与 Mistral 的私有交易参照更接近基础模型实验室的业务形态，因此它们构成 football field 的核心交易区间。倍数落在 **20.5 至 39.0×**，中位数为 **34.1×**；由于私企只能取得同期收入 run-rate，这组交易参照仍单独应用于智谱 FY2026E，得到每股约 HK$240 至 457。统一 LTM 口径后，MiniMax 倍数对应智谱约 HK$257，较市价低 68%。最接近的上市同业不再能解释智谱的大部分市值，智谱相对 MiniMax 仍有约 3.1 倍的收入倍数溢价。
 
 SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 和 Snowflake 放在商业化参照组。它们能帮助读者判断港股 AI 资产和成熟 AI 软件的估值位置，商业模式与收入结构却和基础模型实验室差别很大，因此不参与核心中位数。逐行口径、估值日和来源见 [`data/valuation_comps.csv`](data/valuation_comps.csv)。
 
 ### 事件研究
+
+本节保留截至 8 月 31 日的原始五事件样本及 bootstrap；9 月新增可观察窗口另见 [9 月 11 日更新](UPDATE_2026-09-11.md)。
 
 把模型发布/榜单事件当作信息事件，计算累计异常收益（CAR，均值调整；以 MiniMax 为基准做同业调整稳健性）。
 
@@ -126,21 +130,21 @@ SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 
 
 MiniMax 的主线事件现补齐 M2.5（2 月 12 日）、M2.7 和 M3。H3（7 月 31 日）与 Music 3.0（8 月 13 日）保留在扩展目录，但不进入 Table 2：前者以音视频生成作为主要输出，后者是音乐垂类模型，与文本、编码和 Agent 能力事件不在同一口径。MiniMax 半年报也作为财务披露事件列入目录；由于 8 月 26 日收盘后发布，截至 8 月 31 日没有完整漂移窗口，不计算 CAR。
 
-论文 Table 2 另列出 16 个具备完整窗口、且模型发布方本身存在可交易股票的大型科技厂商事件。7—8 月新增腾讯 Hy3、阿里 Qwen3.8-Max、Google Gemini 3.6/3.7 Flash 和 Meta Muse Spark 1.1。Microsoft 代 OpenAI、Tesla 代 xAI 的 6 条代理事件已从 CAR 表和均值中移除，只留在审计目录；没有完整后窗的 Qwen3.8-Flash、腾讯 Hy4 和 Gemini Transcribe/Omni 1.1 同样只进入目录。
+论文 Table 2 另列出 16 个具备完整窗口、且模型发布方本身存在可交易股票的大型科技厂商事件。7—8 月新增腾讯 Hy3、阿里 Qwen3.8-Max、Google Gemini 3.6/3.7 Flash 和 Meta Muse Spark 1.1。Microsoft 代 OpenAI、Tesla 代 xAI 的 6 条代理事件已从 CAR 表和均值中移除，只留在审计目录；在原 8 月 31 日截止日没有完整后窗的 Qwen3.8-Flash、腾讯 Hy4 和 Gemini Transcribe/Omni 1.1 同样只进入目录。
 
 五个事件能够支撑一个有意思的本科案例。样本数量和上市历史仍然有限，结论只作为初步诊断性证据，不用于证明普遍异象。
 
 ### 港股 AI 参照公司
 
-截至 2026 年 8 月 31 日，港股 AI 参照公司可按业务分为基础模型实验室和企业 AI 平台。
+截至 2026 年 9 月 11 日，港股 AI 参照公司可按业务分为基础模型实验室和企业 AI 平台。
 
 | 公司 | 代码 | 定位 | 上市表现 |
 |---|---|---|---|
-| 智谱AI | 2513.HK | 通用基础大模型实验室 | IPO HK$116.20 → HK$1,195（+928%） |
-| MiniMax | 00100.HK | 通用/多模态基础模型公司 | IPO HK$165 → HK$349（+112%，首日翻倍后曾明显回落） |
+| 智谱AI | 2513.HK | 通用基础大模型实验室 | IPO HK$116.20 → HK$793（+582%） |
+| MiniMax | 00100.HK | 通用/多模态基础模型公司 | IPO HK$165 → HK$270（+64%，首日翻倍后曾明显回落） |
 | SenseTime 商汤 | 00020.HK | 生成式 AI、计算机视觉与解决方案平台 | 2026-08-31 收盘 HK$1.44，约 9.4× LTM 收入 |
 | Phancy 范式智能 | 06682.HK | 企业 AI 平台与智能体服务 | 2026-08-31 收盘 HK$28.02，约 1.6× LTM 收入 |
-| 中科闻歌 Wenge AI | 01956.HK | 企业级决策大模型与 AI 解决方案商 | IPO HK$60.70 → HK$86.00（+42%）；约 28.2× LTM 收入 |
+| 中科闻歌 Wenge AI | 01956.HK | 企业级决策大模型与 AI 解决方案商 | IPO HK$60.70 → HK$79.30（+31%）；约 26.0× LTM 收入 |
 
 > *Recent Hong Kong AI listings include foundation-model laboratories such as Zhipu AI and MiniMax, as well as enterprise-focused AI platforms. Wenge AI is an enterprise decision-intelligence provider and belongs in the Hong Kong-adjacent cohort.*
 
@@ -205,11 +209,11 @@ python scripts/validate_outputs.py
 
 ### Project Overview
 
-I built this project around a valuation problem that conventional earnings-surprise analysis handles poorly. Zhipu AI listed under 2513.HK on 8 January 2026, becoming the first publicly traded foundation-model laboratory. By the close on 31 August, its market capitalization was approximately US$71.3 billion. Results released after that close showed H1 revenue of RMB953.9 million, up 399.7 percent, with open-platform and API sales contributing 86.5 percent. Operating loss nevertheless widened to RMB2.15 billion, and adjusted net loss increased by 12.1 percent. The central question is therefore measurable: how much future operating performance has the market already paid for?
+I built this project around a valuation problem that conventional earnings-surprise analysis handles poorly. Zhipu AI listed under 2513.HK on 8 January 2026, becoming the first publicly traded foundation-model laboratory. By the close on 11 September, its market capitalization was approximately US$47.3 billion. Results released after the 31 August close showed H1 revenue of RMB953.9 million, up 399.7 percent, with open-platform and API sales contributing 86.5 percent. Operating loss nevertheless widened to RMB2.15 billion, and adjusted net loss increased by 12.1 percent. The central question is therefore measurable: how much future operating performance has the market already paid for?
 
 The project asks what investors are pricing when near-term earnings provide little information. I use a three-scenario DCF, reverse DCF, layered comparables and a real-options interpretation to establish a fundamental range. I then define model releases and benchmark gains as capability-surprise events and run a peer-adjusted event study using MiniMax as the comparison firm.
 
-I separate reported facts from forecast choices. The company gave no full-year revenue guidance; the model's US$700 million FY2026E revenue uses H1 actuals and the August run-rate, while a −100 percent FY2026 operating margin assumes substantial improvement from the reported H1 margin of −225 percent. The probability-weighted DCF is about HK$88 per share, or 7.4 percent of the HK$1,195 pre-results close. The reverse DCF requires roughly US$92 billion of 2035 revenue, a 72 percent compound annual growth rate from the FY2026E base. These outputs describe the assumptions embedded in the price rather than a price target.
+I separate reported facts from forecast choices. The company gave no full-year revenue guidance; the model's US$700 million FY2026E revenue uses H1 actuals and the August run-rate, while a −100 percent FY2026 operating margin assumes substantial improvement from the reported H1 margin of −225 percent. The probability-weighted DCF is about HK$88 per share, or 11.1 percent of the HK$793 September 11 close. The reverse DCF requires roughly US$60.5 billion of 2035 revenue, a 64.1 percent compound annual growth rate from the FY2026E base. These outputs describe the assumptions embedded in the price rather than a price target.
 
 The event study covers five independently dated GLM events from GLM-5 through GLM-5.3. The average two-day reaction is 13.7 percent before peer adjustment and 15.3 percent after adjustment. The sample covers one company during its first eight months as a listed firm, so I present the result as diagnostic evidence from an undergraduate case. It cannot establish a general market anomaly.
 
@@ -226,7 +230,7 @@ The event study covers five independently dated GLM events from GLM-5 through GL
 
 | Time available | Suggested entry point |
 |---|---|
-| About 1 minute | Read the [valuation results](#valuation-summary-market-row-at-2026-08-31) and [event study](#event-study) |
+| About 1 minute | Read the [valuation results](#valuation-summary-market-row-at-2026-09-11) and [event study](#event-study) |
 | About 10 minutes | Open the [presentation](presentation/zhipu_beamer.pdf) |
 | Full review | Read the [paper](paper/main.pdf) |
 | Assumption check | Inspect the [valuation model](model/valuation_model.xlsx) and [comparable-company data](data/valuation_comps.csv) |
@@ -260,7 +264,7 @@ The mix has shifted decisively from on-premise deployment toward API usage and s
 
 MiniMax released its [interim results](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0826/2026082600680.pdf) after the 26 August close. Revenue rose 283.1 percent to US$116.6 million, while Open Platform and enterprise-service revenue rose 703.1 percent to US$73.9 million, or 63.4 percent of the total. Gross margin improved from 12.1 to 17.9 percent, but adjusted net loss widened from US$138.7 million to US$293.0 million. The US$165.2 million LTM revenue used in the peer multiple equals FY2025 revenue less H1 2025 plus H1 2026; it is not a simple annualisation of the latest half.
 
-### Valuation Summary (market row at 2026-08-31)
+### Valuation Summary (market row at 2026-09-11)
 
 WACC is approximately 13.5 percent. The bottom-up beta starts from 60 monthly regressions through 31 August, with the 1.55 unlevered median rounded to 1.6. The model applies HK$7.8/US$, RMB7.1/US$ and 465.6 million post-placement shares. Its US$4.289 billion pro forma net-cash bridge starts with reported 30 June cash and short-term investments, deducts bank loans and leases, and adds July placement proceeds. It is not presented as a reported 31 August cash balance. The live workbook is [`model/valuation_model.xlsx`](model/valuation_model.xlsx), and the paper's Appendix B contains the full ten-year Base case.
 
@@ -270,15 +274,17 @@ WACC is approximately 13.5 percent. The bottom-up beta starts from 60 monthly re
 | Base (p=0.45) | 31% | 28% | $4.3B | 73 |
 | Bull (p=0.20) | 47% | 35% | $13.9B | 233 |
 | **Probability weighted** | N/A | N/A | **$5.3B** | **88** |
-| *Market (2026-08-31, pre-results close)* | N/A | N/A | *$71.3B* | *1,195* |
+| *Market (2026-09-11, close)* | N/A | N/A | *$47.3B* | *793* |
 
-**Reverse DCF** fixes the FY2026E base and solves for the growth path required by the observed price. It points to approximately US$92 billion of 2035 revenue, equivalent to roughly 72 percent annual growth from 2026 through 2035.
-For the two listed foundation-model companies, the comparison now uses one rule: 31 August 2026 equity value divided by LTM revenue through 2026H1. Zhipu's RMB1,487.3 million LTM revenue, equal to FY2025 less H1 2025 plus H1 2026, translates to US$209.5 million at RMB7.1/US$ and gives **340.5×**. MiniMax remains at **94.6×** on US$165.2 million of LTM revenue.
+**Reverse DCF** fixes the FY2026E base and solves for the growth path required by the observed price. It points to approximately US$60.5 billion of 2035 revenue, equivalent to roughly 64.1 percent annual growth from 2026 through 2035.
+For the two listed foundation-model companies, the comparison now uses one rule: 11 September 2026 equity value divided by LTM revenue through 2026H1. Zhipu's RMB1,487.3 million LTM revenue, equal to FY2025 less H1 2025 plus H1 2026, translates to US$209.5 million at RMB7.1/US$ and gives **226.0×**. MiniMax remains at **73.2×** on US$165.2 million of LTM revenue.
 Paired private-market references for OpenAI, Anthropic, and Mistral run from **20.5× to 39.0×**, with a **34.1× median**.
-The private range still applies to Zhipu's FY2026E revenue because the private-company observations use contemporaneous revenue run-rates; it implies approximately HK$240 to HK$457 per share. Applying MiniMax's LTM multiple to Zhipu's LTM revenue gives about HK$332, 72 percent below the market. On the uniform listed-company basis, Zhipu trades at roughly 3.6 times MiniMax's revenue multiple, so the peer no longer explains most of the quote.
+The private range still applies to Zhipu's FY2026E revenue because the private-company observations use contemporaneous revenue run-rates; it implies approximately HK$240 to HK$457 per share. Applying MiniMax's LTM multiple to Zhipu's LTM revenue gives about HK$257, 68 percent below the market. On the uniform listed-company basis, Zhipu trades at roughly 3.1 times MiniMax's revenue multiple, so the peer no longer explains most of the quote.
 SenseTime, Phancy, and Wenge AI form a separate Hong Kong-adjacent cohort, while Palantir, Cloudflare, and Snowflake are commercialization references. Neither cohort enters the private-deal range. Row-level bases and sources are in [`data/valuation_comps.csv`](data/valuation_comps.csv).
 
 ### Event Study
+
+This section preserves the original August 31 five-event cohort and bootstrap. Newly observable windows are reported separately in the [September 11 update](UPDATE_2026-09-11.md).
 
 | Event | Day 0 | Reaction [0,+1] | Drift [+2,+10] | Reading |
 |---|---|---|---|---|
@@ -298,7 +304,7 @@ The event dates come from official release announcements and were set independen
 
 The MiniMax peer series now includes M2.5 (12 February), M2.7 and M3. H3 (31 July) and Music 3.0 (13 August) remain in the extended catalog but outside Table 2 because their audio-video and music outputs are not comparable with the text, coding and agent events in the core sample. MiniMax's results announcement is also catalogued as a financial disclosure, but its post-event window is incomplete at the cutoff.
 
-Paper Table 2 also reports 16 complete-window large-tech events for which the model issuer itself has a traded security. The July-August refresh adds Tencent Hy3, Alibaba Qwen3.8-Max, Google Gemini 3.6/3.7 Flash and Meta Muse Spark 1.1. Six Microsoft-for-OpenAI and Tesla-for-xAI proxy events have been removed from the CAR table and its average, while remaining visible in the audit catalog. Qwen3.8-Flash, Tencent Hy4 and Gemini Transcribe/Omni 1.1 also remain catalog-only because their post-event windows are incomplete.
+Paper Table 2 also reports 16 complete-window large-tech events for which the model issuer itself has a traded security. The July-August refresh adds Tencent Hy3, Alibaba Qwen3.8-Max, Google Gemini 3.6/3.7 Flash and Meta Muse Spark 1.1. Six Microsoft-for-OpenAI and Tesla-for-xAI proxy events have been removed from the CAR table and its average, while remaining visible in the audit catalog. Qwen3.8-Flash, Tencent Hy4 and Gemini Transcribe/Omni 1.1 also remain catalog-only because their post-event windows were incomplete at the original August 31 cutoff.
 
 The five events support a focused undergraduate case. The small sample and short listing history limit the result to preliminary diagnostic evidence and do not support a general market anomaly.
 

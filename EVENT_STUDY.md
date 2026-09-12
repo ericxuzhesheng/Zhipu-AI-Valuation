@@ -1,7 +1,7 @@
 # Capability Surprise, Not Earnings Surprise
 ### An event-driven read of how the market prices an early-commercial-stage AI lab (Zhipu, 2513.HK)
 
-> Core market data as of **2026-08-31**. For a foundation-model lab still spending more than twice its revenue on R&D,
+> Original event-study snapshot as of **2026-08-31**. Market valuation has since been refreshed to September 11; see [the update](UPDATE_2026-09-11.md) for current prices and supplementary windows. For a foundation-model lab still spending more than twice its revenue on R&D,
 > near-term earnings do not carry the same information as they do for a mature company. We therefore replace the
 > classic *earnings* surprise with a **capability surprise** - a model release or benchmark-leaderboard jump - and ask the only question that matters for market efficiency: *does the price react once and stop, or does it
 > keep drifting?* This is the AI analogue of post-earnings-announcement drift (PEAD) to **PCAD**.

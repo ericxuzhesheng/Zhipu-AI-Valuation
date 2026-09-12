@@ -148,7 +148,7 @@ body{font-family:'Segoe UI',Arial,'Microsoft YaHei','PingFang SC',sans-serif;
   </div>
   <div class="field">
     <label id="lb_mktprice">当前市价 (HK$)</label>
-    <input id="inp_mktprice" type="number" value="1195" step="1">
+    <input id="inp_mktprice" type="number" value="793" step="1">
   </div>
   <div class="field">
     <label id="lb_exchange">上市板块</label>
@@ -521,7 +521,7 @@ let comps = [
   {name:'OpenAI', val:852, rev:25},
   {name:'Anthropic', val:965, rev:47},
   {name:'Mistral', val:11.7, rev:0.3},
-  {name:'MiniMax', val:15.626042, rev:0.165182},
+  {name:'MiniMax', val:12.088915, rev:0.165182},
 ];
 let charts = {};
 
@@ -1156,10 +1156,10 @@ function recalcAll(){
 function loadPreset(key){
   if(!key) return;
   const presets={
-    zhipu:{company:'智谱 (Knowledge Atlas)',ticker:'2513.HK',sector:'AI / 大模型',ipo:116.2,mkt:1195,exchange:'HKEX 18C',
+    zhipu:{company:'智谱 (Knowledge Atlas)',ticker:'2513.HK',sector:'AI / 大模型',ipo:116.2,mkt:793,exchange:'HKEX 18C',
       rf:4,erp:6,beta:1.6,tax:15,dv:0,kd:5,rev2025:102,rev:700,cash:4289.424,shares:465.62309,g:4,fx:7.8,m0:-100,dtax:15,
       bear:{p:.35,g1:40,gn:6,tm:18,sc:2},base:{p:.45,g1:56,gn:8,tm:28,sc:1.8},bull:{p:.2,g1:85,gn:12,tm:35,sc:1.6},
-      comps:[{name:'OpenAI',val:852,rev:25},{name:'Anthropic',val:965,rev:47},{name:'Mistral',val:11.7,rev:.3},{name:'MiniMax',val:15.626042,rev:.165182}]},
+      comps:[{name:'OpenAI',val:852,rev:25},{name:'Anthropic',val:965,rev:47},{name:'Mistral',val:11.7,rev:.3},{name:'MiniMax',val:12.088915,rev:.165182}]},
     generic_ai:{company:'Generic AI Startup',ticker:'XXXX.HK',sector:'AI SaaS',ipo:50,mkt:120,exchange:'HKEX Main',
       rf:4,erp:6,beta:1.3,tax:15,dv:5,kd:6,rev2025:60,rev:100,cash:200,shares:500,g:3.5,fx:7.8,m0:-20,dtax:15,
       bear:{p:.3,g1:30,gn:5,tm:15,sc:2.2},base:{p:.45,g1:45,gn:8,tm:25,sc:1.8},bull:{p:.25,g1:70,gn:12,tm:32,sc:1.5},

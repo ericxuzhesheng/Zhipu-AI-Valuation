@@ -378,6 +378,9 @@ def write_block_bootstrap_outputs(n_boot: int = 20000) -> None:
     """Block-bootstrap peer-adjusted CAR means under a no-event null."""
     zhipu = pd.read_csv(ROOT / "data" / "Zhipu_KnowledgeAtlas_daily.csv")
     peer = pd.read_csv(ROOT / "data" / "MiniMax_daily.csv")
+    # Preserve the original event-study null sample during the September price refresh.
+    zhipu = zhipu.loc[zhipu["trade_date"].astype(int) <= 20260831].copy()
+    peer = peer.loc[peer["trade_date"].astype(int) <= 20260831].copy()
     zhipu["date"] = pd.to_datetime(zhipu["trade_date"].astype(str))
     peer["date"] = pd.to_datetime(peer["trade_date"].astype(str))
     merged = (

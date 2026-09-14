@@ -83,20 +83,22 @@ Foundation-Model Lab: Evidence from Zhipu AI (2513.HK)}
 \vspace{0.5em}
 
 \begin{abstract}
-\noindent In January 2026, Zhipu AI (2513.HK) became the first publicly traded foundation-model laboratory.
-By 11~September its shares were 6.8 times the IPO price, implying US\$47.3bn of equity value. Results released
-after the 31~August close showed H1 revenue of RMB~953.9m, up 399.7\%; API revenue contributed 86.5\%, while operating
-loss widened to RMB~2.15bn. We distinguish those disclosures from forecast choices and apply scenario DCF,
-reverse DCF and layered comparables. On a US\$700m FY2026E revenue estimate, the DCF spans HK\$25--233 per share
-and gives a probability-weighted HK\$88, or 11.1\% of the September close. Private transactions imply
-HK\$240--457; the closest listed peer implies HK\$257 on matched LTM revenue. The reverse DCF requires about US\$60.5bn of 2035
-revenue. Replacing earnings surprises with \emph{capability-surprise} events then shows how model progress is
-priced. The evidence suggests that public investors attach a large, fragile right-tail value to future
-commercialisation.
+\noindent Zhipu AI's 2026 price path connects two stages of expectations: a sharp re-rating around
+model-capability advances, followed by a partial reversal as commercialisation and capital requirements
+come into focus. By 11~September, the stock had fallen 33.6\% from its 31~August close, yet remained
+6.8 times its IPO price. Using disclosures through 13~September and prices through 11~September, we combine
+scenario DCF, reverse DCF, layered comparables and capability-event analysis. H1 revenue grew 399.7\%,
+but operating loss widened to RMB2.15bn. The probability-weighted DCF is HK\$88 against a HK\$793 close;
+the reverse DCF requires about US\$60.5bn of 2035 revenue. The original five GLM events show a positive
+13.7\% mean two-day reaction, but continuation is less secure. The later GLM-5.3-Flash window records a
+9.1\% reaction followed by -25.9\% drift. These findings support a reading of capability-driven revaluation
+followed by partial mean reversion in the expectations premium. They do not establish a stationary price
+process or convergence to DCF value. Conditional September financing and Wenge's contrasting interim
+results help distinguish technical progress from sustainable shareholder returns.
 
 \vspace{0.6em}
 \noindent\textbf{Keywords:} foundation models; Chapter 18C; pre-profit valuation; real options; market
-efficiency; capability surprise; PEAD/PCAD.
+efficiency; capability surprise; mean reversion.
 \end{abstract}
 
 \section{Introduction}
@@ -108,10 +110,17 @@ pre-profit issuers. At the 11~September close its shares were 6.8 times the IPO 
 market capitalisation of US\$47.3bn. Against US\$209.5m of LTM revenue through 2026H1, that is an
 equity-value-to-revenue multiple of 226.0$\times$
 \citep{tushare2026,prospectus2513,prospectus100,placement2513}. The broader frontier-AI financing wave has
-therefore moved from private markets into public price discovery.
+therefore moved from private markets into public price discovery. That discovery has proceeded in both
+directions: from HK\$1,195 on 31~August to HK\$793 on 11~September, the shares surrendered 33.6\%.
+The central issue is how an initially expanding capability premium becomes vulnerable to mean reversion
+when revenue growth must be reconciled with losses, dilution and future cash requirements.
+
+Information is restricted to 13~September~2026, with prices through the preceding trading day,
+11~September. The original five-event sample remains fixed at 31~August; later observable windows are
+examined separately so the subsequent reversal does not determine the original sample.
 
 This paper poses three questions: \textbf{(i)} what is Zhipu worth on fundamentals; \textbf{(ii)} what does
-the re-rating imply---efficient pricing of capability, exuberance, or option value; and \textbf{(iii)} is the
+the rise and subsequent reversal imply about capability pricing and mean reversion; and \textbf{(iii)} is the
 open-weight, cost-disruption strategy sustainable? Our contribution is methodological: because an early-stage
 lab has no earnings, the standard earnings-surprise event study \citep{ball1968,bernard1989} has nothing to
 bite on, so we reframe the information event as a \emph{capability surprise}---a model release or benchmark
@@ -156,11 +165,12 @@ over-allotment option with HK\$3bn of cornerstone commitments, at an implied val
 strategically remarkable
 on three counts: Chapter~18C gave a loss-making lab permanent public capital years before profitability; its
 first-listed-foundation-model status conferred a certification premium; and the stock
-then re-rated to HK\$793 by 11~September~2026 ($\approx +582\%$ versus IPO; realised annualised volatility
+then experienced a substantial re-rating followed by a reversal to HK\$793 by 11~September~2026 ($\approx +582\%$ versus IPO; realised annualised volatility
 near 189\%; Figure~\ref{fig:price}). The company placed 19.78m new shares on 13~July at HK\$1{,}588,
 raising HK\$31.375bn net and increasing issued shares from 445.843m to 465.623m
 \citep{placement2513}. MiniMax, listing one day later at HK\$165, closed 11~September at HK\$270 after a much
-larger peak-to-trough drawdown; that divergence is used in Section~\ref{sec:event}.
+larger peak-to-trough drawdown. Between 31~August and 11~September MiniMax fell 22.6\%, compared with
+Zhipu's 33.6\%. The common decline and Zhipu's larger reversal frame the analysis in Section~\ref{sec:event}.
 
 \section{Industry, Macro, and Strategy}
 \label{sec:context}
@@ -224,6 +234,32 @@ unlevering bridge.
 pre-profit, capital-intensive lab; the resulting WACC is generous. Second, fixing WACC at 13.5\% through 2035
 ignores the risk-premium increase that could follow a break in the valuation loop. Both refinements would lower
 DCF value. Figure~\ref{fig:tornado} tests rate sensitivity, while the real-options section treats the binary tail.
+
+\textbf{Financing and valuation treatment.} Zhipu's 13~September announcement records agreements signed
+on 12~September for up to 21,965,000 new H shares at HK\$714 and RMB20.14bn of US-dollar-settled,
+zero-coupon convertible bonds \citep{zhipufinancing2026}. The placement price is 9.96\% below the
+11~September close and 19.95\% below the preceding five-day average. Expected placement net proceeds
+are HK\$15,664.13m; expected bond net proceeds are US\$3,010.77m. The initial conversion price is
+HK\$892.50, 12.55\% above the closing share price. The bonds are issued at 100.5\% of principal and
+mature on 16~September~2027, with the ordinary conversion period beginning on 1~July~2027.
+
+The roughly US\$5bn headline describes financing arranged, not cash established as received by this
+cutoff. Placement completion is expected on 16~September subject to conditions including listing approval;
+bond issuance is also conditional, and neither transaction depends on the other completing. The announcement
+confirms 465,623,090 existing shares. Full placement would increase this to 487,588,090; subsequent full
+conversion at the initial price would bring it to 513,953,116. These imply approximately 4.50\% and 9.40\%
+reductions in existing holders' percentage ownership, respectively, before any other changes. They are
+ownership calculations, not predicted price declines.
+
+Accordingly, the model retains the existing share count and June-balance-plus-July-placement net-cash
+bridge; September proceeds are not treated as settled. After closing, a revised bridge would have to record
+new cash alongside the debt claim and equity dilution. Adding all convertible proceeds to equity value
+without a corresponding liability or conversion treatment would overstate value. Zero coupon eliminates
+regular interest payments, not the one-year repayment obligation if the bonds remain outstanding.
+The company allocates 60\% of proposed net proceeds to next-generation GLM development, fully self-training
+and computing infrastructure. This supports technical investment capacity, but does not establish an
+operating return. The HK\$88 weighted DCF remains a reference under the original assumptions, not a
+post-transaction valuation.
 
 \subsection{Scenario DCF}
 We project FCFF over 2026--2035 from a \textbf{US\$700m FY2026E revenue base}. That figure is our estimate,
@@ -305,18 +341,37 @@ use LTM revenue through 2026H1; each other revenue period is recorded in \texttt
 \label{fig:comps}
 \end{figure}
 
+\textbf{Wenge's interim cross-check.} Wenge's 25~August interim-results announcement reports H1 revenue
+of RMB172.750m, up 46.0\%; deployment contributes RMB113.803m (65.9\%), while subscription and API revenue
+reaches RMB58.947m (34.1\%), up 94.0\% \citep{wengeh12026}. Gross margin is 55.0\%, versus 54.6\% a year
+earlier. R\&D expense rises 59.0\% to RMB119.340m, or 69.1\% of revenue. Its deployment-heavy delivery
+model and margin profile differ substantially from Zhipu's API-heavy mix; Wenge therefore remains an
+adjacent Hong Kong comparable, outside the private foundation-lab valuation range.
+
+Loss measures must be distinguished. Total period loss narrows 24.5\% to RMB87.654m; loss attributable
+to owners narrows 27.6\% to RMB88.958m; adjusted net loss narrows 29.5\% to RMB52.920m. Financial-asset
+fair-value gains increase from RMB0.200m to RMB35.047m, contributing to reported loss improvement.
+Cash and cash equivalents increase from RMB324.621m at year-end to RMB1,017.608m in June; the broader
+liquidity increase is primarily attributable to IPO proceeds, rather than evidence of positive operating
+cash flow. Growth and adjusted-loss improvement are encouraging, but R\&D still grows faster than revenue.
+The comparable table already uses an H1-updated LTM denominator; these disclosures are not added a second
+time. The source is the formal interim-results announcement, not a separately verified full interim report.
+
 \subsection{A real-options reading}
-The reconciliation is that Zhipu is best valued not as a discounted cash-flow stream but as a \emph{call option
-on a winner-take-all AGI outcome} \citep{black1973,damodaran2018}. The DCF base case is the option's modest
-intrinsic value; the rest is time value on a fat right tail, amplified by roughly 189\% annualised volatility
-and a long horizon. The reverse DCF describes the state needed for that option to pay off, while
+The valuation gap can be interpreted as investors paying for a \emph{call option
+on a winner-take-all AGI outcome} \citep{black1973,damodaran2018}. This is an economic analogy, not an independently estimated option price: the gap above DCF reflects
+expectations about a fat right tail. Roughly 189\% annualised volatility also means that this expectations
+premium can contract sharply without technical progress being reversed. The reverse DCF describes the state needed for that option to pay off, while
 Section~\ref{sec:event} tests how capability news changes its perceived probability.
 
 \textbf{A practitioner lens: reflexivity.} This also fits Feng Liu's reverse-investing interpretation of
 Soros's \emph{reflexivity} \citep{fengliu}. A high valuation is an input as well as an output: cheap equity
 capital finances compute and talent, which can improve models and support the valuation. The July placement
 makes that loop tangible. It remains fragile because the firm does not yet fund itself; if capability surprises
-or monetisation stall, the same loop can reverse.
+or monetisation stall, the same loop can reverse. September's HK\$714 placement price, against July's
+HK\$1,588, illustrates how the terms of equity finance change as the market reprices. The transactions
+have different dates and terms, so this comparison is descriptive. Continued access to capital supports
+research, while dilution and debt repayment constrain how much of future success accrues to each share.
 
 \subsection{Sensitivity and synthesis}
 The conclusion is not an artefact of any single assumption. Figure~\ref{fig:tornado} tornadoes the Base case
@@ -325,7 +380,9 @@ for locating model risk, but insufficient to bridge the gap to market. Figure~\r
 picture together. Scenario DCF spans HK\$25--233, the 20.5--39.0$\times$ private-deal range gives HK\$240--457,
 and MiniMax's 73.2$\times$ LTM multiple gives about HK\$257 when applied to Zhipu's LTM revenue. That anchor is
 67.6\% below Zhipu's HK\$793 close. Public markets value both listed labs richly, but Zhipu still carries a
-3.09-fold multiple premium to MiniMax, making its price unusually dependent on a durable right-tail option.
+3.09-fold multiple premium to MiniMax. Thus the observed decline is a partial compression of the
+expectations premium, not evidence that the price has already returned to fundamental value. Neither
+HK\$88 nor a historical average is an empirically established long-run mean.
 
 \begin{figure}[H]
 \centering
@@ -347,8 +404,10 @@ shown separately; the diamonds mark probability-weighted DCF and the private-dea
 \label{sec:event}
 \textbf{Hypothesis.} If the firm is priced on its capability trajectory, then capability information should
 move the price. Under semi-strong efficiency \citep{fama1970} the reaction should be immediate and complete;
-any systematic \emph{post-capability-announcement drift} (PCAD)---the analogue of the classic
-post-earnings-announcement drift\citep{ball1968,bernard1989}---would indicate inefficiency.
+subsequent continuation may reflect gradual adjustment, while reversal may reflect an initially excessive
+response or adverse intervening information. We therefore examine both \emph{post-capability-announcement
+drift} (PCAD), analogous to post-earnings-announcement drift\citep{ball1968,bernard1989}, and mean-reversion
+patterns. Neither direction alone proves inefficiency when expected returns and other news are uncertain.
 
 \textbf{Method.} Event dates are identified \emph{independently} from official model-release announcements and
 technical documentation \citep{glm_modelcard,minimax_m3}, not from the price series. On daily prices
@@ -367,7 +426,7 @@ several of the largest positive-return days coincide with these independently da
 releases (GLM-5 through GLM-5.3); green dotted lines mark index/flow catalysts (IPO, the 20~Feb and 13~May
 expectation spikes, the 5--8~June Hang Seng TECH inclusion and Stock Connect access, and the 31~August MSCI
 rebalance). Same sector,
-divergent paths: Zhipu re-rates on successive SOTA releases while MiniMax de-rates from its peak.}
+divergent earlier paths, followed by a common September reversal: Zhipu loses part of its capability premium while MiniMax also declines.}
 \label{fig:price}
 \end{figure}
 
@@ -383,10 +442,10 @@ dates are taken from official announcements and index/Connect schedules, not fro
 
 \textbf{Results.} Averaged across the five GLM events, the reaction window is $+13.7\%$ (the market prices
 capability quickly) and the drift averages $+4.6\%$ but is strongly \emph{bimodal} (Table~\ref{tab:car}).
-The drift sign depends on the \emph{type} of release: a genuine SOTA leap (GLM-5.2) continues upward, whereas
+Within this small sample, the SOTA leap GLM-5.2 is followed by continuation, whereas
 incremental upgrades (GLM-5-Turbo, GLM-5.1) reverse. MiniMax M2.5 drew a $+24.2\%$ launch reaction with little
 subsequent drift, whereas M2.7 and M3 both drew negative reaction/drift profiles. That contrast is consistent with
-\emph{capability surprise, not sector membership, driving the cross-section}
+\emph{heterogeneous responses to capability news}, without establishing a permanent return premium
 (Figures~\ref{fig:car}--\ref{fig:scatter}).
 
 \begin{table}[H]
@@ -425,7 +484,7 @@ Weekend announcements use the next trading day. OpenAI and xAI releases remain i
 Microsoft and Tesla returns are excluded because neither listed company is the model issuer. Same-week Qwen3.8
 variants are catalogued but not double-counted after the 3~August flagship launch. Qwen3.8-Flash (26~August), Gemini
 Transcribe/Omni 1.1 (26--27~August), Tencent Hy4 (28~August), GLM-5.3-Flash, the two H1 disclosures, and MSCI
-rebalance lack a complete post-event window at the cutoff and remain outside the table. MiniMax H3 and Music
+rebalance lacked a complete post-event window at the original 31~August sample cutoff and remain outside this historical table. Later observable windows are analysed below. MiniMax H3 and Music
 3.0 remain catalogued but are excluded because audio-video and music generation are not comparable with the
 text, coding, and agent capability sample.}
 \renewcommand{\arraystretch}{1.0}
@@ -456,15 +515,17 @@ matters: the CARs above are driven by the former, while the latter explain part 
 against attributing every move to model quality. The same discipline matters at the new cutoff. Zhipu rose
 9.6\% on 31~August as MSCI's index changes became effective after the close \citep{msci2026}; the H1 results
 were released only after that close \citep{interim2026}. The financial disclosure can update valuation inputs,
-but it cannot explain that day's return and has no post-announcement window yet, so we exclude it from the CAR
-sample.
+but it cannot explain that day's return. By 11~September the results window has seven of nine drift days,
+so it remains incomplete and outside the original capability sample. The 13~September financing announcement
+likewise follows the measured drawdown; it cannot retrospectively establish its cause.
 
 \subsection{Robustness: peer-adjusted and block-bootstrap checks}
 Because Zhipu and MiniMax share sector and macro shocks, we re-run the study with \emph{peer-adjusted} returns
 (benchmark $=$ MiniMax's same-day return). Table~\ref{tab:robust} shows the reaction result is highly robust
 ($+13.7\%$ vs $+15.3\%$), while the average drift \emph{strengthens} ($+4.6\%\!\to\!+16.8\%$): once the falling
 sector is removed, all five events drift positively, and GLM-5.1's apparent reversal flips to continuation
-($-14.2\%\!\to\!+12.9\%$). The under-reaction pattern is reinforced, not weakened, by peer adjustment.
+($-14.2\%\!\to\!+12.9\%$). This shows relative strength against a falling peer in the original windows. It does not imply that
+absolute prices will keep rising, and the bootstrap below does not establish significant continuation.
 
 An expanded event catalogue guards against cherry-picking by recording screened releases, financial disclosures,
 flow catalysts, listings, and candidates. Twenty-nine day-level, clean-window events enter the CAR panel;
@@ -512,84 +573,54 @@ windows. Shaded areas are percentile 95\% null intervals, and red lines mark the
 \label{fig:boot}
 \end{figure}
 
-\textbf{Honesty box.} This is \emph{preliminary, diagnostic} evidence consistent with PCAD, not a proven
-anomaly: $n=5$ single-firm events (plus two direct peer capability events) over seven months, and drift windows can overlap
-competing-lab news. No statistical significance
-is claimed---five events make an interesting undergraduate case, not a general law. The natural extensions
-are a wider, multi-lab event panel and an NLP-scored surprise magnitude.
+\subsection{From capability revaluation to partial mean reversion}
+The September observations change the interpretation of the earlier positive reactions. GLM-5.3-Flash
+has a +9.1\% two-day mean-adjusted reaction but -25.9\% subsequent nine-day drift. MiniMax's interim-results
+window similarly records -5.7\% reaction and -23.2\% drift. These complete supplementary windows, reported
+in \texttt{eventstudy/september\_window\_update.csv}, show that capability or commercialisation news need
+not sustain its initial valuation effect. They are separate from the fixed August five-event estimates.
+
+Over 31~August--11~September, Zhipu's raw decline of 33.6\% exceeds MiniMax's 22.6\% decline by roughly
+11 percentage points. These calendar-period returns are distinct from event CARs. Together they are
+consistent with a common repricing and an additional compression of Zhipu's premium; a single-peer
+comparison cannot identify the causes of either component. A plausible economic interpretation is that
+technical progress initially supported more optimistic commercialisation expectations, while declining
+gross margin, widening losses and continued financing needs made the distance to sustainable cash flow
+more salient. This interpretation does not require a deterioration in the models themselves.
+
+Mean reversion here describes a partial unwinding of the earlier expectations premium. It does not mean
+that an estimated long-run price mean has been reached, or that every capability rally must reverse.
+The remaining 226.0x LTM multiple and large DCF gap show that substantial optimism survives. No
+stationarity test or causal identification of overreaction is provided, and subsequent news overlaps these
+windows. The evidence warrants replacing a one-directional capability-momentum narrative with an account
+of initial revaluation followed by a financially constrained reversal.
+
+\textbf{Limitations.} Five original GLM events provide diagnostic evidence, not a general return law.
+The bootstrap supports a strong immediate response within its design, while continuation remains
+statistically inconclusive. The September reversal is descriptive evidence of partial mean reversion,
+not a separately identified anomaly. A wider multi-lab panel, a longer price history and independently
+scored surprise magnitudes would be needed to distinguish changing fundamentals from overreaction.
 
 \section{Conclusion and Implications}
-\enlargethispage{3\baselineskip}% keep the whole conclusion on one page (avoid a 2--3 line widow page)
-H1 revenue reached RMB~953.9m and API gross margin turned positive, but operating loss still exceeded twice
-revenue. Our probability-weighted DCF is HK\$88 per share and private transactions imply HK\$240--457, against
-a HK\$793 September close. MiniMax's public multiple implies only HK\$257 on a matched LTM basis. Listed
-scarcity affects both firms, but Zhipu still trades at 3.09 times MiniMax's revenue multiple. The reverse DCF states the wager---about
-US\$60.5bn of 2035 revenue.
+Zhipu's price path illustrates how capability revaluation can give way to partial mean reversion.
+The early event sample shows that investors respond to model advances; the September decline shows
+that those responses do not establish a durable valuation floor. Zhipu fell 33.6\% from 31~August to
+11~September, while MiniMax fell 22.6\%. The stronger conclusion is about the fragility of the expectations
+premium, rather than persistent capability momentum.
 
-Capability surprises are priced quickly and discriminately, while index flows explain part of the remaining
-volatility. On 31~August, MSCI rebalancing could affect the close; results released afterward could not. The
-verdict is therefore \textbf{capability momentum priced as a scarce public option}, not a casual ``bubble''
-label. The main limitations are the small event sample, incomplete post-results windows, and an uncertain path
-from API volume to durable cash flow.
+Commercial progress is real: H1 revenue grew 399.7\% and API gross margin turned positive. Yet operating
+loss exceeded twice revenue. Against the HK\$793 close, the weighted DCF remains HK\$88, private transactions
+imply HK\$240--457, and MiniMax's matched LTM multiple implies HK\$257. The reverse DCF requires about
+US\$60.5bn of 2035 revenue. These gaps explain why growth expectations are consequential; they do not
+establish a price target to which the market must revert. Wenge's stronger gross margin and narrower
+adjusted loss also show why business mix and earnings quality matter when selecting AI comparables.
 
-\subsection*{Disclosure update: information through 13 September}
-The information cutoff is 13~September~2026, a Sunday; prices remain at the 11~September close.
-The original five-event cohort and bootstrap remain fixed at 31~August. Supplementary September windows
-are reported separately in \texttt{UPDATE\_2026-09-11.md}.
-
-\textbf{Financing and valuation treatment.} Zhipu's 13~September announcement records agreements signed
-on 12~September for up to 21,965,000 new H shares at HK\$714 and RMB20.14bn of US-dollar-settled,
-zero-coupon convertible bonds \citep{zhipufinancing2026}. The placement price is 9.96\% below the
-11~September close and 19.95\% below the preceding five-day average. Expected placement net proceeds
-are HK\$15,664.13m; expected bond net proceeds are US\$3,010.77m. The initial conversion price is
-HK\$892.50, 12.55\% above the closing share price. The bonds are issued at 100.5\% of principal and
-mature on 16~September~2027, with the ordinary conversion period beginning on 1~July~2027.
-
-\pagebreak
-The roughly US\$5bn headline describes financing arranged, not cash established as received by this
-cutoff. Placement completion is expected on 16~September subject to conditions including listing approval;
-bond issuance is also conditional, and neither transaction depends on the other completing. The announcement
-confirms 465,623,090 existing shares. Full placement would increase this to 487,588,090; subsequent full
-conversion at the initial price would bring it to 513,953,116. These imply approximately 4.50\% and 9.40\%
-reductions in existing holders' percentage ownership, respectively, before any other changes. They are
-ownership calculations, not predicted price declines.
-
-Accordingly, the model retains the existing share count and June-balance-plus-July-placement net-cash
-bridge; September proceeds are not treated as settled. After closing, a revised bridge would have to record
-new cash alongside the debt claim and equity dilution. Adding all convertible proceeds to equity value
-without a corresponding liability or conversion treatment would overstate value. Zero coupon eliminates
-regular interest payments, not the one-year repayment obligation if the bonds remain outstanding.
-The company allocates 60\% of proposed net proceeds to next-generation GLM development, fully self-training
-and computing infrastructure. This supports technical investment capacity, but does not establish an
-operating return. The HK\$88 weighted DCF remains a reference under the original assumptions, not a
-post-transaction valuation.
-
-\textbf{Wenge's interim cross-check.} Wenge's 25~August interim-results announcement reports H1 revenue
-of RMB172.750m, up 46.0\%; deployment contributes RMB113.803m (65.9\%), while subscription and API revenue
-reaches RMB58.947m (34.1\%), up 94.0\% \citep{wengeh12026}. Gross margin is 55.0\%, versus 54.6\% a year
-earlier. R\&D expense rises 59.0\% to RMB119.340m, or 69.1\% of revenue. Its deployment-heavy delivery
-model and margin profile differ substantially from Zhipu's API-heavy mix; Wenge therefore remains an
-adjacent Hong Kong comparable, outside the private foundation-lab valuation range.
-
-Loss measures must be distinguished. Total period loss narrows 24.5\% to RMB87.654m; loss attributable
-to owners narrows 27.6\% to RMB88.958m; adjusted net loss narrows 29.5\% to RMB52.920m. Financial-asset
-fair-value gains increase from RMB0.200m to RMB35.047m, contributing to reported loss improvement.
-Cash and cash equivalents increase from RMB324.621m at year-end to RMB1,017.608m in June; the broader
-liquidity increase is primarily attributable to IPO proceeds, rather than evidence of positive operating
-cash flow. Growth and adjusted-loss improvement are encouraging, but R\&D still grows faster than revenue.
-The comparable table already uses an H1-updated LTM denominator; these disclosures are not added a second
-time. The source is the formal interim-results announcement, not a separately verified full interim report.
-
-\textbf{Why the price fell back.} Between 31~August and 11~September, Zhipu falls from HK\$1,195 to
-HK\$793 (33.6\%), while MiniMax falls from HK\$349 to HK\$270 (22.6\%). Common weakness is consistent
-with sector repricing, but the roughly 11-percentage-point difference does not identify a company-specific
-cause. Zhipu's H1 gross-margin decline to 26.4\%, widening operating and adjusted losses, and still-high
-226.0x LTM multiple give concrete reasons why revisions to commercialization expectations could move the
-price sharply. This is an interpretation consistent with disclosed fundamentals, not a causal estimate.
-The GLM-5.3-Flash window also shows that a positive two-day reaction (+9.1\%) can coexist with a negative
-subsequent drift (-25.9\%). The September financing discount and potential dilution reveal the terms of
-additional capital, but the formal announcement follows the measured drawdown. It cannot establish why
-that earlier decline occurred, and no post-announcement trading day exists within this cutoff.
+The September financing extends the company's prospective capacity to invest but introduces dilution
+and a short-maturity debt claim. At the information cutoff it remains conditional and is not added as
+settled cash. For valuation, model quality must therefore be translated into revenue, margins, funding
+needs and ultimately value per share. The evidence supports a sequence of capability-driven optimism
+and subsequent partial mean reversion; it does not prove that the reversal is complete or that the
+September financing announcement caused the preceding decline.
 
 \appendix
 \clearpage

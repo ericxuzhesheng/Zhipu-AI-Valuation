@@ -3,11 +3,11 @@
 **Title:** *Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab:
 Evidence from Zhipu AI (2513.HK).*  
 **Author:** Zhesheng Xu (42353012), Corporate Finance, 2025-2026-2.  
-**Build:** XeLaTeX (`paper/main.tex` to `main.pdf`). **Market data as of 2026-09-11; original event cohort through 2026-08-31.**
+**Build:** XeLaTeX (`paper/main.tex` to `main.pdf`). **Information cutoff 2026-09-13; market data as of 2026-09-11; original event cohort through 2026-08-31.**
 
 > Term-paper rules satisfied: title carries core concept (*capability surprise*) + mechanism (price discovery
 > and drift); abstract is below the 400-word limit; full reference list at end.
-> Word-count audit note: `texcount -inc -sum main.tex` previously gave text near the 3,000-word ceiling; rerun after final formatting if the instructor enforces it strictly.
+> Word-count limit: main text may contain up to 5,000 words. Verify with `texcount -inc -sum main.tex` after final editing.
 
 ---
 
@@ -40,6 +40,12 @@ Evidence from Zhipu AI (2513.HK).*
 - Reverse DCF: price implies **~US$60.5B revenue by 2035 (~64.1% annual, 2026-2035)** after fixing the FY2026E base.
 - Event study (mean-adjusted, `[-20,-6]` estimation window): reaction **+13.7%**, drift **+4.6%** (bimodal);
   peer-adjusted reaction/drift **+15.3% / +16.8%** across five GLM events.
+
+## September 13 disclosure supplement
+- Conditional September placement and convertible bond: `zhipufinancing2026`; no premature cash/share recognition.
+- Wenge H1 results: `wengeh12026`; total versus owners' versus adjusted loss and deployment/API mix.
+- Price drawdown: distinguish common repricing and valuation sensitivity from identified causality.
+- Full terms and cutoff treatment: [September 13 update](UPDATE_2026-09-13.md).
 
 ## Sourcing policy (granular; primary > news)
 Key data cite, via the bibliography:

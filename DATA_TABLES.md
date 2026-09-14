@@ -1,7 +1,7 @@
 # Data Tables - Zhipu (2513.HK), MiniMax (00100.HK), Wenge AI (01956.HK)
 
 Market data via **Tushare `hk_daily`** with public-source fallback/cross-checks from **Tencent Finance** (Hong Kong) and **Nasdaq** (US), **as of 2026-09-11** (CSV in `data/`).
-All 11 local market series now end on the 2026-09-11 trading day.
+All 11 local market series now end on the 2026-09-11 trading day. Information cutoff: **2026-09-13**. Conditional September financing terms and Wenge H1 results are documented in [the disclosure supplement](UPDATE_2026-09-13.md); Wenge inputs are in `data/wenge_financials_input.csv`. Pending September proceeds and dilution are not booked into the existing valuation.
 Fundamentals come from the **HKEX Chapter-18C prospectus**, **2025 Annual Report**, and **H1 2026 interim-results announcement** (stock code 2513). All figures are consistent with the paper and `data/zhipu_financials_input.csv`.
 
 ---

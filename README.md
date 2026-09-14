@@ -9,7 +9,7 @@
 <p align="center">
   <strong>Zhesheng Xu（许哲圣）</strong><br>
   Corporate Finance Final Project<br>
-  <strong>核心数据截至 / Core data through</strong> 2026-09-11
+  <strong>信息截止 / Information cutoff</strong> 2026-09-13 · <strong>行情 / Prices</strong> 2026-09-11
 </p>
 
 <p align="center">
@@ -84,9 +84,17 @@
 
 [MiniMax 中期业绩公告](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0826/2026082600680.pdf)于 8 月 26 日收盘后发布。H1 收入同比增长 283.1% 至 US$116.6M，开放平台和企业服务收入增长 703.1% 至 US$73.9M、占收入 63.4%；毛利率由 12.1% 升至 17.9%。但经调整净亏损从 US$138.7M 扩大到 US$293.0M，说明商业化提速仍伴随高研发投入。估值可比中的 US$165.2M LTM 收入，按 FY2025 收入减去 2025H1、再加 2026H1 计算，而不是把半年收入简单年化。
 
+### 9 月 13 日融资与闻歌半年业绩
+
+智谱 [港交所公告](https://www.hkexnews.hk/listedco/listconews/sehk/2026/0913/2026091300026_c.pdf)披露最多 2,196.5 万股配售（HK$714/股）及人民币 201.4 亿元、美元结算的零息可转债，合计约 50 亿美元融资规模。协议已签署，配售预计 9 月 16 日交割且仍有条件；截至 9 月 13 日不能视为资金已经到账。初始转股价 HK$892.50，债券 2027 年 9 月到期。原净现金桥及股本暂不加入本次拟融资。
+
+闻歌 [半年业绩公告](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0825/2026082500959.pdf)显示收入 RMB172.750m（+46.0%），订阅/API 占 34.1%，毛利率 55.0%。总亏损收窄 24.5%，归母亏损收窄 27.6%，经调整亏损收窄 29.5%；研发增速 59.0%，且金融资产公允价值收益帮助报表亏损收窄。闻歌仍属商业模式不同的邻近可比。
+
+8 月 31 日至 9 月 11 日智谱回撤 33.6%，MiniMax 回撤 22.6%。共同重估、较高估值和亏损压力可以解释脆弱性，但不能把周末融资公告倒推为此前下跌的已证实原因。详细条款、口径与分析见 [9 月 13 日更新](UPDATE_2026-09-13.md)。
+
 ### 估值结论
 
-行情更新至 9 月 11 日；经营假设、净现金桥和 8 月末 beta 保持原口径。MiniMax、闻歌市值按原股本及汇率基础重估，其余参照保留逐行日期。收盘后融资消息未计入已完成股本或现金，详见 [更新说明](UPDATE_2026-09-11.md)。
+行情更新至 9 月 11 日；经营假设、净现金桥和 8 月末 beta 保持原口径。MiniMax、闻歌市值按原股本及汇率基础重估，其余参照保留逐行日期。9 月融资仍有交割条件，未计入已完成股本或现金，详见 [信息截止更新](UPDATE_2026-09-13.md)。
 
 WACC 约为 13.5%，其中自下而上 β 以截至 8 月 31 日的 60 个月月度回归为起点，去杠杆中位数 1.55 后取约 1.6；Rf 为 4%，ERP 为 6%。模型统一采用 HK$7.8/US$、RMB 7.1/US$ 和配售后的 4.656 亿股。净现金采用可复核的 pro forma 桥接。6 月末现金与短期投资扣除银行借款及租赁负债，再加 7 月配售净款，合计约 42.89 亿美元。公司截至 8 月末的现金余额尚未披露，因此模型保留这项期后调整的口径说明。活公式见 [`model/valuation_model.xlsx`](model/valuation_model.xlsx)，十年完整 Base Case 见论文附录 B。
 
@@ -208,6 +216,8 @@ python scripts/validate_outputs.py
 ## English
 
 ### Project Overview
+
+The information cutoff is 13 September 2026, with prices through the September 11 close. The September 13 placement and convertible-bond announcement describes conditional transactions, so proceeds and new shares are not booked as settled. Wenge's H1 results and the September drawdown are discussed in the [September 13 update](UPDATE_2026-09-13.md); the original August event sample is unchanged.
 
 I built this project around a valuation problem that conventional earnings-surprise analysis handles poorly. Zhipu AI listed under 2513.HK on 8 January 2026, becoming the first publicly traded foundation-model laboratory. By the close on 11 September, its market capitalization was approximately US$47.3 billion. Results released after the 31 August close showed H1 revenue of RMB953.9 million, up 399.7 percent, with open-platform and API sales contributing 86.5 percent. Operating loss nevertheless widened to RMB2.15 billion, and adjusted net loss increased by 12.1 percent. The central question is therefore measurable: how much future operating performance has the market already paid for?
 

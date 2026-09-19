@@ -32,7 +32,7 @@ VALUATION_COMPS_OUTPUT = DATA / "valuation_comps.csv"
 WACC = 0.135
 TERMINAL_G = 0.04
 TAX_RATE = 0.15
-SHARES_M = 465.62309  # 445,843,090 at 2026-06-30 plus 19,780,000 placed on 2026-07-13
+SHARES_M = 487.58809  # Includes 21,965,000 shares placed on 2026-09-16
 USD_HKD = 7.8
 USD_CNY = 7.1
 H1_CASH_RMBM = 3993.722
@@ -40,12 +40,17 @@ H1_SHORT_INVESTMENTS_RMBM = 506.139
 H1_BANK_LOANS_RMBM = 2224.789
 H1_LEASE_LIABILITIES_RMBM = 379.410
 JULY_PLACEMENT_NET_HKDM = 31374.95
+SEPT_PLACEMENT_NET_HKDM = 15664.13
+SEPT_CB_NET_USDM = 3010.77
+# Issue-date principal proxy: disclosed USD gross proceeds / 100.5% issue price.
+# Not IFRS fair value; future USD settlement is subject to the bond terms and FX.
+SEPT_CB_PRINCIPAL_USDM = 3015.64 / 1.005
 NET_CASH_USDM = (
     H1_CASH_RMBM
     + H1_SHORT_INVESTMENTS_RMBM
     - H1_BANK_LOANS_RMBM
     - H1_LEASE_LIABILITIES_RMBM
-) / USD_CNY + JULY_PLACEMENT_NET_HKDM / USD_HKD
+) / USD_CNY + (JULY_PLACEMENT_NET_HKDM + SEPT_PLACEMENT_NET_HKDM) / USD_HKD + SEPT_CB_NET_USDM - SEPT_CB_PRINCIPAL_USDM
 REV_2025_USDM = 102
 REV_2026_H1_RMBM = 953.892
 REV_2025_RMBM = 724.3
@@ -542,7 +547,7 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
         (
             "Net cash + ST investments (US$m, pro forma)",
             NET_CASH_USDM,
-            "2026-06-30 cash + short-term FVPL investments less bank loans and leases, plus July placement net proceeds; not a reported 2026-08-31 cash balance",
+            "June net cash plus July and September placements plus CB net cash less issue-date principal proxy; excludes undisclosed subsequent cash burn; see UPDATE_2026-09-18.md",
         ),
         ("Market date", MARKET.date.strftime("%Y-%m-%d"), "derived from data/Zhipu_KnowledgeAtlas_daily.csv"),
         ("Market price (HK$)", MARKET.price_hkd, None),
@@ -568,6 +573,9 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
         ("2026-06-30 bank loans + leases (RMB m)", H1_BANK_LOANS_RMBM + H1_LEASE_LIABILITIES_RMBM, None),
         ("July placement net proceeds (HKD m)", JULY_PLACEMENT_NET_HKDM, None),
         ("2026H1 operating cash flow", "Not disclosed", "interim results announcement did not include a cash-flow statement"),
+        ("September placement net (HKD m)", SEPT_PLACEMENT_NET_HKDM, "Completed 2026-09-16"),
+        ("September CB net proceeds (USD m)", SEPT_CB_NET_USDM, "Issued 2026-09-18"),
+        ("September CB principal proxy (USD m)", SEPT_CB_PRINCIPAL_USDM, "3015.64 / 1.005; issue-date proxy, not fair value"),
     ]
     for row in assumptions:
         ws.append(row)

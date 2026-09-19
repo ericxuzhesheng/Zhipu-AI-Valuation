@@ -299,6 +299,10 @@ def main() -> int:
                     try:
                         new_data = fetch_tencent(existing, public_id, start_date, args.end_date)
                         source_used = "Tencent Finance"
+                        if new_data.empty:
+                            print("  WARN Tencent returned no new rows; trying East Money")
+                            new_data = fetch_eastmoney(existing, public_id, start_date, args.end_date)
+                            source_used = "East Money"
                     except Exception as tencent_exc:
                         print(f"  WARN Tencent unavailable; trying East Money: {tencent_exc}")
                         new_data = fetch_eastmoney(existing, public_id, start_date, args.end_date)

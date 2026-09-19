@@ -1,6 +1,6 @@
 data_cutoff,company,ticker,event,day0,event_type,source_type,included,exclusion_reason,leakage_mean,react_mean,drift_mean,react_peer,drift_peer,raw_day0_return,leakage_days,reaction_days,drift_days,drift_full
-2026-09-11,Zhipu,02513.HK,GLM-5.3-Flash,2026-08-26,candidate_capability,official Z.ai model release; native multimodality and efficient hybrid attention,True,,0.9,9.11,-25.86,4.92,-26.03,-2.74,5,2,9,True
-2026-09-11,Zhipu,02513.HK,2026 H1 results announcement,2026-09-01,financial_disclosure,HKEX interim results announcement released at 18:56 after market close,True,,14.93,-8.08,-38.1,-4.82,-10.15,-1.34,5,2,7,False
-2026-09-11,MiniMax,00100.HK,2026 H1 results announcement,2026-08-27,financial_disclosure,HKEX interim results announcement released after market close on 2026-08-26,True,,-7.41,-5.66,-23.2,-7.27,25.88,3.83,5,2,9,True
-2026-09-11,Tencent,0700.HK,Hy4 preview,2026-08-28,candidate_capability,official Tencent open-source preview,True,,0.67,1.72,-2.99,-2.43,34.01,1.65,5,2,9,True
-2026-09-11,Zhipu,02513.HK,MSCI Emerging Markets inclusion rebalance,2026-08-31,flow,MSCI August 2026 index review changes effective after the market close,True,,-7.51,6.01,-47.3,-4.39,-17.13,9.63,5,2,8,False
+2026-09-18,Zhipu,02513.HK,GLM-5.3-Flash,2026-08-26,candidate_capability,official Z.ai model release; native multimodality and efficient hybrid attention,True,,0.9,9.11,-25.86,4.92,-26.03,-2.74,5,2,9,True
+2026-09-18,Zhipu,02513.HK,2026 H1 results announcement,2026-09-01,financial_disclosure,HKEX interim results announcement released at 18:56 after market close,True,,14.93,-8.08,-54.35,-4.82,-11.34,-1.34,5,2,9,True
+2026-09-18,MiniMax,00100.HK,2026 H1 results announcement,2026-08-27,financial_disclosure,HKEX interim results announcement released after market close on 2026-08-26,True,,-7.41,-5.66,-23.2,-7.27,25.88,3.83,5,2,9,True
+2026-09-18,Tencent,0700.HK,Hy4 preview,2026-08-28,candidate_capability,official Tencent open-source preview,True,,0.67,1.72,-2.99,-2.43,34.01,1.65,5,2,9,True
+2026-09-18,Zhipu,02513.HK,MSCI Emerging Markets inclusion rebalance,2026-08-31,flow,MSCI August 2026 index review changes effective after the market close,True,,-7.51,6.01,-57.52,-4.39,-19.69,9.63,5,2,9,True

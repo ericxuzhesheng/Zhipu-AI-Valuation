@@ -16,7 +16,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "paper" / "main.tex"
 SUBMISSION_GLOB = "42353012_*.pdf"
-DATA_CUTOFF = 20260911
+DATA_CUTOFF = 20260918
 
 
 def fail(message: str) -> None:
@@ -222,8 +222,8 @@ def check_valuation_comps() -> None:
             )
 
     minimax = comps.loc[comps["company"] == "MiniMax", "multiple_x"]
-    if len(minimax) != 1 or abs(float(minimax.iloc[0]) - 73.2) > 0.15:
-        fail("MiniMax valuation multiple should be about 73.2x")
+    if len(minimax) != 1 or abs(float(minimax.iloc[0]) - 82.1) > 0.15:
+        fail("MiniMax valuation multiple should be about 82.1x")
 
     with (ROOT / "eventstudy" / "valuation_summary.csv").open(newline="", encoding="utf-8") as f:
         valuation_summary = {row["metric"]: row["value"] for row in csv.DictReader(f)}

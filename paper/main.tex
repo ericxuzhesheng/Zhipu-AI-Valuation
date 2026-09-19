@@ -85,16 +85,17 @@ Foundation-Model Lab: Evidence from Zhipu AI (2513.HK)}
 \begin{abstract}
 \noindent Zhipu AI's 2026 price path connects two stages of expectations: a sharp re-rating around
 model-capability advances, followed by a partial reversal as commercialisation and capital requirements
-come into focus. By 11~September, the stock had fallen 33.6\% from its 31~August close, yet remained
-6.8 times its IPO price. Using disclosures through 13~September and prices through 11~September, we combine
+come into focus. By 18~September, the stock was 34.7\% below its 31~August close, despite a midweek
+rebound. Using disclosures and prices through 18~September, we combine
 scenario DCF, reverse DCF, layered comparables and capability-event analysis. H1 revenue grew 399.7\%,
-but operating loss widened to RMB2.15bn. The probability-weighted DCF is HK\$88 against a HK\$793 close;
-the reverse DCF requires about US\$60.5bn of 2035 revenue. The original five GLM events show a positive
+but operating loss widened to RMB2.15bn. The probability-weighted DCF is HK\$116 against a HK\$780 close;
+the reverse DCF requires about US\$59.7bn of 2035 revenue. The original five GLM events show a positive
 13.7\% mean two-day reaction, but continuation is less secure. The later GLM-5.3-Flash window records a
 9.1\% reaction followed by -25.9\% drift. These findings support a reading of capability-driven revaluation
 followed by partial mean reversion in the expectations premium. They do not establish a stationary price
-process or convergence to DCF value. Conditional September financing and Wenge's contrasting interim
-results help distinguish technical progress from sustainable shareholder returns.
+process or convergence to DCF value. Completed financing, the ZCode privacy controversy and MiniMax's CLI source release bring funding,
+product trust and developer adoption into the same valuation framework. Friday-evening disclosures
+have no subsequent trading observation within the cutoff.
 
 \vspace{0.6em}
 \noindent\textbf{Keywords:} foundation models; Chapter 18C; pre-profit valuation; real options; market
@@ -106,17 +107,16 @@ The first half of 2026 produced an event with no precedent in capital-market his
 hours, two Chinese ``AI tiger'' laboratories---Zhipu AI (2513.HK, 8~January) and MiniMax (00100.HK,
 9~January)---became the first foundation-model developers to go public anywhere, listing on the Hong Kong
 Stock Exchange. Zhipu listed under Chapter~18C, the regime for specialist-technology firms that admits
-pre-profit issuers. At the 11~September close its shares were 6.8 times the IPO price, giving a post-placement
-market capitalisation of US\$47.3bn. Against US\$209.5m of LTM revenue through 2026H1, that is an
-equity-value-to-revenue multiple of 226.0$\times$
+pre-profit issuers. At the 18~September close its shares were 6.7 times the IPO price, giving a post-placement
+market capitalisation of US\$48.8bn. Against US\$209.5m of LTM revenue through 2026H1, that is an
+equity-value-to-revenue multiple of 232.8$\times$
 \citep{tushare2026,prospectus2513,prospectus100,placement2513}. The broader frontier-AI financing wave has
 therefore moved from private markets into public price discovery. That discovery has proceeded in both
 directions: from HK\$1,195 on 31~August to HK\$793 on 11~September, the shares surrendered 33.6\%.
 The central issue is how an initially expanding capability premium becomes vulnerable to mean reversion
 when revenue growth must be reconciled with losses, dilution and future cash requirements.
 
-Information is restricted to 13~September~2026, with prices through the preceding trading day,
-11~September. The original five-event sample remains fixed at 31~August; later observable windows are
+Information and market data are restricted to 18~September~2026, including Friday-evening disclosures. US daily bars use each exchange's local trading date. The original five-event sample remains fixed at 31~August; later observable windows are
 examined separately so the subsequent reversal does not determine the original sample.
 
 This paper poses three questions: \textbf{(i)} what is Zhipu worth on fundamentals; \textbf{(ii)} what does
@@ -165,12 +165,14 @@ over-allotment option with HK\$3bn of cornerstone commitments, at an implied val
 strategically remarkable
 on three counts: Chapter~18C gave a loss-making lab permanent public capital years before profitability; its
 first-listed-foundation-model status conferred a certification premium; and the stock
-then experienced a substantial re-rating followed by a reversal to HK\$793 by 11~September~2026 ($\approx +582\%$ versus IPO; realised annualised volatility
-near 189\%; Figure~\ref{fig:price}). The company placed 19.78m new shares on 13~July at HK\$1{,}588,
+then experienced a substantial re-rating followed by a reversal to HK\$780 by 18~September~2026 ($\approx +571\%$ versus IPO; realised annualised volatility
+near 187\%; Figure~\ref{fig:price}). The company placed 19.78m new shares on 13~July at HK\$1{,}588,
 raising HK\$31.375bn net and increasing issued shares from 445.843m to 465.623m
-\citep{placement2513}. MiniMax, listing one day later at HK\$165, closed 11~September at HK\$270 after a much
+\citep{placement2513}. MiniMax, listing one day later at HK\$165, closed 18~September at HK\$303 after a much
 larger peak-to-trough drawdown. Between 31~August and 11~September MiniMax fell 22.6\%, compared with
-Zhipu's 33.6\%. The common decline and Zhipu's larger reversal frame the analysis in Section~\ref{sec:event}.
+Zhipu's 33.6\%. In the following week, Zhipu fell another 1.6\% while MiniMax recovered 12.2\%.
+Both rebounded after Tuesday; Friday gains were 5.4\% and 18.9\%, respectively. Partial mean reversion
+therefore coexists with sharp recoveries and increasing peer divergence (Section~\ref{sec:event}).
 
 \section{Industry, Macro, and Strategy}
 \label{sec:context}
@@ -206,6 +208,22 @@ a frontier laboratory \citep{prospectus20,prospectus6682,prospectus1956}. Moonsh
 labs may eventually broaden the listed set. For now, \emph{MiniMax is the only direct listed comparable}
 (Section~\ref{sec:rel}).
 
+\textbf{Trust and distribution.} Model quality alone does not secure developer adoption. On 18~September,
+developer ferstar alleged that ZCode uploaded workspace snapshots including Git history, with settings
+that did not disable the upload path \citep{zcodeanalysis2026}. This paper has not independently reproduced
+that analysis. In an evening response reported by IT Home, ZCode apologised, attributed uploads to the
+default-enabled indexing/Repo Wiki feature, said the issue was fixed and data destroyed after Wiki
+generation, and promised source release and external review \citep{zcoderesponse2026}. Those are company
+claims, not independently verified deletion or audit results. The available evidence does not establish
+that all repositories were successfully uploaded or used for training.
+
+MiniMax Code CLI v0.4.12 was meanwhile released under MIT: a terminal coding-agent implementation that
+can be inspected and extended, distinct from the older general-purpose MiniMax CLI and from model weights
+\citep{minimaxcode2026}. Public source can reduce evaluation friction and improve distribution, but is not
+itself a security certification or proof of incremental revenue. The contrast concerns verifiable product
+controls and customer trust. Potential valuation channels include developer retention, enterprise approval
+and remediation expense; no disclosed loss or adoption estimate justifies mechanically changing the DCF.
+
 \textbf{Macro and flows.} Chinese AI is a policy priority (state/SOE demand); U.S. compute-export controls
 force the architectural efficiency that doubles as Zhipu's cost edge; and Hong Kong's market structure sets
 the marginal buyer. Zhipu joined the Hang Seng Tech Index on 5~June and Southbound Stock Connect on
@@ -221,45 +239,36 @@ capability and financial-disclosure events.
 We estimate the cost of equity with the CAPM. Zhipu's short post-IPO history makes its own regression beta
 unstable, so we estimate 60-month monthly betas for global AI-software comparables against SPY through
 31~August, unlever them, and round the 1.55 median to $\beta=1.6$ \citep{nasdaqsec2026}. With a risk-free
-rate of 4.0\% and an equity risk premium of 6.0\%, $K_e = 4.0\% + 1.6\times 6.0\% = 13.6\%$; as the firm is
-effectively all-equity, WACC~$\approx$~13.5\%. Throughout we use HK\$7.8/US\$, RMB~7.1/US\$, and
-465.623m shares after the July placement. The equity bridge adds \textbf{US\$4.289bn of pro-forma net cash
-and short-term investments}: reported cash plus short-term investments, less bank loans and lease liabilities
-at 30~June, plus the placement's net proceeds \citep{interim2026,placement2513}. This is a transparent model
-input, not a reported 31~August cash balance; the interim-results announcement contains no cash-flow statement,
-so subsequent operating burn cannot yet be observed. Appendix~\ref{sec:beta} lists the comparable set and
-unlevering bridge.
+rate of 4.0\% and an equity risk premium of 6.0\%, $K_e = 4.0\% + 1.6\times 6.0\% = 13.6\%$; we retain a 13.5\% discount-rate benchmark for comparability. The new convertible debt does not justify
+a mechanically cheaper rate: zero coupon is not zero economic financing cost. Throughout we use HK\$7.8/US\$, RMB~7.1/US\$, and
+487.588m shares after the 16~September placement. The equity bridge adds \textbf{US\$6.308bn of
+pro-forma net cash and short-term investments}: June cash and investments less bank loans and leases,
+plus July and September placement net proceeds and September bond net proceeds, less an issue-date
+bond-principal proxy \citep{interim2026,placement2513,zhipucompletion2026}. It is not a reported September
+cash balance: subsequent operating burn is not disclosed. Appendix~\ref{sec:beta} records the beta bridge.
 
 \textbf{Two caveats remain.} First, the beta set consists of mature software firms, while Zhipu resembles a
 pre-profit, capital-intensive lab; the resulting WACC is generous. Second, fixing WACC at 13.5\% through 2035
 ignores the risk-premium increase that could follow a break in the valuation loop. Both refinements would lower
 DCF value. Figure~\ref{fig:tornado} tests rate sensitivity, while the real-options section treats the binary tail.
 
-\textbf{Financing and valuation treatment.} Zhipu's 13~September announcement records agreements signed
-on 12~September for up to 21,965,000 new H shares at HK\$714 and RMB20.14bn of US-dollar-settled,
-zero-coupon convertible bonds \citep{zhipufinancing2026}. The placement price is 9.96\% below the
-11~September close and 19.95\% below the preceding five-day average. Expected placement net proceeds
-are HK\$15,664.13m; expected bond net proceeds are US\$3,010.77m. The initial conversion price is
-HK\$892.50, 12.55\% above the closing share price. The bonds are issued at 100.5\% of principal and
-mature on 16~September~2027, with the ordinary conversion period beginning on 1~July~2027.
+\textbf{Financing and valuation treatment.} The 18~September completion announcement confirms that
+21,965,000 new H shares at HK\$714 were placed on 16~September, raising HK\$15,664.13m net; RMB20.14bn
+of US-dollar-settled zero-coupon convertible bonds were issued on 18~September, raising US\$3,010.77m
+net \citep{zhipucompletion2026}. The earlier 9.96\% placement discount refers to the 11~September HK\$793
+close. Initial conversion is at HK\$892.50; maturity is 16~September~2027, with the ordinary conversion
+period beginning on 1~July~2027 \citep{zhipufinancing2026}.
 
-The roughly US\$5bn headline describes financing arranged, not cash established as received by this
-cutoff. Placement completion is expected on 16~September subject to conditions including listing approval;
-bond issuance is also conditional, and neither transaction depends on the other completing. The announcement
-confirms 465,623,090 existing shares. Full placement would increase this to 487,588,090; subsequent full
-conversion at the initial price would bring it to 513,953,116. These imply approximately 4.50\% and 9.40\%
-reductions in existing holders' percentage ownership, respectively, before any other changes. They are
-ownership calculations, not predicted price declines.
-
-Accordingly, the model retains the existing share count and June-balance-plus-July-placement net-cash
-bridge; September proceeds are not treated as settled. After closing, a revised bridge would have to record
-new cash alongside the debt claim and equity dilution. Adding all convertible proceeds to equity value
-without a corresponding liability or conversion treatment would overstate value. Zero coupon eliminates
-regular interest payments, not the one-year repayment obligation if the bonds remain outstanding.
-The company allocates 60\% of proposed net proceeds to next-generation GLM development, fully self-training
-and computing infrastructure. This supports technical investment capacity, but does not establish an
-operating return. The HK\$88 weighted DCF remains a reference under the original assumptions, not a
-post-transaction valuation.
+The bridge now recognises completion, replacing the previous conditional treatment. It adds net proceeds
+but deducts US\$3,000.64m for the bond claim, calculated as disclosed US\$3,015.64m gross proceeds divided
+by the 100.5\% issue price. This is an issue-date principal proxy, not an IFRS fair-value estimate;
+actual dollar settlement depends on the bond terms and exchange rates. No option value is separately
+estimated. A non-conversion treatment uses 487.588m shares; full conversion at the initial price would
+increase shares to 513.953m and remove the corresponding debt claim. The model does not combine both
+full dilution and a debt deduction. Completed financing increases the weighted DCF from roughly HK\$88
+to HK\$116 with operating assumptions unchanged; it does not demonstrate better operating profitability.
+Zero coupon also leaves a near-term repayment or refinancing obligation. The proposed use of 60\% of
+net proceeds for GLM development and infrastructure links funding capacity to future execution risk.
 
 \subsection{Scenario DCF}
 We project FCFF over 2026--2035 from a \textbf{US\$700m FY2026E revenue base}. That figure is our estimate,
@@ -274,39 +283,39 @@ full Base-case chain, and Table~\ref{tab:dcf} gives the headline results.
 
 \begin{table}[H]
 \centering
-\caption{Three-scenario DCF (USD unless noted; per-share in HKD). Market row at the 11~September close. Operating assumptions are unchanged.}
+\caption{Three-scenario DCF (USD unless noted; per-share in HKD). Market row at the 18~September close. Operating assumptions are unchanged.}
 \label{tab:dcf}
 \begin{tabular}{lcccc}
 \toprule
 Scenario & Rev.\ CAGR '26--35 & Term.\ margin & Equity value & Per share (HK\$) \\
 \midrule
-Bear ($p=0.35$) & 23\% & 18\% & US\$1.5B & 25 \\
-Base ($p=0.45$) & 31\% & 28\% & US\$4.3B & 73 \\
-Bull ($p=0.20$) & 47\% & 35\% & US\$13.9B & 233 \\
+Bear ($p=0.35$) & 23\% & 18\% & US\$3.5B & 56 \\
+Base ($p=0.45$) & 31\% & 28\% & US\$6.4B & 102 \\
+Bull ($p=0.20$) & 47\% & 35\% & US\$15.9B & 255 \\
 \midrule
-\textbf{Probability-weighted} & --- & --- & \textbf{US\$5.3B} & \textbf{88} \\
+\textbf{Probability-weighted} & --- & --- & \textbf{US\$7.3B} & \textbf{116} \\
 \midrule
-\textit{Market (2026-09-11)} & --- & --- & \textit{US\$47.3B} & \textit{793} \\
+\textit{Market (2026-09-18)} & --- & --- & \textit{US\$48.8B} & \textit{780} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The probability-weighted intrinsic value is HK\$88 per share---roughly \textbf{11.1\% of the market price}.
+The probability-weighted intrinsic value is HK\$116 per share---roughly \textbf{14.9\% of the market price}.
 The H1 evidence lifts the valuation starting point, but the quoted price still requires a much larger outcome
 than this conventional cash-flow model.
 
 \subsection{Reverse DCF: what the price requires}
-We invert the model to ask what justifies the US\$47.3bn equity value while holding FY2026E revenue fixed.
-At WACC~13.5\% and a 40\% terminal margin, the price requires \textbf{about US\$60.5bn of 2035 revenue}:
-2027 growth of roughly 130\%, followed by a path that still compounds at 64.1\% from 2026 to 2035.
+We invert the model to ask what justifies the US\$48.8bn equity value while holding FY2026E revenue fixed.
+At WACC~13.5\% and a 40\% terminal margin, the price requires \textbf{about US\$59.7bn of 2035 revenue}:
+2027 growth of roughly 130\%, followed by a path that still compounds at 63.9\% from 2026 to 2035.
 Figure~\ref{fig:revheat} grids WACC (10--20\%) against terminal margin (20--50\%). Even the most favourable
-cell (10\%/50\%) requires about US\$19bn, while 15\%/40\% requires US\$85bn. The reverse DCF is therefore
+cell (10\%/50\%) requires about US\$19bn, while 15\%/40\% requires US\$84bn. The reverse DCF is therefore
 less a target price than a statement of the right-tail outcome already embedded in the quote.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.82\textwidth]{fig11_reverse_dcf_heatmap.png}
-\caption{Reverse-DCF sensitivity: 2035 revenue (US\$bn) required to justify the US\$47.3bn equity value
+\caption{Reverse-DCF sensitivity: 2035 revenue (US\$bn) required to justify the US\$48.8bn equity value
 across WACC and terminal-margin assumptions. The red box marks the base case (13.5\%/40\%). Data:
 Table~\ref{tab:revheat} in Appendix~\ref{sec:revheat}.}
 \label{fig:revheat}
@@ -314,13 +323,13 @@ Table~\ref{tab:revheat} in Appendix~\ref{sec:revheat}.}
 
 \subsection{Relative valuation}
 \label{sec:rel}
-We divide each listed lab's 11~September equity value by LTM revenue through 2026H1. Zhipu's RMB~1{,}487.3m
-(FY2025 less H1~2025 plus H1~2026), or US\$209.5m at RMB7.1/US\$, gives \textbf{226.0$\times$}.
-MiniMax's US\$12.09bn equity value and US\$165.2m LTM revenue give \textbf{73.2$\times$}. Private transactions imply
+We divide each listed lab's 18~September equity value by LTM revenue through 2026H1. Zhipu's RMB~1{,}487.3m
+(FY2025 less H1~2025 plus H1~2026), or US\$209.5m at RMB7.1/US\$, gives \textbf{232.8$\times$}.
+MiniMax's US\$13.57bn equity value and US\$165.2m LTM revenue give \textbf{82.1$\times$}. Private transactions imply
 \textbf{34.1$\times$} for OpenAI, \textbf{20.5$\times$} for Anthropic, and \textbf{39.0$\times$} for Mistral
 \citep{minimax2026h1,openai2026,anthropic2026,mistral2025}. This private range, with a 34.1$\times$ median, is
 the football-field transaction range. Their revenue run-rates apply separately to Zhipu's FY2026E estimate,
-giving HK\$240--457 per share. MiniMax's LTM multiple applied to Zhipu's LTM revenue gives HK\$257.
+giving HK\$230--437 per share. MiniMax's LTM multiple applied to Zhipu's LTM revenue gives HK\$275.
 
 MiniMax's 26~August results anchor the peer denominator. H1 revenue rose 283.1\% to US\$116.6m and gross margin
 reached 17.9\%, while adjusted net loss doubled to US\$293.0m. Its US\$165.2m LTM revenue equals FY2025 less
@@ -328,7 +337,7 @@ H1~2025 plus H1~2026, rather than annualised H1 revenue \citep{minimax2026h1}.
 
 SenseTime, Phancy, and Wenge are Hong Kong adjacent-AI references; Palantir, Cloudflare, and Snowflake represent
 commercialisation \citep{hkcomps2026,softwarecomps2026}. Different economics make both groups context only.
-On the matched basis, Zhipu's multiple is 3.09 times MiniMax's, so the peer supports far less of the quote
+On the matched basis, Zhipu's multiple is 2.83 times MiniMax's, so the peer supports far less of the quote
 (Figure~\ref{fig:comps}).
 
 \begin{figure}[H]
@@ -360,7 +369,7 @@ time. The source is the formal interim-results announcement, not a separately ve
 \subsection{A real-options reading}
 The valuation gap can be interpreted as investors paying for a \emph{call option
 on a winner-take-all AGI outcome} \citep{black1973,damodaran2018}. This is an economic analogy, not an independently estimated option price: the gap above DCF reflects
-expectations about a fat right tail. Roughly 189\% annualised volatility also means that this expectations
+expectations about a fat right tail. Roughly 187\% annualised volatility also means that this expectations
 premium can contract sharply without technical progress being reversed. The reverse DCF describes the state needed for that option to pay off, while
 Section~\ref{sec:event} tests how capability news changes its perceived probability.
 
@@ -375,20 +384,20 @@ research, while dilution and debt repayment constrain how much of future success
 
 \subsection{Sensitivity and synthesis}
 The conclusion is not an artefact of any single assumption. Figure~\ref{fig:tornado} tornadoes the Base case
-against its main drivers. One-at-a-time changes put the Base case between roughly HK\$43 and HK\$104: useful
+against its main drivers. One-at-a-time changes put the Base case between roughly HK\$74 and HK\$131: useful
 for locating model risk, but insufficient to bridge the gap to market. Figure~\ref{fig:ff} draws the whole
-picture together. Scenario DCF spans HK\$25--233, the 20.5--39.0$\times$ private-deal range gives HK\$240--457,
-and MiniMax's 73.2$\times$ LTM multiple gives about HK\$257 when applied to Zhipu's LTM revenue. That anchor is
-67.6\% below Zhipu's HK\$793 close. Public markets value both listed labs richly, but Zhipu still carries a
-3.09-fold multiple premium to MiniMax. Thus the observed decline is a partial compression of the
+picture together. Scenario DCF spans HK\$56--255, the 20.5--39.0$\times$ private-deal range gives HK\$230--437,
+and MiniMax's 82.1$\times$ LTM multiple gives about HK\$275 when applied to Zhipu's LTM revenue. That anchor is
+64.7\% below Zhipu's HK\$780 close. Public markets value both listed labs richly, but Zhipu still carries a
+2.83-fold multiple premium to MiniMax. Thus the observed decline is a partial compression of the
 expectations premium, not evidence that the price has already returned to fundamental value. Neither
-HK\$88 nor a historical average is an empirically established long-run mean.
+HK\$116 nor a historical average is an empirically established long-run mean.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.82\textwidth]{fig7_sensitivity.png}
 \caption{DCF sensitivity (Base case, per share). Bars span each driver's low/high setting around the
-HK\$73 base; no one-at-a-time input change moves value near the market price.}
+HK\$102 base; no one-at-a-time input change moves value near the market price.}
 \label{fig:tornado}
 \end{figure}
 
@@ -422,7 +431,7 @@ several of the largest positive-return days coincide with these independently da
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.88\textwidth]{fig1_price_paths.png}
-\caption{Rebased prices (IPO~$=100$, log scale, through 2026-09-11). Orange dashed lines mark capability
+\caption{Rebased prices (IPO~$=100$, log scale, through 2026-09-18). Orange dashed lines mark capability
 releases (GLM-5 through GLM-5.3); green dotted lines mark index/flow catalysts (IPO, the 20~Feb and 13~May
 expectation spikes, the 5--8~June Hang Seng TECH inclusion and Stock Connect access, and the 31~August MSCI
 rebalance). Same sector,
@@ -515,8 +524,9 @@ matters: the CARs above are driven by the former, while the latter explain part 
 against attributing every move to model quality. The same discipline matters at the new cutoff. Zhipu rose
 9.6\% on 31~August as MSCI's index changes became effective after the close \citep{msci2026}; the H1 results
 were released only after that close \citep{interim2026}. The financial disclosure can update valuation inputs,
-but it cannot explain that day's return. By 11~September the results window has seven of nine drift days,
-so it remains incomplete and outside the original capability sample. The 13~September financing announcement
+but it cannot explain that day's return. By 18~September its supplementary drift window is complete (nine days, -54.4\% mean-adjusted CAR),
+but it remains a financial event outside the original capability sample. That CAR overlaps other news
+and is not an isolated estimate of the results' effect. The 13~September financing announcement
 likewise follows the measured drawdown; it cannot retrospectively establish its cause.
 
 \subsection{Robustness: peer-adjusted and block-bootstrap checks}
@@ -590,10 +600,26 @@ more salient. This interpretation does not require a deterioration in the models
 
 Mean reversion here describes a partial unwinding of the earlier expectations premium. It does not mean
 that an estimated long-run price mean has been reached, or that every capability rally must reverse.
-The remaining 226.0x LTM multiple and large DCF gap show that substantial optimism survives. No
+The remaining 232.8x LTM multiple and large DCF gap show that substantial optimism survives. No
 stationarity test or causal identification of overreaction is provided, and subsequent news overlaps these
 windows. The evidence warrants replacing a one-directional capability-momentum narrative with an account
 of initial revaluation followed by a financially constrained reversal.
+
+The week ending 18~September also contains a rebound: Zhipu moves from HK\$680 on Tuesday to HK\$780
+on Friday, while MiniMax moves from HK\$234.6 to HK\$303. Week-on-week returns are -1.6\% and +12.2\%.
+The longer 31~August-to-18~September declines are 34.7\% and 13.2\%. These observations qualify the
+mean-reversion narrative: the earlier premium compressed, but the adjustment was neither monotonic
+nor uniform across the two firms.
+
+Timing prevents a simple scandal-versus-open-source return comparison. Coverage of the ZCode allegations
+was already visible at 15:32 on Friday, before the Hong Kong close; IT Home reported the company response
+at 19:48. First Financial's CLI release report was published at 20:39, and the official GitHub source
+snapshot corroborates the release \citep{zcodetiming2026,zcoderesponse2026,minimaxcode2026}.
+These are observed publication times, not proven first dissemination times. Friday's +5.4\% Zhipu and
++18.9\% MiniMax returns therefore cannot be assigned to the later response or evening CLI report. There
+is no subsequent session in this dataset to measure those disclosures, and earlier circulation means
+ZCode is not a clean after-close event. Both enter a separate timestamped event register, not the five
+capability events or their bootstrap.
 
 \textbf{Limitations.} Five original GLM events provide diagnostic evidence, not a general return law.
 The bootstrap supports a strong immediate response within its design, while continuation remains
@@ -601,6 +627,7 @@ statistically inconclusive. The September reversal is descriptive evidence of pa
 not a separately identified anomaly. A wider multi-lab panel, a longer price history and independently
 scored surprise magnitudes would be needed to distinguish changing fundamentals from overreaction.
 
+\clearpage
 \section{Conclusion and Implications}
 Zhipu's price path illustrates how capability revaluation can give way to partial mean reversion.
 The early event sample shows that investors respond to model advances; the September decline shows
@@ -609,18 +636,19 @@ that those responses do not establish a durable valuation floor. Zhipu fell 33.6
 premium, rather than persistent capability momentum.
 
 Commercial progress is real: H1 revenue grew 399.7\% and API gross margin turned positive. Yet operating
-loss exceeded twice revenue. Against the HK\$793 close, the weighted DCF remains HK\$88, private transactions
-imply HK\$240--457, and MiniMax's matched LTM multiple implies HK\$257. The reverse DCF requires about
-US\$60.5bn of 2035 revenue. These gaps explain why growth expectations are consequential; they do not
+loss exceeded twice revenue. Against the HK\$780 close, the weighted DCF remains HK\$116, private transactions
+imply HK\$230--437, and MiniMax's matched LTM multiple implies HK\$275. The reverse DCF requires about
+US\$59.7bn of 2035 revenue. These gaps explain why growth expectations are consequential; they do not
 establish a price target to which the market must revert. Wenge's stronger gross margin and narrower
 adjusted loss also show why business mix and earnings quality matter when selecting AI comparables.
 
-The September financing extends the company's prospective capacity to invest but introduces dilution
-and a short-maturity debt claim. At the information cutoff it remains conditional and is not added as
-settled cash. For valuation, model quality must therefore be translated into revenue, margins, funding
-needs and ultimately value per share. The evidence supports a sequence of capability-driven optimism
-and subsequent partial mean reversion; it does not prove that the reversal is complete or that the
-September financing announcement caused the preceding decline.
+Completed September financing increases investment capacity and the net-cash bridge, alongside dilution
+and a short-maturity debt claim. This week's rebound further shows that partial mean reversion is not a
+prediction of uninterrupted decline. The ZCode controversy and MiniMax's source release add a product-trust
+dimension: technical capability must become a reliable service before it becomes durable cash flow.
+Claims of remediation, code transparency and user retention must be assessed separately. Friday-evening
+news has no subsequent price observation within the cutoff, so neither its return impact nor a specific
+DCF loss is asserted.
 
 \appendix
 \clearpage
@@ -674,9 +702,11 @@ Bank loans & 2{,}224.8 \\
 Lease liabilities & 379.4 \\
 Total equity & 4{,}429.6 \\
 \midrule
-Shares outstanding after placement & 465.623m \\
+Shares outstanding after September placement & 487.588m \\
 Placement price / net proceeds & HK\$1{,}588 / HK\$31{,}375.0m \\
-Model pro-forma net cash and investments & US\$4{,}289.4m \\
+September placement net proceeds & HK\$15{,}664.1m \\
+CB net proceeds / principal proxy & US\$3{,}010.8m / US\$3{,}000.6m \\
+Model pro-forma net cash and investments & US\$6{,}307.8m \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -690,7 +720,7 @@ still widened. The July placement removed the immediate financing constraint; it
 \section{Base-Case DCF Projection}
 \label{sec:proj}
 Base-case chain (US\$m unless noted), reproducing the live workbook: WACC~$=13.5\%$, statutory tax~$=15\%$,
-terminal $g=4\%$, sales-to-capital~$=1.8$, 465.623m shares, HK\$7.8/US\$. Revenue starts from the model's
+terminal $g=4\%$, sales-to-capital~$=1.8$, 487.588m shares, HK\$7.8/US\$. Revenue starts from the model's
 US\$700m FY2026E and grows to US\$8.0bn by 2035, with annual growth fading from 56\% in 2027 to 8\% in 2035.
 Operating margin ramps $-100\%\!\to\!28\%$. Cash tax is zero while EBIT
 is negative; losses accumulate as NOLs and shelter future positive EBIT until exhausted.
@@ -717,7 +747,7 @@ Year & Revenue & Growth & EBIT margin & Cash tax & NOL end & NOPAT & Reinvest & 
 \multicolumn{9}{l}{Terminal value (2035) $=1{,}910\times1.04/(0.135-0.04)=\text{US\$}20{,}914$m;
  PV of TV $=\text{US\$}5{,}895$m.}\\
 \multicolumn{9}{l}{Enterprise value $=\text{US\$}55$m; $+$ pro-forma net cash and investments
- US\$4{,}289m $=$ equity US\$4{,}344m $=$ \textbf{HK\$73/share}.}\\
+ US\$6{,}308m $=$ equity US\$6{,}363m $=$ \textbf{HK\$102/share}.}\\
 \bottomrule
 \end{tabular}
 }
@@ -738,12 +768,12 @@ $\beta=1.6$ as a modest early-stage risk buffer.
 \clearpage
 \section{Reverse-DCF Sensitivity Grid}
 \label{sec:revheat}
-Table~\ref{tab:revheat} reports the 2035 revenue (US\$bn) required to justify the US\$47.3bn equity value
+Table~\ref{tab:revheat} reports the 2035 revenue (US\$bn) required to justify the US\$48.8bn equity value
 across a grid of WACC and terminal-margin assumptions, underlying Figure~\ref{fig:revheat}.
 
 \begin{table}[H]
 \centering
-\caption{Reverse-DCF sensitivity: required 2035 revenue (US\$bn) to justify US\$47.3bn equity.}
+\caption{Reverse-DCF sensitivity: required 2035 revenue (US\$bn) to justify US\$48.8bn equity.}
 \label{tab:revheat}
 \begin{tabular}{lccccc}
 \toprule
@@ -1007,6 +1037,29 @@ proposed issue of RMB20.14bn US-dollar-settled zero-coupon convertible bonds due
 Wenge Technology Co., Ltd. (2026). \emph{Interim results announcement for the six months ended
 30~June~2026} [25~August~2026]. HKEXnews.
 \url{https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0825/2026082500959.pdf}
+
+\bibitem{zhipucompletion2026}
+Z.AI Co., Ltd. (2026). \emph{Completion of H-share placement and convertible-bond issue} [18 September].
+\url{https://www.hkexnews.hk/listedco/listconews/sehk/2026/0918/2026091800400_c.pdf}
+
+\bibitem{zcodeanalysis2026}
+ferstar. (2026). \emph{ZCode workspace snapshot upload analysis} [18 September; original account,
+excluding the separately dated 19 September update].
+\url{https://blog.ferstar.org/posts/zcode-silent-workspace-snapshot-upload/}
+
+\bibitem{zcoderesponse2026}
+IT Home. (2026). \emph{ZCode responds to repository-upload concerns: fix, source release and external review}
+[18 September, 19:48 China time]. \url{https://www.ithome.com/1/004/310.htm}
+
+\bibitem{zcodetiming2026}
+ChooseAI. (2026). \emph{ZCode workspace-upload controversy} [18 September, 15:32; used for
+publication timing, not independent technical verification]. \url{https://www.chooseai.net/news/7127/}
+
+\bibitem{minimaxcode2026}
+MiniMax. (2026). \emph{MiniMax Code source repository} [18 September snapshot].
+\url{https://github.com/MiniMax-AI/minimax-code/tree/17b8ded9c16da54224c2a05e54185cbee4f15021};
+First Financial. (2026). \emph{MiniMax Code CLI open-sourced} [18 September, 20:39].
+\url{https://www.yicai.com/news/103370485.html}
 
 \end{thebibliography}
 

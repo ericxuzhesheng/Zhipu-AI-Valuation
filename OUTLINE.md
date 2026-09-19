@@ -45,7 +45,7 @@ Evidence from Zhipu AI (2513.HK).*
 - Completed September placement and convertible bond: `zhipucompletion2026`; recognise issued shares and cash alongside a debt principal proxy.
 - Wenge H1 results: `wengeh12026`; total versus owners' versus adjusted loss and deployment/API mix.
 - Price path: earlier partial mean reversion followed by a weekly rebound and peer divergence.
-- ZCode trust controversy and MiniMax Code CLI source release: distinguish intraday allegations, evening reports, and unobserved subsequent returns.
+- Link ZCode trust repair and MiniMax Code CLI source release as related commercial behaviours competing for developer workflows: data-control confidence → procurement/trial → switching/retention → paid usage. Distinguish this competitive interpretation from unproven release targeting, customer migration and return causality.
 - Full terms and cutoff treatment: [September 18 update](UPDATE_2026-09-18.md).
 
 ## Sourcing policy (granular; primary > news)

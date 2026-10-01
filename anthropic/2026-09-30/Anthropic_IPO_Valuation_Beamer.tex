@@ -1,0 +1,302 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{array}
+
+\definecolor{Navy}{HTML}{344354}
+\definecolor{Slate}{HTML}{5A6B7F}
+\definecolor{Accent}{HTML}{A85B36}
+\definecolor{Pale}{HTML}{EDF1F5}
+\definecolor{Ink}{HTML}{242A31}
+\setbeamercolor{normal text}{fg=Ink,bg=white}
+\setbeamercolor{frametitle}{fg=Navy}
+\setbeamercolor{structure}{fg=Navy}
+\setbeamercolor{block title}{fg=white,bg=Navy}
+\setbeamercolor{block body}{fg=Ink,bg=Pale}
+\setbeamercolor{alerted text}{fg=Accent}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\small\raise0.3ex\hbox{\textbullet}}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.8ex,dp=1.3ex,leftskip=0.5cm,rightskip=0.5cm]{normal text}%
+    \scriptsize\color{Slate}Anthropic IPO valuation \hfill 30 Sep 2026 \hfill \insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}}
+\setbeamersize{text margin left=0.6cm,text margin right=0.6cm}
+\hypersetup{colorlinks=true,urlcolor=Slate}
+\newcommand{\source}[1]{\par\vspace{0.08cm}{\scriptsize\color{Slate}#1}}
+\newcommand{\bn}{\,\text{bn}}
+\title{Anthropic IPO Valuation}
+\subtitle{A basic revenue-multiple model and a DCF cross-check}
+\date{30 September 2026}
+
+\begin{document}
+
+% 1 --------------------------------------------------------------------------
+\begin{frame}{Anthropic IPO Valuation}
+  {\large A basic model: cash flows, growth and the discount rate}
+  \vspace{0.35cm}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Revenue-multiple enterprise value}
+        \centering\vspace{0.12cm}
+        {\Huge\bfseries\$1.95 trillion}\\[0.15cm]
+        \$195bn of 2028 revenue $\times$ 10.0x
+        \vspace{0.12cm}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{DCF enterprise value}
+        \centering\vspace{0.12cm}
+        {\Huge\bfseries\$788 billion}\\[0.15cm]
+        Ten-year forecast; 12\% WACC; 3\% terminal growth
+        \vspace{0.12cm}
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{0.18cm}
+  \begin{itemize}
+    \item September reporting indicates an IPO equity target of about \$2tn.
+    \item The multiple supports that price mechanically. The DCF falls 60.6\% below it.
+    \item Net cash is \textbf{assumed zero}; equity comparisons are illustrative.
+  \end{itemize}
+  \source{Information cutoff: 30 Sep 2026. Assumed valuation date: 31 Dec 2026. All values in USD. [S2, S3]}
+\end{frame}
+
+% 2 --------------------------------------------------------------------------
+\begin{frame}{Cash-flow period: 2027--2036, then a terminal value}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.54\textwidth}
+      \begin{block}{Explicit forecast: ten annual periods}
+        \begin{itemize}
+          \item Forecast \textbf{unlevered free cash flow} for 2027--2036.
+          \item Allow revenue growth and EBIT margins to converge toward maturity.
+          \item Start the perpetual-growth phase in \textbf{2037}.
+        \end{itemize}
+      \end{block}
+      \vspace{0.15cm}
+      A five-year forecast would end while assumed growth is still 20\%, creating a sharp maturity transition.
+    \end{column}
+    \begin{column}{0.42\textwidth}
+      \begin{tabular}{@{}lr@{}}
+        \toprule
+        DCF component & PV (\$bn)\\
+        \midrule
+        2027--2036 cash flows & 336.9\\
+        Terminal value & 451.4\\
+        \midrule
+        \textbf{Enterprise value} & \textbf{788.3}\\
+        \bottomrule
+      \end{tabular}
+      \vspace{0.35cm}
+      \textbf{57.3\%} of DCF value comes from cash flows after 2036.
+      \vspace{0.25cm}
+
+      The model discounts at year-end: 2027 is $t=1$ and 2036 is $t=10$.
+    \end{column}
+  \end{columns}
+  \source{2026 is a revenue anchor, not a discounted cash-flow period: the assumed valuation date is 31 Dec 2026.}
+\end{frame}
+
+% 3 --------------------------------------------------------------------------
+\begin{frame}{Annual growth: rapid expansion, followed by a gradual fade}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.52\textwidth}
+      \small
+      \begin{tabular}{@{}lrr@{}}
+        \toprule
+        Year & Revenue (\$bn) & Growth\\
+        \midrule
+        2026E & 60.0 & Anchor\\
+        2027E & 120.0 & 100.0\%\\
+        2028E & \textbf{195.0} & \textbf{62.5\%}\\
+        2029E & 263.3 & 35.0\%\\
+        2030E & 329.1 & 25.0\%\\
+        2031E & 394.9 & 20.0\%\\
+        2032E & 454.1 & 15.0\%\\
+        2033E & 499.5 & 10.0\%\\
+        2034E & 534.5 & 7.0\%\\
+        2035E & 561.2 & 5.0\%\\
+        2036E & 578.0 & 3.0\%\\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \begin{block}{How growth is calculated}
+        \[
+          R_t=R_{t-1}(1+g_t)
+        \]
+        \[
+          g_{2028}=\frac{195}{120}-1=62.5\%
+        \]
+      \end{block}
+      \small
+      \textbf{2028 anchor:} midpoint of the reported \$190--200bn company projection. [S2]
+      \vspace{0.2cm}
+
+      \textbf{Other years:} analyst assumptions. The \$60bn 2026 estimate is not reported annual revenue.
+      \vspace{0.2cm}
+
+      \textbf{Run rate $\ne$ annual revenue.} A recent revenue pace cannot be substituted for full-year recognized sales.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% 4 --------------------------------------------------------------------------
+\begin{frame}{Cash flow: convert revenue into cash available to capital providers}
+  \begin{block}{Unlevered free cash flow (UFCF)}
+    \centering
+    $\mathrm{UFCF}_t=\mathrm{EBIT}_t(1-T)+\mathrm{D\&A}_t-\mathrm{Capex}_t-\Delta\mathrm{NWC}_t$
+  \end{block}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \small
+      \begin{tabular}{@{}lr@{}}
+        \toprule
+        Driver & Assumption\\
+        \midrule
+        EBIT margin & 10\% $\rightarrow$ 35\%\\
+        Tax on positive EBIT & 25\%\\
+        D\&A / revenue & 3\%\\
+        Cash capex / revenue & 8\%\\
+        Operating NWC / revenue & 2\%\\
+        \bottomrule
+      \end{tabular}
+      \vspace{0.2cm}
+
+      Compute, training and distribution costs are included in the EBIT-margin assumption.
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \small
+      \begin{tabular}{@{}lrrr@{}}
+        \toprule
+        \$bn & 2027 & 2028 & 2036\\
+        \midrule
+        Revenue & 120.0 & 195.0 & 578.0\\
+        After-tax EBIT & 9.0 & 29.3 & 151.7\\
+        D\&A & 3.6 & 5.9 & 17.3\\
+        Capex & (9.6) & (15.6) & (46.2)\\
+        $\Delta$NWC & (1.2) & (1.5) & (0.3)\\
+        \midrule
+        \textbf{UFCF} & \textbf{1.8} & \textbf{18.0} & \textbf{122.5}\\
+        \bottomrule
+      \end{tabular}
+      \vspace{0.2cm}
+
+      Example: 2028 UFCF $=29.25+5.85-15.60-1.50=18.00$.
+    \end{column}
+  \end{columns}
+  \source{Rounded displayed figures. No tax-loss carryforwards or separate funding schedule. Long-term compute commitments are not deducted again as one-year capex.}
+\end{frame}
+
+% 5 --------------------------------------------------------------------------
+\begin{frame}{Discount rate: 12\% WACC, with a 10--14\% sensitivity}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.52\textwidth}
+      \begin{block}{Discounting and terminal value}
+        \[
+          \mathrm{EV}=\sum_{t=1}^{10}\frac{\mathrm{UFCF}_t}{(1+r)^t}
+          +\frac{\mathrm{TV}_{2036}}{(1+r)^{10}}
+        \]
+        \[
+          \mathrm{TV}_{2036}=\frac{\mathrm{UFCF}_{2037}}{r-g}
+        \]
+      \end{block}
+      \small
+      \textbf{$r=12\%$:} illustrative WACC for technology, execution and cash-flow risk. It is not an observed or CAPM-estimated company rate.
+      \vspace{0.15cm}
+
+      \textbf{$g=3\%$:} mature perpetual revenue growth. Terminal EBIT margin and investment ratios stay at 2036 levels.
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \small
+      \textbf{DCF enterprise value (\$bn)}\\[0.15cm]
+      \begin{tabular}{@{}lrrr@{}}
+        \toprule
+        WACC / $g$ & 2\% & 3\% & 4\%\\
+        \midrule
+        10\% & 981.9 & 1,074.1 & 1,197.1\\
+        12\% & 739.6 & \textbf{788.3} & 849.2\\
+        14\% & 581.7 & 609.9 & 643.9\\
+        \bottomrule
+      \end{tabular}
+      \vspace{0.32cm}
+
+      Lower discount rates increase the value of distant cash flows.
+      \vspace{0.2cm}
+
+      Even the 10\% WACC / 4\% growth combination remains below the \$2tn benchmark.
+    \end{column}
+  \end{columns}
+  \source{Sensitivity keeps the explicit operating forecast fixed. Terminal revenue, UFCF, investment and discounting recalculate for each rate pair. Require $r>g$.}
+\end{frame}
+
+% 6 --------------------------------------------------------------------------
+\begin{frame}{What would a \$2 trillion valuation require?}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Revenue-multiple interpretation}
+        \[
+          \mathrm{EV}=\$195\bn\times10=\$1{,}950\bn
+        \]
+        \[
+          \frac{\$2{,}000\bn}{\$195\bn}=10.26\mathrm{x}
+        \]
+      \end{block}
+      \small
+      At the \$195bn forecast, 8x gives \$1.56tn and 12x gives \$2.34tn.
+      \vspace{0.2cm}
+
+      The 10x base multiple is an assumption. It is not a current peer-derived median.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{DCF interpretation}
+        \small
+        Holding the ten-year forecast, WACC and investment ratios fixed:
+        \begin{itemize}
+          \item Required 2037 UFCF: \textbf{\$464.9bn}.
+          \item Required perpetual EBIT margin: \textbf{110.9\%}.
+        \end{itemize}
+      \end{block}
+      \small
+      That margin exceeds revenue and is not economically feasible under this cost structure.
+      \vspace{0.2cm}
+
+      Supporting \$2tn therefore requires a different growth path, earlier cash generation, lower WACC or other material assumption changes.
+    \end{column}
+  \end{columns}
+  \source{Equity benchmark is compared with EV using assumed zero net cash. Actual cash, debt, convertible claims and share counts require an IPO-document update.}
+\end{frame}
+
+% 7 --------------------------------------------------------------------------
+\begin{frame}{Conclusion and sources}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{block}{Answers to the three model questions}
+        \begin{itemize}
+          \item \textbf{Cash-flow period:} 2027--2036; terminal value from 2037.
+          \item \textbf{Annual growth:} 100\%, 62.5\%, then a fade to 3\% by 2036.
+          \item \textbf{Discount rate:} 12\% WACC; examine 10--14\%.
+        \end{itemize}
+      \end{block}
+      \small
+      \textbf{Assessment:} \$1.95tn is consistent with the selected revenue multiple. The \$788bn DCF shows that cash economics need much stronger assumptions to support the reported target.
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \footnotesize
+      \textbf{Public sources}
+      \begin{itemize}
+        \item[S1] \href{https://www.anthropic.com/news/series-h}{Anthropic, 28 May 2026}: \$965bn post-money Series H valuation.
+        \item[S2] \href{https://www.investing.com/news/stock-market-news/anthropic-ipo-valuation-hinges-on-190200-billion-2028-revenue-forecast-sources-say-4862222?ampMode=1}{Reuters, Aug 2026}: reported \$190--200bn 2028 revenue projection.
+        \item[S3] \href{https://www.streetinsider.com/Reuters/Exclusive-Anthropic\%2BIPO\%2Bprospectus\%2Blays\%2Bbare\%2Bdeep\%2Bdependence\%2Bon\%2BBig\%2BTech\%2Bpartners/27123187.html}{Reuters, 29 Sep 2026}: approximately \$2tn target and cloud-partner dependence.
+        \item[S5] \href{https://www.anthropic.com/news/confidential-draft-s1-sec}{Anthropic, 1 Jun 2026}: confidential draft S-1 submission.
+      \end{itemize}
+      \textbf{Limits:} projections may change. Current net cash and offering terms are unavailable. Future funding and dilution are not modeled.
+    \end{column}
+  \end{columns}
+  \source{Calculation snapshot from the accompanying editable Excel model. Recalculate and refresh the slides after changing assumptions.}
+\end{frame}
+
+\end{document}

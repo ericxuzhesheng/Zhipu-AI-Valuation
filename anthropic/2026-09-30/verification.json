@@ -1,0 +1,13 @@
+{
+  "independent": {
+    "rev2036": 578.0434253343751,
+    "pv": 336.925359124954,
+    "terminalFcf": 126.17242866486073,
+    "terminalPv": 451.3793913970434,
+    "dcf": 788.3047505219974,
+    "multipleEv": 1950,
+    "terminalShare": 0.5725950415726281
+  },
+  "requiredMargin": 1.108502798356034,
+  "errors": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}"
+}

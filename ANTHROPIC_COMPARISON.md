@@ -2,7 +2,7 @@
 
 本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息截止 **2026-09-30**；模型估值日假设为 **2026-12-31**，与智谱 9 月 30 日的实际市场价格存在三个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
 
-原模型位置：`D:/Quant/Financial Valuation & Modeling/outputs/anthropic_ipo_20260930_01a0f147/Anthropic_IPO_Basic_Valuation.xlsx`。此文件仅作为读取来源；本仓库保存全部预测输入与计算结果，不依赖该外部路径即可复算。
+原始底稿现已归档到 [anthropic/2026-09-30](anthropic/2026-09-30/README.md)，包括[活公式 Excel](anthropic/2026-09-30/Anthropic_IPO_Basic_Valuation.xlsx)、[7 页英文 Beamer](anthropic/2026-09-30/Anthropic_IPO_Valuation_Beamer.pdf)、TeX 源文件、模型生成脚本、核验结果与工作表预览。原来源为 `D:/Quant/Financial Valuation & Modeling/outputs/anthropic_ipo_20260930_01a0f147/`；本仓库的文件和数值复算不依赖该外部路径。
 
 ## 两种估值与两种事实口径
 

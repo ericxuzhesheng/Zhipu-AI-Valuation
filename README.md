@@ -16,7 +16,8 @@
   <a href="paper/main.pdf"><strong>完整论文 / Paper</strong></a> ·
   <a href="model/valuation_model.xlsx"><strong>估值模型 / Model</strong></a> ·
   <a href="presentation/zhipu_beamer.pdf"><strong>演示文稿 / Slides</strong></a> ·
-  <a href="data/valuation_comps.csv"><strong>可比口径 / Comparable Data</strong></a>
+  <a href="data/valuation_comps.csv"><strong>可比口径 / Comparable Data</strong></a> ·
+  <a href="anthropic/2026-09-30/README.md"><strong>Anthropic 底稿 / Working Papers</strong></a>
 </p>
 
 ---

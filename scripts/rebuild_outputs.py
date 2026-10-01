@@ -36,6 +36,8 @@ SHARES_M = 487.58809  # Includes 21,965,000 shares placed on 2026-09-16
 USD_HKD = 7.8
 USD_CNY = 7.1
 H1_CASH_RMBM = 3993.722
+H1_RESTRICTED_CASH_RMBM = 105.995  # Interim report Note 14, released 2026-09-24
+H1_OPERATING_CASH_FLOW_RMBM = -3374.057
 H1_SHORT_INVESTMENTS_RMBM = 506.139
 H1_BANK_LOANS_RMBM = 2224.789
 H1_LEASE_LIABILITIES_RMBM = 379.410
@@ -47,6 +49,7 @@ SEPT_CB_NET_USDM = 3010.77
 SEPT_CB_PRINCIPAL_USDM = 3015.64 / 1.005
 NET_CASH_USDM = (
     H1_CASH_RMBM
+    - H1_RESTRICTED_CASH_RMBM
     + H1_SHORT_INVESTMENTS_RMBM
     - H1_BANK_LOANS_RMBM
     - H1_LEASE_LIABILITIES_RMBM
@@ -547,7 +550,7 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
         (
             "Net cash + ST investments (US$m, pro forma)",
             NET_CASH_USDM,
-            "June net cash plus July and September placements plus CB net cash less issue-date principal proxy; excludes undisclosed subsequent cash burn; see UPDATE_2026-09-18.md",
+            "June unrestricted net cash plus July and September placements plus CB net cash less issue-date principal proxy; excludes undisclosed subsequent cash burn; see UPDATE_2026-09-24.md",
         ),
         ("Market date", MARKET.date.strftime("%Y-%m-%d"), "derived from data/Zhipu_KnowledgeAtlas_daily.csv"),
         ("Market price (HK$)", MARKET.price_hkd, None),
@@ -572,7 +575,7 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
         ("2026-06-30 cash + ST investments (RMB m)", H1_CASH_RMBM + H1_SHORT_INVESTMENTS_RMBM, None),
         ("2026-06-30 bank loans + leases (RMB m)", H1_BANK_LOANS_RMBM + H1_LEASE_LIABILITIES_RMBM, None),
         ("July placement net proceeds (HKD m)", JULY_PLACEMENT_NET_HKDM, None),
-        ("2026H1 operating cash flow", "Not disclosed", "interim results announcement did not include a cash-flow statement"),
+        ("2026H1 operating cash flow (RMB m)", H1_OPERATING_CASH_FLOW_RMBM, "2026 interim report pp.60-61; published 2026-09-24"),
         ("September placement net (HKD m)", SEPT_PLACEMENT_NET_HKDM, "Completed 2026-09-16"),
         ("September CB net proceeds (USD m)", SEPT_CB_NET_USDM, "Issued 2026-09-18"),
         ("September CB principal proxy (USD m)", SEPT_CB_PRINCIPAL_USDM, "3015.64 / 1.005; issue-date proxy, not fair value"),

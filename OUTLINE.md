@@ -3,7 +3,7 @@
 **Title:** *Capability Surprise and the Pricing of an Early-Commercial-Stage Foundation-Model Lab:
 Evidence from Zhipu AI (2513.HK).*  
 **Author:** Zhesheng Xu (42353012), Corporate Finance, 2025-2026-2.  
-**Build:** XeLaTeX (`paper/main.tex` to `main.pdf`). **Information cutoff 2026-09-18; market data as of 2026-09-18; original event cohort through 2026-08-31.**
+**Build:** XeLaTeX (`paper/main.tex` to `main.pdf`). **Information cutoff 2026-09-30; market data as of 2026-09-30; original event cohort through 2026-08-31.**
 
 > Term-paper rules satisfied: title carries core concept (*capability surprise*) + mechanism (price discovery
 > and drift); abstract is below the 400-word limit; full reference list at end.
@@ -20,7 +20,7 @@ Evidence from Zhipu AI (2513.HK).*
 | 1. Introduction | setup | 3 research questions; capability-surprise reframing; frontier-AI financing moving into public price discovery |
 | 2. Background | condensed | open-weight model; Zhipu H1 2026 API-led growth and loss profile; IPO, July placement, re-rating, and MiniMax H1/model-event comparison |
 | 3. Industry, Macro, Strategy | condensed | Porter + leaderboard cost-disruption; HK AI-IPO landscape; macro + flow events |
-| 4. Valuation | main line | WACC; 3-scenario DCF; reverse DCF + heatmap; layered relative valuation; real-options reading |
+| 4. Valuation | main line | WACC; 3-scenario DCF; reverse DCF + heatmap; layered relative valuation; Anthropic IPO cross-check; real-options reading |
 | 5. Capability Surprise | original contribution | CAR results; flow vs capability events; peer-adjusted + block-bootstrap checks; honesty box |
 | 6. Conclusion | close | capability repricing, partial mean reversion, weekly rebound and product trust |
 | Appendix A-D | reproducibility | statements, DCF chain, beta bridge, reverse-DCF sensitivity grid |
@@ -31,29 +31,30 @@ Evidence from Zhipu AI (2513.HK).*
 3. **Fundamental value vs option value** - not "above DCF therefore bubble," but a right-tail option.
 4. **Capability vs flow catalysts** - model releases separated from index/Stock-Connect flows.
 
-## Headline numbers (2026-09-18)
-- Price HK$780 (+571%, 6.7x IPO); post-placement market cap ~US$48.8B; **equity value / LTM 2026H1 revenue 232.8x**; vol ~187%.
+## Headline numbers (2026-09-30)
+- Price HK$641 (+452%, 5.5x IPO); post-placement market cap ~US$40.1B; **equity value / LTM 2026H1 revenue 191.3x**; vol ~184%.
 - H1 2026 revenue RMB953.9M (+399.7%); open platform/API 86.5% of revenue and 24.6% gross margin; operating loss widened to RMB2.15B and adjusted net loss widened 12.1%.
 - The results announcement was released at 18:56 after the 31-Aug close; the same-day +9.63% return predates disclosure and overlaps an MSCI closing rebalance.
 - Layered comps: private-lab transaction range **20.5-39.0x** (median **34.1x**) is the only peer range used in the football field; MiniMax, Hong Kong adjacent names, and commercialization references remain display-only context.
-- DCF (US$700M FY2026E revenue, -100% initial margin, US$6.308B pro forma net cash, NOL carryforward): bear/base/bull HK$56/102/255; probability-weighted **HK$116 (~14.9% of price)**.
-- Reverse DCF: price implies **~US$59.7B revenue by 2035 (~63.9% annual, 2026-2035)** after fixing the FY2026E base.
+- DCF (US$700M FY2026E revenue, -100% initial margin, US$6.293B pro forma net cash, NOL carryforward): bear/base/bull HK$56/102/255; probability-weighted **HK$116 (~18.1% of price)**.
+- Reverse DCF: price implies **~US$47.9B revenue by 2035 (~59.9% annual, 2026-2035)** after fixing the FY2026E base.
 - Event study (mean-adjusted, `[-20,-6]` estimation window): reaction **+13.7%**, drift **+4.6%** (bimodal);
   peer-adjusted reaction/drift **+15.3% / +16.8%** across five GLM events.
 
-## September 18 integrated evidence
-- Completed September placement and convertible bond: `zhipucompletion2026`; recognise issued shares and cash alongside a debt principal proxy.
-- Wenge H1 results: `wengeh12026`; total versus owners' versus adjusted loss and deployment/API mix.
-- Price path: earlier partial mean reversion followed by a weekly rebound and peer divergence.
-- Link ZCode trust repair and MiniMax Code CLI source release as related commercial behaviours competing for developer workflows: data-control confidence → procurement/trial → switching/retention → paid usage. Distinguish this competitive interpretation from unproven release targeting, customer migration and return causality.
-- Full terms and cutoff treatment: [September 18 update](UPDATE_2026-09-18.md).
+## September 30 integrated evidence
+- September 24–30: Zhipu +0.39%, MiniMax −10.32%, Wenge −10.13%; all remain below August 31.
+- ZCode's pre-cutoff source remains v3.14.3; remediation is not independently reproduced.
+- MiniMax's September 29 notice confirms the preview and forthcoming subscription migration; October offers remain prospective.
+- Eight sessions follow September 18 evening news: two reaction days and six drift days. The September 24 report has four later sessions. Original August events remain fixed.
+- Anthropic: 2027–2036 UFCF, 12% WACC / 3% terminal growth; US$1,950bn revenue-multiple EV versus US$788.3bn DCF EV. IPO targets stay outside completed financing comparables.
+- See [September 30 update](UPDATE_2026-09-30.md) and [Anthropic comparison](ANTHROPIC_COMPARISON.md).
 
 ## Sourcing policy (granular; primary > news)
 Key data cite, via the bibliography:
 - **Comparable beta bridge** - `nasdaqsec2026` (60 month-end returns against SPY through 2026-08-31; Nasdaq prices and latest pre-cutoff SEC debt/share disclosures). Auto-generated by `scripts/comps_beta_and_reverse_dcf.py`.
 - **Private-lab funding rounds** - `openai2026`, `anthropic2026`, and the older 2025 Mistral transaction mark; transaction values and contemporaneous revenue run-rates are kept distinct from listed-company market caps.
 - **Layered valuation comparables** - `data/valuation_comps_input.csv` records source dates and revenue bases; `data/valuation_comps.csv` is the computed audit table. Only OpenAI, Anthropic, and Mistral define the 20.5-39.0x football-field range.
-- **HKEX interim / annual reports and exchange quotes** - Zhipu, MiniMax, and Wenge AI repriced to 2026-09-18; SenseTime and PHANCY retain 2026-08-31 market-equity inputs; listed references are shown separately from private transactions.
+- **HKEX interim / annual reports and exchange quotes** - Zhipu, MiniMax, and Wenge AI repriced to 2026-09-30; SenseTime and PHANCY retain 2026-08-31 market-equity inputs; listed references are shown separately from private transactions.
 - **SEC filings and company annual reports** - Palantir, Cloudflare, and Snowflake latest complete fiscal-year revenue; 2026-08-31 market-equity multiples are display only.
 - **HKEX prospectus / annual report / interim results / placement announcements** - `prospectus2513`, `annualreport2513`, `interim2026`, `placement2513`, `agm2513`, `prospectus1956`.
 - **Official model cards / technical reports** - `glm_modelcard`.

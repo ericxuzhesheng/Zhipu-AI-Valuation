@@ -1,0 +1,16 @@
+metric,value
+Information cutoff,2026-09-30
+Assumed valuation date,2026-12-31
+2028 revenue midpoint (USD bn),195.0
+Forward EV / 2028 revenue,10.0
+Revenue-multiple EV (USD bn),1950.0
+DCF EV (USD bn),788.3047505219973
+PV explicit UFCF (USD bn),336.925359124954
+PV terminal value (USD bn),451.3793913970433
+Terminal value share,0.5725950415726282
+Reported IPO equity benchmark (USD bn),2000.0
+Net cash assumption (USD bn),0.0
+WACC assumption,0.12
+Terminal growth assumption,0.03
+Cash tax rate assumption,0.25
+Required terminal EBIT margin at benchmark,1.108502798356034

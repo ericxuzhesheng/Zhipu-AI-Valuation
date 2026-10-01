@@ -1,0 +1,4 @@
+company,start_date,end_date,start_close,end_close,raw_return_pct,return_type
+Zhipu,2026-09-18,2026-09-24,780.0,638.5,-18.141025641025642,"simple close-to-close; descriptive, not event CAR"
+MiniMax,2026-09-18,2026-09-24,303.0,279.0,-7.920792079207917,"simple close-to-close; descriptive, not event CAR"
+Wenge AI,2026-09-18,2026-09-24,79.7,71.05,-10.853199498117949,"simple close-to-close; descriptive, not event CAR"

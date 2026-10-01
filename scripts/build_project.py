@@ -58,6 +58,8 @@ def main() -> int:
     run_step("rebuild generated outputs", [sys.executable, "scripts/rebuild_outputs.py"])
     run_step("refresh beta bridge and reverse DCF", [sys.executable, "scripts/comps_beta_and_reverse_dcf.py"])
 
+    run_step("reproduce Anthropic IPO cross-check", [sys.executable, "scripts/anthropic_ipo_crosscheck.py"])
+
     if not args.skip_tex:
         if shutil.which("xelatex") is None:
             raise SystemExit("[FAIL] xelatex not found on PATH; install TeX Live or use --skip-tex")

@@ -89,8 +89,16 @@ class ValuationTests(unittest.TestCase):
         # Cash financing changes equity, not the operating enterprise value.
         self.assertAlmostEqual(result["enterprise_value"], 54.794031, places=5)
         self.assertAlmostEqual(rebuild_outputs.SHARES_M, 487.58809, places=5)
-        self.assertAlmostEqual(rebuild_outputs.NET_CASH_USDM, 6307.779114, places=5)
-        self.assertAlmostEqual(result["per_share_hkd"], 101.8, places=1)
+        self.assertAlmostEqual(rebuild_outputs.NET_CASH_USDM, 6292.850241, places=5)
+        self.assertAlmostEqual(result["per_share_hkd"], 101.5, places=1)
+
+    def test_interim_cash_flow_and_restricted_cash_reconcile(self) -> None:
+        financials = pd.read_csv(ROOT / 'data' / 'zhipu_financials_input.csv').set_index('period')
+        h1 = financials.loc['H1 2026']
+        self.assertAlmostEqual(h1['cash_rmbm'] - h1['restricted_cash_rmbm'], h1['cash_equivalents_rmbm'], places=6)
+        closing = 2254.920 + h1['operating_cash_flow_rmbm'] + h1['investing_cash_flow_rmbm'] + h1['financing_cash_flow_rmbm'] + h1['fx_effect_rmbm']
+        self.assertAlmostEqual(closing, h1['cash_equivalents_rmbm'], places=6)
+        self.assertAlmostEqual(rebuild_outputs.H1_OPERATING_CASH_FLOW_RMBM, h1['operating_cash_flow_rmbm'], places=6)
 
     def test_valuation_comps_are_built_from_input(self) -> None:
         comps = rebuild_outputs.build_valuation_comps()
@@ -110,10 +118,10 @@ class ValuationTests(unittest.TestCase):
         self.assertAlmostEqual(float(included["multiple_x"].max()), 39.0, delta=0.15)
 
         minimax = comps.loc[comps["company"] == "MiniMax", "multiple_x"].iloc[0]
-        self.assertAlmostEqual(float(minimax), 82.1, delta=0.15)
+        self.assertAlmostEqual(float(minimax), 67.8, delta=0.15)
 
         zhipu = comps.loc[comps["company"] == "Zhipu", "multiple_x"].iloc[0]
-        self.assertAlmostEqual(float(zhipu), 232.8, delta=0.15)
+        self.assertAlmostEqual(float(zhipu), 191.3, delta=0.15)
         self.assertEqual(
             comps.loc[comps["company"] == "Zhipu", "revenue_basis"].iloc[0],
             "LTM through 2026H1",

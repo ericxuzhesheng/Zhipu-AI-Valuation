@@ -30,7 +30,7 @@
 
 我把披露事实与预测假设分开。公司没有提供全年收入指引；FY2026E 的 7 亿美元来自 H1 实际收入和 8 月经营节奏，属于模型估计。2026 年经营利润率取 −100%，较 H1 的 −225% 假定了明显改善。在此基础上，我用 CAPM/WACC、三情景 DCF、反向 DCF 与分层可比估值交叉检验。概率加权 DCF 约为每股 HK$116，9 月 30 日收盘价为 HK$641。反向 DCF 显示，若要支撑现价，2035 年收入需接近 479 亿美元。
 
-估值结果说明市场预期有多高，事件研究继续考察价格怎样吸收新信息。我把模型发布和榜单跃升定义为“能力惊喜”，独立确定五个 GLM 事件日期，再用 MiniMax 做同业调整。五次事件的原始两日平均反应为 13.7%，同业调整后为 15.3%。
+估值结果说明市场预期有多高，事件研究继续考察价格怎样吸收新信息。我把模型发布和榜单跃升定义为“能力惊喜”，独立确定五个 GLM 事件日期，再用 MiniMax 做同业调整。五次事件的原始两日平均反应为 13.7%，同业调整后为 15.3%，后者位于区块 bootstrap 零假设分布的第 99.2 百分位。后续同业调整漂移虽为 16.8%，仍落在该零假设分布的 95% 区间内，持续漂移尚未得到统计支持。
 
 样本只覆盖智谱上市后的前八个月和五个能力事件。本文把结果视为一个本科案例中的诊断性证据，不据此推断普遍的市场异象。完整模型、逐行可比口径、事件结果和重建脚本都保留在仓库中。
 
@@ -87,7 +87,7 @@
 
 ### 本期走势与产品信任
 
-9 月 24 日至 30 日，智谱从 HK$638.5 升至 HK$641（+0.39%），MiniMax 从 HK$279 降至 HK$250.2（−10.32%），中科闻歌从 HK$71.05 降至 HK$63.85（−10.13%）。相对 8 月 31 日，三者仍分别回撤 46.36%、28.31% 和 25.76%。9 月 30 日智谱与 MiniMax 分别反弹 4.31% 和 3.65%；月末反弹没有消除九月回撤。这些是实际收益，不识别某条新闻的因果效应。
+9 月 24 日至 30 日，智谱从 HK$638.5 升至 HK$641（+0.39%），MiniMax 从 HK$279 降至 HK$250.2（−10.32%），中科闻歌从 HK$71.05 降至 HK$63.85（−10.13%）。相对 8 月 31 日，三者仍分别回撤 46.36%、28.31% 和 25.76%。9 月 30 日智谱与 MiniMax 分别反弹 4.31% 和 3.65%；月末反弹没有消除九月回撤。此前上涨在九月部分回吐，这是价格路径的描述，尚不能证明统计意义上的均值回归。融资与产品信任可能影响投资者预期，但现有窗口没有识别这些机制的因果效应。
 
 ZCode 官方源码的最新可核验记录仍为 9 月 23 日 v3.14.3、Apache-2.0 许可。公司转述的整改评测尚未取得完整签署报告，本文未独立复现。MiniMax 的 MIT Code CLI 与 ZCode 继续争夺开发者工作流；9 月 29 日[官方公告](https://platform.minimax.cn/docs/token-plan/announcements)又确认 M3.1-Flash-Preview 与 M Plan 迁移安排。十月促销仍是未来安排，不能写成已实现收入。
 
@@ -105,7 +105,7 @@ ZCode 官方源码的最新可核验记录仍为 9 月 23 日 v3.14.3、Apache-2
 | **概率加权** | N/A | N/A | **$7.3B** | **116** |
 | *市价 (2026-09-30，收盘)* | N/A | N/A | *$40.1B* | *641* |
 
-**反向 DCF** 固定 FY2026E 收入后重新求解增长路径。要支撑现价，2035 年收入需接近 **US$479 亿**，对应 2026 至 2035 年约 **60%** 的年复合增速。这项结果只用于呈现市价隐含条件。
+**反向 DCF** 固定 FY2026E 收入后重新求解增长路径。要支撑现价，2035 年收入需接近 **US$479 亿**，对应 2026 至 2035 年约 **60%** 的年复合增速。这项结果只用于呈现市价隐含条件。敏感性分析中，10% WACC 与 50% 终期利润率对应约 US$145 亿收入，15% WACC 与 40% 利润率对应约 US$681 亿；隐含收入对折现率与利润率假设很敏感。
 
 **分层可比** 对两家上市基础模型公司采用同一规则：2026 年 9 月 30 日市值除以截至 2026H1 的 LTM 实际收入。智谱 LTM 收入为人民币 14.87 亿元（FY2025 减 2025H1、再加 2026H1），按 RMB7.1/US$ 折合 US$209.5M，对应 **191.3×**；MiniMax LTM 收入为 US$165.2M，对应 **67.8×**。
 
@@ -113,11 +113,11 @@ OpenAI、Anthropic 与 Mistral 的私有交易参照更接近基础模型实验�
 
 SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 和 Snowflake 放在商业化参照组。它们能帮助读者判断港股 AI 资产和成熟 AI 软件的估值位置，商业模式与收入结构却和基础模型实验室差别很大，因此不参与核心中位数。逐行口径、估值日和来源见 [`data/valuation_comps.csv`](data/valuation_comps.csv)。
 
-### Anthropic IPO 估值对照
+### Anthropic 商业化与估值方法对照
 
-已纳入另一个对话“Build Anthropic IPO valuation model”的现金流与收入倍数框架，并独立复算。信息截止 9 月 30 日，估值日假设为 2026 年 12 月 31 日；2027—2036 年为显式预测期，2037 年起为终值。2028 年收入取报道预测中点 US$195bn；假设 10× 前瞻收入给出 US$1.95tn EV，12% WACC、3% 永续增长下 DCF EV 为 US$788.3bn，终值占 57.3%。
+Anthropic 的现金流与收入倍数框架用于说明能力如何转化为商业收入，以及不同估值方法如何依赖经营假设。该伴随模型已独立复算。信息截止 9 月 30 日，估值日假设为 2026 年 12 月 31 日；2027—2036 年为显式预测期，2037 年起为终值。2028 年收入取报道预测中点 US$195bn；假设 10× 前瞻收入给出 US$1.95tn EV，12% WACC、3% 永续增长下 DCF EV 为 US$788.3bn，终值占 57.3%。
 
-2026 年 US$60bn 收入锚、10× 倍数、利润率与现金桥均为模型假设。报道的约 US$2tn IPO 股权目标尚非成交价格，不替换原可比表中已完成的 US$965bn 融资。完整假设与来源见[Anthropic 对照说明](ANTHROPIC_COMPARISON.md)。
+2026 年 US$60bn 收入锚、10× 倍数、利润率与现金桥均为模型假设。报道的约 US$2tn IPO 股权目标尚非成交价格，不替换原可比表中已完成的 US$965bn 融资。这项对照用于解释估值方法和商业转化条件，不构成智谱的额外目标价，也没有为智谱事件研究提供独立实证验证。完整假设与来源见[Anthropic 对照说明](ANTHROPIC_COMPARISON.md)。
 
 ### 事件研究
 
@@ -127,10 +127,10 @@ SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 
 
 | 事件 | Day 0 | 反应[0,+1] | 漂移[+2,+10] | 读数 |
 |---|---|---|---|---|
-| GLM-5 | 2026-02-11 | +22.5% | +24.7% | 反应不足 |
+| GLM-5 | 2026-02-11 | +22.5% | +24.7% | 正反应后继续上行 |
 | GLM-5-Turbo | 2026-03-16 | +7.7% | −19.3% | 反转 |
-| GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | 过度反应 |
-| GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | 强反应不足 |
+| GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | 正反应后回撤 |
+| GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | 正反应后继续上行 |
 | GLM-5.3 | 2026-08-14 | −6.5% | +3.8% | 信息可能提前进入价格，同业调整后为正 |
 | MiniMax M2.5 | 2026-02-12 | +24.2% | −2.1% | 发布当期获正面定价，后续基本持平 |
 | MiniMax M2.7 | 2026-03-18 | −5.5% | −49.1% | 反应较弱，随后估值收缩 |
@@ -139,13 +139,13 @@ SenseTime、Phancy 和中科闻歌放在港股邻近组。Palantir、Cloudflare 
 
 均值调整采用 `AR_t = R_t - average(R[-20,-6])`。截至原样本截止日 2026-08-31，GLM-5.2 与 GLM-5.3 的 [+2,+10] 窗口均覆盖完整 9 个交易日。GLM-5.3-Flash 只有三个后续交易日，因此只进入扩展目录。H1 业绩公告于 8 月 31 日 18:56 收盘后发布，也只列入财务披露目录；当天 +9.63% 的涨幅不能写成“财报发布后的反应”。
 
-事件日期独立取自官方发布公告，没有按股价走势倒推。原始短窗五次中有四次为正，均值为 +13.7%。同业调整后，五次反应与后续漂移均为正，均值分别为 +15.3% 和 +16.8%。2 月 20 日与 5 月 13 日的尖峰来自指数调整和资金流事件，未计为能力事件。
+事件日期独立取自官方发布公告，没有按股价走势倒推。原始短窗五次中有四次为正，均值为 +13.7%。同业调整后，五次反应与后续漂移均为正，均值分别为 +15.3% 和 +16.8%。区块 bootstrap 将反应均值置于零假设分布的第 99.2 百分位，但漂移仍落在 95% 区间内。因此，样本支持能力事件附近的即时重定价，尚不足以确认持续漂移。表中的上行和回撤只描述各事件的收益路径。2 月 20 日与 5 月 13 日的尖峰来自指数调整和资金流事件，未计为能力事件。
 
 MiniMax 的主线事件现补齐 M2.5（2 月 12 日）、M2.7 和 M3。H3（7 月 31 日）与 Music 3.0（8 月 13 日）保留在扩展目录，但不进入 Table 2：前者以音视频生成作为主要输出，后者是音乐垂类模型，与文本、编码和 Agent 能力事件不在同一口径。MiniMax 半年报也作为财务披露事件列入目录；由于 8 月 26 日收盘后发布，截至 8 月 31 日没有完整漂移窗口，不计算 CAR。
 
 论文 Table 2 另列出 16 个具备完整窗口、且模型发布方本身存在可交易股票的大型科技厂商事件。7—8 月新增腾讯 Hy3、阿里 Qwen3.8-Max、Google Gemini 3.6/3.7 Flash 和 Meta Muse Spark 1.1。Microsoft 代 OpenAI、Tesla 代 xAI 的 6 条代理事件已从 CAR 表和均值中移除，只留在审计目录；在原 8 月 31 日截止日没有完整后窗的 Qwen3.8-Flash、腾讯 Hy4 和 Gemini Transcribe/Omni 1.1 同样只进入目录。
 
-五个事件能够支撑一个有意思的本科案例。样本数量和上市历史仍然有限，结论只作为初步诊断性证据，不用于证明普遍异象。
+样本只有五个事件，上市历史也很短。即时重定价的证据适用于本案例，不能据此推断所有基础模型公司都存在同样的价格反应。
 
 ### 港股 AI 参照公司
 
@@ -197,6 +197,8 @@ MiniMax 的主线事件现补齐 M2.5（2 月 12 日）、M2.7 和 M3。H3（7 �
 ├── OUTLINE.md / DATA_TABLES.md / EVENT_STUDY.md  # 过程文档
 ```
 
+本次文章修订不设字数上限。常规校验仍保留课程字数限制；检查本次扩展稿时使用 `python scripts/validate_outputs.py --ignore-word-limits`。
+
 ### 如何编译
 
 ```bash
@@ -222,7 +224,7 @@ python scripts/validate_outputs.py
 
 ### Project Overview
 
-Information and local-exchange daily bars extend through 30 September 2026. From September 24 to 30, Zhipu gained 0.39 percent, while MiniMax fell 10.32 percent. Both remain below their August 31 closes, by 46.36 and 28.31 percent respectively. New incomplete windows remain separate from the fixed August cohort. See the [evidence note](UPDATE_2026-09-30.md).
+Information and local-exchange daily bars extend through 30 September 2026. From September 24 to 30, Zhipu gained 0.39 percent, while MiniMax fell 10.32 percent. Both remain below their August 31 closes, by 46.36 and 28.31 percent respectively. September partially unwound the earlier price gains, but this descriptive path does not establish statistical mean reversion. Financing and product trust are possible mechanisms whose causal effects are not identified by these windows. New incomplete windows remain separate from the fixed August cohort. See the [evidence note](UPDATE_2026-09-30.md).
 
 
 I built this project around a valuation problem that conventional earnings-surprise analysis handles poorly. Zhipu AI listed under 2513.HK on 8 January 2026, becoming the first publicly traded foundation-model laboratory. By the close on 30 September, its market capitalization was approximately US$40.1 billion. Results released after the 31 August close showed H1 revenue of RMB953.9 million, up 399.7 percent, with open-platform and API sales contributing 86.5 percent. Operating loss nevertheless widened to RMB2.15 billion, and adjusted net loss increased by 12.1 percent. The central question is therefore measurable: how much future operating performance has the market already paid for?
@@ -231,7 +233,7 @@ The project asks what investors are pricing when near-term earnings provide litt
 
 I separate reported facts from forecast choices. The company gave no full-year revenue guidance; the model's US$700 million FY2026E revenue uses H1 actuals and the August run-rate, while a −100 percent FY2026 operating margin assumes substantial improvement from the reported H1 margin of −225 percent. The probability-weighted DCF is about HK$116 per share, or 18.1 percent of the HK$641 September 30 close. The reverse DCF requires roughly US$47.9 billion of 2035 revenue, a 59.9 percent compound annual growth rate from the FY2026E base. These outputs describe the assumptions embedded in the price rather than a price target.
 
-The event study covers five independently dated GLM events from GLM-5 through GLM-5.3. The average two-day reaction is 13.7 percent before peer adjustment and 15.3 percent after adjustment. The sample covers one company during its first eight months as a listed firm, so I present the result as diagnostic evidence from an undergraduate case. It cannot establish a general market anomaly.
+The event study covers five independently dated GLM events from GLM-5 through GLM-5.3. The average two-day reaction is 13.7 percent before peer adjustment and 15.3 percent after adjustment. The adjusted reaction lies at the 99.2nd percentile of the block-bootstrap null distribution. Adjusted subsequent drift averages 16.8 percent but remains within the null distribution's 95 percent interval, so durable drift is not statistically established. The sample covers one company during its first eight months as a listed firm, so I present the result as diagnostic evidence from an undergraduate case. It cannot establish a general market anomaly.
 
 ### Work Completed
 
@@ -292,15 +294,15 @@ WACC remains 13.5 percent for comparability. Shares are 487.588 million after th
 | **Probability weighted** | N/A | N/A | **$7.3B** | **116** |
 | *Market (2026-09-30, close)* | N/A | N/A | *$40.1B* | *641* |
 
-**Reverse DCF** fixes the FY2026E base and solves for the growth path required by the observed price. It points to approximately US$47.9 billion of 2035 revenue, equivalent to roughly 59.9 percent annual growth from 2026 through 2035.
+**Reverse DCF** fixes the FY2026E base and solves for the growth path required by the observed price. It points to approximately US$47.9 billion of 2035 revenue, equivalent to roughly 59.9 percent annual growth from 2026 through 2035. At 10 percent WACC and a 50 percent terminal margin, required revenue is about US$14.5 billion; at 15 percent WACC and a 40 percent margin, it is about US$68.1 billion.
 For the two listed foundation-model companies, the comparison now uses one rule: 30 September 2026 equity value divided by LTM revenue through 2026H1. Zhipu's RMB1,487.3 million LTM revenue, equal to FY2025 less H1 2025 plus H1 2026, translates to US$209.5 million at RMB7.1/US$ and gives **191.3×**. MiniMax remains at **67.8×** on US$165.2 million of LTM revenue.
 Paired private-market references for OpenAI, Anthropic, and Mistral run from **20.5× to 39.0×**, with a **34.1× median**.
 The private range still applies to Zhipu's FY2026E revenue because the private-company observations use contemporaneous revenue run-rates; it implies approximately HK$230 to HK$437 per share. Applying MiniMax's LTM multiple to Zhipu's LTM revenue gives about HK$227, 65 percent below the market. On the uniform listed-company basis, Zhipu trades at roughly 2.8 times MiniMax's revenue multiple, so the peer no longer explains most of the quote.
 SenseTime, Phancy, and Wenge AI form a separate Hong Kong-adjacent cohort, while Palantir, Cloudflare, and Snowflake are commercialization references. Neither cohort enters the private-deal range. Row-level bases and sources are in [`data/valuation_comps.csv`](data/valuation_comps.csv).
 
-### Anthropic IPO cross-check
+### Anthropic commercialization and valuation illustration
 
-The companion model is reproduced separately: information cutoff September 30, assumed valuation date December 31, 2026, explicit UFCF in 2027–2036 and terminal value from 2037. A reported 2028 revenue midpoint of US$195bn and an assumed 10× forward multiple imply US$1.95tn EV, versus US$788.3bn DCF EV at 12% WACC and 3% terminal growth. The reported US$2tn IPO equity target does not replace the completed May funding reference. See the [reproducible cross-check](ANTHROPIC_COMPARISON.md).
+The companion model illustrates how capability can translate into commercial revenue and how valuation methods depend on operating assumptions. It is reproduced separately: information cutoff September 30, assumed valuation date December 31, 2026, explicit UFCF in 2027–2036 and terminal value from 2037. A reported 2028 revenue midpoint of US$195bn and an assumed 10× forward multiple imply US$1.95tn EV, versus US$788.3bn DCF EV at 12% WACC and 3% terminal growth. The reported US$2tn IPO equity target does not replace the completed May funding reference. It supplies neither an additional Zhipu price target nor independent empirical validation of the Zhipu event study. See the [method comparison](ANTHROPIC_COMPARISON.md).
 
 ### Event Study
 
@@ -308,25 +310,25 @@ This section preserves the original August 31 five-event cohort and bootstrap. N
 
 | Event | Day 0 | Reaction [0,+1] | Drift [+2,+10] | Reading |
 |---|---|---|---|---|
-| GLM-5 | 2026-02-11 | +22.5% | +24.7% | under-reaction |
+| GLM-5 | 2026-02-11 | +22.5% | +24.7% | positive reaction followed by further gains |
 | GLM-5-Turbo | 2026-03-16 | +7.7% | −19.3% | reversal |
-| GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | over-reaction |
-| GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | strong under-reaction |
+| GLM-5.1 | 2026-04-08 | +13.8% | −14.2% | positive reaction followed by a pullback |
+| GLM-5.2 | 2026-06-15 | +30.8% | +28.2% | positive reaction followed by further gains |
 | GLM-5.3 | 2026-08-14 | −6.5% | +3.8% | anticipated; positive peer-adjusted reaction |
 | MiniMax M2.5 | 2026-02-12 | +24.2% | −2.1% | positive launch reaction; little subsequent drift |
 | MiniMax M2.7 | 2026-03-18 | −5.5% | −49.1% | muted / de-rate |
-| MiniMax M3 | 2026-06-01 | −21.1% | −40.8% | failed catalyst / de-rate |
+| MiniMax M3 | 2026-06-01 | −21.1% | −40.8% | negative reaction followed by further losses |
 | **Average (5)** | | **+13.7%** | **+4.6%** | |
 
 The mean-adjusted return is defined as `AR_t = R_t - average(R[-20,-6])`. As of the original 2026-08-31 sample cutoff, GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows. GLM-5.3-Flash has only three subsequent trading days and remains in the extended catalog. The H1 results announcement was released at 18:56 after the 31 August close, so that day's 9.63 percent gain predates the disclosure and is not treated as an earnings reaction.
 
-The event dates come from official release announcements and were set independently of the share-price path. Mean reaction rises from +13.7 percent before adjustment to +15.3 percent after peer adjustment. Subsequent drift rises from +4.6 percent to +16.8 percent, and all five adjusted reaction and drift windows are positive. The spikes on 20 February and 13 May are index and flow events linked to Hang Seng Tech inclusion and Stock Connect.
+The event dates come from official release announcements and were set independently of the share-price path. Mean reaction rises from +13.7 percent before adjustment to +15.3 percent after peer adjustment. Subsequent drift rises from +4.6 percent to +16.8 percent, and all five adjusted reaction and drift windows are positive. The block bootstrap places the adjusted reaction at the 99.2nd percentile of the null distribution, while adjusted drift remains inside its 95 percent interval. This supports immediate repricing around capability events; the evidence does not establish durable drift. Table readings describe the return paths. The spikes on 20 February and 13 May are index and flow events linked to Hang Seng Tech inclusion and Stock Connect.
 
 The MiniMax peer series now includes M2.5 (12 February), M2.7 and M3. H3 (31 July) and Music 3.0 (13 August) remain in the extended catalog but outside Table 2 because their audio-video and music outputs are not comparable with the text, coding and agent events in the core sample. MiniMax's results announcement is also catalogued as a financial disclosure, but its post-event window is incomplete at the cutoff.
 
 Paper Table 2 also reports 16 complete-window large-tech events for which the model issuer itself has a traded security. The July-August refresh adds Tencent Hy3, Alibaba Qwen3.8-Max, Google Gemini 3.6/3.7 Flash and Meta Muse Spark 1.1. Six Microsoft-for-OpenAI and Tesla-for-xAI proxy events have been removed from the CAR table and its average, while remaining visible in the audit catalog. Qwen3.8-Flash, Tencent Hy4 and Gemini Transcribe/Omni 1.1 also remain catalog-only because their post-event windows were incomplete at the original August 31 cutoff.
 
-The five events support a focused undergraduate case. The small sample and short listing history limit the result to preliminary diagnostic evidence and do not support a general market anomaly.
+The five-event sample and short listing history limit the immediate-repricing result to this case. They do not establish a general market anomaly.
 
 ### Repository Structure
 
@@ -339,6 +341,8 @@ The five events support a focused undergraduate case. The small sample and short
 ├── figures/    # Figures
 └── data/       # Tushare / Tencent Finance / Nasdaq market-data CSVs
 ```
+
+This article revision has no word-count cap. The default validator retains the course limits; use `python scripts/validate_outputs.py --ignore-word-limits` to check the expanded draft.
 
 ### How to Build
 

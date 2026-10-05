@@ -366,6 +366,11 @@ def main() -> int:
         action="store_true",
         help="Skip checks that require TeX tooling or freshly compiled PDFs.",
     )
+    parser.add_argument(
+        "--ignore-word-limits",
+        action="store_true",
+        help="Report word counts without enforcing the original submission limits.",
+    )
     args = parser.parse_args()
 
     checks = [
@@ -376,12 +381,15 @@ def main() -> int:
         ("appendix outputs exist", check_appendix_outputs),
     ]
     if not args.skip_tex_checks:
-        checks = [
-            ("texcount text words <= 5000", lambda: texcount_words() <= 5000),
-            ("abstract words < 400", lambda: abstract_words() < 400),
-            ("PDF files exist and have pages", check_pdfs),
-            *checks,
-        ]
+        if args.ignore_word_limits:
+            print(f"INFO: text words={texcount_words()}, abstract words={abstract_words()}")
+        else:
+            checks = [
+                ("texcount text words <= 5000", lambda: texcount_words() <= 5000),
+                ("abstract words < 400", lambda: abstract_words() < 400),
+                *checks,
+            ]
+        checks = [("PDF files exist and have pages", check_pdfs), *checks]
     for label, check in checks:
         result = check()
         if result is False:

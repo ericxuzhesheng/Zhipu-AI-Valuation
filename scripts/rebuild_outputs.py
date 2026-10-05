@@ -1248,9 +1248,9 @@ def write_reaction_vs_drift() -> None:
             dx, dy_text, ha = label_offsets[row.event]
             ax.annotate(label, (rx, dy), textcoords="offset points",
                         xytext=(dx, dy_text), ha=ha, fontsize=6.9, color=C_TEAL)
-    ax.text(0.02, 0.97, "UNDER-reaction\n(drift continues)", transform=ax.transAxes,
+    ax.text(0.02, 0.97, "Positive subsequent CAR", transform=ax.transAxes,
             va="top", ha="left", fontsize=8, color=C_GREEN)
-    ax.text(0.02, 0.52, "OVER-reaction\n(reversal)", transform=ax.transAxes,
+    ax.text(0.02, 0.52, "Negative subsequent CAR", transform=ax.transAxes,
             va="top", ha="left", fontsize=8, color=C_RED)
     ax.set_xlabel("Immediate reaction CAR[0,+1] (%)")
     ax.set_ylabel("Post-event drift CAR[+2,+10] (%)")
@@ -1278,14 +1278,14 @@ def write_table2_large_tech_tex() -> None:
     def reading(react: float, drift: float) -> str:
         if drift >= 3:
             if react >= 3:
-                return "under-reaction"
+                return "positive continuation"
             if react < 0:
-                return "delayed reaction"
+                return "negative, then positive"
             return "muted continuation"
         if drift <= -3:
-            return "reversal" if react > 0 else "de-rate"
+            return "negative subsequent CAR" if react > 0 else "negative in both windows"
         if react <= -3 and drift <= 0:
-            return "de-rate"
+            return "negative in both windows"
         if react >= 3 and drift < 0:
             return "muted / reversal"
         return "muted"

@@ -1,6 +1,6 @@
 """Reproduce the user's companion Anthropic IPO model as a separate comparison.
 
-USD billions; information cutoff 2026-09-30; assumed valuation date 2026-12-31.
+USD billions; information cutoff 2026-10-11; assumed valuation date 2026-12-31.
 Model assumptions are not company guidance or a completed funding transaction.
 """
 from pathlib import Path
@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WACC = 0.12
 TERMINAL_G = 0.03
 TAX = 0.25
-ANCHOR_REVENUE = 60.0
+ANCHOR_REVENUE = 64.0
 FORWARD_MULTIPLE = 10.0
 IPO_BENCHMARK = 2000.0
 NET_CASH_ASSUMPTION = 0.0
@@ -45,7 +45,7 @@ def calculate(wacc=WACC, terminal_g=TERMINAL_G):
     required_margin = (required_terminal_fcf+(terminal_revenue-previous_revenue)*last.nwc_to_revenue-terminal_revenue*(last.da_to_revenue-last.capex_to_revenue))/(terminal_revenue*(1-TAX))
     revenue_2028 = rows[1]['revenue_usdbn']
     summary = {
-        'Information cutoff':'2026-09-30', 'Assumed valuation date':'2026-12-31',
+        'Information cutoff':'2026-10-11', 'Assumed valuation date':'2026-12-31',
         '2028 revenue midpoint (USD bn)':revenue_2028, 'Forward EV / 2028 revenue':FORWARD_MULTIPLE,
         'Revenue-multiple EV (USD bn)':revenue_2028*FORWARD_MULTIPLE,
         'DCF EV (USD bn)':pv_explicit+pv_terminal, 'PV explicit UFCF (USD bn)':pv_explicit,
@@ -60,8 +60,8 @@ def calculate(wacc=WACC, terminal_g=TERMINAL_G):
 
 def main():
     projection, summary = calculate()
-    assert abs(summary['DCF EV (USD bn)'] - 788.3047505219974) < 1e-8
-    assert abs(projection.loc[projection.year.eq(2028), 'ufcf_usdbn'].iloc[0] - 18.0) < 1e-8
+    assert abs(summary['DCF EV (USD bn)'] - 788.5394443995484) < 1e-8
+    assert abs(projection.loc[projection.year.eq(2028), 'ufcf_usdbn'].iloc[0] - 18.16) < 1e-8
     projection.to_csv(ROOT/'eventstudy/anthropic_ipo_projection.csv', index=False)
     pd.DataFrame(summary.items(), columns=['metric','value']).to_csv(ROOT/'eventstudy/anthropic_ipo_summary.csv', index=False)
     rows=[]

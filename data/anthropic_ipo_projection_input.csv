@@ -1,7 +1,7 @@
 year,revenue_growth,ebit_margin,da_to_revenue,capex_to_revenue,nwc_to_revenue,classification
-2026,,,,,0.02,analyst revenue anchor USD60bn; not reported annual revenue
+2026,,,,,0.02,analyst revenue anchor USD64bn from supplied October 11 model; not reported annual revenue
 2027,1.00,0.10,0.03,0.08,0.02,analyst assumption
-2028,0.625,0.20,0.03,0.08,0.02,growth calibrated to USD195bn midpoint of reported 2028 forecast
+2028,0.5234375,0.20,0.03,0.08,0.02,growth calibrated to USD195bn midpoint of reported 2028 forecast
 2029,0.35,0.25,0.03,0.08,0.02,analyst assumption
 2030,0.25,0.30,0.03,0.08,0.02,analyst assumption
 2031,0.20,0.32,0.03,0.08,0.02,analyst assumption

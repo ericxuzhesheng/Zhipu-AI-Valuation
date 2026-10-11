@@ -38,3 +38,14 @@ venv/
 
 # third-party copyrighted reference PDFs — keep local, do not publish
 /reference/
+
+# October refresh scratch files and imported local runtime/diagnostics
+/tmp/1011_runtime/
+/tmp/1011_sources/
+/tmp/refresh_1011_workbook.json
+/tmp/update_docs_1011.py
+/tmp/finish_docs_1011.py
+/model/*.inspect.ndjson
+/anthropic/2026-10-11/node_modules/
+/anthropic/2026-10-11/.workbuddy/
+/anthropic/2026-10-11/diagnostics/

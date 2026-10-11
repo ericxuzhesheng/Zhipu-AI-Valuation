@@ -1,0 +1,13 @@
+cohort,company,ticker,equity_value_usdbn,enterprise_value_usdbn,revenue_usdbn,revenue_basis,revenue_growth,multiple_x,as_of,source_id,treatment
+frontier_private,OpenAI - last priced round,Private,852,n.a.,70,"ARR, Sep-26",n.a.,12.17142857142857,Mar-26 / Sep-26,S14,supplied model; not independently verified; excluded from Zhipu core range
+frontier_private,OpenAI - secondary mark,Private,1200,n.a.,70,"ARR, Sep-26",n.a.,17.142857142857142,Oct-26,S14,supplied model; not independently verified; excluded from Zhipu core range
+frontier_private,Anthropic - last priced round,TARGET,965,n.a.,65,"ARR, Jul-26",n.a.,14.846153846153847,May-26 / Jul-26,"S1, S6",supplied model; not independently verified; excluded from Zhipu core range
+frontier_private,xAI,Private,250,n.a.,n.a.,[MISSING],n.a.,n.a.,Feb-26,S15,supplied model; not independently verified; excluded from Zhipu core range
+frontier_private,Mistral AI,Private,24,n.a.,n.a.,[MISSING],n.a.,n.a.,Sep-26,S15,supplied model; not independently verified; excluded from Zhipu core range
+software_growth,Palantir,PLTR,439,432,8.15,2026E revenue,0.6,53.00613496932515,Aug-26,S13,supplied model; not independently verified; excluded from Zhipu core range
+software_growth,Cloudflare,NET,110,109,2.62,2026E revenue,0.36,41.603053435114504,Aug-26,S13,supplied model; not independently verified; excluded from Zhipu core range
+software_growth,CrowdStrike,CRWD,220,218,8.91,NTM revenue,0.22,24.466891133557798,Aug-26,S16,supplied model; not independently verified; excluded from Zhipu core range
+software_growth,Snowflake,SNOW,130,128,9.35,NTM revenue,0.28,13.689839572192513,Oct-26,S16,supplied model; not independently verified; excluded from Zhipu core range
+software_growth,SpaceX,Private/listed,n.a.,n.a.,n.a.,2026E revenue,n.a.,41.6,Aug-26,S13,supplied model; not independently verified; excluded from Zhipu core range
+neocloud,CoreWeave,CRWV,58,86.6,12.93,2026E revenue,1.2,6.697602474864656,May-26,S17,supplied model; not independently verified; excluded from Zhipu core range
+neocloud,Nebius,NBIS,55,56.6,3.2,2026E revenue,3,17.6875,Jun-26,S17,supplied model; not independently verified; excluded from Zhipu core range

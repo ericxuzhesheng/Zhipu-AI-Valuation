@@ -52,3 +52,12 @@ venv/
 /anthropic/2026-10-11/node_modules/
 /anthropic/2026-10-11/.workbuddy/
 /anthropic/2026-10-11/diagnostics/
+
+# Reproducible build intermediates and workbook previews
+*.xdv
+*.nav
+*.snm
+*.vrb
+/anthropic/2026-10-11/previews/
+/anthropic/2026-10-11/*.png
+/anthropic/2026-10-11/verification.json

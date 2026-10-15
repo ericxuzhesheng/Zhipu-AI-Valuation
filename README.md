@@ -196,7 +196,7 @@ MiniMax 的主线事件现补齐 M2.5（2 月 12 日）、M2.7 和 M3。H3（7 �
 ├── eventstudy/            # 事件研究 CAR 结果与 Base Case 预测 (csv)
 ├── figures/               # 论文/README 图表
 ├── data/                  # 行情与分层估值可比口径 CSV
-├── OUTLINE.md / DATA_TABLES.md / EVENT_STUDY.md  # 过程文档
+├── DATA_TABLES.md / EVENT_STUDY.md  # 数据口径与事件研究说明
 ```
 
 本次文章修订不设字数上限。常规校验仍保留课程字数限制；检查本次扩展稿时使用 `python scripts/validate_outputs.py --ignore-word-limits`。
@@ -347,6 +347,8 @@ The five-event sample and short listing history limit the immediate-repricing re
 This article revision has no word-count cap. The default validator retains the course limits; use `python scripts/validate_outputs.py --ignore-word-limits` to check the expanded draft.
 
 ### October refresh
+
+Market-data updater: `python scripts/fetch_latest_data.py --end-date 20261014 --source public`. Historical snapshots and retired refresh scripts are available in Git history.
 
 `python scripts/refresh_1011.py` rebuilds the valuation snapshot from staged market data; `python scripts/anthropic_ipo_crosscheck.py` reproduces the latest companion assumptions. Workbook edits use the bundled artifact-tool; PDF outputs use local XeLaTeX. The original August event sample remains fixed.
 

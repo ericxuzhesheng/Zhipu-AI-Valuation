@@ -42,6 +42,9 @@ venv/
 # October refresh scratch files and imported local runtime/diagnostics
 /tmp/1011_runtime/
 /tmp/1011_sources/
+/tmp/1015_sources/
+/tmp/1015_runtime/
+/tmp/update_current.py
 /tmp/refresh_1011_workbook.json
 /tmp/update_docs_1011.py
 /tmp/finish_docs_1011.py

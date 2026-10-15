@@ -1,4 +1,4 @@
-"""Rebuild the October 9 valuation snapshot, retaining the fixed August event cohort."""
+"""Rebuild the October 14 valuation snapshot, retaining the fixed August event cohort."""
 from pathlib import Path
 import json
 import pandas as pd
@@ -7,8 +7,8 @@ import comps_beta_and_reverse_dcf as reverse
 import event_panel
 
 ROOT = Path(__file__).resolve().parents[1]
-DATE = '2026-10-09'
-CUTOFF = 20261009
+DATE = '2026-10-14'
+CUTOFF = 20261014
 
 def main():
     assert r.MARKET.date.strftime('%Y-%m-%d') == DATE
@@ -22,6 +22,15 @@ def main():
         comps.loc[mask,'equity_value_bn'] *= float(prices.loc[CUTOFF,'close']) / float(prices.loc[old_date,'close'])
         comps.loc[mask,'valuation_date'] = DATE
         comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {DATE}; share-count and FX basis carried forward from 2026-08-31.'
+    bridge = pd.read_csv(ROOT/'data/comps_price_bridge.csv')
+    for company, rows in bridge.groupby('company'):
+        mask = comps.company.eq(company)
+        old_date = comps.loc[mask,'valuation_date'].iloc[0]
+        prices = rows.set_index('trade_date').close
+        comps.loc[mask,'equity_value_bn'] *= float(prices.loc[DATE]) / float(prices.loc[old_date])
+        comps.loc[mask,'valuation_date'] = DATE
+        comps.loc[mask,'valuation_source_url'] = rows.source_url.iloc[0]
+        comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {DATE}; August share-count and FX basis retained, not a newly verified market capitalization.'
     comps.loc[comps.company.eq('Zhipu'),'valuation_date'] = DATE
     comps.to_csv(path,index=False)
     r.write_price_summary_csv()
@@ -49,9 +58,9 @@ def main():
     for company,filename in [('Zhipu','Zhipu_KnowledgeAtlas_daily.csv'),('MiniMax','MiniMax_daily.csv'),('Wenge AI','WengeAI_daily.csv')]:
         prices = pd.read_csv(ROOT/'data'/filename).set_index('trade_date').close
         returns.append(dict(company=company,data_cutoff=DATE,close_0930=float(prices.loc[20260930]),
-            close_1009=float(prices.loc[CUTOFF]),return_from_0930_pct=(prices.loc[CUTOFF]/prices.loc[20260930]-1)*100,
+            latest_close=float(prices.loc[CUTOFF]),return_from_0930_pct=(prices.loc[CUTOFF]/prices.loc[20260930]-1)*100,
             return_from_0831_pct=(prices.loc[CUTOFF]/prices.loc[20260831]-1)*100))
-    pd.DataFrame(returns).to_csv(ROOT/'eventstudy/october_01_09_returns.csv',index=False)
+    pd.DataFrame(returns).to_csv(ROOT/'eventstudy/october_returns.csv',index=False)
     multiple = float(comps.loc[comps.company.eq('MiniMax'),'multiple_x'].iloc[0])
     peer_price = multiple*r.REV_LTM_USDM/r.SHARES_M*r.USD_HKD
     growth, revenue = reverse.solve_required_path(r.WACC,0.40)

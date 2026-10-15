@@ -148,7 +148,7 @@ body{font-family:'Segoe UI',Arial,'Microsoft YaHei','PingFang SC',sans-serif;
   </div>
   <div class="field">
     <label id="lb_mktprice">当前市价 (HK$)</label>
-    <input id="inp_mktprice" type="number" value="793" step="1">
+    <input id="inp_mktprice" type="number" value="572" step="1">
   </div>
   <div class="field">
     <label id="lb_exchange">上市板块</label>
@@ -246,11 +246,11 @@ body{font-family:'Segoe UI',Arial,'Microsoft YaHei','PingFang SC',sans-serif;
           </div>
           <div class="input-group">
             <label class="t" data-cn="净现金 (US$M)" data-en="Net Cash (US$M)">净现金 (US$M)</label>
-            <input id="dcf_cash" type="number" value="4289.424" step="50">
+            <input id="dcf_cash" type="number" value="6292.850241" step="50">
           </div>
           <div class="input-group">
             <label class="t" data-cn="总股本 (百万股)" data-en="Shares (Million)">总股本 (百万股)</label>
-            <input id="dcf_shares" type="number" value="465.62309" step="1">
+            <input id="dcf_shares" type="number" value="487.58809" step="1">
           </div>
         </div>
         <div class="input-row-4">
@@ -434,9 +434,9 @@ body{font-family:'Segoe UI',Arial,'Microsoft YaHei','PingFang SC',sans-serif;
     <div class="grid-2">
       <div>
         <p style="font-size:.82rem;margin-bottom:12px" class="t"
-           data-cn="添加可比公司，比较股权价值/收入倍数。注意区分上市公司市值与私募交易估值，并核对收入期间。"
-           data-en="Add comparable firms to compare equity-value/revenue multiples. Distinguish public market capitalisation from private transaction value and check each revenue period.">
-          添加可比公司，比较股权价值/收入倍数。注意区分上市公司市值与私募交易估值，并核对收入期间。
+           data-cn="智谱预设行情截至 2026-10-14；现金桥未扣未披露期后消耗。目标倍数使用 FY2026E，MiniMax 使用 LTM，仅展示、不入私募中位数。本教学工具的 CAPM 默认得出 13.6%，论文另取 13.5%。"
+           data-en="Zhipu preset prices: 2026-10-14. The cash bridge excludes undisclosed cash burn. Target multiple uses FY2026E; MiniMax uses LTM and is excluded from the private median. Demo CAPM gives 13.6%; the paper assumes 13.5%.">
+          智谱预设行情截至 2026-10-14；现金桥未扣未披露期后消耗。目标倍数使用 FY2026E，MiniMax 使用 LTM，仅展示、不入私募中位数。本教学工具的 CAPM 默认得出 13.6%，论文另取 13.5%。
         </p>
         <div class="input-row-3" style="margin-bottom:12px">
           <div class="input-group">
@@ -521,7 +521,7 @@ let comps = [
   {name:'OpenAI', val:852, rev:25},
   {name:'Anthropic', val:965, rev:47},
   {name:'Mistral', val:11.7, rev:0.3},
-  {name:'MiniMax', val:12.088915, rev:0.165182},
+  {name:'MiniMax (LTM; reference)', val:9.14280221495621, rev:0.165182, include:false},
 ];
 let charts = {};
 
@@ -947,7 +947,7 @@ function calcMultiples(){
   });
   tbl.innerHTML=html;
 
-  const peerMults=comps.map(c=>c.val/c.rev).sort((a,b)=>a-b);
+  const peerMults=comps.filter(c=>c.include!==false).map(c=>c.val/c.rev).sort((a,b)=>a-b);
   const mid=Math.floor(peerMults.length/2);
   const median=peerMults.length===0?0:(peerMults.length%2?peerMults[mid]:(peerMults[mid-1]+peerMults[mid])/2);
   const premium=median>0?(targetMult/median):0;
@@ -1000,7 +1000,7 @@ function calcScorecard(dcfResult, rdcfResult){
   const mktCapUSDM=mkt*val('dcf_shares')/val('dcf_fx');
   const rev2026=val('dcf_rev');
   const targetMult=mktCapUSDM/rev2026;
-  const peerMults=comps.map(c=>c.val/c.rev).sort((a,b)=>a-b);
+  const peerMults=comps.filter(c=>c.include!==false).map(c=>c.val/c.rev).sort((a,b)=>a-b);
   const mid=Math.floor(peerMults.length/2);
   const median=peerMults.length===0?35:(peerMults.length%2?peerMults[mid]:(peerMults[mid-1]+peerMults[mid])/2);
   const premium=median>0?(targetMult/median):99;
@@ -1156,10 +1156,10 @@ function recalcAll(){
 function loadPreset(key){
   if(!key) return;
   const presets={
-    zhipu:{company:'智谱 (Knowledge Atlas)',ticker:'2513.HK',sector:'AI / 大模型',ipo:116.2,mkt:793,exchange:'HKEX 18C',
-      rf:4,erp:6,beta:1.6,tax:15,dv:0,kd:5,rev2025:102,rev:700,cash:4289.424,shares:465.62309,g:4,fx:7.8,m0:-100,dtax:15,
+    zhipu:{company:'智谱 (Knowledge Atlas)',ticker:'2513.HK',sector:'AI / 大模型',ipo:116.2,mkt:572,exchange:'HKEX 18C',
+      rf:4,erp:6,beta:1.6,tax:15,dv:0,kd:5,rev2025:102,rev:700,cash:6292.850241,shares:487.58809,g:4,fx:7.8,m0:-100,dtax:15,
       bear:{p:.35,g1:40,gn:6,tm:18,sc:2},base:{p:.45,g1:56,gn:8,tm:28,sc:1.8},bull:{p:.2,g1:85,gn:12,tm:35,sc:1.6},
-      comps:[{name:'OpenAI',val:852,rev:25},{name:'Anthropic',val:965,rev:47},{name:'Mistral',val:11.7,rev:.3},{name:'MiniMax',val:12.088915,rev:.165182}]},
+      comps:[{name:'OpenAI',val:852,rev:25},{name:'Anthropic',val:965,rev:47},{name:'Mistral',val:11.7,rev:.3},{name:'MiniMax (LTM; reference)',val:9.14280221495621,rev:.165182,include:false}]},
     generic_ai:{company:'Generic AI Startup',ticker:'XXXX.HK',sector:'AI SaaS',ipo:50,mkt:120,exchange:'HKEX Main',
       rf:4,erp:6,beta:1.3,tax:15,dv:5,kd:6,rev2025:60,rev:100,cash:200,shares:500,g:3.5,fx:7.8,m0:-20,dtax:15,
       bear:{p:.3,g1:30,gn:5,tm:15,sc:2.2},base:{p:.45,g1:45,gn:8,tm:25,sc:1.8},bull:{p:.25,g1:70,gn:12,tm:32,sc:1.5},

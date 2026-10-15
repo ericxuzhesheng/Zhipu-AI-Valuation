@@ -1,6 +1,6 @@
 data_cutoff,company,ticker,event,day0,event_type,source_type,included,exclusion_reason,leakage_mean,react_mean,drift_mean,react_peer,drift_peer,raw_day0_return,leakage_days,reaction_days,drift_days,drift_full
-2026-10-09,Zhipu,02513.HK,ZCode evening response / public source,2026-09-21,product_trust,dated disclosures; first subsequent session; overlapping news,True,,9.85,-0.53,16.81,0.79,10.99,1.79,5,2,9,True
-2026-10-09,MiniMax,00100.HK,Code CLI evening release,2026-09-21,developer_tool,dated disclosures; first subsequent session; overlapping news,True,,21.19,-2.61,0.03,-0.79,-10.99,-1.65,5,2,9,True
-2026-10-09,Zhipu,02513.HK,Formal interim report,2026-09-25,financial_disclosure,dated disclosures; first subsequent session; overlapping news,True,,0.48,3.0,26.41,7.85,18.77,-0.78,5,2,8,False
-2026-10-09,MiniMax,00100.HK,M3.1-Flash-Preview availability,2026-09-28,capability_preview,dated disclosures; first subsequent session; overlapping news,True,,-11.27,-13.34,-13.81,-9.58,-16.46,-9.08,5,2,7,False
-2026-10-09,Zhipu,02513.HK,September share awards,2026-10-02,share_award,dated disclosures; first subsequent session; overlapping news,True,,15.66,10.65,10.55,6.26,9.52,-2.26,5,2,4,False
+2026-10-14,Zhipu,02513.HK,ZCode evening response / public source,2026-09-21,product_trust,dated disclosures; first subsequent session; overlapping news,True,,9.85,-0.53,16.81,0.79,10.99,1.79,5,2,9,True
+2026-10-14,MiniMax,00100.HK,Code CLI evening release,2026-09-21,developer_tool,dated disclosures; first subsequent session; overlapping news,True,,21.19,-2.61,0.03,-0.79,-10.99,-1.65,5,2,9,True
+2026-10-14,Zhipu,02513.HK,Formal interim report,2026-09-25,financial_disclosure,dated disclosures; first subsequent session; overlapping news,True,,0.48,3.0,25.7,7.85,14.79,-0.78,5,2,9,True
+2026-10-14,MiniMax,00100.HK,M3.1-Flash-Preview availability,2026-09-28,capability_preview,dated disclosures; first subsequent session; overlapping news,True,,-11.27,-13.34,-15.01,-9.58,-10.5,-9.08,5,2,9,True
+2026-10-14,Zhipu,02513.HK,September share awards,2026-10-02,share_award,dated disclosures; first subsequent session; overlapping news,True,,15.66,10.65,9.46,6.26,2.43,-2.26,5,2,7,False

@@ -1,18 +1,18 @@
-# Anthropic IPO 底稿（研究更新至 2026-10-11）
+# Anthropic IPO 底稿（原始版本 2026-10-11，信息复核至 2026-10-14）
 
 2026-10-11 从 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/` 迁入，共 28 项原始内容；源文件夹已清空。原目录名虽含 20260930，Excel 和生成脚本的研究截止日实际为 2026-10-11。旧版保留在 [2026-09-30](../2026-09-30/README.md)。
 
 | 入口 | 内容 |
 |---|---|
 | [估值工作簿](Anthropic_IPO_Basic_Valuation.xlsx) | 原始 Valuation / Comps / Inputs 三表；保留迁入文件 |
-| [演示 PDF](Anthropic_IPO_Valuation_Beamer.pdf) | 原 7 页展示稿已同步 640 亿美元收入锚与新版 DCF |
+| [演示 PDF](Anthropic_IPO_Valuation_Beamer.pdf) | 8 页；同步收入锚、DCF，并补充 10 月 14 日信息及截止边界 |
 | [演示源文件](Anthropic_IPO_Valuation_Beamer.tex) | 本地 XeLaTeX 可编译 |
 | [生成脚本](build_model.mjs) | 输出路径改为本目录，不再写回源文件夹 |
 | [原核验结果](verification.json) | 迁入版本数值核对记录 |
 | [预览](previews/) | 迁入的工作表及旧展示稿截图；以当前 PDF 为准 |
-| [诊断与原展示稿](diagnostics/) | 编译中间文件、运行记录，以及修改前的 PDF / TeX |
+| [原展示稿](diagnostics/) | 修改前的 PDF / TeX；编译中间文件和临时运行记录已清理 |
 
-DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。研究截止日为 10 月 11 日，估值日假设为 12 月 31 日。2026 年 US$64bn 收入仍是分析者假设，不是已披露年度收入。
+DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。原始工作簿研究日为 10 月 11 日，信息复核至北京时间 10 月 14 日，估值日假设为 12 月 31 日。新增新加坡合作公告未披露可代入模型的收入；Q3 收入报道发布时已是北京时间 15 日，未纳入本次截止。2026 年 US$64bn 收入仍是分析者假设，不是已披露年度收入。
 
 ## 已纳入智谱项目
 
@@ -26,4 +26,4 @@ DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。研究截止
 - 经营亏损与净亏损可以因融资工具会计损益而不同，原表中「两种亏损不可能同时成立」的判断不采用。未公开 S-1 不代表不存在审计报表。
 - 所有私有二级市场、IPO 目标及媒体转述按原来源性质保留，不能等同已完成融资；原可比输入未逐项独立证实。
 
-`node_modules` 是指向 Codex 运行时的本机依赖链接；`.workbuddy` 和 diagnostics 保存迁入的本机记录，均不进入 Git。重新生成原始 Excel 会恢复底稿原有文字，请以上述说明及智谱集成结果为核对依据。
+`node_modules` 是指向 Codex 运行时的本机依赖链接；`.workbuddy` 保存迁入的本机记录，diagnostics 保留修改前的展示稿，均不进入 Git。重新生成原始 Excel 会恢复底稿原有文字，请以上述说明及智谱集成结果为核对依据。

@@ -50,7 +50,7 @@ The valuation estimates recover the operating conditions required by the observe
 - MiniMax's September 29 notice confirms the preview and forthcoming subscription migration; October offers remain prospective.
 - Eight sessions follow September 18 evening news: two reaction days and six drift days. The September 24 report has four later sessions. Original August events remain fixed.
 - Anthropic: 2027–2036 UFCF, 12% WACC / 3% terminal growth; US$1,950bn revenue-multiple EV versus US$788.3bn DCF EV. This is an illustration of commercialization conditions and valuation methods, not an extra Zhipu target price or empirical validation. IPO targets stay outside completed financing comparables.
-- See [September 30 update](UPDATE_2026-09-30.md) and [Anthropic comparison](ANTHROPIC_COMPARISON.md).
+- See [source evidence](data/weekly_events_2026-09-30.csv) and [Anthropic comparison](ANTHROPIC_COMPARISON.md).
 
 ## Sourcing policy (granular; primary > news)
 Key data cite, via the bibliography:

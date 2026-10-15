@@ -550,7 +550,7 @@ def write_workbook(valuation_comps: pd.DataFrame) -> None:
         (
             "Net cash + ST investments (US$m, pro forma)",
             NET_CASH_USDM,
-            "June unrestricted net cash plus July and September placements plus CB net cash less issue-date principal proxy; excludes undisclosed subsequent cash burn; see UPDATE_2026-09-24.md",
+            "June unrestricted net cash plus July and September placements plus CB net cash less issue-date principal proxy; excludes undisclosed subsequent cash burn; see data/zhipu_financials_input.csv",
         ),
         ("Market date", MARKET.date.strftime("%Y-%m-%d"), "derived from data/Zhipu_KnowledgeAtlas_daily.csv"),
         ("Market price (HK$)", MARKET.price_hkd, None),

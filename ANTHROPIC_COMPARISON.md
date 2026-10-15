@@ -1,8 +1,8 @@
 # Anthropic IPO：收入预期与现金流估值对照
 
-本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息截止 **2026-10-11**；模型估值日假设为 **2026-12-31**，与智谱 10 月 9 日的实际市场价格存在约三个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
+本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-10-14（北京时间）**；模型估值日假设为 **2026-12-31**，与智谱 10 月 14 日的实际市场价格存在约三个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
 
-原始底稿现已归档到 [anthropic/2026-10-11](anthropic/2026-10-11/README.md)，包括[活公式 Excel](anthropic/2026-10-11/Anthropic_IPO_Basic_Valuation.xlsx)、[7 页英文 Beamer](anthropic/2026-10-11/Anthropic_IPO_Valuation_Beamer.pdf)、TeX 源文件、模型生成脚本、核验结果与工作表预览。原来源为 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/`；本仓库的文件和数值复算不依赖该外部路径。
+原始底稿现已归档到 [anthropic/2026-10-11](anthropic/2026-10-11/README.md)，包括[活公式 Excel](anthropic/2026-10-11/Anthropic_IPO_Basic_Valuation.xlsx)、[8 页英文 Beamer](anthropic/2026-10-11/Anthropic_IPO_Valuation_Beamer.pdf)、TeX 源文件、模型生成脚本、核验结果与工作表预览。原来源为 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/`；本仓库的文件和数值复算不依赖该外部路径。
 
 ## 两种估值与两种事实口径
 
@@ -21,6 +21,12 @@
 Anthropic [5 月 28 日官方融资公告](https://www.anthropic.com/news/series-h)披露投后估值 US$965bn、收入 run-rate 超过 US$47bn；[6 月 1 日官方公告](https://www.anthropic.com/news/confidential-draft-s1-sec)确认向 SEC 提交保密 S-1 草案，未确定发行价格或股数。Reuters 的[2028 年收入预测报道](https://www.investing.com/news/stock-market-news/anthropic-ipo-valuation-hinges-on-190200-billion-2028-revenue-forecast-sources-say-4862222)以知情人士为来源，正文电头为 8 月 14 日、转载页为 8 月 17 日。上述预测不是经审计业绩。
 
 Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-Anthropic%2BIPO%2Bprospectus%2Blays%2Bbare%2Bdeep%2Bdependence%2Bon%2BBig%2BTech%2Bpartners/27123187.html)于 9 月 29 日 16:52 EDT 发布，即北京时间 9 月 30 日 04:52，属于本期截止范围；约 US$2tn 目标仍按报道信息处理。它不替换已完成融资的 20.5× 可比值，也不加入原私募区间的中位数。
+
+## 截止日内的新信息
+
+[10 月 14 日官方公告](https://www.anthropic.com/news/singapore-office-opening)确认设立新加坡办公室，并与新加坡政府签署合作备忘录。公司列举 GovTech、DBS、Grab 等采用场景，但没有披露可直接映射到本模型的新增收入或现金流，因此不据此提高预测。
+
+Reuters 关于三季度收入 US$16.8bn 的[报道](https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221)最初发布时间为 10 月 14 日 23:25 BST，即北京时间 **10 月 15 日 06:25**，晚于本次信息截止。该数据不进入 14 日估值；季度收入、季度年化收入和全年收入不能混用。原 Excel 是 10 月 11 日收到的底稿，保留原始研究日期和假设；本次复算确认现有预测下 DCF 仍为 US$788.5bn。
 
 ## 可复算的现金流假设
 

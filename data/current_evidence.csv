@@ -1,0 +1,11 @@
+date,company,event,source_url,valuation_treatment
+2026-09-30,Zhipu,1222934 share awards granted after close,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0930/2026093002448_c.pdf,Unvested awards; no September issued-share addition; next session October 2
+2026-10-02,Zhipu,September monthly return released after close,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1002/2026100201832_c.pdf,263059605 H shares plus 224528485 unlisted shares confirms 487588090 total
+2026-10-09,Zhipu,Share-award performance conditions supplemented after close,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1009/2026100900566_c.pdf,No issued-share or forecast change; cannot explain October 9 close
+2026-10-11,Anthropic,Supplied workbook research cutoff,anthropic/2026-10-11/Anthropic_IPO_Basic_Valuation.xlsx,USD64bn analyst 2026 revenue anchor; independent DCF USD788.539bn; not a completed transaction
+2026-10-14,Zhipu,Close HKD572; unchanged issued-share basis,https://cn.investing.com/equities/knowledge-atlas-tech-joint-stock-historical-data,USD35.75646bn; LTM170.6907x; September monthly return remains share-count source
+2026-10-14,Public comparables,All public comparable prices refreshed,data/comps_price_bridge.csv,Price-only bridge retains dated peer share counts; FX and revenue periods are not refreshed observations
+2026-10-12,ZCode,Desktop v3.15.1: HighSpeed random trial and workflow/permission changes,https://zcode.z.ai/en/changelog,Release hour unavailable; no causal CAR assignment or revenue uplift
+2026-10-13,ZCode,Desktop v3.15.3: update login and parallel-request fixes,https://zcode.z.ai/en/changelog,Desktop and GitHub source release dates differ; no demonstrated historical-data deletion or quantified financial effect
+2026-10-14,Anthropic,Singapore office and government MOU,https://www.anthropic.com/news/singapore-office-opening,Adoption context only; no quantified incremental revenue; retain analyst forecast
+2026-10-15,Anthropic,Q3 revenue Reuters report published 06:25 Beijing time,https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221,Excluded from October14 Beijing information cutoff; never backdate US publication date

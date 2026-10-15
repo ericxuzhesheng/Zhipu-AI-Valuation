@@ -1,4 +1,4 @@
-"""Stage October 1-9 prices; append only after all eleven series validate."""
+"""Stage October 12-14 prices; append only after all eleven series validate."""
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
@@ -7,7 +7,7 @@ import pandas as pd
 import requests
 
 ROOT = Path(__file__).resolve().parents[1]
-STAGE = ROOT / 'tmp/1011_sources'
+STAGE = ROOT / 'tmp/1015_sources'
 STAGE.mkdir(parents=True, exist_ok=True)
 SPECS = {
     'Zhipu_KnowledgeAtlas': 'hk02513', 'MiniMax': 'hk00100', 'WengeAI': 'hk01956',
@@ -18,14 +18,14 @@ SPECS = {
 def fetch(spec):
     name, symbol = spec
     old = pd.read_csv(ROOT / f'data/{name}_daily.csv')
-    assert int(old.trade_date.max()) == 20260930, name
+    assert int(old.trade_date.max()) == 20261009, name
     if symbol.startswith('hk'):
         url = 'https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get'
-        params = {'param': f'{symbol},day,2026-09-30,2026-10-09,640,qfq'}
+        params = {'param': f'{symbol},day,2026-10-09,2026-10-14,640,qfq'}
     else:
         url = f'https://query1.finance.yahoo.com/v8/finance/chart/{symbol}'
-        params = {'period1': int(datetime(2026, 9, 30, tzinfo=timezone.utc).timestamp()),
-                  'period2': int(datetime(2026, 10, 10, tzinfo=timezone.utc).timestamp()), 'interval': '1d'}
+        params = {'period1': int(datetime(2026, 10, 9, tzinfo=timezone.utc).timestamp()),
+                  'period2': int(datetime(2026, 10, 15, tzinfo=timezone.utc).timestamp()), 'interval': '1d'}
     response = requests.get(url, params=params, headers={'User-Agent': 'Mozilla/5.0'}, timeout=40)
     response.raise_for_status()
     payload = response.json()
@@ -37,7 +37,7 @@ def fetch(spec):
             records.append(dict(trade_date=int(row[0].replace('-','')), open=float(row[1]),
                 close=float(row[2]), high=float(row[3]), low=float(row[4]), vol=float(row[5]),
                 amount=float(row[8])*10000))
-        expected = [20261002,20261005,20261006,20261007,20261008,20261009]
+        expected = [20261012,20261013,20261014]
     else:
         result = payload['chart']['result'][0]
         quote = result['indicators']['quote'][0]
@@ -47,11 +47,11 @@ def fetch(spec):
             records.append(dict(trade_date=int(datetime.fromtimestamp(timestamp, timezone.utc).strftime('%Y%m%d')),
                 **{key:round(quote[key][i], 4) for key in ('open','high','low','close')},
                 vol=quote['volume'][i], amount=quote['volume'][i]*quote['close'][i]))
-        expected = [20261001,20261002,20261005,20261006,20261007,20261008,20261009]
+        expected = [20261012,20261013,20261014]
     rows = []
     previous = float(old.close.iloc[-1])
     for row in records:
-        if not 20260930 < row['trade_date'] <= 20261009:
+        if not 20261009 < row['trade_date'] <= 20261014:
             continue
         assert row['low'] <= min(row['open'],row['close']) <= max(row['open'],row['close']) <= row['high']
         row.update(ts_code=old.ts_code.iloc[-1], pre_close=previous,
@@ -66,7 +66,7 @@ def fetch(spec):
 if __name__ == '__main__':
     with ThreadPoolExecutor(max_workers=6) as pool:
         staged = list(pool.map(fetch, SPECS.items()))
-    assert abs(dict(staged)['Zhipu_KnowledgeAtlas'].close.iloc[-1] - 641.5) < 1e-8
+    assert abs(dict(staged)['Zhipu_KnowledgeAtlas'].close.iloc[-1] - 572.0) < 1e-8
     for name, new in staged:
         path = ROOT / f'data/{name}_daily.csv'
         original = path.read_bytes()

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+from unittest.mock import patch
 import sys
 from pathlib import Path
 
@@ -11,6 +12,31 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import event_panel
 import rebuild_outputs
+import fetch_latest_data
+import anthropic_ipo_crosscheck
+
+
+class MarketDataTests(unittest.TestCase):
+    def test_yahoo_bar_dates_and_returns(self) -> None:
+        columns = ['ts_code', 'trade_date', 'open', 'high', 'low', 'close',
+                   'pre_close', 'change', 'pct_chg', 'vol', 'amount']
+        existing = pd.DataFrame([['02513.HK', '20261014', 605.5, 606.5, 566, 572,
+                                  601, -29, -4.825, 3871717, 0]], columns=columns)
+        dates = ['2026-10-14', '2026-10-15', '2026-10-16', '2026-10-17']
+        payload = {'chart': {'result': [{
+            'timestamp': [int(pd.Timestamp(d, tz='UTC').timestamp()) for d in dates],
+            'indicators': {'quote': [{'open': [605.5, 535, 529, 0],
+                                     'high': [606.5, 544.5, 541.5, 0],
+                                     'low': [566, 504.5, 513.5, 0],
+                                     'close': [572, 513.5, 518, 0],
+                                     'volume': [3871717, 6669040, 3446822, 0]}]}}]}}
+        with patch.object(fetch_latest_data, 'request_json', return_value=payload) as request:
+            result = fetch_latest_data.fetch_yahoo(existing, 'hk02513', '20261015', '20261016')
+        self.assertIn('/2513.HK', request.call_args.args[0])
+        self.assertEqual(result.trade_date.tolist(), ['20261015', '20261016'])
+        self.assertEqual(result.pre_close.tolist(), [572, 513.5])
+        self.assertAlmostEqual(result.iloc[0].pct_chg, (513.5 / 572 - 1) * 100)
+        self.assertAlmostEqual(result.iloc[1].amount, 518 * 3446822)
 
 
 class EventPanelTests(unittest.TestCase):
@@ -84,6 +110,17 @@ class EventPanelTests(unittest.TestCase):
 
 
 class ValuationTests(unittest.TestCase):
+    def test_anthropic_latest_disclosures_and_historical_benchmark(self) -> None:
+        _, latest = anthropic_ipo_crosscheck.calculate()
+        _, historical = anthropic_ipo_crosscheck.calculate(ipo_benchmark=2000)
+        self.assertEqual(latest['Information cutoff'], '2026-10-16 (Beijing time)')
+        self.assertEqual(latest['Reported IPO equity benchmark (USD bn)'], 1500)
+        self.assertAlmostEqual(latest['Reported Q1-Q3 revenue (USD bn)'], 33.1)
+        self.assertAlmostEqual(latest['Q4 revenue required for annual anchor (USD bn)'], 30.9)
+        self.assertAlmostEqual(latest['DCF EV (USD bn)'], historical['DCF EV (USD bn)'])
+        self.assertLess(latest['Required terminal EBIT margin at benchmark'],
+                        historical['Required terminal EBIT margin at benchmark'])
+
     def test_base_case_includes_completed_september_financing(self) -> None:
         result = rebuild_outputs.project_scenario(rebuild_outputs.SCENARIOS[1])
         # Cash financing changes equity, not the operating enterprise value.
@@ -118,10 +155,11 @@ class ValuationTests(unittest.TestCase):
         self.assertAlmostEqual(float(included["multiple_x"].max()), 39.0, delta=0.15)
 
         minimax = comps.loc[comps["company"] == "MiniMax", "multiple_x"].iloc[0]
-        self.assertAlmostEqual(float(minimax), 55.3, delta=0.15)
+        minimax_input = inputs.loc[inputs.company.eq('MiniMax')].iloc[0]
+        self.assertAlmostEqual(float(minimax), float(minimax_input.equity_value_bn) / float(minimax_input.revenue_bn), delta=0.051)
 
         zhipu = comps.loc[comps["company"] == "Zhipu", "multiple_x"].iloc[0]
-        self.assertAlmostEqual(float(zhipu), 170.7, delta=0.15)
+        self.assertAlmostEqual(float(zhipu), rebuild_outputs.MARKET.revenue_multiple, delta=0.051)
         self.assertEqual(
             comps.loc[comps["company"] == "Zhipu", "revenue_basis"].iloc[0],
             "LTM through 2026H1",

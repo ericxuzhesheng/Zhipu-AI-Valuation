@@ -21,7 +21,7 @@
 \setbeamertemplate{itemize item}{\small\raise0.3ex\hbox{\textbullet}}
 \setbeamertemplate{footline}{%
   \leavevmode\hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.8ex,dp=1.3ex,leftskip=0.5cm,rightskip=0.5cm]{normal text}%
-    \scriptsize\color{Slate}Anthropic IPO valuation \hfill 14 Oct 2026 \hfill \insertframenumber/\inserttotalframenumber
+    \scriptsize\color{Slate}Anthropic IPO valuation \hfill 16 Oct 2026 \hfill \insertframenumber/\inserttotalframenumber
   \end{beamercolorbox}}}
 \setbeamersize{text margin left=0.6cm,text margin right=0.6cm}
 \hypersetup{colorlinks=true,urlcolor=Slate}
@@ -29,7 +29,7 @@
 \newcommand{\bn}{\,\text{bn}}
 \title{Anthropic IPO Valuation}
 \subtitle{A basic revenue-multiple model and a DCF cross-check}
-\date{14 October 2026}
+\date{16 October 2026}
 
 \begin{document}
 
@@ -57,11 +57,11 @@
   \end{columns}
   \vspace{0.18cm}
   \begin{itemize}
-    \item September reporting indicates an IPO equity target of about \$2tn.
-    \item The multiple supports that price mechanically. The DCF falls 60.6\% below it.
+    \item Latest investor discussion is about \$1.5tn; the earlier \$2tn is a historical stress case.
+    \item The assumed multiple gives a value 30.0\% above that discussion; the DCF is 47.4\% below it.
     \item Net cash is \textbf{assumed zero}; equity comparisons are illustrative.
   \end{itemize}
-  \source{Information cutoff: 14 Oct 2026. Assumed valuation date: 31 Dec 2026. All values in USD. [S2, S3]}
+  \source{Information cutoff: 16 Oct 2026. Assumed valuation date: 31 Dec 2026. All values in USD. [S2, S3]}
 \end{frame}
 
 % 2 --------------------------------------------------------------------------
@@ -227,14 +227,14 @@
       Lower discount rates increase the value of distant cash flows.
       \vspace{0.2cm}
 
-      Even the 10\% WACC / 4\% growth combination remains below the \$2tn benchmark.
+      Even the 10\% WACC / 4\% growth combination remains below the \$1.5tn discussion benchmark.
     \end{column}
   \end{columns}
   \source{Sensitivity keeps the explicit operating forecast fixed. Terminal revenue, UFCF, investment and discounting recalculate for each rate pair. Require $r>g$.}
 \end{frame}
 
 % 6 --------------------------------------------------------------------------
-\begin{frame}{What would a \$2 trillion valuation require?}
+\begin{frame}{What would a \$1.5 trillion discussion value require?}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.48\textwidth}
       \begin{block}{Revenue-multiple interpretation}
@@ -242,7 +242,7 @@
           \mathrm{EV}=\$195\bn\times10=\$1{,}950\bn
         \]
         \[
-          \frac{\$2{,}000\bn}{\$195\bn}=10.26\mathrm{x}
+          \frac{\$1{,}500\bn}{\$195\bn}=7.69\mathrm{x}
         \]
       \end{block}
       \small
@@ -256,15 +256,15 @@
         \small
         Holding the ten-year forecast, WACC and investment ratios fixed:
         \begin{itemize}
-          \item Required 2037 UFCF: \textbf{\$464.9bn}.
-          \item Required perpetual EBIT margin: \textbf{110.9\%}.
+          \item Required 2037 UFCF: \textbf{\$325.0bn}.
+          \item Required perpetual EBIT margin: \textbf{79.5\%}.
         \end{itemize}
       \end{block}
       \small
-      That margin exceeds revenue and is not economically feasible under this cost structure.
+      That margin is substantially above the assumed 35\% terminal margin.
       \vspace{0.2cm}
 
-      Supporting \$2tn therefore requires a different growth path, earlier cash generation, lower WACC or other material assumption changes.
+      Supporting \$1.5tn therefore requires a different growth path, earlier cash generation, lower WACC or other material assumption changes.
     \end{column}
   \end{columns}
   \source{Equity benchmark is compared with EV using assumed zero net cash. Actual cash, debt, convertible claims and share counts require an IPO-document update.}
@@ -282,7 +282,7 @@
         \end{itemize}
       \end{block}
       \small
-      \textbf{Assessment:} \$1.95tn is consistent with the selected revenue multiple. The \$788bn DCF shows that cash economics need much stronger assumptions to support the reported target.
+      \textbf{Assessment:} \$1.95tn is consistent with the selected revenue multiple. The \$788bn DCF shows that cash economics need much stronger assumptions to support the reported discussion value.
     \end{column}
     \begin{column}{0.47\textwidth}
       \footnotesize
@@ -299,14 +299,14 @@
   \source{Calculation snapshot from the accompanying editable Excel model. Recalculate and refresh the slides after changing assumptions.}
 \end{frame}
 
-\begin{frame}{Information reviewed through 14 October (Beijing time)}
+\begin{frame}{Information reviewed through 16 October (Beijing time)}
   \begin{itemize}
-    \item Anthropic announced its Singapore office and a government MOU on 14 October, with enterprise and public-sector adoption examples.
-    \item No quantified incremental revenue or cash flow was disclosed in that announcement. The existing forecast remains an analyst scenario.
-    \item Reuters' Q3 revenue report first appeared at 23:25 BST on 14 October, or 06:25 Beijing time on 15 October. It is outside this cutoff.
-    \item The supplied 11 October workbook is retained as original evidence. Its US\$64bn annual anchor is not replaced by a quarterly annualization.
+    \item Quarterly reports are now included; the unchanged \$64bn annual assumption requires \$30.9bn Q4 revenue, or 83.9\% sequential growth.
+    \item Latest investor discussion is \$1.5tn. The prior \$2tn remains a historical stress case; neither is completed pricing.
+    \item The companion workbook's cutoff, benchmark and quarterly reconciliation have been updated; operating assumptions remain explicit.
+    \item The independent-evaluator announcement adds governance context without a quantified forecast increment.
   \end{itemize}
-  \source{\href{https://www.anthropic.com/news/singapore-office-opening}{Anthropic: Singapore office and government MOU, 14 October 2026}.}
+  \source{\href{https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html}{Reuters IPO discussion, 16 Oct Beijing}; \href{https://www.anthropic.com/news/an-update-on-independent-evaluators}{Anthropic independent evaluators, 15 Oct}.}
 \end{frame}
 
 \end{document}

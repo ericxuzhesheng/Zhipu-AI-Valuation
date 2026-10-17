@@ -3,6 +3,8 @@
 Primary source: Tushare ``hk_daily`` / ``us_daily``.
 Public fallback: Tencent Finance (then East Money) daily K-lines for Hong
 Kong stocks and the official Nasdaq historical endpoint for US stocks.
+Yahoo Finance daily bars are the final public fallback; their amount field
+is a close-times-volume proxy rather than reported turnover.
 """
 
 from __future__ import annotations
@@ -22,6 +24,7 @@ DATA_DIR = ROOT / "data"
 EASTMONEY_URL = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
 TENCENT_URL = "https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get"
 NASDAQ_URL = "https://api.nasdaq.com/api/quote/{ticker}/historical"
+YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}"
 
 # csv filename, Tushare code, market, public-source identifier
 STOCKS = [
@@ -186,6 +189,35 @@ def parse_us_number(value: str) -> float:
     return float(str(value).replace("$", "").replace(",", ""))
 
 
+def fetch_yahoo(existing: pd.DataFrame, public_id: str, start_date: str, end_date: str) -> pd.DataFrame:
+    ticker = f"{int(public_id[2:]):04d}.HK" if public_id.startswith("hk") else public_id
+    payload = request_json(
+        YAHOO_URL.format(ticker=ticker),
+        params={
+            "period1": int(pd.Timestamp(start_date, tz="UTC").timestamp()),
+            "period2": int((pd.Timestamp(end_date, tz="UTC") + pd.Timedelta(days=1)).timestamp()),
+            "interval": "1d",
+        },
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
+    result = payload["chart"]["result"][0]
+    quotes = result["indicators"]["quote"][0]
+    records = []
+    for i, timestamp in enumerate(result.get("timestamp", [])):
+        day = pd.Timestamp(timestamp, unit="s", tz="UTC").strftime("%Y%m%d")
+        if not start_date <= day <= end_date:
+            continue
+        values = {key: quotes[key][i] for key in ("open", "high", "low", "close", "volume")}
+        if any(value is None for value in values.values()):
+            raise ValueError(f"{ticker}: incomplete daily bar for {day}")
+        if public_id.startswith("hk"):
+            for key in ("open", "high", "low", "close"):
+                values[key] = round(values[key], 3)
+        records.append({"trade_date": day, **{k: values[k] for k in ("open", "high", "low", "close")},
+                        "vol": values["volume"], "amount": values["close"] * values["volume"]})
+    return rows_with_returns(existing, records, str(existing.iloc[-1]["ts_code"]))
+
+
 def fetch_nasdaq(
     existing: pd.DataFrame,
     ticker: str,
@@ -286,6 +318,9 @@ def main() -> int:
             try:
                 new_data = fetch_tushare(pro, existing, ts_code, market, start_date, args.end_date)
                 source_used = "Tushare"
+                if new_data.empty and args.source == "auto":
+                    print("  WARN Tushare returned no rows; trying public sources")
+                    new_data = None
             except Exception as exc:
                 if args.source == "tushare":
                     errors.append(f"{csv_name}: Tushare: {exc}")
@@ -311,9 +346,16 @@ def main() -> int:
                     new_data = fetch_nasdaq(existing, public_id, start_date, args.end_date)
                     source_used = "Nasdaq"
             except Exception as exc:
-                errors.append(f"{csv_name}: public fallback: {exc}")
-                print(f"  ERROR public fallback: {exc}")
-                continue
+                print(f"  WARN public source unavailable; trying Yahoo Finance: {exc}")
+                new_data = None
+            if new_data is None or new_data.empty:
+                try:
+                    new_data = fetch_yahoo(existing, public_id, start_date, args.end_date)
+                    source_used = "Yahoo Finance (amount = close * volume proxy)"
+                except Exception as exc:
+                    errors.append(f"{csv_name}: Yahoo fallback: {exc}")
+                    print(f"  ERROR Yahoo fallback: {exc}")
+                    continue
 
         if new_data.empty:
             print(f"  no new rows ({source_used})")

@@ -1,4 +1,4 @@
-"""Rebuild the October 14 valuation snapshot, retaining the fixed August event cohort."""
+"""Rebuild the October 16 valuation snapshot, retaining the fixed August event cohort."""
 from pathlib import Path
 import json
 import pandas as pd
@@ -7,8 +7,8 @@ import comps_beta_and_reverse_dcf as reverse
 import event_panel
 
 ROOT = Path(__file__).resolve().parents[1]
-DATE = '2026-10-14'
-CUTOFF = 20261014
+DATE = '2026-10-16'
+CUTOFF = 20261016
 
 def main():
     assert r.MARKET.date.strftime('%Y-%m-%d') == DATE
@@ -21,6 +21,8 @@ def main():
         old_date = int(comps.loc[mask,'valuation_date'].iloc[0].replace('-',''))
         comps.loc[mask,'equity_value_bn'] *= float(prices.loc[CUTOFF,'close']) / float(prices.loc[old_date,'close'])
         comps.loc[mask,'valuation_date'] = DATE
+        symbol = {'MiniMax':'0100.HK', 'Wenge AI':'1956.HK'}[company]
+        comps.loc[mask,'valuation_source_url'] = f'https://query1.finance.yahoo.com/v8/finance/chart/{symbol}'
         comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {DATE}; share-count and FX basis carried forward from 2026-08-31.'
     bridge = pd.read_csv(ROOT/'data/comps_price_bridge.csv')
     for company, rows in bridge.groupby('company'):
@@ -32,6 +34,7 @@ def main():
         comps.loc[mask,'valuation_source_url'] = rows.source_url.iloc[0]
         comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {DATE}; August share-count and FX basis retained, not a newly verified market capitalization.'
     comps.loc[comps.company.eq('Zhipu'),'valuation_date'] = DATE
+    comps.loc[comps.company.eq('Zhipu'),'valuation_source_url'] = 'https://query1.finance.yahoo.com/v8/finance/chart/2513.HK'
     comps.to_csv(path,index=False)
     r.write_price_summary_csv()
     r.write_valuation_summary_csv()

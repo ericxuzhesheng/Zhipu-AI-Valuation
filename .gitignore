@@ -43,6 +43,8 @@ venv/
 /tmp/1011_runtime/
 /tmp/1011_sources/
 /tmp/1015_sources/
+/tmp/1017_sources/
+/scripts/node_modules/
 /tmp/1015_runtime/
 /tmp/update_current.py
 /tmp/refresh_1011_workbook.json
@@ -61,3 +63,4 @@ venv/
 /anthropic/2026-10-11/previews/
 /anthropic/2026-10-11/*.png
 /anthropic/2026-10-11/verification.json
+/anthropic/2026-10-11/*.inspect.ndjson

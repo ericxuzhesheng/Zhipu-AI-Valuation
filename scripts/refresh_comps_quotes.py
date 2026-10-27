@@ -9,7 +9,7 @@ import requests
 ROOT = Path(__file__).resolve().parents[1]
 SPECS = {'SenseTime':'hk00020', 'Phancy':'hk06682', 'Palantir':'PLTR',
          'Cloudflare':'NET', 'Snowflake':'SNOW'}
-END = '2026-10-16'
+END = '2026-10-23'
 
 def fetch(item):
     company, symbol = item
@@ -29,7 +29,7 @@ def fetch(item):
     if symbol.startswith('hk'):
         prices = {day: round(price, 3) for day, price in prices.items() if price is not None}
     return [dict(company=company,ticker=symbol,trade_date=d,close=prices[d],source_url=response.url)
-            for d in sorted({'2026-08-31', '2026-10-14', END})]
+            for d in sorted({'2026-08-31', '2026-10-16', END})]
 
 if __name__ == '__main__':
     with ThreadPoolExecutor(max_workers=5) as pool:

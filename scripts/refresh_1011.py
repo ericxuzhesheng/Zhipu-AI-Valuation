@@ -1,4 +1,4 @@
-"""Rebuild the October 16 valuation snapshot, retaining the fixed August event cohort."""
+"""Rebuild the October 23 valuation snapshot, retaining the fixed August event cohort."""
 from pathlib import Path
 import json
 import pandas as pd
@@ -7,8 +7,8 @@ import comps_beta_and_reverse_dcf as reverse
 import event_panel
 
 ROOT = Path(__file__).resolve().parents[1]
-DATE = '2026-10-16'
-CUTOFF = 20261016
+DATE = '2026-10-23'
+CUTOFF = 20261023
 
 def main():
     assert r.MARKET.date.strftime('%Y-%m-%d') == DATE
@@ -53,8 +53,16 @@ def main():
         ('Zhipu','02513.HK','Formal interim report','2026-09-25','financial_disclosure','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
         ('MiniMax','00100.HK','M3.1-Flash-Preview availability','2026-09-28','capability_preview','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
         ('Zhipu','02513.HK','September share awards','2026-10-02','share_award','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
+        ('MiniMax','00100.HK','M3.1 Flash general availability','2026-10-20','capability_release','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
+        ('Zhipu','02513.HK','ZCode v3.16.2','2026-10-20','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
+        ('MiniMax','00100.HK','Code Mini App','2026-10-22','developer_tool','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
+        ('Zhipu','02513.HK','ZCode v3.16.3','2026-10-23','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
+        ('MiniMax','00100.HK','Technology export registration after close','2026-10-26','regulatory_disclosure','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
     ]]
     supplement = event_panel.event_panel_rows(events)
+    supplement.loc[supplement.drift_days.eq(0), ['drift_mean', 'drift_peer']] = None
+    supplement.loc[supplement.day0.ge('2026-10-20'), 'source_type'] = 'official dated release; intraday timing unverified; provisional window; overlapping news'
+    supplement.loc[supplement.event.eq('Technology export registration after close'), 'source_type'] = 'HKEX 2026-10-23 22:33 Beijing; first subsequent session outside cutoff'
     supplement.insert(0,'data_cutoff',DATE)
     supplement.to_csv(ROOT/'eventstudy/october_window_update.csv',index=False)
     returns = []

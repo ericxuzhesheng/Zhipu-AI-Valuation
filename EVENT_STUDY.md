@@ -81,3 +81,9 @@ The 31 August boundary also prevents a tempting causal mistake. Zhipu rose 9.63%
 - Extensions: multi-lab panel (MiniMax, Wenge releases), NLP-scored surprise magnitude.
 
 *Inputs: market prices through 2026-08-31 for the core Zhipu/MiniMax series in `data/`; CAR tables to `eventstudy/car_robustness.csv`; charts to `figures/`.*
+
+## October 23 supplementary cutoff
+
+The core sample and bootstrap remain fixed. `eventstudy/october_window_update.csv` separately records M3.1 Flash general availability, ZCode v3.16.2/v3.16.3, and Code Mini App. October 19 has no Hong Kong session, so M3.1 Flash maps to October 20; only two drift sessions are observable. Mini App has two reaction sessions and no drift, while v3.16.3 has only one reaction session. Date-only same-day launch windows are provisional because publication times were not established. No-session CARs are missing, rather than zero returns.
+
+MiniMax's October 23 business update was released at 22:33 Beijing time. It belongs in the disclosure review, but its next-session event date of October 26 lies beyond the price cutoff, so no post-announcement CAR is reported. Source URLs and coverage limits are in [the October 23 review](DISCLOSURE_UPDATE_2026-10-23.md).

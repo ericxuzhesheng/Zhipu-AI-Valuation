@@ -15,3 +15,15 @@ date,company,event,source_url,valuation_treatment
 2026-10-16,Anthropic,Latest IPO investor discussion is USD1500bn,https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html,Available 05:00 Beijing; current comparison benchmark only; earlier USD2000bn retained as historical stress case
 2026-10-16,Disclosures,Source review through October16 completed,data/disclosure_review_2026-10-16.csv,Zhipu issuer feed checked; MiniMax list API retrieval limitation and media-only tutoring report explicitly recorded
 2026-10-16,MiniMax,Integrity and self-discipline pledge,https://www.minimax.cn/news/integrity-self-discipline-pledge,Governance context; no quantified revenue or completed financing
+2026-10-18,Anthropic,Public Benefit Fund,https://www.anthropic.com/news/public-benefit-fund,Subject to shareholder approval; no assumed share issuance or mechanical EV haircut
+2026-10-21,Anthropic,Claude Duet research preview,https://claude.com/resources/articles/claude-duet,Product distribution context; no quantified revenue or margin uplift
+2026-10-21,Anthropic,Long-Term Benefit Trust,https://www.anthropic.com/news/christopher-stubbs-joins-long-term-benefit-trust,Governance context; no forecast change
+2026-10-22,Anthropic,IPO timetable and valuation discussion,https://uk.marketscreener.com/news/anthropic-ipo-stands-alone-as-ai-market-jitters-sideline-others-ce785cdeda8cf026,Retain USD1500bn discussion benchmark; not completed pricing
+2026-10-22,Anthropic,Claude Platform on Google Cloud,https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed,Enterprise distribution context; no disclosed incremental revenue
+2026-10-22,Anthropic,Agent Skills donated to AAIF,https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation,Ecosystem context; adoption does not establish Anthropic revenue
+2026-10-23,Anthropic,Unified Claude Enterprise,https://claude.com/resources/articles/unified-claude-enterprise,Date-only boundary item; qualitative watchlist only; no valuation or event-window input
+2026-10-19,MiniMax,M3.1 Flash official availability,https://www.minimax.io/blog/minimax-m31f,Company claims; no revenue extrapolation; next HK session Oct20
+2026-10-20,ZCode,Desktop v3.16.2,https://zcode.z.ai/en/changelog,Workflow and security-fix claims; no quantified forecast change
+2026-10-22,MiniMax,Code Mini App,https://www.minimax.io/blog/minimax-code-mini-app-1792650729,Developer-tool launch; incomplete event window
+2026-10-23,ZCode,Desktop v3.16.3,https://zcode.z.ai/en/changelog,Date-only release; one observed session; no full reaction or drift
+2026-10-23,MiniMax,Technology export registration after close,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1023/2026102301675.pdf,22:33 Beijing disclosure; Oct23 close predates announcement; no financial input change

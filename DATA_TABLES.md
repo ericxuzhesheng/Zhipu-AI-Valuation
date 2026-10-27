@@ -1,7 +1,7 @@
 # Data Tables - Zhipu (2513.HK), MiniMax (00100.HK), Wenge AI (01956.HK)
 
-Market data via **Tushare `hk_daily`** with public-source fallback/cross-checks from **Tencent Finance / Yahoo Finance** (Hong Kong) and **Nasdaq / Yahoo Finance** (US), **as of 2026-10-16** (CSV in `data/`). New Hong Kong bars for October 15-16 use Yahoo Finance; `amount` is a close-times-volume proxy, not reported turnover.
-All 11 market series end on 2026-10-16. Information reviewed through 2026-10-16 (Beijing time); prices use local exchange dates. All public comparable prices are refreshed to October 16; peer share counts, FX and revenue periods retain their dated basis. Private transactions and the monthly-beta estimation sample remain historical. Dated disclosures and sources are recorded in the [evidence table](data/current_evidence.csv). Wenge H1 inputs remain in `data/wenge_financials_input.csv`.
+Market data via **Tushare `hk_daily`** with public-source fallback/cross-checks from **Tencent Finance / Yahoo Finance** (Hong Kong) and **Nasdaq / Yahoo Finance** (US), **as of 2026-10-23** (CSV in `data/`). October 20-23 Hong Kong bars use Tencent Finance and October 19-23 US bars use Nasdaq. The older October 15-16 Hong Kong Yahoo bars retain close-times-volume proxy amounts. All prices use exchange-local session dates; the Beijing information cutoff is separate from the US Friday close.
+All 11 market series end on 2026-10-23. Information reviewed through 2026-10-23 (Beijing time); prices use local exchange dates. All public comparable prices are refreshed to October 23; peer share counts, FX and revenue periods retain their dated basis. Private transactions and the monthly-beta estimation sample remain historical. Dated disclosures and sources are recorded in the [evidence table](data/current_evidence.csv). Wenge H1 inputs remain in `data/wenge_financials_input.csv`.
 Fundamentals come from the **HKEX Chapter-18C prospectus**, **2025 Annual Report**, and **H1 2026 interim-results announcement and September 24 interim report** (stock code 2513). All figures are consistent with the paper and `data/zhipu_financials_input.csv`.
 
 ---
@@ -19,17 +19,17 @@ Fundamentals come from the **HKEX Chapter-18C prospectus**, **2025 Annual Report
 | HQ / founded | Beijing, 2019 (Tsinghua KEG) | Shanghai, 2021 | Beijing, 2017 (CAS Inst. of Automation) |
 | Positioning | general foundation-model lab | general/multimodal foundation lab | enterprise decision-intelligence (DIOS/Decitron/Yayi) |
 
-## Table D2 - Market Performance (IPO to 2026-10-16)
+## Table D2 - Market Performance (IPO to 2026-10-23)
 
 | Metric | Zhipu | MiniMax | Wenge AI |
 |---|---|---|---|
 | IPO price (HK$) | 116.20 | 165.00 | 60.70 |
 | Day-1 close (HK$) | 131.5 | 345.0 (+109%) | 111.7 (+84%) |
-| Latest close (HK$) | 518.0 (2026-10-16) | 182.1 (2026-10-16) | 64.75 (2026-10-16) |
-| Return vs IPO | **+346% (~4.5x)** | +10% | +7% |
-| Period high / low (close) | 2,410.0 / 131.5 | 1,238.0 / 179.5 | 111.7 / 59.3 |
-| Latest market cap | **~HK$252.6B (~US$32.4B)** | ~HK$63.6B (~US$8.15B) | ~RMB9.77B (~US$1.38B) |
-| Equity value / revenue | **154.6x (LTM 2026H1)** | 49.4x (LTM 2026H1) | 21.2x (LTM 2026H1; different model) |
+| Latest close (HK$) | 499.0 (2026-10-23) | 187.6 (2026-10-23) | 59.1 (2026-10-23) |
+| Return vs IPO | **+329% (~4.3x)** | +14% | -3% |
+| Period high / low (close) | 2,410.0 / 131.5 | 1,238.0 / 160.7 | 111.7 / 59.1 |
+| Latest market cap | **~HK$243.3B (~US$31.2B)** | ~HK$65.5B (~US$8.40B) | ~RMB8.92B (~US$1.26B) |
+| Equity value / revenue | **148.9x (LTM 2026H1)** | 50.9x (LTM 2026H1) | 19.4x (LTM 2026H1; different model) |
 
 See the [comparable inputs](data/valuation_comps_input.csv) for carried-forward share counts and dated reference inputs.
 
@@ -39,17 +39,17 @@ The cohorts are deliberately separated because private funding marks, listed-com
 
 | Cohort | Company | Equity-value / revenue | Measurement basis | Use in valuation |
 |---|---|---:|---|---|
-| Core frontier labs | Zhipu | **154.6x** | 2026-10-16 market equity value / LTM 2026H1 revenue | subject company; same listed-peer denominator rule as MiniMax |
-| Core frontier labs | MiniMax | 49.4x | 2026-10-16 market equity value / LTM 2026H1 revenue | direct listed cross-check; not in private-round range |
+| Core frontier labs | Zhipu | **148.9x** | 2026-10-23 market equity value / LTM 2026H1 revenue | subject company; same listed-peer denominator rule as MiniMax |
+| Core frontier labs | MiniMax | 50.9x | 2026-10-23 market equity value / LTM 2026H1 revenue | direct listed cross-check; not in private-round range |
 | Core frontier labs | OpenAI | 34.1x | 2026 financing-round value / 2026 revenue run-rate | primary private transaction |
 | Core frontier labs | Anthropic | 20.5x | 2026 financing-round value / 2026 revenue run-rate | primary private transaction |
 | Core frontier labs | Mistral | 39.0x | older 2025 financing mark / contemporaneous revenue estimate | secondary private transaction |
-| Hong Kong adjacent | SenseTime | 7.6x | 2026-10-16 price-rolled equity value / LTM 2026H1 revenue | display only |
-| Hong Kong adjacent | PHANCY | 1.3x | 2026-10-16 price-rolled equity value / LTM 2026H1 revenue | display only |
-| Hong Kong adjacent | Wenge AI | 21.2x | 2026-10-16 market equity value / LTM 2026H1 revenue | display only |
-| Commercialization reference | Palantir | 99.9x | 2026-10-16 price-rolled equity value / latest complete fiscal-year revenue | display only |
-| Commercialization reference | Cloudflare | 48.5x | 2026-10-16 price-rolled equity value / latest complete fiscal-year revenue | display only |
-| Commercialization reference | Snowflake | 22.7x | 2026-10-16 price-rolled equity value / latest complete fiscal-year revenue | display only |
+| Hong Kong adjacent | SenseTime | 7.6x | 2026-10-23 price-rolled equity value / LTM 2026H1 revenue | display only |
+| Hong Kong adjacent | PHANCY | 1.3x | 2026-10-23 price-rolled equity value / LTM 2026H1 revenue | display only |
+| Hong Kong adjacent | Wenge AI | 19.4x | 2026-10-23 market equity value / LTM 2026H1 revenue | display only |
+| Commercialization reference | Palantir | 105.6x | 2026-10-23 price-rolled equity value / latest complete fiscal-year revenue | display only |
+| Commercialization reference | Cloudflare | 53.3x | 2026-10-23 price-rolled equity value / latest complete fiscal-year revenue | display only |
+| Commercialization reference | Snowflake | 24.1x | 2026-10-23 price-rolled equity value / latest complete fiscal-year revenue | display only |
 
 Private-lab transaction range: **20.5-39.0x**, median **34.1x** (OpenAI, Anthropic, Mistral). MiniMax, the Hong Kong adjacent group, and the commercialization references are shown to explain market context, not pooled into that range.
 
@@ -57,8 +57,8 @@ Private-lab transaction range: **20.5-39.0x**, median **34.1x** (OpenAI, Anthrop
 
 | Metric | Zhipu | MiniMax |
 |---|---|---|
-| Annualized volatility (daily x sqrt(252)) | **~180%** | ~147% |
-| Pattern | peaked ~HK$2,410; latest HK$518.0 | boom-bust (peaked 1,238; latest 182.1) |
+| Annualized volatility (daily x sqrt(252)) | **~179%** | ~147% |
+| Pattern | peaked ~HK$2,410; latest HK$499.0 | boom-bust (peaked 1,238; latest 187.6) |
 | Beta | bottom-up/comparable **beta ~= 1.6** (60 monthly returns vs SPY through 2026-08-31; 1.55 unlevered median rounded with an early-stage buffer) |
 
 ## Table D5 - Fundamentals (Zhipu, from prospectus, annual report, and interim results; RMB unless noted)
@@ -76,7 +76,7 @@ Private-lab transaction range: **20.5-39.0x**, median **34.1x** (OpenAI, Anthrop
 
 Balance sheet @ 30-Jun-2026: cash RMB 3,993.7M, short-term FVPL investments RMB 506.1M, bank loans RMB 2,224.8M, lease liabilities RMB 379.4M, and positive equity RMB 4,429.6M. The 13-Jul placement added 19.78M shares and HK$31,374.95M of net proceeds after the reporting date. The September placement then raises shares to 487.58809M. Adding its net proceeds and bond net proceeds, less the issue-date bond principal proxy, gives US$6,292.9M pro forma net cash. This excludes undisclosed subsequent cash burn; see data/zhipu_financials_input.csv and the financing discussion in the paper for the approximation and sources.
 
-**Implied market equity value / LTM revenue = 154.6x** (US$32.4B / US$209.5M). The LTM denominator is FY2025 revenue less H1 2025 plus H1 2026, translated at RMB7.1/US$. The US$700M FY2026E estimate remains a DCF assumption and no longer enters the listed-company trading-multiple comparison.
+**Implied market equity value / LTM revenue = 148.9x** (US$31.2B / US$209.5M). The LTM denominator is FY2025 revenue less H1 2025 plus H1 2026, translated at RMB7.1/US$. The US$700M FY2026E estimate remains a DCF assumption and no longer enters the listed-company trading-multiple comparison.
 
 ### September 24 cash-flow disclosure
 
@@ -168,14 +168,14 @@ GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of the origi
 - **SEC filings and company annual reports** (Palantir, Cloudflare, Snowflake) - latest complete fiscal-year revenue for the commercialization-reference cohort.
 - **Official model cards / technical reports** (Z.ai; Hugging Face `zai-org/GLM-4.6`) - architecture, benchmarks.
 - **Hang Seng Indexes Company** announcements - index inclusion / Stock Connect flows.
-- **Tushare `hk_daily`**, with Tencent Finance (Hong Kong), Nasdaq / Yahoo Finance (US), Yahoo Finance (HK), and HKEX day quotes as fallbacks/cross-checks - 2026-10-16 prices and daily series to `data/*.csv`.
+- **Tushare `hk_daily`**, with Tencent Finance (Hong Kong), Nasdaq / Yahoo Finance (US), Yahoo Finance (HK), and HKEX day quotes as fallbacks/cross-checks - 2026-10-23 prices and daily series to `data/*.csv`.
 - News (Caixin, CNBC, SCMP, Bloomberg, Investing.com) - corroboration only.
 
 ## Table D9 - Separate Anthropic IPO model (USD billions)
 
 | Item | Assumption / result | Classification |
 |---|---:|---|
-| Information cutoff / assumed valuation date | 2026-10-16 / 2026-12-31 | different from Zhipu's observed market date |
+| Information cutoff / assumed valuation date | 2026-10-23 / 2026-12-31 | different from Zhipu's observed market date |
 | 2026 revenue anchor | 64 | analyst assumption |
 | 2028 revenue midpoint | 195 | reported 190–200 forecast midpoint |
 | Explicit forecast / terminal start | 2027–2036 / 2037 | year-end discounting |
@@ -190,4 +190,4 @@ GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of the origi
 
 Full drivers and sources: [Anthropic comparison](ANTHROPIC_COMPARISON.md). This model is excluded from the completed-deal 20.5–39.0× range.
 
-Disclosure review and retrieval limitations: [October 16 review](DISCLOSURE_UPDATE_2026-10-16.md).
+Disclosure review and retrieval limitations: [October 23 review](DISCLOSURE_UPDATE_2026-10-23.md).

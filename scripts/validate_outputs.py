@@ -16,7 +16,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "paper" / "main.tex"
 SUBMISSION_GLOB = "42353012_*.pdf"
-DATA_CUTOFF = 20261016
+DATA_CUTOFF = 20261023
 
 
 def fail(message: str) -> None:
@@ -369,6 +369,15 @@ def check_disclosure_refresh() -> None:
     disclosures = pd.read_csv(ROOT / 'data' / 'anthropic_ipo_disclosures_input.csv')
     if (pd.to_datetime(disclosures.available_at_beijing) >= cutoff + pd.Timedelta(days=1)).any():
         fail('Anthropic inputs contain information beyond the Beijing cutoff')
+    latest = disclosures.set_index('metric').loc['Latest IPO equity discussion']
+    if float(latest['value']) != 1500 or not str(latest['period']).startswith('2026-10-22'):
+        fail('latest Anthropic discussion must reconcile to the October 22 Reuters report')
+    windows = pd.read_csv(ROOT / 'eventstudy/october_window_update.csv').set_index('event')
+    if not windows.data_cutoff.eq(cutoff.strftime('%Y-%m-%d')).all():
+        fail('supplementary event windows have a stale cutoff')
+    after_close = windows.loc['Technology export registration after close']
+    if bool(after_close['included']) or pd.notna(after_close['react_mean']):
+        fail('October 23 after-close disclosure must not have an observed reaction at this cutoff')
     summary = pd.read_csv(ROOT / 'eventstudy' / 'anthropic_ipo_summary.csv').set_index('metric')['value']
     if summary['Information cutoff'] != f'{cutoff:%Y-%m-%d} (Beijing time)':
         fail('Anthropic summary has a stale information cutoff')

@@ -13,10 +13,10 @@ if (process.argv.includes('--inspect')) {
   const preview = await wb.render({ sheetName: 'Valuation', range: 'C6:I19', scale: 1.5, format: 'png' });
   await fs.writeFile(path.join(runtime, 'anthropic-before.png'), new Uint8Array(await preview.arrayBuffer()));
 } else {
-  inputs.getRange('D8').values = [[new Date('2026-10-16T00:00:00Z')]];
-  inputs.getRange('F8').values = [['Reviewed through 16 Oct 2026 Beijing time; latest observations in S18/S19.']];
-  inputs.getRange('F15').values = [['Investor discussion reported 16 Oct Beijing time [S18]; not a priced offer.']];
-  inputs.getRange('C45:G45').values = [['IPO investor discussion, about', 1500, '16-Oct-26 BJT', 'Media-reported', 'S18']];
+  inputs.getRange('D8').values = [[new Date('2026-10-23T00:00:00Z')]];
+  inputs.getRange('F8').values = [['Reviewed through 23 Oct 2026 Beijing time; S18/S19 and S20-S24.']];
+  inputs.getRange('F15').values = [['USD1.5tn discussion reaffirmed 22 Oct [S20]; offering not priced.']];
+  inputs.getRange('C45:G45').values = [['IPO investor discussion, about', 1500, '22-Oct-26 BJT', 'Media-reported', 'S20']];
   inputs.getRange('C46:G46').values = [['Long-term compute commitments, at least', 518, 'Oct-26', 'Media-reported', 'S19']];
   inputs.getRange('C29').values = [['2026 revenue of USD64bn remains an analyst assumption, not a reported annual result.']];
   inputs.getRange('C30').values = [['Latest quarterly observations and a full-year reconciliation appear below and on Valuation.']];
@@ -34,6 +34,19 @@ if (process.argv.includes('--inspect')) {
   inputs.getRange('C126').values = [['https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html']];
   inputs.getRange('C128').values = [['S19. Reuters, 15 Oct Beijing. Quarterly revenue and decade-long compute commitments.']];
   inputs.getRange('C129').values = [['https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221']];
+  inputs.getRange('C131').values = [['S20. Reuters, 22 Oct 22:51 Beijing; November IPO timetable is provisional.']];
+  inputs.getRange('C132').values = [['https://uk.marketscreener.com/news/anthropic-ipo-stands-alone-as-ai-market-jitters-sideline-others-ce785cdeda8cf026']];
+  inputs.getRange('C134').values = [['S21. Anthropic, 18 Oct: 5% public-benefit share commitment, subject to shareholder approval.']];
+  inputs.getRange('C135').values = [['https://www.anthropic.com/news/public-benefit-fund']];
+  inputs.getRange('C137').values = [['S22. Claude Duet, 21 Oct: US Pro/Max research preview, with shared plan limits.']];
+  inputs.getRange('C138').values = [['https://claude.com/resources/articles/claude-duet']];
+  inputs.getRange('C140').values = [['S23. Claude Platform on Google Cloud, 22 Oct: Anthropic managed service generally available.']];
+  inputs.getRange('C141').values = [['https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed']];
+  inputs.getRange('C143').values = [['S24. Agent Skills donated to AAIF, 22 Oct; no quantified revenue or cash-flow uplift.']];
+  inputs.getRange('C144').values = [['https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation']];
+  valuation.getRange('C114').values = [['23 Oct review: USD1.5tn discussion retained; new product/governance news does not change cash-flow inputs.']];
+  valuation.getRange('C115').values = [['Public-benefit share commitment is conditional; no mechanical 5% EV haircut or assumed dilution.']];
+  valuation.getRange('C116').values = [['The 26 Oct public S-1 is a subsequent event, excluded from the 23 Oct valuation information set.']];
   valuation.getRange('C103').values = [['Latest investor discussion is USD1.5tn; the earlier USD2tn expectation is a historical stress case.']];
   valuation.getRange('C10').values = [['IPO investor discussion']];
   valuation.getRange('C99').values = [['IPO investor discussion']];
@@ -58,7 +71,7 @@ if (process.argv.includes('--inspect')) {
   inputs.getRange('D45').values = [[1500]];
   wb.recalculate();
   console.log((await wb.inspect({ kind: 'match', searchTerm: '#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!', options: { useRegex: true, maxResults: 30 }, maxChars: 1000 })).ndjson);
-  for (const [sheetName, range, filename] of [['Valuation', 'C6:I19', 'anthropic-after'], ['Valuation', 'C108:F112', 'anthropic-reconciliation'], ['Inputs', 'I36:M39', 'anthropic-quarter-inputs']]) {
+  for (const [sheetName, range, filename] of [['Valuation', 'C6:I19', 'anthropic-after'], ['Valuation', 'C108:M116', 'anthropic-reconciliation'], ['Inputs', 'I36:M39', 'anthropic-quarter-inputs']]) {
     const preview = await wb.render({ sheetName, range, scale: 1.5, format: 'png' });
     await fs.writeFile(path.join(runtime, `${filename}.png`), new Uint8Array(await preview.arrayBuffer()));
   }

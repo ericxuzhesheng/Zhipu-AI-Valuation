@@ -1,8 +1,8 @@
 # Anthropic IPO：收入预期与现金流估值对照
 
-本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-10-16（北京时间）**；模型估值日假设为 **2026-12-31**，与智谱 10 月 16 日的实际市场价格存在约三个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
+本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-10-23（北京时间）**；模型估值日假设为 **2026-12-31**，与智谱 10 月 23 日的实际市场价格存在约三个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
 
-10 月 11 日起始底稿保存在 [anthropic/2026-10-11](anthropic/2026-10-11/README.md)，包括[活公式 Excel](anthropic/2026-10-11/Anthropic_IPO_Basic_Valuation.xlsx)、[8 页英文 Beamer](anthropic/2026-10-11/Anthropic_IPO_Valuation_Beamer.pdf)、TeX 源文件、模型生成脚本、核验结果与工作表预览。原来源为 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/`；本仓库的文件和数值复算不依赖该外部路径。
+10 月 11 日起始底稿保存在 [anthropic/2026-10-11](anthropic/2026-10-11/README.md)，包括[活公式 Excel](anthropic/2026-10-11/Anthropic_IPO_Basic_Valuation.xlsx)、[英文 Beamer](anthropic/2026-10-11/Anthropic_IPO_Valuation_Beamer.pdf)、TeX 源文件、模型生成脚本、核验结果与工作表预览。原来源为 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/`；本仓库的文件和数值复算不依赖该外部路径。
 
 ## 两种估值与两种事实口径
 
@@ -29,9 +29,19 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 北京时间 10 月 15 日的 [Reuters 季度报道](https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221)已纳入本期信息集。结构化观测与来源保存在 [披露输入](data/anthropic_ipo_disclosures_input.csv)。原 US$64bn 年度假设对照已报道前三季度收入 US$33.1bn，要求 Q4 收入 US$30.9bn，环比增长 83.9%；季度收入、年度收入与 run-rate 分别记录。
 
-[Reuters 最新估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，当前讨论基准更新为 US$1.5tn。完整时区、核验范围与取数限制见[本期核验记录](DISCLOSURE_UPDATE_2026-10-16.md)。10 月 11 日为底稿起始日，当前工作簿及展示稿已同步至 16 日；原始状态可从 Git 历史恢复。
+[Reuters 最新估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，当前讨论基准更新为 US$1.5tn。完整时区、核验范围与取数限制见[本期核验记录](DISCLOSURE_UPDATE_2026-10-23.md)。10 月 11 日为底稿起始日，当前工作簿及展示稿已同步至 23 日；原始状态可从 Git 历史恢复。
 
 ## 可复算的现金流假设
+
+### 10 月 17—23 日跟进
+
+[10 月 22 日 Reuters 报道](https://uk.marketscreener.com/news/anthropic-ipo-stands-alone-as-ai-market-jitters-sideline-others-ce785cdeda8cf026)继续讨论约 US$1.5tn，并称公司计划 11 月中旬上市、11 月 9 日当周开始营销，时间仍可能变化。该报道未提供已定价发行条款，原 DCF 与讨论基准保持不变。
+
+本周新增 [18 日公益基金股权承诺](https://www.anthropic.com/news/public-benefit-fund)、[21 日 Duet 研究预览](https://claude.com/resources/articles/claude-duet)、[22 日 Google Cloud 渠道扩展](https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed)和 [Agent Skills 捐赠](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation)。5% 股权承诺仍待股东批准，未明确的最终股权安排不能直接转成 EV 折价或已发生稀释。产品进展没有披露增量收入，原经营路径继续使用显式假设。日期、来源及 23 日 Enterprise 公告的时区边界限制见 [进展表](data/anthropic_progress_2026-10-23.csv)。
+
+**期后事项**：[10 月 26 日官方公告](https://www.anthropic.com/news/s1-sec)确认公开提交 S-1，拟用 ANT 代码在 Nasdaq 上市，当时价格和发行股数尚未确定。该消息及公开文件中的新财务数字不进入本次 23 日的信息集；本节“未取得公开招股书”的表述均指截止日当时的状态。
+
+### 保留的经营路径
 
 2026 年 US$64bn 收入锚为分析者假设，不是公司全年业绩指引。2027–2036 年是十年显式预测期，现金流按年末折现；2037 年开始终值。输入逐年保存在 [预测输入](data/anthropic_ipo_projection_input.csv)。
 

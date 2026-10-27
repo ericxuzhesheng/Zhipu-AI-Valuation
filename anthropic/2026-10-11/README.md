@@ -1,15 +1,15 @@
-# Anthropic IPO 底稿（起始版本 2026-10-11，信息复核至 2026-10-16）
+# Anthropic IPO 底稿（起始版本 2026-10-11，信息复核至 2026-10-23）
 
 2026-10-11 从 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/` 迁入，共 28 项原始内容；源文件夹已清空。原目录名虽含 20260930，Excel 和生成脚本的研究截止日实际为 2026-10-11。旧版底稿通过 Git 历史查阅。
 
 | 入口 | 内容 |
 |---|---|
-| [估值工作簿](Anthropic_IPO_Basic_Valuation.xlsx) | 保留 Valuation / Comps / Inputs 三表；当前披露已同步至 16 日 |
-| [演示 PDF](Anthropic_IPO_Valuation_Beamer.pdf) | 8 页；同步收入锚、DCF，并补充 10 月 15—16 日披露 |
+| [估值工作簿](Anthropic_IPO_Basic_Valuation.xlsx) | 保留 Valuation / Comps / Inputs 三表；当前披露已同步至 23 日 |
+| [演示 PDF](Anthropic_IPO_Valuation_Beamer.pdf) | 同步收入锚、DCF，并补充 10 月 18—23 日进展及期后事项边界 |
 | [演示源文件](Anthropic_IPO_Valuation_Beamer.tex) | 本地 XeLaTeX 可编译 |
 | [生成脚本](build_model.mjs) | 输出路径改为本目录，不再写回源文件夹 |
 
-DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始日为 10 月 11 日，当前工作簿的信息复核截止已更新至北京时间 16 日，估值日仍假设为 12 月 31 日。最新 IPO 投资者讨论基准为 US$1,500bn；原 US$2,000bn 保留为历史压力情景。季度收入及年度假设对照已加入工作簿，US$64bn 仍为分析者假设。来源见[披露核验](../../DISCLOSURE_UPDATE_2026-10-16.md)。
+DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始日为 10 月 11 日，当前工作簿的信息复核截止已更新至北京时间 23 日，估值日仍假设为 12 月 31 日。最新 IPO 投资者讨论基准为 US$1,500bn；原 US$2,000bn 保留为历史压力情景。季度收入及年度假设对照已加入工作簿，US$64bn 仍为分析者假设。来源见[披露核验](../../DISCLOSURE_UPDATE_2026-10-23.md)。
 
 ## 已纳入智谱项目
 

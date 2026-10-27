@@ -9,7 +9,7 @@
 | [演示源文件](Anthropic_IPO_Valuation_Beamer.tex) | 本地 XeLaTeX 可编译 |
 | [生成脚本](build_model.mjs) | 输出路径改为本目录，不再写回源文件夹 |
 
-DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始日为 10 月 11 日，当前工作簿的信息复核截止已更新至北京时间 23 日，估值日仍假设为 12 月 31 日。最新 IPO 投资者讨论基准为 US$1,500bn；原 US$2,000bn 保留为历史压力情景。季度收入及年度假设对照已加入工作簿，US$64bn 仍为分析者假设。来源见[披露核验](../../DISCLOSURE_UPDATE_2026-10-23.md)。
+DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始日为 10 月 11 日，当前工作簿的信息复核截止已更新至北京时间 23 日，估值日仍假设为 12 月 31 日。最新 IPO 投资者讨论基准为 US$1,500bn；原 US$2,000bn 保留为历史压力情景。季度收入及年度假设对照已加入工作簿，US$64bn 仍为分析者假设。来源见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。
 
 ## 已纳入智谱项目
 

@@ -91,7 +91,7 @@
 
 10 月 2 日港交所月报确认智谱总股本为 487,588,090 股。9 月 30 日盘后公告授予 1,222,934 股奖励，尚未归属，九月未因此发行新股；10 月 9 日盘后仅补充绩效条件。已发行股本及原现金桥保留，未把尚未归属奖励直接当作新增已发行股份。
 
-9 月 18 日晚间回应与 CLI 消息对应的 9 月 21 日窗口，现已具备完整九日漂移；9 月 24 日盘后报告和周末预览窗口也已具备完整九日漂移；10 月 2 日奖励窗口也已具备完整九日漂移，均值调整与同业调整漂移分别为 +6.88% 和 +3.72%。行情更新至 10 月 23 日，披露核验范围及来源限制分别记录，新增信息见[披露核验更新](DISCLOSURE_UPDATE_2026-10-23.md)。原五事件与 bootstrap 保持 8 月 31 日边界，新增结果单列。十月促销期虽已过去，实际收入影响仍未独立核验。来源见[证据表](data/current_evidence.csv)。
+9 月 18 日晚间回应与 CLI 消息对应的 9 月 21 日窗口，现已具备完整九日漂移；9 月 24 日盘后报告和周末预览窗口也已具备完整九日漂移；10 月 2 日奖励窗口也已具备完整九日漂移，均值调整与同业调整漂移分别为 +6.88% 和 +3.72%。行情更新至 10 月 23 日，披露核验范围及来源限制分别记录，新增信息见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。原五事件与 bootstrap 保持 8 月 31 日边界，新增结果单列。十月促销期虽已过去，实际收入影响仍未独立核验。来源见[证据表](data/current_evidence.csv)。
 
 ZCode 官方桌面更新页新增 10 月 20 日 v3.16.2 和 23 日 v3.16.3，涉及插件市场、远程工作流及公司所述安全与稳定性修复。MiniMax 19 日正式发布 M3.1 Flash，22 日推出 Code Mini App；23 日 22:33 公告完成部分模型的技术出口登记，晚于当日收盘，不能用于解释 23 日收益。新窗口均未具备完整九日漂移。GitHub 的 v3.14.3 源码发布与桌面版本日期不同，不能混用。未披露相关收入和留存影响，经营预测不据此提高。
 
@@ -121,7 +121,7 @@ Anthropic 对照模型的信息核验更新至 10 月 23 日，估值日仍假�
 
 新增 Reuters 报道已纳入：Q3 收入 US$16.8bn；最新 IPO 投资者讨论值约 US$1.5tn，非成交价格。此前 US$2tn 保留为历史压力情景。年度 US$64bn 仍是分析者假设，按已报道前三季度收入计算，Q4 需达 US$30.9bn 才能实现。当前 DCF 比 US$1.5tn 低 47.4%，固定原路径所需终期 EBIT 利润率约 79.5%。
 
-5 月已完成的 US$965bn 融资仍留在原私募可比组。10 月 18 日公益基金股权安排仍待股东批准；21 日 Duet 研究预览、22 日 Google Cloud 渠道扩展与 Agent Skills 捐赠补充商业化和治理背景。22 日 Reuters 报道仍讨论约 US$1.5tn，上市时间表尚可能变化；经营预测不据此提高。10 月 26 日公开 S-1 为期后事项，未纳入本次估值。来源、报道时区及限制见[披露核验更新](DISCLOSURE_UPDATE_2026-10-23.md)及[Anthropic 对照说明](ANTHROPIC_COMPARISON.md)。
+5 月已完成的 US$965bn 融资仍留在原私募可比组。10 月 18 日公益基金股权安排仍待股东批准；21 日 Duet 研究预览、22 日 Google Cloud 渠道扩展与 Agent Skills 捐赠补充商业化和治理背景。22 日 Reuters 报道仍讨论约 US$1.5tn，上市时间表尚可能变化；经营预测不据此提高。10 月 26 日公开 S-1 为期后事项，未纳入本次估值。来源、报道时区及限制见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)及[Anthropic 对照说明](ANTHROPIC_COMPARISON.md)。
 
 ### 事件研究
 
@@ -306,7 +306,7 @@ SenseTime, Phancy, and Wenge AI form a separate Hong Kong-adjacent cohort, while
 
 ### Anthropic commercialization and valuation illustration
 
-Information is reviewed through October 23; the assumed valuation date remains December 31, 2026. The operating scenario still gives US$788.5bn DCF EV. Reuters' October 22 report reiterates US$1.5tn as an investor discussion, with a provisional November IPO timetable. This replaces the earlier US$2tn expectation as the current comparison benchmark; neither is a completed transaction. The DCF discount is 47.4%. Quarterly observations and the annual-anchor reconciliation are in the updated workbook and [disclosure review](DISCLOSURE_UPDATE_2026-10-23.md). The completed May funding reference remains separate. New disclosures cover the conditional public-benefit share pledge, Duet preview, Google Cloud distribution and Agent Skills donation. The October 26 public S-1 is recorded as a subsequent event and excluded from this cutoff. See the [method comparison](ANTHROPIC_COMPARISON.md).
+Information is reviewed through October 23; the assumed valuation date remains December 31, 2026. The operating scenario still gives US$788.5bn DCF EV. Reuters' October 22 report reiterates US$1.5tn as an investor discussion, with a provisional November IPO timetable. This replaces the earlier US$2tn expectation as the current comparison benchmark; neither is a completed transaction. The DCF discount is 47.4%. Quarterly observations and the annual-anchor reconciliation are in the updated workbook and [Git commit history](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/). The completed May funding reference remains separate. New disclosures cover the conditional public-benefit share pledge, Duet preview, Google Cloud distribution and Agent Skills donation. The October 26 public S-1 is recorded as a subsequent event and excluded from this cutoff. See the [method comparison](ANTHROPIC_COMPARISON.md).
 
 ### Event Study
 

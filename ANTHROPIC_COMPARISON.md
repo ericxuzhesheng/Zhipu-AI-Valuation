@@ -29,7 +29,7 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 北京时间 10 月 15 日的 [Reuters 季度报道](https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221)已纳入本期信息集。结构化观测与来源保存在 [披露输入](data/anthropic_ipo_disclosures_input.csv)。原 US$64bn 年度假设对照已报道前三季度收入 US$33.1bn，要求 Q4 收入 US$30.9bn，环比增长 83.9%；季度收入、年度收入与 run-rate 分别记录。
 
-[Reuters 最新估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，当前讨论基准更新为 US$1.5tn。完整时区、核验范围与取数限制见[本期核验记录](DISCLOSURE_UPDATE_2026-10-23.md)。10 月 11 日为底稿起始日，当前工作簿及展示稿已同步至 23 日；原始状态可从 Git 历史恢复。
+[Reuters 最新估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，当前讨论基准更新为 US$1.5tn。完整时区、核验范围与取数限制见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。10 月 11 日为底稿起始日，当前工作簿及展示稿已同步至 23 日；原始状态可从 Git 历史恢复。
 
 ## 可复算的现金流假设
 

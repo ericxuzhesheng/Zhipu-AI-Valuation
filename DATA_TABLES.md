@@ -190,4 +190,4 @@ GLM-5.2 and GLM-5.3 both have complete nine-day [+2,+10] windows as of the origi
 
 Full drivers and sources: [Anthropic comparison](ANTHROPIC_COMPARISON.md). This model is excluded from the completed-deal 20.5–39.0× range.
 
-Disclosure review and retrieval limitations: [October 23 review](DISCLOSURE_UPDATE_2026-10-23.md).
+Disclosure review and retrieval limitations: [Git commit history](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/).

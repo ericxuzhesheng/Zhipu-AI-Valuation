@@ -1,5 +1,5 @@
 metric,value
-Information cutoff,2026-10-23 (Beijing time)
+Information cutoff,2026-10-26 (Beijing time)
 Assumed valuation date,2026-12-31
 2028 revenue midpoint (USD bn),195.0
 Forward EV / 2028 revenue,10.0
@@ -14,8 +14,16 @@ WACC assumption,0.12
 Terminal growth assumption,0.03
 Cash tax rate assumption,0.25
 Required terminal EBIT margin at benchmark,0.7953634877048168
+DCF equity value (USD bn),788.5394443995483
 DCF discount to IPO discussion,0.47430703706696775
-Reported Q1-Q3 revenue (USD bn),33.1
-Long-term compute commitments (USD bn),518.0
-Q4 revenue required for annual anchor (USD bn),30.9
-Required Q4 sequential growth,0.8392857142857142
+Reported Q1-Q3 revenue (USD bn),33.086
+Earlier Reuters compute commitment observation (USD bn),518.0
+S1 minimum purchase commitments (USD bn),265.6
+S1 uncommenced lease obligations (USD bn),321.4
+S1 H1 revenue (USD bn),16.286
+S1 H1 operating income (USD bn),-0.693
+S1 H1 net income (USD bn),-80.748
+S1 H1 operating cash flow (USD bn),3.929
+S1 H1 cash flow less cash capex (USD bn),3.447
+Q4 revenue required for annual anchor (USD bn),30.914
+Required Q4 sequential growth,0.8401190476190477

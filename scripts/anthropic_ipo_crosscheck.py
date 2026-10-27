@@ -1,9 +1,10 @@
 """Reproduce the user's companion Anthropic IPO model as a separate comparison.
 
-USD billions; information cutoff 2026-10-23 (Beijing time); assumed valuation date 2026-12-31.
+USD billions; Anthropic information cutoff 2026-10-26; assumed valuation date 2026-12-31.
 Model assumptions are not company guidance or a completed funding transaction.
 """
 from pathlib import Path
+import json
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,9 +16,13 @@ FORWARD_MULTIPLE = 10.0
 DISCLOSURES = pd.read_csv(ROOT / 'data/anthropic_ipo_disclosures_input.csv').set_index('metric')
 IPO_BENCHMARK = float(DISCLOSURES.loc['Latest IPO equity discussion', 'value'])
 NET_CASH_ASSUMPTION = 0.0
+INFORMATION_CUTOFF = '2026-10-26'
+S1_FINANCIALS = pd.read_csv(ROOT / 'data/anthropic_s1_financials_input.csv').set_index('period')
+S1_BALANCE = pd.read_csv(ROOT / 'data/anthropic_s1_balance_input.csv').set_index('metric')
 
 
-def calculate(wacc=WACC, terminal_g=TERMINAL_G, ipo_benchmark=IPO_BENCHMARK):
+def calculate(wacc=WACC, terminal_g=TERMINAL_G, ipo_benchmark=IPO_BENCHMARK,
+              net_cash_adjustment=NET_CASH_ASSUMPTION):
     assert wacc > terminal_g
     inputs = pd.read_csv(ROOT / 'data/anthropic_ipo_projection_input.csv')
     previous_revenue = ANCHOR_REVENUE
@@ -42,26 +47,54 @@ def calculate(wacc=WACC, terminal_g=TERMINAL_G, ipo_benchmark=IPO_BENCHMARK):
     terminal_fcf = terminal_revenue * (last.ebit_margin*(1-TAX)+last.da_to_revenue-last.capex_to_revenue) - (terminal_revenue-previous_revenue)*last.nwc_to_revenue
     pv_explicit = sum(row['pv_ufcf_usdbn'] for row in rows)
     pv_terminal = terminal_fcf / (wacc-terminal_g) / (1+wacc)**10
-    required_terminal_fcf = (ipo_benchmark-NET_CASH_ASSUMPTION-pv_explicit)*(1+wacc)**10*(wacc-terminal_g)
+    required_terminal_fcf = (ipo_benchmark-net_cash_adjustment-pv_explicit)*(1+wacc)**10*(wacc-terminal_g)
     required_margin = (required_terminal_fcf+(terminal_revenue-previous_revenue)*last.nwc_to_revenue-terminal_revenue*(last.da_to_revenue-last.capex_to_revenue))/(terminal_revenue*(1-TAX))
     revenue_2028 = rows[1]['revenue_usdbn']
     summary = {
-        'Information cutoff':'2026-10-23 (Beijing time)', 'Assumed valuation date':'2026-12-31',
+        'Information cutoff':f'{INFORMATION_CUTOFF} (Beijing time)', 'Assumed valuation date':'2026-12-31',
         '2028 revenue midpoint (USD bn)':revenue_2028, 'Forward EV / 2028 revenue':FORWARD_MULTIPLE,
         'Revenue-multiple EV (USD bn)':revenue_2028*FORWARD_MULTIPLE,
         'DCF EV (USD bn)':pv_explicit+pv_terminal, 'PV explicit UFCF (USD bn)':pv_explicit,
         'PV terminal value (USD bn)':pv_terminal, 'Terminal value share':pv_terminal/(pv_explicit+pv_terminal),
         'Reported IPO equity benchmark (USD bn)':ipo_benchmark,
-        'Net cash assumption (USD bn)':NET_CASH_ASSUMPTION, 'WACC assumption':wacc,
+        'Net cash assumption (USD bn)':net_cash_adjustment, 'WACC assumption':wacc,
         'Terminal growth assumption':terminal_g, 'Cash tax rate assumption':TAX,
         'Required terminal EBIT margin at benchmark':required_margin,
-        'DCF discount to IPO discussion':1-(pv_explicit+pv_terminal+NET_CASH_ASSUMPTION)/ipo_benchmark,
+        'DCF equity value (USD bn)':pv_explicit+pv_terminal+net_cash_adjustment,
+        'DCF discount to IPO discussion':1-(pv_explicit+pv_terminal+net_cash_adjustment)/ipo_benchmark,
         'Reported Q1-Q3 revenue (USD bn)':sum(float(DISCLOSURES.loc[q+' revenue','value']) for q in ['Q1','Q2','Q3']),
-        'Long-term compute commitments (USD bn)':float(DISCLOSURES.loc['Long-term compute commitments','value']),
+        'Earlier Reuters compute commitment observation (USD bn)':float(DISCLOSURES.loc['Long-term compute commitments','value']),
+        'S1 minimum purchase commitments (USD bn)':float(S1_BALANCE.loc['Minimum purchase commitments','value']),
+        'S1 uncommenced lease obligations (USD bn)':float(S1_BALANCE.loc['Uncommenced lease obligations','value']),
+        'S1 H1 revenue (USD bn)':float(S1_FINANCIALS.loc['H1 2026','revenue_usdbn']),
+        'S1 H1 operating income (USD bn)':float(S1_FINANCIALS.loc['H1 2026','operating_income_usdbn']),
+        'S1 H1 net income (USD bn)':float(S1_FINANCIALS.loc['H1 2026','net_income_usdbn']),
+        'S1 H1 operating cash flow (USD bn)':float(S1_FINANCIALS.loc['H1 2026','operating_cash_flow_usdbn']),
     }
+    h1 = S1_FINANCIALS.loc['H1 2026']
+    summary['S1 H1 cash flow less cash capex (USD bn)'] = float(h1.operating_cash_flow_usdbn-h1.cash_capex_usdbn)
     summary['Q4 revenue required for annual anchor (USD bn)'] = ANCHOR_REVENUE-summary['Reported Q1-Q3 revenue (USD bn)']
     summary['Required Q4 sequential growth'] = summary['Q4 revenue required for annual anchor (USD bn)']/float(DISCLOSURES.loc['Q3 revenue','value'])-1
     return pd.DataFrame(rows), summary
+
+
+def historical_cash_bridge():
+    """June snapshots are sensitivities, not a December net-cash forecast or IPO price."""
+    balance = S1_BALANCE['value']
+    liquidity = float(balance['Cash and equivalents'] + balance['Short-term investments'])
+    finance_leases = float(balance['Finance lease liabilities'])
+    notes = float(balance['Amazon 2023 note principal'] + balance['Amazon 2024 note principal'])
+    rows = []
+    for name, note_principal in [('All June note principal retained', notes),
+                                 ('Full conversion illustrative ceiling', 0.0)]:
+        adjustment = liquidity-finance_leases-note_principal
+        _, result = calculate(net_cash_adjustment=adjustment)
+        rows.append(dict(case=name, balance_date='2026-06-30', liquidity_usdbn=liquidity,
+            finance_lease_liabilities_usdbn=finance_leases, note_principal_usdbn=note_principal,
+            net_cash_proxy_usdbn=adjustment, dcf_equity_usdbn=result['DCF equity value (USD bn)'],
+            required_terminal_ebit_margin=result['Required terminal EBIT margin at benchmark'],
+            classification='Historical principal-based sensitivity; no H2 cash roll-forward, IPO proceeds or new funding; conversion subject to 12% ownership cap; not an existing-common equity allocation'))
+    return pd.DataFrame(rows)
 
 
 def main():
@@ -76,6 +109,19 @@ def main():
             _, s = calculate(wacc,terminal_g)
             rows.append({'wacc':wacc,'terminal_growth':terminal_g,'dcf_ev_usdbn':s['DCF EV (USD bn)']})
     pd.DataFrame(rows).to_csv(ROOT/'eventstudy/anthropic_ipo_sensitivity.csv',index=False)
+    historical_cash_bridge().to_csv(ROOT/'eventstudy/anthropic_s1_cash_bridge.csv',index=False)
+    runtime = ROOT/'tmp/1011_runtime'
+    runtime.mkdir(parents=True, exist_ok=True)
+    _, historical = calculate(ipo_benchmark=2000)
+    payload = dict(cutoff=INFORMATION_CUTOFF, dcf=summary['DCF EV (USD bn)'],
+        requiredMargin=summary['Required terminal EBIT margin at benchmark'],
+        historicalMargin=historical['Required terminal EBIT margin at benchmark'],
+        q4Required=summary['Q4 revenue required for annual anchor (USD bn)'],
+        q4Growth=summary['Required Q4 sequential growth'],
+        quarters=[float(DISCLOSURES.loc[q+' revenue','value']) for q in ['Q1','Q2','Q3']],
+        financials=S1_FINANCIALS.fillna('').to_dict(orient='index'),
+        balance=S1_BALANCE['value'].to_dict(), bridges=historical_cash_bridge().to_dict(orient='records'))
+    (runtime/'anthropic-latest.json').write_text(json.dumps(payload),encoding='utf-8')
     print(pd.Series(summary).to_string())
 
 

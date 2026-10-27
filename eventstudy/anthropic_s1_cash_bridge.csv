@@ -1,0 +1,3 @@
+case,balance_date,liquidity_usdbn,finance_lease_liabilities_usdbn,note_principal_usdbn,net_cash_proxy_usdbn,dcf_equity_usdbn,required_terminal_ebit_margin,classification
+All June note principal retained,2026-06-30,131.651,0.443,6.203,125.005,913.5444443995483,0.7171122588175672,"Historical principal-based sensitivity; no H2 cash roll-forward, IPO proceeds or new funding; conversion subject to 12% ownership cap; not an existing-common equity allocation"
+Full conversion illustrative ceiling,2026-06-30,131.651,0.443,0.0,131.208,919.7474443995483,0.7132292751546128,"Historical principal-based sensitivity; no H2 cash roll-forward, IPO proceeds or new funding; conversion subject to 12% ownership cap; not an existing-common equity allocation"

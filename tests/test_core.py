@@ -127,13 +127,30 @@ class ValuationTests(unittest.TestCase):
     def test_anthropic_latest_disclosures_and_historical_benchmark(self) -> None:
         _, latest = anthropic_ipo_crosscheck.calculate()
         _, historical = anthropic_ipo_crosscheck.calculate(ipo_benchmark=2000)
-        self.assertEqual(latest['Information cutoff'], '2026-10-23 (Beijing time)')
+        self.assertEqual(latest['Information cutoff'], '2026-10-26 (Beijing time)')
         self.assertEqual(latest['Reported IPO equity benchmark (USD bn)'], 1500)
-        self.assertAlmostEqual(latest['Reported Q1-Q3 revenue (USD bn)'], 33.1)
-        self.assertAlmostEqual(latest['Q4 revenue required for annual anchor (USD bn)'], 30.9)
+        self.assertAlmostEqual(latest['Reported Q1-Q3 revenue (USD bn)'], 33.086)
+        self.assertAlmostEqual(latest['Q4 revenue required for annual anchor (USD bn)'], 30.914)
         self.assertAlmostEqual(latest['DCF EV (USD bn)'], historical['DCF EV (USD bn)'])
         self.assertLess(latest['Required terminal EBIT margin at benchmark'],
                         historical['Required terminal EBIT margin at benchmark'])
+
+    def test_s1_actuals_and_conditional_cash_bridge_reconcile(self) -> None:
+        financials = anthropic_ipo_crosscheck.S1_FINANCIALS
+        self.assertAlmostEqual(financials.loc['Q1 2026','revenue_usdbn'] +
+                               financials.loc['Q2 2026','revenue_usdbn'],
+                               financials.loc['H1 2026','revenue_usdbn'])
+        self.assertAlmostEqual(financials.loc['Q1 2026','operating_income_usdbn'] +
+                               financials.loc['Q2 2026','operating_income_usdbn'], -0.693)
+        self.assertIn('Reuters', anthropic_ipo_crosscheck.DISCLOSURES.loc['Q3 revenue','classification'])
+        bridges = anthropic_ipo_crosscheck.historical_cash_bridge()
+        self.assertAlmostEqual(bridges.iloc[0].net_cash_proxy_usdbn, 112.389+19.262-0.443-6.203)
+        self.assertAlmostEqual(bridges.iloc[1].net_cash_proxy_usdbn-bridges.iloc[0].net_cash_proxy_usdbn, 6.203)
+        _, base = anthropic_ipo_crosscheck.calculate()
+        _, funded = anthropic_ipo_crosscheck.calculate(net_cash_adjustment=125.005)
+        self.assertAlmostEqual(base['DCF EV (USD bn)'], funded['DCF EV (USD bn)'])
+        self.assertAlmostEqual(funded['DCF equity value (USD bn)']-base['DCF equity value (USD bn)'], 125.005)
+        self.assertLess(funded['Required terminal EBIT margin at benchmark'], base['Required terminal EBIT margin at benchmark'])
 
     def test_base_case_includes_completed_september_financing(self) -> None:
         result = rebuild_outputs.project_scenario(rebuild_outputs.SCENARIOS[1])

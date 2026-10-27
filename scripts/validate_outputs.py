@@ -11,6 +11,7 @@ from pathlib import Path
 import openpyxl
 import pandas as pd
 from pypdf import PdfReader
+from anthropic_ipo_crosscheck import INFORMATION_CUTOFF
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -367,7 +368,11 @@ def check_disclosure_refresh() -> None:
     if not review['as_of_beijing'].eq(cutoff.strftime('%Y-%m-%d')).all():
         fail('disclosure review cutoff does not match the market cutoff')
     disclosures = pd.read_csv(ROOT / 'data' / 'anthropic_ipo_disclosures_input.csv')
-    if (pd.to_datetime(disclosures.available_at_beijing) >= cutoff + pd.Timedelta(days=1)).any():
+    anthropic_cutoff = pd.Timestamp(INFORMATION_CUTOFF)
+    s1_review = pd.read_csv(ROOT / 'data' / f'disclosure_review_{INFORMATION_CUTOFF}.csv')
+    if not s1_review.as_of_beijing.eq(INFORMATION_CUTOFF).all():
+        fail('S-1 review has a stale Anthropic information cutoff')
+    if (pd.to_datetime(disclosures.available_at_beijing, format='mixed') >= anthropic_cutoff + pd.Timedelta(days=1)).any():
         fail('Anthropic inputs contain information beyond the Beijing cutoff')
     latest = disclosures.set_index('metric').loc['Latest IPO equity discussion']
     if float(latest['value']) != 1500 or not str(latest['period']).startswith('2026-10-22'):
@@ -379,13 +384,13 @@ def check_disclosure_refresh() -> None:
     if bool(after_close['included']) or pd.notna(after_close['react_mean']):
         fail('October 23 after-close disclosure must not have an observed reaction at this cutoff')
     summary = pd.read_csv(ROOT / 'eventstudy' / 'anthropic_ipo_summary.csv').set_index('metric')['value']
-    if summary['Information cutoff'] != f'{cutoff:%Y-%m-%d} (Beijing time)':
+    if summary['Information cutoff'] != f'{anthropic_cutoff:%Y-%m-%d} (Beijing time)':
         fail('Anthropic summary has a stale information cutoff')
     wb = openpyxl.load_workbook(
         ROOT / 'anthropic' / '2026-10-11' / 'Anthropic_IPO_Basic_Valuation.xlsx',
         data_only=True, read_only=True,
     )
-    if pd.Timestamp(wb['Inputs']['D8'].value) != cutoff:
+    if pd.Timestamp(wb['Inputs']['D8'].value) != anthropic_cutoff:
         fail('Anthropic workbook has a stale research cutoff')
     for cell, metric in [
         ('D8', 'DCF EV (USD bn)'),
@@ -395,6 +400,11 @@ def check_disclosure_refresh() -> None:
     ]:
         if abs(float(wb['Valuation'][cell].value) - float(summary[metric])) > 1e-8:
             fail(f'Anthropic workbook {cell} does not match {metric}')
+    bridges = pd.read_csv(ROOT / 'eventstudy' / 'anthropic_s1_cash_bridge.csv')
+    for cell, row, metric in [('D132', 0, 'dcf_equity_usdbn'), ('D133', 1, 'dcf_equity_usdbn'),
+                              ('D135', 1, 'required_terminal_ebit_margin')]:
+        if abs(float(wb['Valuation'][cell].value)-float(bridges.iloc[row][metric])) > 1e-8:
+            fail(f'Anthropic workbook {cell} does not match S-1 cash bridge')
 
 
 def main() -> int:

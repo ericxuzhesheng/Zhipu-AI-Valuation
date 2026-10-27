@@ -35,7 +35,7 @@
 \subtitle{Evidence from Zhipu AI (2513.HK)\\论文讲解版}
 \author{许哲圣 \quad 42353012}
 \institute{公司金融课程论文}
-\date{23 October 2026}
+\date[26 October 2026]{26 October 2026\\{\small 智谱行情截至 10/23；Anthropic 信息截至 10/26}}
 
 \begin{document}
 
@@ -416,9 +416,9 @@
   \end{tabular}
   \end{table}
   \begin{block}{保留两种日期与可比口径}
-    信息截止北京时间 10/16；估值日假设 2026/12/31。Q3 报道已纳入，全年 US\$64bn 假设要求 Q4 US\$30.9bn。原 US\$2tn 留作历史压力情景；5 月已完成融资仍作交易参照。
+    Anthropic 已纳入 10/26 公开 S-1；估值日仍假设 12/31。S-1 H1 收入加 Reuters Q3 报道合计 US\$33.086bn；全年 US\$64bn 假设要求 Q4 US\$30.914bn、环比增长 84.0\%。智谱行情仍截至 10/23。
   \end{block}
-  \smallnote{来源：用户的 Anthropic 模型；官方 S-1 公告；Reuters 收入预测与招股材料报道。}
+  \smallnote{来源：公开 S-1、已复算的 Anthropic 模型及 Reuters；US\$1.5tn 仍为讨论值，非发行定价。}
 \end{frame}
 
 \begin{frame}{Anthropic 对照：把折现假设说清楚}
@@ -433,6 +433,47 @@
   \begin{block}{对智谱估值的启发}
     高收入预测不能自动转为现金流价值。收入倍数、利润兑现和再投资支出需要分别检验；10$\times$ 不作为新的已成交可比倍数。
   \end{block}
+\end{frame}
+
+\begin{frame}{Anthropic S-1：经营亏损、净亏损与现金流}
+  \centering\small
+  \begin{tabular}{lrrr}
+    \toprule
+    US\$bn & FY2025 & H1 2025 & H1 2026\\
+    \midrule
+    收入 & 4.585 & 1.163 & 16.286\\
+    经营利润（亏损） & (8.060) & (2.135) & (0.693)\\
+    净利润（亏损） & (41.965) & (12.969) & (80.748)\\
+    融资工具公允价值损失 & 34.308 & 10.942 & 72.388\\
+    经营现金流 & (2.637) & (1.513) & 3.929\\
+    现金资本支出 & 0.131 & 0.018 & 0.482\\
+    \bottomrule
+  \end{tabular}
+  \begin{block}{现金流与报表亏损分开读}
+    Q2 经营利润 US\$0.974bn，H1 整体仍亏损。H1 经营现金流减现金 capex 为 US\$3.447bn，受非现金调整及付款时点影响，不能当作可持续 UFCF 利润率。
+  \end{block}
+  \smallnote{S-1 MD\&A p160、财务报表 F-7/F-12。FY2025 经审计；半年及季度数据未经审计。}
+\end{frame}
+
+\begin{frame}{Anthropic S-1：六月现金桥仅作敏感性}
+  \small
+  可用现金及短投 US\$131.651bn，已排除受限现金；再扣 US\$0.443bn 融资租赁负债及保留的票据本金。
+  \begin{table}
+    \begin{tabular}{lrr}
+      \toprule
+      US\$bn，利润率除外 & 保留全部票据本金 & 假设全额转换\\
+      \midrule
+      扣除的票据本金 & 6.203 & 0.000\\
+      历史净现金代理值 & 125.005 & 131.208\\
+      DCF 股权代理值 & 913.544 & 919.747\\
+      反向终期 EBIT 利润率 & 71.7\% & 71.3\%\\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  \begin{block}{转换与时点约束}
+    票据账面公允价值 US\$108.566bn，与本金 US\$6.203bn 不同。转换受 Amazon 12\% 持股上限约束；未滚动 H2 现金流或加入 IPO 募资，亦未分配至原普通股股东。
+  \end{block}
+  \smallnote{S-1 p164、F-5/F-35。经营 DCF EV 仍为 US\$788.5bn；主模型保留十二月底净现金为零的假设，六月情景单列。}
 \end{frame}
 
 \begin{frame}{新底稿的可比分析：借鉴分层，核对口径}
@@ -796,16 +837,15 @@
 \end{frame}
 
 
-\begin{frame}{Anthropic: developments through 23 October}
-  \small
+\begin{frame}{Anthropic S-1：承诺支出与发行条件}
   \begin{itemize}
-    \item 18 Oct: conditional public-benefit share commitment. Approval and final mechanics remain open.
-    \item 21--22 Oct: Duet research preview, Google Cloud distribution and Agent Skills donation.
-    \item 22 Oct Reuters: provisional November IPO; about US\$1.5tn remains an investor discussion.
-    \item No quantified cash-flow uplift: DCF EV stays US\$788.5bn; FY2026 US\$64bn remains an assumption.
-    \item 26 Oct public S-1: subsequent event, excluded from this cutoff and valuation inputs.
+    \item 6 月末最低采购承诺 US\$265.6bn、尚未起租义务 US\$321.4bn，分别记录跨年期限及条件。
+    \item 此前 Reuters US\$518bn 的日期与范围不同，不能直接作同比或增量。
+    \item 长期承诺不全部当作当期债务或当年 capex；经营租金已包含在预测利润率中。
+    \item 发行价格、募资、残余票据及最终摊薄股数仍未确定，不估算每股 IPO 价格。
+    \item 智谱原五事件和 10/23 行情边界保留，仅 Anthropic 信息扩展至 10/26。
   \end{itemize}
-  \smallnote{Sources: Anthropic 18--22 Oct announcements; Reuters 22 Oct. Details and timing limits: DISCLOSURE\_UPDATE\_2026-10-23.md.}
+  \smallnote{来源：\href{https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm}{Anthropic 10/26 公开 S-1}，F-35/F-58。SEC 直连受限，已检查全文 PDF 转存件；转存一致性仍为来源限制。}
 \end{frame}
 
 \end{document}

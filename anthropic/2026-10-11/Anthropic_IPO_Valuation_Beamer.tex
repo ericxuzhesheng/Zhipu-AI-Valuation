@@ -21,7 +21,7 @@
 \setbeamertemplate{itemize item}{\small\raise0.3ex\hbox{\textbullet}}
 \setbeamertemplate{footline}{%
   \leavevmode\hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.8ex,dp=1.3ex,leftskip=0.5cm,rightskip=0.5cm]{normal text}%
-    \scriptsize\color{Slate}Anthropic IPO valuation \hfill 23 Oct 2026 \hfill \insertframenumber/\inserttotalframenumber
+    \scriptsize\color{Slate}Anthropic IPO valuation \hfill 26 Oct 2026 \hfill \insertframenumber/\inserttotalframenumber
   \end{beamercolorbox}}}
 \setbeamersize{text margin left=0.6cm,text margin right=0.6cm}
 \hypersetup{colorlinks=true,urlcolor=Slate}
@@ -29,7 +29,7 @@
 \newcommand{\bn}{\,\text{bn}}
 \title{Anthropic IPO Valuation}
 \subtitle{A basic revenue-multiple model and a DCF cross-check}
-\date{23 October 2026}
+\date{26 October 2026}
 
 \begin{document}
 
@@ -49,7 +49,7 @@
     \begin{column}{0.48\textwidth}
       \begin{block}{DCF enterprise value}
         \centering\vspace{0.12cm}
-        {\Huge\bfseries\$788 billion}\\[0.15cm]
+        {\Huge\bfseries\$788.5 billion}\\[0.15cm]
         Ten-year forecast; 12\% WACC; 3\% terminal growth
         \vspace{0.12cm}
       \end{block}
@@ -59,9 +59,9 @@
   \begin{itemize}
     \item Latest investor discussion is about \$1.5tn; the earlier \$2tn is a historical stress case.
     \item The assumed multiple gives a value 30.0\% above that discussion; the DCF is 47.4\% below it.
-    \item Net cash is \textbf{assumed zero}; equity comparisons are illustrative.
+    \item December net cash remains \textbf{assumed zero}; June financing sensitivities are separate.
   \end{itemize}
-  \source{Information cutoff: 23 Oct 2026. Assumed valuation date: 31 Dec 2026. All values in USD. [S2, S3]}
+  \source{Information cutoff: 26 Oct 2026. Assumed valuation date: 31 Dec 2026. All values in USD. Public S-1 included. [S2, S25]}
 \end{frame}
 
 % 2 --------------------------------------------------------------------------
@@ -165,7 +165,7 @@
       \end{tabular}
       \vspace{0.2cm}
 
-      Compute, training and distribution costs are included in the EBIT-margin assumption.
+      Operating compute and distribution costs enter assumed EBIT margins; contract timing is not fully modeled.
     \end{column}
     \begin{column}{0.47\textwidth}
       \small
@@ -227,7 +227,7 @@
       Lower discount rates increase the value of distant cash flows.
       \vspace{0.2cm}
 
-      Even the 10\% WACC / 4\% growth combination remains below the \$1.5tn discussion benchmark.
+      At zero assumed net cash, even 10\% WACC / 4\% growth remains below the \$1.5tn equity discussion.
     \end{column}
   \end{columns}
   \source{Sensitivity keeps the explicit operating forecast fixed. Terminal revenue, UFCF, investment and discounting recalculate for each rate pair. Require $r>g$.}
@@ -267,7 +267,7 @@
       Supporting \$1.5tn therefore requires a different growth path, earlier cash generation, lower WACC or other material assumption changes.
     \end{column}
   \end{columns}
-  \source{Equity benchmark is compared with EV using assumed zero net cash. Actual cash, debt, convertible claims and share counts require an IPO-document update.}
+  \source{Zero December net cash is assumed. June balances are disclosed; conversion and financing sensitivities follow.}
 \end{frame}
 
 % 7 --------------------------------------------------------------------------
@@ -282,7 +282,7 @@
         \end{itemize}
       \end{block}
       \small
-      \textbf{Assessment:} \$1.95tn is consistent with the selected revenue multiple. The \$788bn DCF shows that cash economics need much stronger assumptions to support the reported discussion value.
+      \textbf{Assessment:} \$1.95tn is consistent with the selected revenue multiple. The \$788.5bn DCF shows that cash economics need much stronger assumptions to support the reported discussion value.
     \end{column}
     \begin{column}{0.47\textwidth}
       \footnotesize
@@ -291,35 +291,69 @@
         \item[S1] \href{https://www.anthropic.com/news/series-h}{Anthropic, 28 May 2026}: \$965bn post-money Series H valuation.
         \item[S2] \href{https://www.investing.com/news/stock-market-news/anthropic-ipo-valuation-hinges-on-190200-billion-2028-revenue-forecast-sources-say-4862222?ampMode=1}{Reuters, Aug 2026}: reported \$190--200bn 2028 revenue projection.
         \item[S3] \href{https://www.streetinsider.com/Reuters/Exclusive-Anthropic\%2BIPO\%2Bprospectus\%2Blays\%2Bbare\%2Bdeep\%2Bdependence\%2Bon\%2BBig\%2BTech\%2Bpartners/27123187.html}{Reuters, 29 Sep 2026}: approximately \$2tn target and cloud-partner dependence.
-        \item[S5] \href{https://www.anthropic.com/news/confidential-draft-s1-sec}{Anthropic, 1 Jun 2026}: confidential draft S-1 submission.
+        \item[S25] \href{https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm}{Anthropic public S-1, 26 Oct 2026}: audited annuals, unaudited interim statements and conversion terms.
       \end{itemize}
-      \textbf{Limits:} projections may change. Current net cash and offering terms are unavailable. Future funding and dilution are not modeled.
+      \textbf{Limits:} projections may change. June balances are historical; December net cash and final offer terms remain uncertain. Future funding and dilution are not fully modeled.
     \end{column}
   \end{columns}
   \source{Calculation snapshot from the accompanying editable Excel model. Recalculate and refresh the slides after changing assumptions.}
 \end{frame}
 
-\begin{frame}{Information reviewed through 23 October (Beijing time)}
+\begin{frame}{Public S-1: operating loss, net loss and cash flow}
+  \small
+  \begin{tabular}{@{}lrrr@{}}
+    \toprule
+    US\$bn & FY2025 & H1 2025 & H1 2026\\
+    \midrule
+    Revenue & 4.585 & 1.163 & 16.286\\
+    Operating income (loss) & (8.060) & (2.135) & (0.693)\\
+    Net income (loss) & (41.965) & (12.969) & (80.748)\\
+    Financing fair-value loss & 34.308 & 10.942 & 72.388\\
+    Operating cash flow & (2.637) & (1.513) & 3.929\\
+    Cash capex & 0.131 & 0.018 & 0.482\\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.15cm}
   \begin{itemize}
-    \item Quarterly reports are now included; the unchanged \$64bn annual assumption requires \$30.9bn Q4 revenue, or 83.9\% sequential growth.
-    \item Latest investor discussion is \$1.5tn. The prior \$2tn remains a historical stress case; neither is completed pricing.
-    \item The companion workbook's cutoff, benchmark and quarterly reconciliation have been updated; operating assumptions remain explicit.
-    \item The independent-evaluator announcement adds governance context without a quantified forecast increment.
+    \item Q1/Q2 revenue is US\$4.731bn / US\$11.555bn. Q3 US\$16.8bn remains Reuters-reported.
+    \item The US\$64bn annual assumption requires US\$30.914bn in Q4, or 84.0\% sequential growth.
+    \item H1 cash flow less cash capex is US\$3.447bn; it is not the forecast's unlevered FCF.
   \end{itemize}
-  \source{\href{https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html}{Reuters IPO discussion, 16 Oct Beijing}; \href{https://www.anthropic.com/news/an-update-on-independent-evaluators}{Anthropic independent evaluators, 15 Oct}.}
+  \source{S-1 MD\&A p160; financial statements F-7/F-12. FY2025 audited; interim periods unaudited. Non-cash remeasurement and payment timing affect the cash-flow comparison.}
 \end{frame}
 
 
-\begin{frame}{Anthropic: developments through 23 October}
+\begin{frame}{June cash bridge: a historical sensitivity}
   \small
+  Liquid resources US\$131.651bn exclude restricted cash. Subtract US\$0.443bn finance leases, then any retained Amazon note principal.
+  \vspace{0.2cm}
+  \begin{tabular}{@{}lrr@{}}
+    \toprule
+    US\$bn unless stated & Notes retained & Full conversion\\
+    \midrule
+    Amazon principal deducted & 6.203 & 0.000\\
+    Net cash proxy & 125.005 & 131.208\\
+    DCF equity proxy & 913.544 & 919.747\\
+    Required terminal EBIT margin & 71.7\% & 71.3\%\\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.2cm}
   \begin{itemize}
-    \item 18 Oct: conditional public-benefit share commitment. Approval and final mechanics remain open.
-    \item 21--22 Oct: Duet research preview, Google Cloud distribution and Agent Skills donation.
-    \item 22 Oct Reuters: provisional November IPO; about US\$1.5tn remains an investor discussion.
-    \item No quantified cash-flow uplift: DCF EV stays US\$788.5bn; FY2026 US\$64bn remains an assumption.
-    \item 26 Oct public S-1: subsequent event, excluded from this cutoff and valuation inputs.
+    \item Note carrying value is US\$108.566bn; it is not the US\$6.203bn contractual cash principal.
+    \item Conversion is subject to Amazon's 12\% ownership cap unless waived; residual notes may remain.
+    \item No H2 cash roll-forward or IPO proceeds. These are not December cash forecasts or values allocated to existing common shares.
   \end{itemize}
-  \source{Sources: Anthropic 18--22 Oct announcements; Reuters 22 Oct. Details and timing limits: DISCLOSURE\_UPDATE\_2026-10-23.md.}
+  \source{S-1 MD\&A p164; balance sheet F-5; lease note F-35. Unchanged DCF EV US\$788.5bn; margin calculation uses the US\$1.5tn discussion benchmark.}
+\end{frame}
+
+\begin{frame}{Commitments and offering terms still constrain valuation}
+  \begin{itemize}
+    \item June minimum purchase commitments: US\$265.6bn. Leases not yet commenced: US\$321.4bn. Separate multiyear categories, with stated conditions.
+    \item The earlier Reuters US\$518bn observation differs in date and scope. It is not a comparable growth series.
+    \item Do not deduct all commitments as current debt or one-year capex. Operating rent stays within forecast margins.
+    \item Offer price, proceeds, residual notes and final diluted shares remain blank. No per-share IPO price is estimated.
+  \end{itemize}
+  \source{\href{https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm}{Public S-1, 26 Oct 2026}, F-35/F-58. SEC HTML retrieval was blocked; a complete PDF conversion was inspected. Source-copy fidelity remains a limitation.}
 \end{frame}
 
 \end{document}

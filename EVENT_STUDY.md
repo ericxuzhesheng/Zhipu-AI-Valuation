@@ -82,8 +82,8 @@ The 31 August boundary also prevents a tempting causal mistake. Zhipu rose 9.63%
 
 *Inputs: market prices through 2026-08-31 for the core Zhipu/MiniMax series in `data/`; CAR tables to `eventstudy/car_robustness.csv`; charts to `figures/`.*
 
-## October 23 supplementary cutoff
+## October 30 supplementary cutoff
 
-The core sample and bootstrap remain fixed. `eventstudy/october_window_update.csv` separately records M3.1 Flash general availability, ZCode v3.16.2/v3.16.3, and Code Mini App. October 19 has no Hong Kong session, so M3.1 Flash maps to October 20; only two drift sessions are observable. Mini App has two reaction sessions and no drift, while v3.16.3 has only one reaction session. Date-only same-day launch windows are provisional because publication times were not established. No-session CARs are missing, rather than zero returns.
+The original five-event cohort and bootstrap remain fixed at August 31. Supplementary Hong Kong observations now extend through October 30. M3.1 Flash and ZCode v3.16.2 each have seven drift sessions; Code Mini App has five and v3.16.3 has four. None has a full nine-session drift.
 
-MiniMax's October 23 business update was released at 22:33 Beijing time. It belongs in the disclosure review, but its next-session event date of October 26 lies beyond the price cutoff, so no post-announcement CAR is reported. Source URLs and coverage limits are in [Git commit history](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/).
+MiniMax's October 23 export-registration announcement was released at 22:33 Beijing time. Its reaction begins October 26, with two reaction sessions and three drift sessions now observed. The October 23 return still predates the disclosure. Partial drift values are explicitly flagged and are not pooled into the original sample. See [window results](eventstudy/october_window_update.csv) and [review limitations](data/disclosure_review_2026-10-30.csv).

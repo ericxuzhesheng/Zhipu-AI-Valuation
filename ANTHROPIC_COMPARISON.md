@@ -1,6 +1,6 @@
 # Anthropic IPO：收入预期与现金流估值对照
 
-本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-10-23（北京时间）**；模型估值日假设为 **2026-12-31**，与智谱 10 月 23 日的实际市场价格存在约三个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
+本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-10-26（北京时间）**；模型估值日假设为 **2026-12-31**，与智谱 10 月 30 日的实际市场价格存在约两个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
 
 10 月 11 日起始底稿保存在 [anthropic/2026-10-11](anthropic/2026-10-11/README.md)，包括[活公式 Excel](anthropic/2026-10-11/Anthropic_IPO_Basic_Valuation.xlsx)、[英文 Beamer](anthropic/2026-10-11/Anthropic_IPO_Valuation_Beamer.pdf)、TeX 源文件、模型生成脚本、核验结果与工作表预览。原来源为 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/`；本仓库的文件和数值复算不依赖该外部路径。
 
@@ -27,9 +27,9 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 [10 月 14 日官方公告](https://www.anthropic.com/news/singapore-office-opening)确认设立新加坡办公室，并与新加坡政府签署合作备忘录。公司列举 GovTech、DBS、Grab 等采用场景，但没有披露可直接映射到本模型的新增收入或现金流，因此不据此提高预测。
 
-北京时间 10 月 15 日的 [Reuters 季度报道](https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221)已纳入本期信息集。结构化观测与来源保存在 [披露输入](data/anthropic_ipo_disclosures_input.csv)。原 US$64bn 年度假设对照已报道前三季度收入 US$33.1bn，要求 Q4 收入 US$30.9bn，环比增长 83.9%；季度收入、年度收入与 run-rate 分别记录。
+北京时间 10 月 15 日的 [Reuters 季度报道](https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221)已纳入本期信息集。结构化观测与来源保存在 [披露输入](data/anthropic_ipo_disclosures_input.csv)。原 US$64bn 年度假设对照 S-1 的 Q1/Q2 与 Reuters 的 Q3 合计收入 US$33.086bn，要求 Q4 收入 US$30.914bn，环比增长 84.0%；季度收入、年度收入与 run-rate 分别记录。
 
-[Reuters 最新估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，当前讨论基准更新为 US$1.5tn。完整时区、核验范围与取数限制见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。10 月 11 日为底稿起始日，当前工作簿及展示稿已同步至 23 日；原始状态可从 Git 历史恢复。
+[Reuters 最新估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，当前讨论基准更新为 US$1.5tn。完整时区、核验范围与取数限制见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。10 月 11 日为底稿起始日，当前工作簿及展示稿已纳入 26 日公开 S-1；原始状态可从 Git 历史恢复。
 
 ## 可复算的现金流假设
 
@@ -39,7 +39,7 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 本周新增 [18 日公益基金股权承诺](https://www.anthropic.com/news/public-benefit-fund)、[21 日 Duet 研究预览](https://claude.com/resources/articles/claude-duet)、[22 日 Google Cloud 渠道扩展](https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed)和 [Agent Skills 捐赠](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation)。5% 股权承诺仍待股东批准，未明确的最终股权安排不能直接转成 EV 折价或已发生稀释。产品进展没有披露增量收入，原经营路径继续使用显式假设。日期、来源及 23 日 Enterprise 公告的时区边界限制见 [进展表](data/anthropic_progress_2026-10-23.csv)。
 
-**期后事项**：[10 月 26 日官方公告](https://www.anthropic.com/news/s1-sec)确认公开提交 S-1，拟用 ANT 代码在 Nasdaq 上市，当时价格和发行股数尚未确定。该消息及公开文件中的新财务数字不进入本次 23 日的信息集；本节“未取得公开招股书”的表述均指截止日当时的状态。
+**公开 S-1 已纳入**：[10 月 26 日公开申报](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)列示 2025 年收入 US$4.585bn、经营亏损 US$8.060bn；2026H1 收入 US$16.286bn、经营亏损 US$0.693bn、净亏损 US$80.748bn，其中融资工具公允价值损失 US$72.388bn。H1 经营现金流为 US$3.929bn，扣现金 capex 后为 US$3.447bn。年度报表经审计，中期数据未经审计。Q3 继续使用 Reuters 报道，发行股数和定价仍未确定。本周直接读取 SEC HTML，核对了收入及融资工具公允价值损失；此前 PDF 转换件的完整核验记录保留。经营预测、12 月净现金零假设和独立的六月现金桥敏感性均未改变。
 
 ### 保留的经营路径
 
@@ -85,7 +85,7 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 该差异说明，以远期收入乘一个假设倍数，与逐年考虑利润、税和再投资成本，会得到不同的价值边界。高收入增长不足以单独证明现金流估值。
 
-Reuters 招股材料报道列示 2025 年销售约 US$4.6bn、经营亏损超过 US$8bn，约 47% 销售来自 Amazon 与 Google 渠道，两大客户分别占收入约 12%；报道还提及早期超过 US$417bn 的长期算力承诺；10 月报道口径更新至至少 US$518bn。这些数字来自记者取得的材料，本文未取得完整公开招股书核对。租用算力、训练和渠道支付可能通过经营费用进入 EBIT 利润率，自有基础设施则可能形成 capex；同一费用不能在两处重复扣减。长期算力承诺也不自动等于当前有息债务，不能把全部承诺一次性列为当期 capex。另一方面，固定利润率和 capex 比率可能低估承诺支出的规模或时间安排。模型没有逐合同支出计划，无法证明当前假设完整覆盖这些承诺。
+Reuters 招股材料报道列示 2025 年销售约 US$4.6bn、经营亏损超过 US$8bn，约 47% 销售来自 Amazon 与 Google 渠道，两大客户分别占收入约 12%；报道还提及早期超过 US$417bn 的长期算力承诺；10 月报道口径更新至至少 US$518bn。早期报道现由公开 S-1 补充；新数据及口径见上文和结构化 S-1 输入。租用算力、训练和渠道支付可能通过经营费用进入 EBIT 利润率，自有基础设施则可能形成 capex；同一费用不能在两处重复扣减。长期算力承诺也不自动等于当前有息债务，不能把全部承诺一次性列为当期 capex。另一方面，固定利润率和 capex 比率可能低估承诺支出的规模或时间安排。模型没有逐合同支出计划，无法证明当前假设完整覆盖这些承诺。
 
 ## 本地复算与集成位置
 
@@ -97,7 +97,7 @@ Reuters 招股材料报道列示 2025 年销售约 US$4.6bn、经营亏损超过
 
 新版新增 Comps 表，保留前沿实验室、成长软件、neocloud 和大型平台四组。底稿可比行已抽取至 [参考表](data/anthropic_ipo_comps_reference.csv)，不进入智谱核心中位数。底稿的 14.657×「前沿实验室中位数」实际来自 OpenAI 的融资和二级市场两个估值，并不是两个独立公司；其他组混合日期、收入预测期与 EV/股权分子。因此只借鉴分层方法，不把 1.886 万亿美元的参考结果当作已完成融资或智谱目标价。
 
-640 亿美元收入锚是代码中的固定输入。底稿称它依据 ARR 路径推导，但没有提供可复算的月度确认收入桥，本项目继续把它标记为分析者假设。底稿称「80 亿经营亏损与 420 亿亏损不可能同时成立」也不能直接采用：经营亏损与净亏损并非相同口径，需先核对融资工具会计损益。工作簿保留起始底稿结构，论文不引用该冲突判断。未公开招股书也不等于公司不存在审计财务报表。
+640 亿美元收入锚是代码中的固定输入。底稿称它依据 ARR 路径推导，但没有提供可复算的月度确认收入桥，本项目继续把它标记为分析者假设。底稿称「80 亿经营亏损与 420 亿亏损不可能同时成立」也不能直接采用：经营亏损与净亏损并非相同口径，需先核对融资工具会计损益。工作簿保留起始底稿结构，论文不引用该冲突判断。公开 S-1 包含经审计年度报表，经营亏损与净亏损仍须按不同口径解释。
 
 迁入工作簿的研究日期为 10 月 11 日，但随附展示稿仍是 9 月 30 日版本。本次已同步展示稿的收入、现金流与 DCF 数字；旧版底稿与展示稿通过 Git 历史查阅，工作目录仅保留当前版本。
 

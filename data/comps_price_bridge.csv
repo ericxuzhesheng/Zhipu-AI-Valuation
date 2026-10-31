@@ -14,3 +14,11 @@ Cloudflare,NET,2026-10-23,325.7300109863281,https://query1.finance.yahoo.com/v8/
 Snowflake,SNOW,2026-08-31,331.42999267578125,https://query1.finance.yahoo.com/v8/finance/chart/SNOW?period1=1788134400&period2=1792800000&interval=1d
 Snowflake,SNOW,2026-10-16,306.8399963378906,https://query1.finance.yahoo.com/v8/finance/chart/SNOW?period1=1788134400&period2=1792800000&interval=1d
 Snowflake,SNOW,2026-10-23,325.42999267578125,https://query1.finance.yahoo.com/v8/finance/chart/SNOW?period1=1788134400&period2=1792800000&interval=1d
+Cloudflare,NET,2026-10-29,310.29998779296875,https://query1.finance.yahoo.com/v8/finance/chart/NET?period1=1792713600&period2=1793318400&interval=1d
+Palantir,PLTR,2026-10-29,196.4199981689453,https://query1.finance.yahoo.com/v8/finance/chart/PLTR?period1=1792713600&period2=1793318400&interval=1d
+Phancy,hk06682,2026-10-30,21.64,https://query1.finance.yahoo.com/v8/finance/chart/6682.HK?period1=1792713600&period2=1793404800&interval=1d
+SenseTime,hk00020,2026-10-30,1.105,https://query1.finance.yahoo.com/v8/finance/chart/0020.HK?period1=1792713600&period2=1793404800&interval=1d
+Snowflake,SNOW,2026-10-29,330.2699890136719,https://query1.finance.yahoo.com/v8/finance/chart/SNOW?period1=1792713600&period2=1793318400&interval=1d
+Palantir,PLTR,2026-10-30,184.1100006103516,https://query1.finance.yahoo.com/v8/finance/chart/PLTR?period1=1793318400&period2=1793404800&interval=1d
+Cloudflare,NET,2026-10-30,280.70001220703125,https://query1.finance.yahoo.com/v8/finance/chart/NET?period1=1793318400&period2=1793404800&interval=1d
+Snowflake,SNOW,2026-10-30,306.0799865722656,https://query1.finance.yahoo.com/v8/finance/chart/SNOW?period1=1793318400&period2=1793404800&interval=1d

@@ -1,0 +1,12 @@
+file,rows,cutoff,close,source
+Zhipu_KnowledgeAtlas_daily.csv,5,20261030,483.6,Yahoo Finance chart; amount is close times volume proxy
+MiniMax_daily.csv,5,20261030,161.3,Yahoo Finance chart; amount is close times volume proxy
+WengeAI_daily.csv,5,20261030,52.0,Yahoo Finance chart; amount is close times volume proxy
+Alibaba_daily.csv,5,20261030,97.05,Yahoo Finance chart; amount is close times volume proxy
+Baidu_daily.csv,5,20261030,75.7,Yahoo Finance chart; amount is close times volume proxy
+Tencent_daily.csv,5,20261030,383.6,Yahoo Finance chart; amount is close times volume proxy
+Meituan_daily.csv,5,20261030,71.6,Yahoo Finance chart; amount is close times volume proxy
+Google_daily.csv,4,20261029,283.82000732421875,Yahoo Finance chart; amount is close times volume proxy
+Meta_daily.csv,4,20261029,624.52001953125,Yahoo Finance chart; amount is close times volume proxy
+Microsoft_daily.csv,4,20261029,530.1400146484375,Yahoo Finance chart; amount is close times volume proxy
+Tesla_daily.csv,4,20261029,403.29998779296875,Yahoo Finance chart; amount is close times volume proxy

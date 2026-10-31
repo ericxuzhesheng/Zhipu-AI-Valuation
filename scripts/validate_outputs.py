@@ -17,7 +17,8 @@ from anthropic_ipo_crosscheck import INFORMATION_CUTOFF
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "paper" / "main.tex"
 SUBMISSION_GLOB = "42353012_*.pdf"
-DATA_CUTOFF = 20261023
+DATA_CUTOFF = 20261030
+US_DATA_CUTOFF = 20261030
 
 
 def fail(message: str) -> None:
@@ -81,8 +82,9 @@ def check_price_summary_dates() -> None:
     for path in sorted((ROOT / "data").glob("*_daily.csv")):
         raw = pd.read_csv(path, usecols=["trade_date"])
         latest = int(raw["trade_date"].max())
-        if latest != DATA_CUTOFF:
-            fail(f"{path.name} data cutoff should be {DATA_CUTOFF}, found {latest}")
+        expected = US_DATA_CUTOFF if path.stem in {"Google_daily", "Meta_daily", "Microsoft_daily", "Tesla_daily"} else DATA_CUTOFF
+        if latest != expected:
+            fail(f"{path.name} data cutoff should be {expected}, found {latest}")
 
 
 def check_valuation_summary() -> None:
@@ -381,8 +383,10 @@ def check_disclosure_refresh() -> None:
     if not windows.data_cutoff.eq(cutoff.strftime('%Y-%m-%d')).all():
         fail('supplementary event windows have a stale cutoff')
     after_close = windows.loc['Technology export registration after close']
-    if bool(after_close['included']) or pd.notna(after_close['react_mean']):
-        fail('October 23 after-close disclosure must not have an observed reaction at this cutoff')
+    if after_close.day0 != '2026-10-26' or not bool(after_close['included']) or after_close.reaction_days != 2:
+        fail('October 23 after-close disclosure must begin its reaction on October 26')
+    if after_close.drift_days != 3 or bool(after_close.drift_full):
+        fail('October 26 event must retain an incomplete three-day drift at this cutoff')
     summary = pd.read_csv(ROOT / 'eventstudy' / 'anthropic_ipo_summary.csv').set_index('metric')['value']
     if summary['Information cutoff'] != f'{anthropic_cutoff:%Y-%m-%d} (Beijing time)':
         fail('Anthropic summary has a stale information cutoff')

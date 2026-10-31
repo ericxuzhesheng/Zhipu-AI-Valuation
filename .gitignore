@@ -64,3 +64,6 @@ venv/
 /anthropic/2026-10-11/*.png
 /anthropic/2026-10-11/verification.json
 /anthropic/2026-10-11/*.inspect.ndjson
+
+# Weekly refresh source snapshots and render checks
+/tmp/weekly_20261030/

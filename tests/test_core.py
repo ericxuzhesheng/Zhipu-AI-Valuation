@@ -42,17 +42,20 @@ class MarketDataTests(unittest.TestCase):
 class EventPanelTests(unittest.TestCase):
     def test_october_supplement_preserves_incomplete_and_after_close_windows(self) -> None:
         panel = pd.read_csv(ROOT / 'eventstudy/october_window_update.csv').set_index('event')
-        self.assertTrue(panel.data_cutoff.eq('2026-10-23').all())
+        self.assertTrue(panel.data_cutoff.eq('2026-10-30').all())
         flash = panel.loc['M3.1 Flash general availability']
         self.assertEqual(flash.day0, '2026-10-20')
         self.assertEqual(flash.reaction_days, 2)
-        self.assertEqual(flash.drift_days, 2)
+        self.assertEqual(flash.drift_days, 7)
         self.assertFalse(flash.drift_full)
-        self.assertTrue(pd.isna(panel.loc['Code Mini App'].drift_mean))
+        self.assertEqual(panel.loc['Code Mini App'].drift_days, 5)
+        self.assertFalse(panel.loc['Code Mini App'].drift_full)
         after_close = panel.loc['Technology export registration after close']
         self.assertEqual(after_close.day0, '2026-10-26')
-        self.assertFalse(after_close.included)
-        self.assertTrue(pd.isna(after_close.react_mean))
+        self.assertTrue(after_close.included)
+        self.assertEqual(after_close.reaction_days, 2)
+        self.assertEqual(after_close.drift_days, 3)
+        self.assertFalse(after_close.drift_full)
 
     def test_event_catalog_input_drives_panel(self) -> None:
         events = event_panel.load_panel_events()

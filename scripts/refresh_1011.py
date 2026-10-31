@@ -1,4 +1,4 @@
-"""Rebuild the October 23 valuation snapshot, retaining the fixed August event cohort."""
+"""Rebuild the latest Hong Kong valuation snapshot, retaining the fixed August event cohort."""
 from pathlib import Path
 import json
 import pandas as pd
@@ -7,11 +7,10 @@ import comps_beta_and_reverse_dcf as reverse
 import event_panel
 
 ROOT = Path(__file__).resolve().parents[1]
-DATE = '2026-10-23'
-CUTOFF = 20261023
+DATE = r.MARKET.date.strftime('%Y-%m-%d')
+CUTOFF = int(r.MARKET.date.strftime('%Y%m%d'))
 
 def main():
-    assert r.MARKET.date.strftime('%Y-%m-%d') == DATE
     path = ROOT / 'data/valuation_comps_input.csv'
     comps = pd.read_csv(path, keep_default_na=False)
     comps['equity_value_bn'] = pd.to_numeric(comps['equity_value_bn'], errors='coerce')
@@ -29,10 +28,11 @@ def main():
         mask = comps.company.eq(company)
         old_date = comps.loc[mask,'valuation_date'].iloc[0]
         prices = rows.set_index('trade_date').close
-        comps.loc[mask,'equity_value_bn'] *= float(prices.loc[DATE]) / float(prices.loc[old_date])
-        comps.loc[mask,'valuation_date'] = DATE
-        comps.loc[mask,'valuation_source_url'] = rows.source_url.iloc[0]
-        comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {DATE}; August share-count and FX basis retained, not a newly verified market capitalization.'
+        peer_date = rows.trade_date.max()
+        comps.loc[mask,'equity_value_bn'] *= float(prices.loc[peer_date]) / float(prices.loc[old_date])
+        comps.loc[mask,'valuation_date'] = peer_date
+        comps.loc[mask,'valuation_source_url'] = rows.loc[rows.trade_date.eq(peer_date), 'source_url'].iloc[0]
+        comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {peer_date}; August share-count and FX basis retained, not a newly verified market capitalization.'
     comps.loc[comps.company.eq('Zhipu'),'valuation_date'] = DATE
     comps.loc[comps.company.eq('Zhipu'),'valuation_source_url'] = 'https://query1.finance.yahoo.com/v8/finance/chart/2513.HK'
     comps.to_csv(path,index=False)
@@ -62,7 +62,7 @@ def main():
     supplement = event_panel.event_panel_rows(events)
     supplement.loc[supplement.drift_days.eq(0), ['drift_mean', 'drift_peer']] = None
     supplement.loc[supplement.day0.ge('2026-10-20'), 'source_type'] = 'official dated release; intraday timing unverified; provisional window; overlapping news'
-    supplement.loc[supplement.event.eq('Technology export registration after close'), 'source_type'] = 'HKEX 2026-10-23 22:33 Beijing; first subsequent session outside cutoff'
+    supplement.loc[supplement.event.eq('Technology export registration after close'), 'source_type'] = 'HKEX 2026-10-23 22:33 Beijing; first subsequent session 2026-10-26; drift completeness reported separately'
     supplement.insert(0,'data_cutoff',DATE)
     supplement.to_csv(ROOT/'eventstudy/october_window_update.csv',index=False)
     returns = []

@@ -1,0 +1,8 @@
+file,rows,cutoff,close,source,source_url
+Google_daily.csv,1,20261030,279.8399963378906,Yahoo Finance chart; amount is close times volume proxy,https://query1.finance.yahoo.com/v8/finance/chart/GOOGL?period1=1793318400&period2=1793404800&interval=1d
+Meta_daily.csv,1,20261030,614.989990234375,Yahoo Finance chart; amount is close times volume proxy,https://query1.finance.yahoo.com/v8/finance/chart/META?period1=1793318400&period2=1793404800&interval=1d
+Microsoft_daily.csv,1,20261030,521.9099731445312,Yahoo Finance chart; amount is close times volume proxy,https://query1.finance.yahoo.com/v8/finance/chart/MSFT?period1=1793318400&period2=1793404800&interval=1d
+Tesla_daily.csv,1,20261030,399.80999755859375,Yahoo Finance chart; amount is close times volume proxy,https://query1.finance.yahoo.com/v8/finance/chart/TSLA?period1=1793318400&period2=1793404800&interval=1d
+comps_price_bridge.csv,1,20261030,184.11000061035156,Palantir Yahoo Finance chart,https://query1.finance.yahoo.com/v8/finance/chart/PLTR?period1=1793318400&period2=1793404800&interval=1d
+comps_price_bridge.csv,1,20261030,280.70001220703125,Cloudflare Yahoo Finance chart,https://query1.finance.yahoo.com/v8/finance/chart/NET?period1=1793318400&period2=1793404800&interval=1d
+comps_price_bridge.csv,1,20261030,306.0799865722656,Snowflake Yahoo Finance chart,https://query1.finance.yahoo.com/v8/finance/chart/SNOW?period1=1793318400&period2=1793404800&interval=1d

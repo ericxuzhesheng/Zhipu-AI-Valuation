@@ -14,6 +14,7 @@ def main():
     path = ROOT / 'data/valuation_comps_input.csv'
     comps = pd.read_csv(path, keep_default_na=False)
     comps['equity_value_bn'] = pd.to_numeric(comps['equity_value_bn'], errors='coerce')
+    shares = pd.read_csv(ROOT / 'data/listed_share_counts.csv').set_index('company')
     for company, filename in [('MiniMax','MiniMax_daily.csv'), ('Wenge AI','WengeAI_daily.csv')]:
         prices = pd.read_csv(ROOT / 'data' / filename).set_index('trade_date')
         mask = comps.company.eq(company)
@@ -23,6 +24,10 @@ def main():
         symbol = {'MiniMax':'0100.HK', 'Wenge AI':'1956.HK'}[company]
         comps.loc[mask,'valuation_source_url'] = f'https://query1.finance.yahoo.com/v8/finance/chart/{symbol}'
         comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {DATE}; share-count and FX basis carried forward from 2026-08-31.'
+        if company == 'MiniMax':
+            disclosure = shares.loc[company]
+            comps.loc[mask, 'equity_value_bn'] = float(prices.loc[CUTOFF, 'close']) * disclosure.issued_shares / r.USD_HKD / 1e9
+            comps.loc[mask, 'comparability_note'] = f'Closest listed foundation-model peer. Price refreshed to {DATE}; {disclosure.issued_shares} issued shares at {disclosure.balance_date}; HKD/USD assumption {r.USD_HKD}. Share source: {disclosure.source_url}'
     bridge = pd.read_csv(ROOT/'data/comps_price_bridge.csv')
     for company, rows in bridge.groupby('company'):
         mask = comps.company.eq(company)
@@ -58,6 +63,7 @@ def main():
         ('MiniMax','00100.HK','Code Mini App','2026-10-22','developer_tool','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
         ('Zhipu','02513.HK','ZCode v3.16.3','2026-10-23','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
         ('MiniMax','00100.HK','Technology export registration after close','2026-10-26','regulatory_disclosure','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
+        ('Zhipu','02513.HK','ZCode v3.17.2','2026-11-03','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
     ]]
     supplement = event_panel.event_panel_rows(events)
     supplement.loc[supplement.drift_days.eq(0), ['drift_mean', 'drift_peer']] = None

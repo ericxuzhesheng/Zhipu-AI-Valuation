@@ -21,7 +21,7 @@
 \setbeamertemplate{itemize item}{\small\raise0.3ex\hbox{\textbullet}}
 \setbeamertemplate{footline}{%
   \leavevmode\hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.8ex,dp=1.3ex,leftskip=0.5cm,rightskip=0.5cm]{normal text}%
-    \scriptsize\color{Slate}Anthropic IPO valuation \hfill 26 Oct 2026 \hfill \insertframenumber/\inserttotalframenumber
+    \scriptsize\color{Slate}Anthropic IPO valuation \hfill 2 Nov 2026 \hfill \insertframenumber/\inserttotalframenumber
   \end{beamercolorbox}}}
 \setbeamersize{text margin left=0.6cm,text margin right=0.6cm}
 \hypersetup{colorlinks=true,urlcolor=Slate}
@@ -29,7 +29,7 @@
 \newcommand{\bn}{\,\text{bn}}
 \title{Anthropic IPO Valuation}
 \subtitle{A basic revenue-multiple model and a DCF cross-check}
-\date{26 October 2026}
+\date{2 November 2026}
 
 \begin{document}
 
@@ -59,9 +59,9 @@
   \begin{itemize}
     \item Latest investor discussion is about \$1.5tn; the earlier \$2tn is a historical stress case.
     \item The assumed multiple gives a value 30.0\% above that discussion; the DCF is 47.4\% below it.
-    \item December net cash remains \textbf{assumed zero}; June financing sensitivities are separate.
+    \item December net cash remains \textbf{assumed zero}; September financing sensitivities are separate.
   \end{itemize}
-  \source{Information cutoff: 26 Oct 2026. Assumed valuation date: 31 Dec 2026. All values in USD. [S2, S25]}
+  \source{Information cutoff: 2 Nov 2026. Assumed valuation date: 31 Dec 2026. All values in USD. [S2, S25]}
 \end{frame}
 
 % 2 --------------------------------------------------------------------------
@@ -267,7 +267,7 @@
       Supporting \$1.5tn therefore requires a different growth path, earlier cash generation, lower WACC or other material assumption changes.
     \end{column}
   \end{columns}
-  \source{Zero December net cash is assumed. June balances are disclosed; conversion and financing sensitivities follow.}
+  \source{Zero December net cash is assumed. September balances are disclosed; conversion and financing sensitivities follow.}
 \end{frame}
 
 % 7 --------------------------------------------------------------------------
@@ -293,7 +293,7 @@
         \item[S3] \href{https://www.streetinsider.com/Reuters/Exclusive-Anthropic\%2BIPO\%2Bprospectus\%2Blays\%2Bbare\%2Bdeep\%2Bdependence\%2Bon\%2BBig\%2BTech\%2Bpartners/27123187.html}{Reuters, 29 Sep 2026}: approximately \$2tn target and cloud-partner dependence.
         \item[S25] \href{https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm}{Anthropic public S-1, 26 Oct 2026}: audited annuals, unaudited interim statements and conversion terms.
       \end{itemize}
-      \textbf{Limits:} projections may change. June balances are historical; December net cash and final offer terms remain uncertain. Future funding and dilution are not fully modeled.
+      \textbf{Limits:} projections may change. September balances are historical; December net cash and final offer terms remain uncertain. Future funding and dilution are not fully modeled.
     \end{column}
   \end{columns}
   \source{Source: accompanying editable Excel model. Forecasts are analyst assumptions.}
@@ -315,45 +315,56 @@
   \end{tabular}
   \vspace{0.15cm}
   \begin{itemize}
-    \item Q1/Q2 revenue is US\$4.731bn / US\$11.555bn. Q3 US\$16.8bn remains Reuters-reported.
-    \item The US\$64bn annual assumption requires US\$30.914bn in Q4, or 84.0\% sequential growth.
+    \item Q1/Q2 revenue is US\$4.731bn / US\$11.555bn. Q3 is US\$16.956bn in the November S-1/A.
+    \item The US\$64bn annual assumption requires US\$30.758bn in Q4, or 81.4\% sequential growth.
     \item H1 cash flow less cash capex is US\$3.447bn; it is not the forecast's unlevered FCF.
   \end{itemize}
   \source{S-1 MD\&A p160; financial statements F-7/F-12. FY2025 audited; interim periods unaudited. Non-cash remeasurement and payment timing affect the cash-flow comparison.}
 \end{frame}
 
 
-\begin{frame}{June cash bridge: a historical sensitivity}
+\begin{frame}{September cash bridge: a historical sensitivity}
   \small
-  Liquid resources US\$131.651bn exclude restricted cash. Subtract US\$0.443bn finance leases, then any retained Amazon note principal.
+  Liquid resources US\$131.845bn exclude restricted cash. Subtract US\$1.674bn finance leases, then any retained Amazon note principal.
   \vspace{0.2cm}
   \begin{tabular}{@{}lrr@{}}
     \toprule
     US\$bn unless stated & Notes retained & Full conversion\\
     \midrule
     Amazon principal deducted & 6.203 & 0.000\\
-    Net cash proxy & 125.005 & 131.208\\
-    DCF equity proxy & 913.544 & 919.747\\
-    Required terminal EBIT margin & 71.7\% & 71.3\%\\
+    Net cash proxy & 123.968 & 130.171\\
+    DCF equity proxy & 912.507 & 918.710\\
+    Required terminal EBIT margin & 71.8\% & 71.4\%\\
     \bottomrule
   \end{tabular}
   \vspace{0.2cm}
   \begin{itemize}
-    \item Note carrying value is US\$108.566bn; it is not the US\$6.203bn contractual cash principal.
+    \item Note carrying value is US\$130.502bn; it is not the US\$6.203bn contractual cash principal.
     \item Conversion is subject to Amazon's 12\% ownership cap unless waived; residual notes may remain.
-    \item No H2 cash roll-forward or IPO proceeds. These are not December cash forecasts or values allocated to existing common shares.
+    \item No Q4 cash roll-forward or IPO proceeds. These are not December cash forecasts or values allocated to existing common shares.
   \end{itemize}
-  \source{S-1 MD\&A p164; balance sheet F-5; lease note F-35. Unchanged DCF EV US\$788.5bn; margin calculation uses the US\$1.5tn discussion benchmark.}
+  \source{S-1/A MD\&A p168; balance sheet F-6; lease note 7. Unchanged DCF EV US\$788.5bn; margin calculation uses the US\$1.5tn discussion benchmark.}
 \end{frame}
 
 \begin{frame}{Commitments and offering terms still constrain valuation}
   \begin{itemize}
-    \item June minimum purchase commitments: US\$265.6bn. Leases not yet commenced: US\$321.4bn. Separate multiyear categories, with stated conditions.
+    \item September minimum purchase commitments: US\$313.819bn. Leases not yet commenced: US\$451.2bn. Separate multiyear categories, with stated conditions.
     \item The earlier Reuters US\$518bn observation differs in date and scope. It is not a comparable growth series.
     \item Do not deduct all commitments as current debt or one-year capex. Operating rent stays within forecast margins.
     \item Offer price, proceeds, residual notes and final diluted shares remain blank. No per-share IPO price is estimated.
   \end{itemize}
-  \source{\href{https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm}{Public S-1, 26 Oct 2026}, F-35/F-58. Financials use a PDF conversion; conversion fidelity remains a source limitation.}
+  \source{\href{https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm}{S-1/A, 2 Nov 2026}, p174--175. SEC HTML checked; annual forecasts remain assumptions.}
+\end{frame}
+
+\begin{frame}{November amendment: nine-month results}
+  \begin{itemize}
+    \item Nine-month revenue US\$33.242bn; operating loss US\$1.260bn.
+    \item Net loss US\$104.039bn includes US\$94.324bn financing fair-value loss.
+    \item Operating cash flow US\$6.569bn less cash capex US\$0.925bn is US\$5.644bn; not unlevered FCF.
+    \item Aggregate commitments, including short-term and subsequent arrangements, are about US\$895.4bn. Do not add this aggregate to its component categories.
+    \item Operating forecasts, zero December net cash and blank IPO pricing remain assumptions.
+  \end{itemize}
+  \source{\href{https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm}{S-1/A, 2 Nov 2026}, p161/174--175; F-8/F-13. Interim figures unaudited.}
 \end{frame}
 
 \end{document}

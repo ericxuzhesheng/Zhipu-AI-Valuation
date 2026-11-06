@@ -14,7 +14,7 @@ if(before){
   const assumptions=workbook.worksheets.getItem('Assumptions');
   assumptions.getRange('B8').values=[[p.market_date]];
   assumptions.getRange('B9').values=[[p.market_price]];
-  assumptions.getRange('C5').values=[['September monthly return (2 Oct): 263,059,605 H + 224,528,485 unlisted shares; awards unvested. https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1002/2026100201832_c.pdf']];
+  assumptions.getRange('C5').values=[['October monthly return (4 Nov): 263,059,605 H + 224,528,485 unlisted shares; 1,215,762 awards unvested. https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1104/2026110401758.pdf']];
   workbook.worksheets.getItem('Audit Summary').getRange('A1:B10').values=p.audit;
   const comps=workbook.worksheets.getItem('Valuation Comps');
   for(let i=0;i<p.comps.length;i++){

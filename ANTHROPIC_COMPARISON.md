@@ -1,6 +1,6 @@
 # Anthropic IPO：收入预期与现金流估值对照
 
-本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-10-26（北京时间）**；模型估值日假设为 **2026-12-31**，与智谱 10 月 30 日的实际市场价格存在约两个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
+本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-11-02（北京时间）**；模型估值日假设为 **2026-12-31**，与智谱 11 月 6 日的实际市场价格存在约两个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
 
 10 月 11 日起始底稿保存在 [anthropic/2026-10-11](anthropic/2026-10-11/README.md)，包括[活公式 Excel](anthropic/2026-10-11/Anthropic_IPO_Basic_Valuation.xlsx)、[英文 Beamer](anthropic/2026-10-11/Anthropic_IPO_Valuation_Beamer.pdf)、TeX 源文件、模型生成脚本、核验结果与工作表预览。原来源为 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/`；本仓库的文件和数值复算不依赖该外部路径。
 
@@ -27,9 +27,9 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 [10 月 14 日官方公告](https://www.anthropic.com/news/singapore-office-opening)确认设立新加坡办公室，并与新加坡政府签署合作备忘录。公司列举 GovTech、DBS、Grab 等采用场景，但没有披露可直接映射到本模型的新增收入或现金流，因此不据此提高预测。
 
-北京时间 10 月 15 日的 [Reuters 季度报道](https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221)已纳入本期信息集。结构化观测与来源保存在 [披露输入](data/anthropic_ipo_disclosures_input.csv)。原 US$64bn 年度假设对照 S-1 的 Q1/Q2 与 Reuters 的 Q3 合计收入 US$33.086bn，要求 Q4 收入 US$30.914bn，环比增长 84.0%；季度收入、年度收入与 run-rate 分别记录。
+北京时间 10 月 15 日的 [Reuters 季度报道](https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221)已纳入本期信息集。结构化观测与来源保存在 [披露输入](data/anthropic_ipo_disclosures_input.csv)。原 US$64bn 年度假设对照 S-1/A 的 Q1/Q2/Q3 合计收入 US$33.242bn，要求 Q4 收入 US$30.758bn，环比增长 81.4%；季度收入、年度收入与 run-rate 分别记录。
 
-[Reuters 最新估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，当前讨论基准更新为 US$1.5tn。完整时区、核验范围与取数限制见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。10 月 11 日为底稿起始日，当前工作簿及展示稿已纳入 26 日公开 S-1；原始状态可从 Git 历史恢复。
+[Reuters 最新估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，当前讨论基准更新为 US$1.5tn。完整时区、核验范围与取数限制见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。10 月 11 日为底稿起始日，当前工作簿及展示稿已纳入 11 月 2 日修订 S-1/A；原始状态可从 Git 历史恢复。
 
 ## 可复算的现金流假设
 
@@ -37,9 +37,9 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 [10 月 22 日 Reuters 报道](https://uk.marketscreener.com/news/anthropic-ipo-stands-alone-as-ai-market-jitters-sideline-others-ce785cdeda8cf026)继续讨论约 US$1.5tn，并称公司计划 11 月中旬上市、11 月 9 日当周开始营销，时间仍可能变化。该报道未提供已定价发行条款，原 DCF 与讨论基准保持不变。
 
-本周新增 [18 日公益基金股权承诺](https://www.anthropic.com/news/public-benefit-fund)、[21 日 Duet 研究预览](https://claude.com/resources/articles/claude-duet)、[22 日 Google Cloud 渠道扩展](https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed)和 [Agent Skills 捐赠](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation)。5% 股权承诺仍待股东批准，未明确的最终股权安排不能直接转成 EV 折价或已发生稀释。产品进展没有披露增量收入，原经营路径继续使用显式假设。日期、来源及 23 日 Enterprise 公告的时区边界限制见 [进展表](data/anthropic_progress_2026-10-23.csv)。
+此前新增 [18 日公益基金股权承诺](https://www.anthropic.com/news/public-benefit-fund)、[21 日 Duet 研究预览](https://claude.com/resources/articles/claude-duet)、[22 日 Google Cloud 渠道扩展](https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed)和 [Agent Skills 捐赠](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation)。5% 股权承诺仍待股东批准，未明确的最终股权安排不能直接转成 EV 折价或已发生稀释。产品进展没有披露增量收入，原经营路径继续使用显式假设。日期、来源及 23 日 Enterprise 公告的时区边界限制见 [进展表](data/anthropic_progress_2026-10-23.csv)。
 
-**公开 S-1 已纳入**：[10 月 26 日公开申报](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)列示 2025 年收入 US$4.585bn、经营亏损 US$8.060bn；2026H1 收入 US$16.286bn、经营亏损 US$0.693bn、净亏损 US$80.748bn，其中融资工具公允价值损失 US$72.388bn。H1 经营现金流为 US$3.929bn，扣现金 capex 后为 US$3.447bn。年度报表经审计，中期数据未经审计。Q3 继续使用 Reuters 报道，发行股数和定价仍未确定。本周直接读取 SEC HTML，核对了收入及融资工具公允价值损失；此前 PDF 转换件的完整核验记录保留。经营预测、12 月净现金零假设和独立的六月现金桥敏感性均未改变。
+**公开 S-1 已纳入**：[10 月 26 日公开申报](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)列示 2025 年收入 US$4.585bn、经营亏损 US$8.060bn；2026H1 收入 US$16.286bn、经营亏损 US$0.693bn、净亏损 US$80.748bn，其中融资工具公允价值损失 US$72.388bn。H1 经营现金流为 US$3.929bn，扣现金 capex 后为 US$3.447bn。年度报表经审计，中期数据未经审计。Q3 已由 11 月 2 日 S-1/A 的 US$16.956bn 替换媒体估计，发行股数和定价仍未确定。本周直接读取 SEC HTML，核对了收入及融资工具公允价值损失；此前 PDF 转换件的完整核验记录保留。经营预测及 12 月净现金零假设不变，独立现金桥敏感性已更新至九月末。
 
 ### 保留的经营路径
 
@@ -102,3 +102,7 @@ Reuters 招股材料报道列示 2025 年销售约 US$4.6bn、经营亏损超过
 迁入工作簿的研究日期为 10 月 11 日，但随附展示稿仍是 9 月 30 日版本。本次已同步展示稿的收入、现金流与 DCF 数字；旧版底稿与展示稿通过 Git 历史查阅，工作目录仅保留当前版本。
 
 当前工作簿更新命令：先运行 `python scripts/anthropic_ipo_crosscheck.py`，再运行 `node scripts/refresh_anthropic_disclosures.mjs`。`build_model.mjs` 保留起始生成流程，重建后须应用上述披露更新。
+
+11 月 2 日 [S-1/A](https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm)披露前三季度收入 US$33.242bn、经营亏损 US$1.260bn、净亏损 US$104.039bn（含融资公允价值损失 US$94.324bn）。经营现金流 US$6.569bn，扣 US$0.925bn 现金 capex 后为 US$5.644bn，不能等同 UFCF。包含短期及期后安排的总承诺约 US$895.4bn；不能与其组成项目重复相加。九月现金桥更新，12 月净现金零假设及经营预测保持不变。
+
+补核的 10 月 27—28 日官方进展包括 [GSA 渠道扩展](https://www.anthropic.com/news/expanding-partnership-gsa)、[科研机构额度计划](https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions)与[药物研发合作研究](https://www.anthropic.com/research/early-progress-drug-development)。折扣、赠送额度和研究合作不等于确认收入，未据此上调经营预测。

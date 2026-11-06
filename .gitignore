@@ -67,3 +67,5 @@ venv/
 
 # Weekly refresh source snapshots and render checks
 /tmp/weekly_20261030/
+/tmp/weekly_20261106/
+/tmp/weekly_20261106_stage.py

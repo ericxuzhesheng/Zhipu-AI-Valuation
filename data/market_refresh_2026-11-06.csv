@@ -1,0 +1,12 @@
+file,rows,cutoff,close,source,turnover_basis,retrieved_at_beijing,cross_check
+Zhipu_KnowledgeAtlas_daily.csv,5,20261106,426.2,https://query1.finance.yahoo.com/v8/finance/chart/2513.HK,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+MiniMax_daily.csv,5,20261106,155.8,https://query1.finance.yahoo.com/v8/finance/chart/0100.HK,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+WengeAI_daily.csv,5,20261106,53.5,https://query1.finance.yahoo.com/v8/finance/chart/1956.HK,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+Alibaba_daily.csv,5,20261106,104.9,https://query1.finance.yahoo.com/v8/finance/chart/9988.HK,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+Baidu_daily.csv,5,20261106,78.2,https://query1.finance.yahoo.com/v8/finance/chart/9888.HK,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+Tencent_daily.csv,5,20261106,419.8,https://query1.finance.yahoo.com/v8/finance/chart/0700.HK,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+Meituan_daily.csv,5,20261106,80.4,https://query1.finance.yahoo.com/v8/finance/chart/3690.HK,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+Google_daily.csv,4,20261105,282.57000732421875,https://query1.finance.yahoo.com/v8/finance/chart/GOOGL,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+Meta_daily.csv,4,20261105,605.0800170898438,https://query1.finance.yahoo.com/v8/finance/chart/META,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+Microsoft_daily.csv,4,20261105,535.9299926757812,https://query1.finance.yahoo.com/v8/finance/chart/MSFT,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure
+Tesla_daily.csv,4,20261105,343.69000244140625,https://query1.finance.yahoo.com/v8/finance/chart/TSLA,close times volume proxy,2026-11-06,Zhipu Nov6 OHLC agrees with ET Net 16:15 HKT; Tencent TLS failure

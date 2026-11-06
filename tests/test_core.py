@@ -42,20 +42,23 @@ class MarketDataTests(unittest.TestCase):
 class EventPanelTests(unittest.TestCase):
     def test_october_supplement_preserves_incomplete_and_after_close_windows(self) -> None:
         panel = pd.read_csv(ROOT / 'eventstudy/october_window_update.csv').set_index('event')
-        self.assertTrue(panel.data_cutoff.eq('2026-10-30').all())
+        self.assertTrue(panel.data_cutoff.eq('2026-11-06').all())
         flash = panel.loc['M3.1 Flash general availability']
         self.assertEqual(flash.day0, '2026-10-20')
         self.assertEqual(flash.reaction_days, 2)
-        self.assertEqual(flash.drift_days, 7)
-        self.assertFalse(flash.drift_full)
-        self.assertEqual(panel.loc['Code Mini App'].drift_days, 5)
-        self.assertFalse(panel.loc['Code Mini App'].drift_full)
+        self.assertEqual(flash.drift_days, 9)
+        self.assertTrue(flash.drift_full)
+        self.assertEqual(panel.loc['Code Mini App'].drift_days, 9)
+        self.assertTrue(panel.loc['Code Mini App'].drift_full)
         after_close = panel.loc['Technology export registration after close']
         self.assertEqual(after_close.day0, '2026-10-26')
         self.assertTrue(after_close.included)
         self.assertEqual(after_close.reaction_days, 2)
-        self.assertEqual(after_close.drift_days, 3)
+        self.assertEqual(after_close.drift_days, 8)
         self.assertFalse(after_close.drift_full)
+        newest = panel.loc['ZCode v3.17.2']
+        self.assertEqual(newest.drift_days, 2)
+        self.assertFalse(newest.drift_full)
 
     def test_event_catalog_input_drives_panel(self) -> None:
         events = event_panel.load_panel_events()
@@ -130,10 +133,10 @@ class ValuationTests(unittest.TestCase):
     def test_anthropic_latest_disclosures_and_historical_benchmark(self) -> None:
         _, latest = anthropic_ipo_crosscheck.calculate()
         _, historical = anthropic_ipo_crosscheck.calculate(ipo_benchmark=2000)
-        self.assertEqual(latest['Information cutoff'], '2026-10-26 (Beijing time)')
+        self.assertEqual(latest['Information cutoff'], '2026-11-02 (Beijing time)')
         self.assertEqual(latest['Reported IPO equity benchmark (USD bn)'], 1500)
-        self.assertAlmostEqual(latest['Reported Q1-Q3 revenue (USD bn)'], 33.086)
-        self.assertAlmostEqual(latest['Q4 revenue required for annual anchor (USD bn)'], 30.914)
+        self.assertAlmostEqual(latest['Reported Q1-Q3 revenue (USD bn)'], 33.242)
+        self.assertAlmostEqual(latest['Q4 revenue required for annual anchor (USD bn)'], 30.758)
         self.assertAlmostEqual(latest['DCF EV (USD bn)'], historical['DCF EV (USD bn)'])
         self.assertLess(latest['Required terminal EBIT margin at benchmark'],
                         historical['Required terminal EBIT margin at benchmark'])
@@ -145,9 +148,10 @@ class ValuationTests(unittest.TestCase):
                                financials.loc['H1 2026','revenue_usdbn'])
         self.assertAlmostEqual(financials.loc['Q1 2026','operating_income_usdbn'] +
                                financials.loc['Q2 2026','operating_income_usdbn'], -0.693)
-        self.assertIn('Reuters', anthropic_ipo_crosscheck.DISCLOSURES.loc['Q3 revenue','classification'])
+        self.assertIn('S-1/A', anthropic_ipo_crosscheck.DISCLOSURES.loc['Q3 revenue','classification'])
+        self.assertAlmostEqual(financials.loc['9M 2026','revenue_usdbn'], financials.loc['H1 2026','revenue_usdbn'] + financials.loc['Q3 2026','revenue_usdbn'])
         bridges = anthropic_ipo_crosscheck.historical_cash_bridge()
-        self.assertAlmostEqual(bridges.iloc[0].net_cash_proxy_usdbn, 112.389+19.262-0.443-6.203)
+        self.assertAlmostEqual(bridges.iloc[0].net_cash_proxy_usdbn, 95.562+36.283-1.674-6.203)
         self.assertAlmostEqual(bridges.iloc[1].net_cash_proxy_usdbn-bridges.iloc[0].net_cash_proxy_usdbn, 6.203)
         _, base = anthropic_ipo_crosscheck.calculate()
         _, funded = anthropic_ipo_crosscheck.calculate(net_cash_adjustment=125.005)

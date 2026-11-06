@@ -15,10 +15,10 @@ if (process.argv.includes('--inspect')) {
 } else {
   const expected = JSON.parse(await fs.readFile(path.join(runtime, 'anthropic-latest.json'), 'utf8'));
   inputs.getRange('D8').values = [[new Date(`${expected.cutoff}T00:00:00Z`)]];
-  inputs.getRange('C3').values = [['USD billions. S-1 review: 26 Oct 2026. Annuals audited; interim statements unaudited.']];
-  valuation.getRange('C3').values = [['USD billions. S-1 review: 26 Oct 2026. Valuation date remains assumed 31 Dec 2026.']];
-  inputs.getRange('F8').values = [['Public S-1 included [S25]; filing PDF conversion used; EDGAR HTML retrieval blocked.']];
-  inputs.getRange('F12').values = [['Zero remains a Dec-2026 assumption. June liquidity and debt sensitivities appear below.']];
+  inputs.getRange('C3').values = [['USD billions. S-1/A review: 2 Nov 2026. Annuals audited; interim statements unaudited.']];
+  valuation.getRange('C3').values = [['USD billions. S-1/A review: 2 Nov 2026. Valuation date remains assumed 31 Dec 2026.']];
+  inputs.getRange('F8').values = [['S-1/A included [S26]; SEC HTML checked; offer terms remain blank.']];
+  inputs.getRange('F12').values = [['Zero remains a Dec-2026 assumption. September liquidity and debt sensitivities appear below.']];
   inputs.getRange('F16').values = [['Public S-1 leaves offering size blank. Proceeds remain an unfilled input.']];
   inputs.getRange('F18').values = [['Final post-conversion diluted offering share count remains blank in the S-1.']];
   valuation.getRange('F81').values = [['Final IPO share count remains blank; historical shares cannot determine an offer price.']];
@@ -33,7 +33,7 @@ if (process.argv.includes('--inspect')) {
   inputs.getRange('I37:M39').values = [
     ['2026Q1', expected.quarters[0], new Date('2026-10-26T00:00:00Z'), 'S-1 unaudited', 'S25'],
     ['2026Q2', expected.quarters[1], new Date('2026-10-26T00:00:00Z'), 'S-1 unaudited', 'S25'],
-    ['2026Q3', expected.quarters[2], new Date('2026-10-15T00:00:00Z'), 'Reuters; not S-1', 'S19'],
+    ['2026Q3', expected.quarters[2], new Date('2026-11-02T00:00:00Z'), 'S-1/A unaudited', 'S26'],
   ];
   inputs.getRange('J37:J39').setNumberFormat('0.000');
   inputs.getRange('K37:K39').setNumberFormat('yyyy-mm-dd');
@@ -51,10 +51,10 @@ if (process.argv.includes('--inspect')) {
   inputs.getRange('C141').values = [['https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed']];
   inputs.getRange('C143').values = [['S24. Agent Skills donated to AAIF, 22 Oct; no quantified revenue or cash-flow uplift.']];
   inputs.getRange('C144').values = [['https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation']];
-  valuation.getRange('C114').values = [['26 Oct S-1 included: Q1/Q2 are exact filing values; Q3 remains Reuters-reported.']];
+  valuation.getRange('C114').values = [['2 Nov S-1/A: all three quarters now use exact unaudited filing values.']];
   valuation.getRange('C115').values = [['S-1 annuals are audited; interim statements are unaudited. Forecasts remain assumptions.']];
-  valuation.getRange('C116').values = [['June liquidity is not December net cash. Amazon conversion is subject to an ownership cap.']];
-  valuation.getRange('C101').values = [['Active December net-cash assumption remains zero; separate June snapshot sensitivities are shown below.']];
+  valuation.getRange('C116').values = [['September liquidity is not December net cash. Amazon conversion is subject to an ownership cap.']];
+  valuation.getRange('C101').values = [['Active December net-cash assumption remains zero; separate September snapshot sensitivities are shown below.']];
   valuation.getRange('C103').values = [['Latest investor discussion is USD1.5tn; the earlier USD2tn expectation is a historical stress case.']];
   valuation.getRange('C10').values = [['IPO investor discussion']];
   valuation.getRange('C99').values = [['IPO investor discussion']];
@@ -86,7 +86,7 @@ if (process.argv.includes('--inspect')) {
   inputs.getRange('D37:D38').setNumberFormat(number);
   inputs.getRange('D149:F156').setNumberFormat(number);
   inputs.getRange('C160:H172').format = { font: { name: 'Arial', size: 10 }, rowHeight: 23 };
-  inputs.getRange('C160:H160').values = [['June 2026 balance / terms', 'Value', 'Unit', 'Status', 'Source', null]];
+  inputs.getRange('C160:H160').values = [['September 2026 balance / terms', 'Value', 'Unit', 'Status', 'Source', null]];
   const balances = [
     ['Cash and equivalents', 'Cash and equivalents'], ['Short-term investments', 'Short-term investments'],
     ['Restricted cash (excluded)', 'Restricted cash'], ['Notes at fair value', 'Convertible note carrying value'],
@@ -96,14 +96,14 @@ if (process.argv.includes('--inspect')) {
     ['Amazon conversion ownership cap', 'Amazon conversion ownership cap'],
   ];
   inputs.getRange('C161:H171').values = balances.map(([label, metric]) =>
-    [label, expected.balance[metric], metric.includes('cap') ? 'fraction' : 'USD bn', 'S1; see notes', 'S25', null]);
+    [label, expected.balance[metric], metric.includes('cap') ? 'fraction' : 'USD bn', 'S1/A; see notes', 'S26', null]);
   inputs.getRange('D161:D170').setNumberFormat(number);
   inputs.getRange('D171').setNumberFormat('0%');
   inputs.getRange('C173').values = [['Purchase commitments and uncommenced leases are separate multiyear categories, not current debt.']];
   inputs.getRange('C175').values = [['S25. Anthropic Form S-1 filed 26 Oct 2026. MD&A p160/p164; statements F-5/F-7/F-12; notes F-35/F-58.']];
   inputs.getRange('C176').values = [['https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm']];
-  inputs.getRange('C178').values = [['Retrieval: SEC HTML blocked / reader size limit. Filing PDF conversion checked; conversion fidelity is a source limitation.']];
-  inputs.getRange('C179').values = [['https://sec2pdf.com/ANTHROPIC']];
+  inputs.getRange('C178').values = [['S26. Anthropic S-1/A filed 2 Nov 2026: MD&A p161/168/174/175; F-6/F-8/F-13; lease note 7.']];
+  inputs.getRange('C179').values = [['https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm']];
   valuation.getRange('C118:N141').format = { font: { name: 'Arial', size: 10 }, rowHeight: 23 };
   valuation.getRange('C118').values = [['S1 operating observations (USD bn)']];
   valuation.getRange('C119:C124').values = [['H1 2026 revenue'], ['H1 operating income (loss)'], ['H1 net income (loss)'], ['H1 operating cash flow'], ['H1 cash flow less cash capex'], ['H1 financing fair-value loss']];
@@ -111,9 +111,9 @@ if (process.argv.includes('--inspect')) {
     ["='Inputs'!F149"], ["='Inputs'!F150"], ["='Inputs'!F151"], ["='Inputs'!F153"],
     ["=D122-'Inputs'!F154"], ["='Inputs'!F152"],
   ];
-  valuation.getRange('F119').values = [['H1 interim statements are unaudited; Q3 revenue remains a separate media observation.']];
+  valuation.getRange('F119').values = [['H1 interim statements are historical; latest nine-month observations appear below.']];
   valuation.getRange('F123').values = [['Cash-flow less cash capex is not unlevered FCF; vendor-payment timing affects operating cash flow.']];
-  valuation.getRange('C126').values = [['June cash bridge sensitivity (USD bn)']];
+  valuation.getRange('C126').values = [['September cash bridge sensitivity (USD bn)']];
   valuation.getRange('C127:C135').values = [
     ['Cash plus short-term investments'], ['Less: finance lease liabilities'], ['Amazon note principal'],
     ['Cash proxy: notes retained'], ['Cash proxy: full conversion'], ['DCF equity: notes retained'],
@@ -127,13 +127,24 @@ if (process.argv.includes('--inspect')) {
     [`=((D10-D${row}-D56)/N42*('Inputs'!D11-'Inputs'!D13)-SUM(D50:D52))/D46/(1-'Inputs'!D14)`]);
   valuation.getRange('D119:D133').setNumberFormat(number);
   valuation.getRange('D134:D135').setNumberFormat('0.0%');
-  valuation.getRange('C137').values = [['June snapshot only: no H2 cash roll-forward, new funding or IPO proceeds; not an existing-common equity allocation.']];
+  valuation.getRange('C137').values = [['September snapshot only: no Q4 cash roll-forward, new funding or IPO proceeds; not an existing-common equity allocation.']];
   valuation.getRange('C138').values = [['Full conversion is illustrative, subject to Amazon 12% ownership cap; residual notes may remain outstanding.']];
   valuation.getRange('C139').values = [['Restricted cash is excluded. Operating rent remains in forecast margins and is not deducted a second time.']];
-  valuation.getRange('C140').values = [['The USD108.566bn note carrying value is not the USD6.203bn cash principal.']];
+  valuation.getRange('C140').values = [['The USD130.502bn note carrying value is not the USD6.203bn cash principal.']];
   for (const [sheet, range] of [[inputs, 'C148:H148'], [inputs, 'C160:H160'], [valuation, 'C118:N118'], [valuation, 'C126:N126']]) {
     sheet.getRange(range).format = { fill: '#31465A', font: { name: 'Arial', size: 10, bold: true, color: '#FFFFFF' }, rowHeight: 25 };
   }
+  inputs.getRange('C181:H187').format = { font: { name: 'Arial', size: 10 }, rowHeight: 23 };
+  inputs.getRange('C181:H181').copyFrom(inputs.getRange('C148:H148'), 'all');
+  inputs.getRange('C181:H181').values = [['S-1/A actuals', '9M 2025', '9M 2026', 'Unit', 'Source', null]];
+  inputs.getRange('C182:H187').values = metrics.slice(0,6).map(([label, metric]) =>
+    [label, ...['9M 2025', '9M 2026'].map(period => expected.financials[period][metric]), 'USD bn', 'S26', null]);
+  inputs.getRange('D182:E187').setNumberFormat(number);
+  valuation.getRange('C143:F149').format = { font: { name: 'Arial', size: 10 }, rowHeight: 23 };
+  valuation.getRange('C143:F143').values = [['Nine-month 2026 observations', null, null, null]];
+  valuation.getRange('C144:C149').values = [['Revenue'], ['Operating income (loss)'], ['Net income (loss)'], ['Financing fair-value loss'], ['Operating cash flow'], ['Cash flow less cash capex']];
+  valuation.getRange('D144:D149').formulas = [["='Inputs'!E182"], ["='Inputs'!E183"], ["='Inputs'!E184"], ["='Inputs'!E185"], ["='Inputs'!E186"], ["=D148-'Inputs'!E187"]];
+  valuation.getRange('D144:D149').setNumberFormat(number);
   wb.recalculate();
   const close = (actual, target, label) => { if (Math.abs(actual - target) > 1e-8) throw new Error(`${label}: ${actual} != ${target}`); };
   close(valuation.getRange('D8').values[0][0], expected.dcf, 'DCF');
@@ -142,6 +153,8 @@ if (process.argv.includes('--inspect')) {
   close(valuation.getRange('D111').values[0][0], expected.q4Required, 'Q4 reconciliation');
   close(valuation.getRange('D112').values[0][0], expected.q4Growth, 'Q4 growth');
   close(valuation.getRange('D119').values[0][0], 16.286, 'H1 revenue');
+  close(valuation.getRange('D144').values[0][0], 33.242, 'Nine-month revenue');
+  close(valuation.getRange('D149').values[0][0], 5.644, 'Nine-month cash flow less capex');
   close(inputs.getRange('D37').values[0][0], 4.585, 'Audited FY2025 revenue reference');
   close(valuation.getRange('D123').values[0][0], 3.447, 'Cash flow less cash capex');
   close(valuation.getRange('D132').values[0][0], expected.bridges[0].dcf_equity_usdbn, 'Principal bridge equity');
@@ -160,7 +173,7 @@ if (process.argv.includes('--inspect')) {
   inputs.getRange('D12').values = [[0]];
   wb.recalculate();
   console.log((await wb.inspect({ kind: 'match', searchTerm: '#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!', options: { useRegex: true, maxResults: 30 }, maxChars: 1000 })).ndjson);
-  for (const [sheetName, range, filename] of [['Valuation', 'C6:I19', 'anthropic-after'], ['Valuation', 'C108:N140', 'anthropic-s1-review'], ['Inputs', 'C146:H171', 'anthropic-s1-inputs']]) {
+  for (const [sheetName, range, filename] of [['Valuation', 'C6:I19', 'anthropic-after'], ['Valuation', 'C108:N140', 'anthropic-s1-review'], ['Inputs', 'C146:H171', 'anthropic-s1-inputs'], ['Valuation', 'C143:F149', 'anthropic-nine-month-review'], ['Inputs', 'C181:H187', 'anthropic-nine-month-inputs']]) {
     const preview = await wb.render({ sheetName, range, scale: 1.5, format: 'png' });
     await fs.writeFile(path.join(runtime, `${filename}.png`), new Uint8Array(await preview.arrayBuffer()));
   }

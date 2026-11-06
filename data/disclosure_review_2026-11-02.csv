@@ -1,0 +1,2 @@
+as_of_beijing,reviewed_on,company,published_at_beijing,source_url,result,valuation_treatment,verification_status
+2026-11-02,2026-11-06,Anthropic,2026-11-02,https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm,S-1/A: Q3 revenue 16.956; nine-month revenue33.242; operating loss1.260; net loss104.039; operating cash flow6.569; cash capex0.925 USD bn,Replace media Q3 estimate; update September balance sensitivity; keep operating path and December zero net cash assumption,SEC HTML reviewed via web reader; direct local request HTTP403

@@ -1,6 +1,6 @@
 """Reproduce the user's companion Anthropic IPO model as a separate comparison.
 
-USD billions; Anthropic information cutoff 2026-10-26; assumed valuation date 2026-12-31.
+USD billions; Anthropic information cutoff 2026-11-02; assumed valuation date 2026-12-31.
 Model assumptions are not company guidance or a completed funding transaction.
 """
 from pathlib import Path
@@ -16,7 +16,7 @@ FORWARD_MULTIPLE = 10.0
 DISCLOSURES = pd.read_csv(ROOT / 'data/anthropic_ipo_disclosures_input.csv').set_index('metric')
 IPO_BENCHMARK = float(DISCLOSURES.loc['Latest IPO equity discussion', 'value'])
 NET_CASH_ASSUMPTION = 0.0
-INFORMATION_CUTOFF = '2026-10-26'
+INFORMATION_CUTOFF = '2026-11-02'
 S1_FINANCIALS = pd.read_csv(ROOT / 'data/anthropic_s1_financials_input.csv').set_index('period')
 S1_BALANCE = pd.read_csv(ROOT / 'data/anthropic_s1_balance_input.csv').set_index('metric')
 
@@ -79,21 +79,21 @@ def calculate(wacc=WACC, terminal_g=TERMINAL_G, ipo_benchmark=IPO_BENCHMARK,
 
 
 def historical_cash_bridge():
-    """June snapshots are sensitivities, not a December net-cash forecast or IPO price."""
+    """September snapshots are sensitivities, not a December net-cash forecast or IPO price."""
     balance = S1_BALANCE['value']
     liquidity = float(balance['Cash and equivalents'] + balance['Short-term investments'])
     finance_leases = float(balance['Finance lease liabilities'])
     notes = float(balance['Amazon 2023 note principal'] + balance['Amazon 2024 note principal'])
     rows = []
-    for name, note_principal in [('All June note principal retained', notes),
+    for name, note_principal in [('All September note principal retained', notes),
                                  ('Full conversion illustrative ceiling', 0.0)]:
         adjustment = liquidity-finance_leases-note_principal
         _, result = calculate(net_cash_adjustment=adjustment)
-        rows.append(dict(case=name, balance_date='2026-06-30', liquidity_usdbn=liquidity,
+        rows.append(dict(case=name, balance_date='2026-09-30', liquidity_usdbn=liquidity,
             finance_lease_liabilities_usdbn=finance_leases, note_principal_usdbn=note_principal,
             net_cash_proxy_usdbn=adjustment, dcf_equity_usdbn=result['DCF equity value (USD bn)'],
             required_terminal_ebit_margin=result['Required terminal EBIT margin at benchmark'],
-            classification='Historical principal-based sensitivity; no H2 cash roll-forward, IPO proceeds or new funding; conversion subject to 12% ownership cap; not an existing-common equity allocation'))
+            classification='Historical principal-based sensitivity; no Q4 cash roll-forward, IPO proceeds or new funding; conversion subject to 12% ownership cap; not an existing-common equity allocation'))
     return pd.DataFrame(rows)
 
 

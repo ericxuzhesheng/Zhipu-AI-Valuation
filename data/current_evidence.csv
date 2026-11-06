@@ -24,6 +24,17 @@ date,company,event,source_url,valuation_treatment
 2026-10-23,Anthropic,Unified Claude Enterprise,https://claude.com/resources/articles/unified-claude-enterprise,Date-only boundary item; qualitative watchlist only; no valuation or event-window input
 2026-10-19,MiniMax,M3.1 Flash official availability,https://www.minimax.io/blog/minimax-m31f,Company claims; no revenue extrapolation; next HK session Oct20
 2026-10-20,ZCode,Desktop v3.16.2,https://zcode.z.ai/en/changelog,Workflow and security-fix claims; no quantified forecast change
-2026-10-22,MiniMax,Code Mini App,https://www.minimax.io/blog/minimax-code-mini-app-1792650729,Developer-tool launch; incomplete event window
-2026-10-23,ZCode,Desktop v3.16.3,https://zcode.z.ai/en/changelog,Date-only release; one observed session; no full reaction or drift
+2026-10-22,MiniMax,Code Mini App,https://www.minimax.io/blog/minimax-code-mini-app-1792650729,Developer-tool launch; nine-day drift complete at Nov6 cutoff
+2026-10-23,ZCode,Desktop v3.16.3,https://zcode.z.ai/en/changelog,Date-only release; provisional window now has full reaction and nine-day drift at Nov6 cutoff
 2026-10-23,MiniMax,Technology export registration after close,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1023/2026102301675.pdf,22:33 Beijing disclosure; Oct23 close predates announcement; no financial input change
+2026-10-29,Zhipu,Related-party transactions circular,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1029/2026102901811.pdf,Historical coverage correction; transaction subsets not consolidated Q3 results
+2026-11-04,Zhipu,October monthly return,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1104/2026110401758.pdf,487588090 issued shares unchanged; 7172 awards lapsed; 1215762 unvested
+2026-11-05,MiniMax,October monthly return,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1105/2026110501846.pdf,352480183 shares; replace old share-count proxy
+2026-11-03,ZCode,Desktop v3.17.2,https://zcode.z.ai/en/changelog,Provisional date-only window; incomplete drift; no forecast uplift
+2026-11-02,Anthropic,S-1/A amendment,https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm,Exact Q3 revenue; September balance and commitments; operating forecasts unchanged
+2026-11-02,Palantir,Q3 revenue USD2.313411bn; FY2026 guidance USD8.530-8.534bn,https://www.sec.gov/Archives/edgar/data/1321655/000132165526000045/a2026q3ex991pressrelease.htm,Quarterly actual and full-year guidance separate; keep completed annual revenue comparable denominator and historical share proxy
+2026-10-28,Anthropic,AI for Science expansion: credits for research organizations,https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions,Qualitative distribution context; no quantified incremental revenue or forecast uplift
+2026-10-27,Anthropic,GSA partnership expansion and discounted access,https://www.anthropic.com/news/expanding-partnership-gsa,Historical coverage addition; discounts and usage are not revenue; no forecast change
+2026-10-27,Anthropic,Drug-development research with six partners,https://www.anthropic.com/research/early-progress-drug-development,Research evidence not an operating revenue forecast
+2026-11-06,Cloudflare,Q3 revenue USD782.5m; GAAP operating loss67.9m; FY2026 revenue guidance USD2963-2964m,https://www.cloudflare.com/id-id/press/press-releases/2026/cloudflare-announces-third-quarter-2026-financial-results/,Keep completed FY2025 comparable denominator; no attribution of Nov5 close to after-close results
+2026-11-02,Snowflake,Q3 FY2027 results scheduled for Dec2 after US close,https://www.snowflake.com/en/news/press-releases/fy27-q3-earnings-date-announcement/,No new quarterly results at cutoff; retain completed annual denominator

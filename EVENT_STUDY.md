@@ -82,8 +82,8 @@ The 31 August boundary also prevents a tempting causal mistake. Zhipu rose 9.63%
 
 *Inputs: market prices through 2026-08-31 for the core Zhipu/MiniMax series in `data/`; CAR tables to `eventstudy/car_robustness.csv`; charts to `figures/`.*
 
-## November 6 supplementary cutoff
+## November 13 supplementary cutoff
 
-The original five-event cohort and bootstrap remain fixed at August 31. Supplementary Hong Kong observations extend through November 6. M3.1 Flash, ZCode v3.16.2, Code Mini App and v3.16.3 now have nine drift sessions. Their overlapping windows remain descriptive and separate from the original sample.
+The five-event sample and bootstrap remain fixed at August 31. All supplemental October windows now have nine drift sessions. ZCode v3.17.2 has seven drift sessions and remains incomplete.
 
-MiniMax's October 23 export-registration announcement was released at 22:33 Beijing. Its reaction starts October 26; eight drift sessions are available, so the nine-session window remains incomplete. ZCode v3.17.2 is dated November 3 and has two reaction and two drift sessions. Intraday timing is unverified and the launch-day window is provisional. No product release mechanically changes forecasts. See [window results](eventstudy/october_window_update.csv) and [source review](data/disclosure_review_2026-11-06.csv).
+Zhipu's November 10 buyback intention was published at 19:05 Beijing; reaction starts November 11. It and MiniMax's date-only November 11 H3-Image launch each have two reaction sessions and one drift session. The image release remains outside the core text-model cohort. ZCode v3.18.2, dated November 13 with intraday timing unverified, has one reaction session and no drift; absent drift is blank, not zero. `reaction_full` explicitly flags incomplete two-day reactions. No partial window is pooled into the original bootstrap. See [results](eventstudy/october_window_update.csv) and [sources](data/disclosure_review_2026-11-13.csv).

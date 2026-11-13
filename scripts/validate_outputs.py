@@ -17,8 +17,8 @@ from anthropic_ipo_crosscheck import INFORMATION_CUTOFF
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "paper" / "main.tex"
 SUBMISSION_GLOB = "42353012_*.pdf"
-DATA_CUTOFF = 20261106
-US_DATA_CUTOFF = 20261105
+DATA_CUTOFF = 20261113
+US_DATA_CUTOFF = 20261112
 
 
 def fail(message: str) -> None:
@@ -376,17 +376,17 @@ def check_disclosure_refresh() -> None:
         fail('S-1 review has a stale Anthropic information cutoff')
     if (pd.to_datetime(disclosures.available_at_beijing, format='mixed') >= anthropic_cutoff + pd.Timedelta(days=1)).any():
         fail('Anthropic inputs contain information beyond the Beijing cutoff')
-    latest = disclosures.set_index('metric').loc['Latest IPO equity discussion']
+    latest = disclosures.set_index('metric').loc['Historical IPO equity discussion']
     if float(latest['value']) != 1500 or not str(latest['period']).startswith('2026-10-22'):
-        fail('latest Anthropic discussion must reconcile to the October 22 Reuters report')
+        fail('historical Anthropic discussion must reconcile to the October 22 Reuters report')
     windows = pd.read_csv(ROOT / 'eventstudy/october_window_update.csv').set_index('event')
     if not windows.data_cutoff.eq(cutoff.strftime('%Y-%m-%d')).all():
         fail('supplementary event windows have a stale cutoff')
     after_close = windows.loc['Technology export registration after close']
     if after_close.day0 != '2026-10-26' or not bool(after_close['included']) or after_close.reaction_days != 2:
         fail('October 23 after-close disclosure must begin its reaction on October 26')
-    if after_close.drift_days != 8 or bool(after_close.drift_full):
-        fail('October 26 event must retain an incomplete eight-day drift at this cutoff')
+    if after_close.drift_days != 9 or not bool(after_close.drift_full):
+        fail('October 26 event must have a complete nine-day drift at this cutoff')
     summary = pd.read_csv(ROOT / 'eventstudy' / 'anthropic_ipo_summary.csv').set_index('metric')['value']
     if summary['Information cutoff'] != f'{anthropic_cutoff:%Y-%m-%d} (Beijing time)':
         fail('Anthropic summary has a stale information cutoff')
@@ -405,6 +405,22 @@ def check_disclosure_refresh() -> None:
         if abs(float(wb['Valuation'][cell].value) - float(summary[metric])) > 1e-8:
             fail(f'Anthropic workbook {cell} does not match {metric}')
     bridges = pd.read_csv(ROOT / 'eventstudy' / 'anthropic_s1_cash_bridge.csv')
+    terms = pd.read_csv(ROOT / 'data/anthropic_offer_terms_input.csv').set_index('metric')['value']
+    offers = pd.read_csv(ROOT / 'eventstudy/anthropic_offer_scenarios.csv')
+    for row in offers.itertuples():
+        issuer = row.price_usd * terms['Issuer offered shares'] / 1e9
+        seller = row.price_usd * terms['Selling-holder offered shares'] / 1e9
+        if max(abs(row.issuer_gross_usdbn-issuer), abs(row.seller_gross_usdbn-seller),
+               abs(row.total_gross_usdbn-issuer-seller)) > 1e-8:
+            fail('preliminary offer proceeds do not reconcile to disclosed share counts')
+    midpoint = offers.iloc[1]
+    for cell, expected in [('D155', midpoint.issuer_gross_usdbn),
+                           ('E155', midpoint.seller_gross_usdbn),
+                           ('F155', midpoint.total_gross_usdbn),
+                           ('D158', terms['Combined estimated net proceeds']),
+                           ('D159', terms['Combined estimated net proceeds']-terms['Estimated RSU withholding'])]:
+        if abs(float(wb['Valuation'][cell].value)-expected) > 1e-8:
+            fail(f'Anthropic workbook {cell} does not reconcile to preliminary offer terms')
     for cell, row, metric in [('D132', 0, 'dcf_equity_usdbn'), ('D133', 1, 'dcf_equity_usdbn'),
                               ('D135', 1, 'required_terminal_ebit_margin')]:
         if abs(float(wb['Valuation'][cell].value)-float(bridges.iloc[row][metric])) > 1e-8:

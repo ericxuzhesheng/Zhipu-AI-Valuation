@@ -1,6 +1,6 @@
 """Reproduce the user's companion Anthropic IPO model as a separate comparison.
 
-USD billions; Anthropic information cutoff 2026-11-02; assumed valuation date 2026-12-31.
+USD billions; Anthropic information cutoff 2026-11-10; assumed valuation date 2026-12-31.
 Model assumptions are not company guidance or a completed funding transaction.
 """
 from pathlib import Path
@@ -14,9 +14,9 @@ TAX = 0.25
 ANCHOR_REVENUE = 64.0
 FORWARD_MULTIPLE = 10.0
 DISCLOSURES = pd.read_csv(ROOT / 'data/anthropic_ipo_disclosures_input.csv').set_index('metric')
-IPO_BENCHMARK = float(DISCLOSURES.loc['Latest IPO equity discussion', 'value'])
+IPO_BENCHMARK = float(DISCLOSURES.loc['Historical IPO equity discussion', 'value'])
 NET_CASH_ASSUMPTION = 0.0
-INFORMATION_CUTOFF = '2026-11-02'
+INFORMATION_CUTOFF = '2026-11-10'
 S1_FINANCIALS = pd.read_csv(ROOT / 'data/anthropic_s1_financials_input.csv').set_index('period')
 S1_BALANCE = pd.read_csv(ROOT / 'data/anthropic_s1_balance_input.csv').set_index('metric')
 
@@ -110,10 +110,15 @@ def main():
             rows.append({'wacc':wacc,'terminal_growth':terminal_g,'dcf_ev_usdbn':s['DCF EV (USD bn)']})
     pd.DataFrame(rows).to_csv(ROOT/'eventstudy/anthropic_ipo_sensitivity.csv',index=False)
     historical_cash_bridge().to_csv(ROOT/'eventstudy/anthropic_s1_cash_bridge.csv',index=False)
+    offer = pd.read_csv(ROOT/'data/anthropic_offer_terms_input.csv').set_index('metric')['value']
+    offer_rows = []
+    for price in [offer['Offer price low'], (offer['Offer price low']+offer['Offer price high'])/2, offer['Offer price high']]:
+        offer_rows.append(dict(price_usd=price, issuer_gross_usdbn=price*offer['Issuer offered shares']/1e9, seller_gross_usdbn=price*offer['Selling-holder offered shares']/1e9, total_gross_usdbn=price*(offer['Issuer offered shares']+offer['Selling-holder offered shares'])/1e9, classification='Preliminary; seller proceeds are not company cash; excludes overallotment'))
+    pd.DataFrame(offer_rows).to_csv(ROOT/'eventstudy/anthropic_offer_scenarios.csv',index=False)
     runtime = ROOT/'tmp/1011_runtime'
     runtime.mkdir(parents=True, exist_ok=True)
     _, historical = calculate(ipo_benchmark=2000)
-    payload = dict(cutoff=INFORMATION_CUTOFF, dcf=summary['DCF EV (USD bn)'],
+    payload = dict(offer=offer.to_dict(), cutoff=INFORMATION_CUTOFF, dcf=summary['DCF EV (USD bn)'],
         requiredMargin=summary['Required terminal EBIT margin at benchmark'],
         historicalMargin=historical['Required terminal EBIT margin at benchmark'],
         q4Required=summary['Q4 revenue required for annual anchor (USD bn)'],

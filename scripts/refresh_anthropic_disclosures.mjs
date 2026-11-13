@@ -15,15 +15,15 @@ if (process.argv.includes('--inspect')) {
 } else {
   const expected = JSON.parse(await fs.readFile(path.join(runtime, 'anthropic-latest.json'), 'utf8'));
   inputs.getRange('D8').values = [[new Date(`${expected.cutoff}T00:00:00Z`)]];
-  inputs.getRange('C3').values = [['USD billions. S-1/A review: 2 Nov 2026. Annuals audited; interim statements unaudited.']];
-  valuation.getRange('C3').values = [['USD billions. S-1/A review: 2 Nov 2026. Valuation date remains assumed 31 Dec 2026.']];
-  inputs.getRange('F8').values = [['S-1/A included [S26]; SEC HTML checked; offer terms remain blank.']];
+  inputs.getRange('C3').values = [['USD billions. S-1/A review: 10 Nov 2026. Annuals audited; interim statements unaudited.']];
+  valuation.getRange('C3').values = [['USD billions. S-1/A review: 10 Nov 2026. Valuation date remains assumed 31 Dec 2026.']];
+  inputs.getRange('F8').values = [['S-1/A-2 included [S27]; preliminary terms below; final pricing pending.']];
   inputs.getRange('F12').values = [['Zero remains a Dec-2026 assumption. September liquidity and debt sensitivities appear below.']];
-  inputs.getRange('F16').values = [['Public S-1 leaves offering size blank. Proceeds remain an unfilled input.']];
-  inputs.getRange('F18').values = [['Final post-conversion diluted offering share count remains blank in the S-1.']];
-  valuation.getRange('F81').values = [['Final IPO share count remains blank; historical shares cannot determine an offer price.']];
-  inputs.getRange('F15').values = [['USD1.5tn discussion reaffirmed 22 Oct [S20]; offering not priced.']];
-  inputs.getRange('C45:G45').values = [['IPO investor discussion, about', 1500, '22-Oct-26 BJT', 'Media-reported', 'S20']];
+  inputs.getRange('F16').values = [['Preliminary proceeds below; no completed receipt added to the December forecast.']];
+  inputs.getRange('F18').values = [['Preliminary share schedule disclosed; final dilution and closing remain pending.']];
+  valuation.getRange('F81').values = [['No model price: dilution and December cash roll-forward are unresolved; preliminary terms below.']];
+  inputs.getRange('F15').values = [['Historical October USD1.5tn stress benchmark [S20]; November offer terms below.']];
+  inputs.getRange('C45:G45').values = [['Historical IPO discussion, about', 1500, '22-Oct-26 BJT', 'Media-reported', 'S20']];
   inputs.getRange('C46:G46').values = [['Prior Reuters compute observation', 518, '15-Oct-26', 'Historical report', 'S19']];
   inputs.getRange('C29').values = [['2026 revenue of USD64bn remains an analyst assumption, not a reported annual result.']];
   inputs.getRange('C30').values = [['Latest quarterly observations and a full-year reconciliation appear below and on Valuation.']];
@@ -55,10 +55,10 @@ if (process.argv.includes('--inspect')) {
   valuation.getRange('C115').values = [['S-1 annuals are audited; interim statements are unaudited. Forecasts remain assumptions.']];
   valuation.getRange('C116').values = [['September liquidity is not December net cash. Amazon conversion is subject to an ownership cap.']];
   valuation.getRange('C101').values = [['Active December net-cash assumption remains zero; separate September snapshot sensitivities are shown below.']];
-  valuation.getRange('C103').values = [['Latest investor discussion is USD1.5tn; the earlier USD2tn expectation is a historical stress case.']];
-  valuation.getRange('C10').values = [['IPO investor discussion']];
-  valuation.getRange('C99').values = [['IPO investor discussion']];
-  valuation.getRange('F10').values = [['Investor discussion; no priced offering or company valuation guidance.']];
+  valuation.getRange('C103').values = [['USD1.5tn and USD2tn are historical comparisons; preliminary Nov10 offer terms below.']];
+  valuation.getRange('C10').values = [['Historical IPO discussion']];
+  valuation.getRange('C99').values = [['Historical IPO discussion']];
+  valuation.getRange('F10').values = [['Historical October comparison; not the November preliminary offer valuation.']];
   valuation.getRange('F13').values = [['Heterogeneous peer references; excluded from Zhipu transaction multiples.']];
   valuation.getRange('C108:D108').values = [['Reported quarters and annual revenue assumption', null]];
   valuation.getRange('C109:C112').values = [['Reported Q1-Q3 revenue (USD bn)'], ['FY2026 revenue assumption (USD bn)'], ['Q4 revenue needed (USD bn)'], ['Required Q4 growth vs Q3']];
@@ -128,7 +128,7 @@ if (process.argv.includes('--inspect')) {
   valuation.getRange('D119:D133').setNumberFormat(number);
   valuation.getRange('D134:D135').setNumberFormat('0.0%');
   valuation.getRange('C137').values = [['September snapshot only: no Q4 cash roll-forward, new funding or IPO proceeds; not an existing-common equity allocation.']];
-  valuation.getRange('C138').values = [['Full conversion is illustrative, subject to Amazon 12% ownership cap; residual notes may remain outstanding.']];
+  valuation.getRange('C138').values = [['Full conversion is only a ceiling; Nov10 terms assume USD0.5793bn principal converts.']];
   valuation.getRange('C139').values = [['Restricted cash is excluded. Operating rent remains in forecast margins and is not deducted a second time.']];
   valuation.getRange('C140').values = [['The USD130.502bn note carrying value is not the USD6.203bn cash principal.']];
   for (const [sheet, range] of [[inputs, 'C148:H148'], [inputs, 'C160:H160'], [valuation, 'C118:N118'], [valuation, 'C126:N126']]) {
@@ -145,8 +145,34 @@ if (process.argv.includes('--inspect')) {
   valuation.getRange('C144:C149').values = [['Revenue'], ['Operating income (loss)'], ['Net income (loss)'], ['Financing fair-value loss'], ['Operating cash flow'], ['Cash flow less cash capex']];
   valuation.getRange('D144:D149').formulas = [["='Inputs'!E182"], ["='Inputs'!E183"], ["='Inputs'!E184"], ["='Inputs'!E185"], ["='Inputs'!E186"], ["=D148-'Inputs'!E187"]];
   valuation.getRange('D144:D149').setNumberFormat(number);
+
+  const offer = expected.offer;
+  inputs.getRange('C190:H200').format = { font: { name: 'Arial', size: 10 }, rowHeight: 25 };
+  inputs.getRange('C190:H190').copyFrom(inputs.getRange('C160:H160'), 'all');
+  inputs.getRange('C190:H190').values = [['Nov10 preliminary offer', 'Value', 'Unit', 'Status', 'Source', null]];
+  const offerMetrics = ['Offer price low','Offer price high','Issuer offered shares','Selling-holder offered shares','Overallotment option','Concurrent private placement','Combined estimated net proceeds','Estimated RSU withholding','Amazon principal conversion','October run-rate revenue'];
+  inputs.getRange('C191:H200').values = offerMetrics.map((metric,i) => [metric,offer[metric],i<2?'USD/share':i<5?'shares':'USD bn',i===9?'Run-rate':'Preliminary','S27',null]);
+  inputs.getRange('D191:D200').setNumberFormat('#,##0.0000');
+  inputs.getRange('D193:D195').setNumberFormat('#,##0');
+  inputs.getRange('C202').values = [['S27. S-1/A-2, 10 Nov 2026: cover, Offering and Use of Proceeds; conditions apply.']];
+  inputs.getRange('C203').values = [['https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm']];
+  valuation.getRange('C152:H163').format = { font: { name: 'Arial', size: 10 }, rowHeight: 25 };
+  valuation.getRange('C152:H152').copyFrom(valuation.getRange('C126:H126'),'all');
+  valuation.getRange('C152:H152').values = [['Preliminary offer: gross proceeds (USD bn)',null,null,null,null,null]];
+  valuation.getRange('C153:F153').values = [['Price (USD)','Issuer gross','Seller gross','Total gross']];
+  valuation.getRange('C154:C156').formulas = [["='Inputs'!D191"],["=AVERAGE('Inputs'!D191:D192)"],["='Inputs'!D192"]];
+  for(let row=154;row<=156;row++) valuation.getRange(`D${row}:F${row}`).formulas = [[`=C${row}*'Inputs'!$D$193/1000000000`,`=C${row}*'Inputs'!$D$194/1000000000`,`=SUM(D${row}:E${row})`]];
+  valuation.getRange('C154:F156').setNumberFormat('0.00');
+  valuation.getRange('C158:C161').values = [['Combined net proceeds (midpoint)'],['Net less estimated RSU withholding'],['Amazon principal to convert'],['October run-rate (not annual actual)']];
+  valuation.getRange('D158:D161').formulas = [["='Inputs'!D197"],["=D158-'Inputs'!D198"],["='Inputs'!D199"],["='Inputs'!D200"]];
+  valuation.getRange('D158:D161').setNumberFormat('0.0000');
+  valuation.getRange('C163').values = [['Seller cash excluded; financing conditional. No proceeds added to active December net cash.']];
+
   wb.recalculate();
   const close = (actual, target, label) => { if (Math.abs(actual - target) > 1e-8) throw new Error(`${label}: ${actual} != ${target}`); };
+  close(valuation.getRange('D155').values[0][0], 59.300000196, 'Issuer gross proceeds');
+  close(valuation.getRange('F155').values[0][0], 61.05, 'Total offered proceeds');
+  close(valuation.getRange('D159').values[0][0], 80.8, 'Net proceeds less RSU withholding');
   close(valuation.getRange('D8').values[0][0], expected.dcf, 'DCF');
   close(valuation.getRange('D10').values[0][0], 1500, 'IPO benchmark');
   close(valuation.getRange('D61').values[0][0], expected.requiredMargin, 'Reverse margin');
@@ -173,7 +199,7 @@ if (process.argv.includes('--inspect')) {
   inputs.getRange('D12').values = [[0]];
   wb.recalculate();
   console.log((await wb.inspect({ kind: 'match', searchTerm: '#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!', options: { useRegex: true, maxResults: 30 }, maxChars: 1000 })).ndjson);
-  for (const [sheetName, range, filename] of [['Valuation', 'C6:I19', 'anthropic-after'], ['Valuation', 'C108:N140', 'anthropic-s1-review'], ['Inputs', 'C146:H171', 'anthropic-s1-inputs'], ['Valuation', 'C143:F149', 'anthropic-nine-month-review'], ['Inputs', 'C181:H187', 'anthropic-nine-month-inputs']]) {
+  for (const [sheetName, range, filename] of [['Valuation', 'C6:I19', 'anthropic-after'], ['Valuation', 'C108:N140', 'anthropic-s1-review'], ['Inputs', 'C146:H171', 'anthropic-s1-inputs'], ['Valuation', 'C152:H163', 'anthropic-offer-review'], ['Inputs', 'C190:H203', 'anthropic-offer-inputs'], ['Valuation', 'C143:F149', 'anthropic-nine-month-review'], ['Inputs', 'C181:H187', 'anthropic-nine-month-inputs']]) {
     const preview = await wb.render({ sheetName, range, scale: 1.5, format: 'png' });
     await fs.writeFile(path.join(runtime, `${filename}.png`), new Uint8Array(await preview.arrayBuffer()));
   }

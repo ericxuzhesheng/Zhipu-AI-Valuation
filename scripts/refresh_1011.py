@@ -64,11 +64,16 @@ def main():
         ('Zhipu','02513.HK','ZCode v3.16.3','2026-10-23','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
         ('MiniMax','00100.HK','Technology export registration after close','2026-10-26','regulatory_disclosure','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
         ('Zhipu','02513.HK','ZCode v3.17.2','2026-11-03','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
+        ('Zhipu','02513.HK','H-share repurchase intention after close','2026-11-11','capital_allocation','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
+        ('MiniMax','00100.HK','H3-Image release','2026-11-11','image_release','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
+        ('Zhipu','02513.HK','ZCode v3.18.2','2026-11-13','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
     ]]
     supplement = event_panel.event_panel_rows(events)
     supplement.loc[supplement.drift_days.eq(0), ['drift_mean', 'drift_peer']] = None
     supplement.loc[supplement.day0.ge('2026-10-20'), 'source_type'] = 'official dated release; intraday timing unverified; provisional window; overlapping news'
     supplement.loc[supplement.event.eq('Technology export registration after close'), 'source_type'] = 'HKEX 2026-10-23 22:33 Beijing; first subsequent session 2026-10-26; drift completeness reported separately'
+    supplement.loc[supplement.event.eq('H-share repurchase intention after close'), 'source_type'] = 'HKEX 2026-11-10 19:05 Beijing; first subsequent session Nov11; intention not executed repurchases'
+    supplement['reaction_full'] = supplement.reaction_days.eq(2)
     supplement.insert(0,'data_cutoff',DATE)
     supplement.to_csv(ROOT/'eventstudy/october_window_update.csv',index=False)
     returns = []

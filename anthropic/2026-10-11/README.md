@@ -1,15 +1,15 @@
-# Anthropic IPO 底稿（起始版本 2026-10-11，信息复核至 2026-11-02）
+# Anthropic IPO 底稿（起始版本 2026-10-11，信息复核至 2026-11-10）
 
 2026-10-11 从 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/` 迁入，共 28 项原始内容；源文件夹已清空。原目录名虽含 20260930，Excel 和生成脚本的研究截止日实际为 2026-10-11。旧版底稿通过 Git 历史查阅。
 
 | 入口 | 内容 |
 |---|---|
-| [估值工作簿](Anthropic_IPO_Basic_Valuation.xlsx) | 保留 Valuation / Comps / Inputs 三表；当前披露已同步至 11 月 2 日 S-1/A |
+| [估值工作簿](Anthropic_IPO_Basic_Valuation.xlsx) | 保留 Valuation / Comps / Inputs 三表；当前披露已同步至 11 月 10 日初步发行条款 |
 | [演示 PDF](Anthropic_IPO_Valuation_Beamer.pdf) | 同步收入锚、DCF，并补充 10 月 18—23 日进展及期后事项边界 |
 | [演示源文件](Anthropic_IPO_Valuation_Beamer.tex) | 本地 XeLaTeX 可编译 |
 | [生成脚本](build_model.mjs) | 输出路径改为本目录，不再写回源文件夹 |
 
-DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始日为 10 月 11 日，当前工作簿的信息复核截止已更新至北京时间 11 月 2 日，估值日仍假设为 12 月 31 日。最新 IPO 投资者讨论基准为 US$1,500bn；原 US$2,000bn 保留为历史压力情景。季度收入及年度假设对照已加入工作簿，US$64bn 仍为分析者假设。来源见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。
+DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始日为 10 月 11 日，当前工作簿的信息复核截止已更新至 11 月 10 日申报，估值日仍假设为 12 月 31 日。历史 IPO 投资者讨论基准为 US$1,500bn；原 US$2,000bn 保留为历史压力情景。季度收入及年度假设对照已加入工作簿，US$64bn 仍为分析者假设。来源见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。
 
 ## 已纳入智谱项目
 
@@ -26,3 +26,5 @@ DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始
 `node_modules` 是指向 Codex 运行时的本机依赖链接；`.workbuddy` 保存迁入的本机记录，均不进入 Git。重新生成起始 Excel 会恢复底稿原有文字，请以上述说明及智谱集成结果为核对依据。
 
 11 月 2 日 [S-1/A](https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm)披露前三季度收入 US$33.242bn、经营亏损 US$1.260bn、净亏损 US$104.039bn（含融资公允价值损失 US$94.324bn）。经营现金流 US$6.569bn，扣 US$0.925bn 现金 capex 后为 US$5.644bn，不能等同 UFCF。包含短期及期后安排的总承诺约 US$895.4bn；不能与其组成项目重复相加。九月现金桥更新，12 月净现金零假设及经营预测保持不变。
+
+11 月 10 日 [S-1/A 第 2 次修订](https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm)披露初步区间 US$70–78，合计 825,000,000 股，其中发行人 801,351,354 股、售股股东 23,648,646 股。中点 US$74 下，发行人毛款 US$59.30bn、售股股东 US$1.75bn；后者不是公司所得。另有条件式 US$26bn 并行私募，合计预计净款 US$84.6bn，另拟支付约 US$3.8bn RSU 代扣款；均未视作已收到现金。拟转换 Amazon 本金 US$0.5793bn，不能假定全部 US$6.203bn 本金消失。10 月末收入 run-rate 约 US$81bn，不等于全年收入。区间毛款计算保留为活公式，原经营路径及十二月净现金零假设不变；US$1.5tn 仅作历史情景。

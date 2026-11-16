@@ -1,0 +1,86 @@
+{
+  "checked_on": "2026-11-16",
+  "validation": "passed",
+  "hong_kong_cutoff": "2026-11-16",
+  "us_cutoff": "2026-11-13",
+  "series": [
+    {
+      "file": "Zhipu_KnowledgeAtlas_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261116,
+      "close": 353.6,
+      "source": "Tushare"
+    },
+    {
+      "file": "MiniMax_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261116,
+      "close": 124.9,
+      "source": "Tencent Finance"
+    },
+    {
+      "file": "WengeAI_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261116,
+      "close": 47.2,
+      "source": "Tencent Finance"
+    },
+    {
+      "file": "Alibaba_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261116,
+      "close": 90.15,
+      "source": "Tencent Finance"
+    },
+    {
+      "file": "Baidu_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261116,
+      "close": 75.25,
+      "source": "Tencent Finance"
+    },
+    {
+      "file": "Tencent_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261116,
+      "close": 390.4,
+      "source": "Tencent Finance"
+    },
+    {
+      "file": "Meituan_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261116,
+      "close": 71.55,
+      "source": "Tencent Finance"
+    },
+    {
+      "file": "Google_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261113,
+      "close": 295.77,
+      "source": "Tushare"
+    },
+    {
+      "file": "Meta_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261113,
+      "close": 641.69,
+      "source": "Nasdaq"
+    },
+    {
+      "file": "Microsoft_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261113,
+      "close": 523.88,
+      "source": "Nasdaq"
+    },
+    {
+      "file": "Tesla_daily.csv",
+      "added_rows": 1,
+      "cutoff": 20261113,
+      "close": 390.22,
+      "source": "Nasdaq"
+    }
+  ],
+  "scope": "Price data only; valuation workbook, forecasts, event studies and paper retained"
+}

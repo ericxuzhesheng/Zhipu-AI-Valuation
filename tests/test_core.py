@@ -42,7 +42,7 @@ class MarketDataTests(unittest.TestCase):
 class EventPanelTests(unittest.TestCase):
     def test_october_supplement_preserves_incomplete_and_after_close_windows(self) -> None:
         panel = pd.read_csv(ROOT / 'eventstudy/october_window_update.csv').set_index('event')
-        self.assertTrue(panel.data_cutoff.eq('2026-11-13').all())
+        self.assertTrue(panel.data_cutoff.eq('2026-11-20').all())
         flash = panel.loc['M3.1 Flash general availability']
         self.assertEqual(flash.day0, '2026-10-20')
         self.assertEqual(flash.reaction_days, 2)
@@ -57,15 +57,20 @@ class EventPanelTests(unittest.TestCase):
         self.assertEqual(after_close.drift_days, 9)
         self.assertTrue(after_close.drift_full)
         newest = panel.loc['ZCode v3.17.2']
-        self.assertEqual(newest.drift_days, 7)
-        self.assertFalse(newest.drift_full)
+        self.assertEqual(newest.drift_days, 9)
+        self.assertTrue(newest.drift_full)
         release = panel.loc['ZCode v3.18.2']
-        self.assertEqual(release.reaction_days, 1)
-        self.assertFalse(release.reaction_full)
-        self.assertTrue(pd.isna(release.drift_mean))
+        self.assertEqual(release.reaction_days, 2)
+        self.assertTrue(release.reaction_full)
+        self.assertEqual(release.drift_days, 4)
+        self.assertFalse(release.drift_full)
         buyback = panel.loc['H-share repurchase intention after close']
         self.assertEqual(buyback.day0, '2026-11-11')
-        self.assertEqual(buyback.drift_days, 1)
+        self.assertEqual(buyback.drift_days, 6)
+        egm = panel.loc['Related-party EGM results after close']
+        self.assertEqual(egm.day0, '2026-11-16')
+        self.assertEqual(egm.drift_days, 3)
+        self.assertFalse(egm.drift_full)
 
     def test_event_catalog_input_drives_panel(self) -> None:
         events = event_panel.load_panel_events()
@@ -140,7 +145,7 @@ class ValuationTests(unittest.TestCase):
     def test_anthropic_latest_disclosures_and_historical_benchmark(self) -> None:
         _, latest = anthropic_ipo_crosscheck.calculate()
         _, historical = anthropic_ipo_crosscheck.calculate(ipo_benchmark=2000)
-        self.assertEqual(latest['Information cutoff'], '2026-11-10 (Beijing time)')
+        self.assertEqual(latest['Information cutoff'], '2026-11-20 (Beijing time)')
         self.assertEqual(latest['Reported IPO equity benchmark (USD bn)'], 1500)
         self.assertAlmostEqual(latest['Reported Q1-Q3 revenue (USD bn)'], 33.242)
         self.assertAlmostEqual(latest['Q4 revenue required for annual anchor (USD bn)'], 30.758)

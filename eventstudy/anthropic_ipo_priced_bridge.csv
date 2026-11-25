@@ -1,0 +1,3 @@
+case,ipo_price,first_close,first_close_return,issuer_gross_usdbn,seller_gross_usdbn,private_placement_usdbn,issuer_net_estimate_usdbn,net_less_rsu_estimate_usdbn,basic_shares,offer_equity_proxy_usdbn,debut_equity_proxy_usdbn,classification
+Base priced offer,83.0,97.17,0.17072289156626508,79.377162382,1.962837618,26.0,104.8,100.5,12372801314,1026.942509062,1202.2651036813802,Prospectus pro forma A plus accounting-outstanding N; no diluted instruments or confirmed cash at cutoff
+Full option scenario,83.0,97.17,0.17072289156626508,91.578162382,1.962837618,26.0,117.0,112.7,12519801314,1039.143509062,1216.54909368138,Prospectus pro forma A plus accounting-outstanding N; no diluted instruments or confirmed cash at cutoff

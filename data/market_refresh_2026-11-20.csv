@@ -1,0 +1,12 @@
+file,added_rows,cutoff,close,source,source_url,retrieved_on_beijing,turnover_basis
+Zhipu_KnowledgeAtlas_daily.csv,4,20261120,334.0,Tushare,https://tushare.pro,2026-11-24,provider turnover
+MiniMax_daily.csv,4,20261120,102.4,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-24,Tencent field 8 times 10000 if available; fallback close times volume
+WengeAI_daily.csv,4,20261120,34.06,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-24,Tencent field 8 times 10000 if available; fallback close times volume
+Alibaba_daily.csv,4,20261120,83.35,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-24,Tencent field 8 times 10000 if available; fallback close times volume
+Baidu_daily.csv,4,20261120,64.05,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-24,Tencent field 8 times 10000 if available; fallback close times volume
+Tencent_daily.csv,4,20261120,344.0,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-24,Tencent field 8 times 10000 if available; fallback close times volume
+Meituan_daily.csv,4,20261120,66.5,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-24,Tencent field 8 times 10000 if available; fallback close times volume
+Google_daily.csv,4,20261119,272.66,Tushare,https://tushare.pro,2026-11-24,provider turnover
+Meta_daily.csv,4,20261119,596.22,Nasdaq,https://api.nasdaq.com/api/quote/META/historical,2026-11-24,close-times-volume proxy
+Microsoft_daily.csv,4,20261119,498.3,Nasdaq,https://api.nasdaq.com/api/quote/MSFT/historical,2026-11-24,close-times-volume proxy
+Tesla_daily.csv,4,20261119,374.41,Nasdaq,https://api.nasdaq.com/api/quote/TSLA/historical,2026-11-24,close-times-volume proxy

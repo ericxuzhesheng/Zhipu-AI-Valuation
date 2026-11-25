@@ -16,7 +16,7 @@ FORWARD_MULTIPLE = 10.0
 DISCLOSURES = pd.read_csv(ROOT / 'data/anthropic_ipo_disclosures_input.csv').set_index('metric')
 IPO_BENCHMARK = float(DISCLOSURES.loc['Historical IPO equity discussion', 'value'])
 NET_CASH_ASSUMPTION = 0.0
-INFORMATION_CUTOFF = '2026-11-10'
+INFORMATION_CUTOFF = '2026-11-20'
 S1_FINANCIALS = pd.read_csv(ROOT / 'data/anthropic_s1_financials_input.csv').set_index('period')
 S1_BALANCE = pd.read_csv(ROOT / 'data/anthropic_s1_balance_input.csv').set_index('metric')
 
@@ -97,6 +97,30 @@ def historical_cash_bridge():
     return pd.DataFrame(rows)
 
 
+def priced_offer_bridge():
+    terms = pd.read_csv(ROOT/'data/anthropic_ipo_pricing_input.csv').set_index('metric')['value']
+    debut = pd.read_csv(ROOT/'data/anthropic_public_prices.csv').set_index('trade_date').loc[20261119, 'close']
+    rows = []
+    for name, option, net in [
+        ('Base priced offer', 0, terms['Base estimated net proceeds']),
+        ('Full option scenario', terms['Option shares'], terms['Full option estimated net proceeds']),
+    ]:
+        price = terms['IPO price']
+        shares = terms['Base post-offer Class A shares'] + terms['Base post-offer Class N economic shares'] + option
+        rows.append(dict(
+            case=name, ipo_price=price, first_close=debut, first_close_return=debut/price-1,
+            issuer_gross_usdbn=(terms['Base issuer shares']+option)*price/1e9,
+            seller_gross_usdbn=terms['Seller shares']*price/1e9,
+            private_placement_usdbn=terms['Concurrent private placement'],
+            issuer_net_estimate_usdbn=net,
+            net_less_rsu_estimate_usdbn=net-terms['Estimated RSU withholding'],
+            basic_shares=int(shares), offer_equity_proxy_usdbn=shares*price/1e9,
+            debut_equity_proxy_usdbn=shares*debut/1e9,
+            classification='Prospectus pro forma A plus accounting-outstanding N; no diluted instruments or confirmed cash at cutoff',
+        ))
+    return pd.DataFrame(rows)
+
+
 def main():
     projection, summary = calculate()
     assert abs(summary['DCF EV (USD bn)'] - 788.5394443995484) < 1e-8
@@ -115,10 +139,14 @@ def main():
     for price in [offer['Offer price low'], (offer['Offer price low']+offer['Offer price high'])/2, offer['Offer price high']]:
         offer_rows.append(dict(price_usd=price, issuer_gross_usdbn=price*offer['Issuer offered shares']/1e9, seller_gross_usdbn=price*offer['Selling-holder offered shares']/1e9, total_gross_usdbn=price*(offer['Issuer offered shares']+offer['Selling-holder offered shares'])/1e9, classification='Preliminary; seller proceeds are not company cash; excludes overallotment'))
     pd.DataFrame(offer_rows).to_csv(ROOT/'eventstudy/anthropic_offer_scenarios.csv',index=False)
+    priced = priced_offer_bridge()
+    priced.to_csv(ROOT/'eventstudy/anthropic_ipo_priced_bridge.csv',index=False)
+    pricing = pd.read_csv(ROOT/'data/anthropic_ipo_pricing_input.csv').set_index('metric')['value']
     runtime = ROOT/'tmp/1011_runtime'
     runtime.mkdir(parents=True, exist_ok=True)
     _, historical = calculate(ipo_benchmark=2000)
-    payload = dict(offer=offer.to_dict(), cutoff=INFORMATION_CUTOFF, dcf=summary['DCF EV (USD bn)'],
+    payload = dict(offer=offer.to_dict(), pricing=pricing.to_dict(), priced=priced.to_dict(orient='records'),
+        cutoff=INFORMATION_CUTOFF, dcf=summary['DCF EV (USD bn)'],
         requiredMargin=summary['Required terminal EBIT margin at benchmark'],
         historicalMargin=historical['Required terminal EBIT margin at benchmark'],
         q4Required=summary['Q4 revenue required for annual anchor (USD bn)'],

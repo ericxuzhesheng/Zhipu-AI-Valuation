@@ -17,8 +17,8 @@ from anthropic_ipo_crosscheck import INFORMATION_CUTOFF
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "paper" / "main.tex"
 SUBMISSION_GLOB = "42353012_*.pdf"
-DATA_CUTOFF = 20261113
-US_DATA_CUTOFF = 20261112
+DATA_CUTOFF = 20261120
+US_DATA_CUTOFF = 20261119
 
 
 def fail(message: str) -> None:
@@ -421,6 +421,12 @@ def check_disclosure_refresh() -> None:
                            ('D159', terms['Combined estimated net proceeds']-terms['Estimated RSU withholding'])]:
         if abs(float(wb['Valuation'][cell].value)-expected) > 1e-8:
             fail(f'Anthropic workbook {cell} does not reconcile to preliminary offer terms')
+    priced = pd.read_csv(ROOT / 'eventstudy' / 'anthropic_ipo_priced_bridge.csv')
+    for column, row in zip(('D', 'E'), priced.itertuples(index=False), strict=True):
+        for cell, expected in [(169, row.first_close_return), (170, row.issuer_gross_usdbn), (171, row.seller_gross_usdbn),
+                               (174, row.net_less_rsu_estimate_usdbn), (177, row.debut_equity_proxy_usdbn)]:
+            if abs(float(wb['Valuation'][f'{column}{cell}'].value)-expected) > 1e-8:
+                fail(f'Anthropic workbook {column}{cell} does not reconcile to final pricing')
     for cell, row, metric in [('D132', 0, 'dcf_equity_usdbn'), ('D133', 1, 'dcf_equity_usdbn'),
                               ('D135', 1, 'required_terminal_ebit_margin')]:
         if abs(float(wb['Valuation'][cell].value)-float(bridges.iloc[row][metric])) > 1e-8:

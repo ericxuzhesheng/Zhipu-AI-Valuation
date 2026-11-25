@@ -1,0 +1,2 @@
+trade_date,open,high,low,close,vol,source_url,retrieved_at_beijing
+20261119,111.5,115.1,92.72,97.17,857312300.0,https://api.nasdaq.com/api/quote/ANT/historical,2026-11-24

@@ -1,0 +1,13 @@
+metric,value,unit,classification,source_locator,available_at_beijing,source_url
+IPO price,83,USD/share,Final pricing,Cover,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Base issuer shares,956351354,shares,Priced base offer,Cover,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Seller shares,23648646,shares,Priced secondary shares,Cover,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Option shares,147000000,shares,Full exercise scenario as of cutoff,Cover,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Concurrent private placement,26,USD bn,Priced placement; settlement pending as of cutoff,Offering,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Base estimated net proceeds,104.8,USD bn,Issuer only; before RSU withholding,Use of Proceeds,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Full option estimated net proceeds,117,USD bn,Issuer only; before RSU withholding,Use of Proceeds,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Estimated RSU withholding,4.3,USD bn,At IPO price,Use of Proceeds,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Amazon principal conversion,0.6127,USD bn,Priced prospectus assumption; 12% ownership cap,Offering,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Base post-offer Class A shares,7583103996,shares,"Prospectus pro forma, base deal",Offering,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Base post-offer Class N economic shares,4789697318,shares,Accounting outstanding; excludes 846840960 held by consolidated subsidiary,Capitalization,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm
+Initial Public Benefit Fund shares,846840960,shares,Legally outstanding; excluded from accounting outstanding while subsidiary-held,Capitalization,2026-11-19 19:05:50,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm

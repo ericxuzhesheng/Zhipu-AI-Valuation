@@ -1,6 +1,6 @@
 # Anthropic IPO：收入预期与现金流估值对照
 
-本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-11-10（申报日期；复核于 11 月 13 日）**；模型估值日假设为 **2026-12-31**，与智谱 11 月 13 日的实际市场价格存在约两个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
+本节采用另一个对话 **“Build Anthropic IPO valuation model”** 的最终模型，并用本仓库脚本独立复算。信息复核截止 **2026-11-20 17:30（北京时间）**；模型估值日假设为 **2026-12-31**，与智谱 11 月 20 日的实际市场价格存在约两个月差异。金额均为美元，表内单位为十亿美元（US$bn）。
 
 10 月 11 日起始底稿保存在 [anthropic/2026-10-11](anthropic/2026-10-11/README.md)，包括[活公式 Excel](anthropic/2026-10-11/Anthropic_IPO_Basic_Valuation.xlsx)、[英文 Beamer](anthropic/2026-10-11/Anthropic_IPO_Valuation_Beamer.pdf)、TeX 源文件、模型生成脚本、核验结果与工作表预览。原来源为 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/`；本仓库的文件和数值复算不依赖该外部路径。
 
@@ -29,7 +29,7 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 北京时间 10 月 15 日的 [Reuters 季度报道](https://uk.marketscreener.com/news/anthropic-s-q3-revenue-surges-45-to-nearly-17-billion-ce785dd2d08cf221)已纳入本期信息集。结构化观测与来源保存在 [披露输入](data/anthropic_ipo_disclosures_input.csv)。原 US$64bn 年度假设对照 S-1/A 的 Q1/Q2/Q3 合计收入 US$33.242bn，要求 Q4 收入 US$30.758bn，环比增长 81.4%；季度收入、年度收入与 run-rate 分别记录。
 
-[Reuters 历史估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，历史讨论基准为 US$1.5tn。完整时区、核验范围与取数限制见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。10 月 11 日为底稿起始日，当前工作簿及展示稿已纳入 11 月 10 日第 2 次修订 S-1/A；原始状态可从 Git 历史恢复。
+[Reuters 历史估值报道](https://www.aol.com/articles/exclusive-investors-temper-anthropic-ipo-210007000.html)于北京时间 10 月 16 日 05:00 首发，历史讨论基准为 US$1.5tn。完整时区、核验范围与取数限制见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。10 月 11 日为底稿起始日，当前工作簿及展示稿已纳入正式招股书与上市首日行情；原始状态可从 Git 历史恢复。
 
 ## 可复算的现金流假设
 
@@ -39,7 +39,7 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 此前新增 [18 日公益基金股权承诺](https://www.anthropic.com/news/public-benefit-fund)、[21 日 Duet 研究预览](https://claude.com/resources/articles/claude-duet)、[22 日 Google Cloud 渠道扩展](https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed)和 [Agent Skills 捐赠](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation)。5% 股权承诺仍待股东批准，未明确的最终股权安排不能直接转成 EV 折价或已发生稀释。产品进展没有披露增量收入，原经营路径继续使用显式假设。日期、来源及 23 日 Enterprise 公告的时区边界限制见 [进展表](data/anthropic_progress_2026-10-23.csv)。
 
-**公开 S-1 已纳入**：[10 月 26 日公开申报](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)列示 2025 年收入 US$4.585bn、经营亏损 US$8.060bn；2026H1 收入 US$16.286bn、经营亏损 US$0.693bn、净亏损 US$80.748bn，其中融资工具公允价值损失 US$72.388bn。H1 经营现金流为 US$3.929bn，扣现金 capex 后为 US$3.447bn。年度报表经审计，中期数据未经审计。Q3 已由 11 月 2 日 S-1/A 的 US$16.956bn 替换媒体估计，初步发行条款已于 11 月 10 日披露，最终价格及交割仍未确定。本周直接读取 SEC HTML，核对了收入及融资工具公允价值损失；此前 PDF 转换件的完整核验记录保留。经营预测及 12 月净现金零假设不变，独立现金桥敏感性已更新至九月末。
+**公开 S-1 已纳入**：[10 月 26 日公开申报](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)列示 2025 年收入 US$4.585bn、经营亏损 US$8.060bn；2026H1 收入 US$16.286bn、经营亏损 US$0.693bn、净亏损 US$80.748bn，其中融资工具公允价值损失 US$72.388bn。H1 经营现金流为 US$3.929bn，扣现金 capex 后为 US$3.447bn。年度报表经审计，中期数据未经审计。Q3 已由 11 月 2 日 S-1/A 的 US$16.956bn 替换媒体估计，11 月 10 日初步发行条款已由正式定价取代。本周直接读取 SEC HTML，核对了收入及融资工具公允价值损失；此前 PDF 转换件的完整核验记录保留。经营预测及 12 月净现金零假设不变，独立现金桥敏感性已更新至九月末。
 
 ### 保留的经营路径
 
@@ -73,7 +73,7 @@ Reuters 的[招股材料报道](https://www.streetinsider.com/Reuters/Exclusive-
 
 基准 WACC 为 12%、永续增长为 3%，均为分析者假设。终值沿用 35% EBIT 利润率和再投资比率。显式现金流现值 US$337.2bn，终值现值 US$451.4bn，合计 EV US$788.5bn，终值现值占 57.2%。2028 年收入为 US$195bn、UFCF 为 US$18.16bn。
 
-净现金假设为零，初步募资条款另列，但期后现金消耗和最终摊薄口径尚未完成核对，因此不估计每股 IPO 价格。把模型 EV 与报道的股权目标比较只是一项示意检验。若固定 2027–2036 年显式现金流、终期收入、税率、投资比率、12% WACC 和 3% 永续增长，仅调整终期 EBIT 利润率以支撑历史 US$1.5tn 讨论值，所需利润率为 79.5%。历史 US$2tn 压力情景仍需 110.8%，约 111%。这不是实际利润预测；它说明这组固定收入和投资路径需要非常高的终期利润率。更高的收入路径、更早的利润改善、较低的投资需求或折现率都会改变约束，不能据此否定所有 US$2tn 情景。
+净现金假设为零，正式定价下的募资估计另列，但期后现金消耗和最终摊薄口径尚未完成核对，因此不估计每股 IPO 价格。把模型 EV 与报道的股权目标比较只是一项示意检验。若固定 2027–2036 年显式现金流、终期收入、税率、投资比率、12% WACC 和 3% 永续增长，仅调整终期 EBIT 利润率以支撑历史 US$1.5tn 讨论值，所需利润率为 79.5%。历史 US$2tn 压力情景仍需 110.8%，约 111%。这不是实际利润预测；它说明这组固定收入和投资路径需要非常高的终期利润率。更高的收入路径、更早的利润改善、较低的投资需求或折现率都会改变约束，不能据此否定所有 US$2tn 情景。
 
 ## 折现率与终值增长敏感性
 
@@ -108,3 +108,5 @@ Reuters 招股材料报道列示 2025 年销售约 US$4.6bn、经营亏损超过
 补核的 10 月 27—28 日官方进展包括 [GSA 渠道扩展](https://www.anthropic.com/news/expanding-partnership-gsa)、[科研机构额度计划](https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions)与[药物研发合作研究](https://www.anthropic.com/research/early-progress-drug-development)。折扣、赠送额度和研究合作不等于确认收入，未据此上调经营预测。
 
 11 月 10 日 [S-1/A 第 2 次修订](https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm)披露初步区间 US$70–78，合计 825,000,000 股，其中发行人 801,351,354 股、售股股东 23,648,646 股。中点 US$74 下，发行人毛款 US$59.30bn、售股股东 US$1.75bn；后者不是公司所得。另有条件式 US$26bn 并行私募，合计预计净款 US$84.6bn，另拟支付约 US$3.8bn RSU 代扣款；均未视作已收到现金。拟转换 Amazon 本金 US$0.5793bn，不能假定全部 US$6.203bn 本金消失。10 月末收入 run-rate 约 US$81bn，不等于全年收入。区间毛款计算保留为活公式，原经营路径及十二月净现金零假设不变；US$1.5tn 仅作历史情景。
+
+Anthropic 正式发行价为 US$83，11 月 19 日纳斯达克首日收于 US$97.17，较发行价上涨 17.1%。按正式招股书，基础发行公司毛款 US$79.38bn，售股股东毛款 US$1.96bn。计入 US$26bn 并行私募后，公司预计净募资 US$104.8bn，全额超配情景为 US$117.0bn。两种情景均另扣预计 US$4.3bn RSU 代扣款。按基础发行的 A 股与会计口径流通在外 N 股，首日股权价值代理为 US$1,202.3bn。截止北京时间 11 月 20 日 17:30，交割尚未在本期信息集中确认。 最终招股书按 US$0.6127bn Amazon 票据本金转股计算，剩余本金约 US$5.5903bn。股权价值代理排除全资子公司所持 846,840,960 股公益基金股份及未转换工具。历史 US$1.5tn 情景独立保留。[正式招股书](https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm) · [价格与募资桥](eventstudy/anthropic_ipo_priced_bridge.csv)

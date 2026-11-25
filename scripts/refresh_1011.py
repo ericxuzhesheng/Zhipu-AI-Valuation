@@ -13,6 +13,8 @@ CUTOFF = int(r.MARKET.date.strftime('%Y%m%d'))
 def main():
     path = ROOT / 'data/valuation_comps_input.csv'
     comps = pd.read_csv(path, keep_default_na=False)
+    manifest = ROOT / 'data' / f'market_refresh_{DATE}.csv'
+    source_urls = pd.read_csv(manifest).set_index('file')['source_url'] if DATE == '2026-11-20' else {}
     comps['equity_value_bn'] = pd.to_numeric(comps['equity_value_bn'], errors='coerce')
     shares = pd.read_csv(ROOT / 'data/listed_share_counts.csv').set_index('company')
     for company, filename in [('MiniMax','MiniMax_daily.csv'), ('Wenge AI','WengeAI_daily.csv')]:
@@ -22,7 +24,7 @@ def main():
         comps.loc[mask,'equity_value_bn'] *= float(prices.loc[CUTOFF,'close']) / float(prices.loc[old_date,'close'])
         comps.loc[mask,'valuation_date'] = DATE
         symbol = {'MiniMax':'0100.HK', 'Wenge AI':'1956.HK'}[company]
-        comps.loc[mask,'valuation_source_url'] = f'https://query1.finance.yahoo.com/v8/finance/chart/{symbol}'
+        comps.loc[mask,'valuation_source_url'] = source_urls.get(filename, f'https://query1.finance.yahoo.com/v8/finance/chart/{symbol}')
         comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {DATE}; share-count and FX basis carried forward from 2026-08-31.'
         if company == 'MiniMax':
             disclosure = shares.loc[company]
@@ -39,7 +41,8 @@ def main():
         comps.loc[mask,'valuation_source_url'] = rows.loc[rows.trade_date.eq(peer_date), 'source_url'].iloc[0]
         comps.loc[mask,'comparability_note'] = comps.loc[mask,'comparability_note'].str.split(' Price refreshed').str[0] + f' Price refreshed to {peer_date}; August share-count and FX basis retained, not a newly verified market capitalization.'
     comps.loc[comps.company.eq('Zhipu'),'valuation_date'] = DATE
-    comps.loc[comps.company.eq('Zhipu'),'valuation_source_url'] = 'https://query1.finance.yahoo.com/v8/finance/chart/2513.HK'
+    comps.loc[comps.company.eq('Zhipu'),'valuation_source_url'] = source_urls.get(
+        'Zhipu_KnowledgeAtlas_daily.csv', 'https://query1.finance.yahoo.com/v8/finance/chart/2513.HK')
     comps.to_csv(path,index=False)
     r.write_price_summary_csv()
     r.write_valuation_summary_csv()
@@ -67,12 +70,14 @@ def main():
         ('Zhipu','02513.HK','H-share repurchase intention after close','2026-11-11','capital_allocation','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
         ('MiniMax','00100.HK','H3-Image release','2026-11-11','image_release','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
         ('Zhipu','02513.HK','ZCode v3.18.2','2026-11-13','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
+        ('Zhipu','02513.HK','Related-party EGM results after close','2026-11-16','governance_disclosure','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
     ]]
     supplement = event_panel.event_panel_rows(events)
     supplement.loc[supplement.drift_days.eq(0), ['drift_mean', 'drift_peer']] = None
     supplement.loc[supplement.day0.ge('2026-10-20'), 'source_type'] = 'official dated release; intraday timing unverified; provisional window; overlapping news'
     supplement.loc[supplement.event.eq('Technology export registration after close'), 'source_type'] = 'HKEX 2026-10-23 22:33 Beijing; first subsequent session 2026-10-26; drift completeness reported separately'
     supplement.loc[supplement.event.eq('H-share repurchase intention after close'), 'source_type'] = 'HKEX 2026-11-10 19:05 Beijing; first subsequent session Nov11; intention not executed repurchases'
+    supplement.loc[supplement.event.eq('Related-party EGM results after close'), 'source_type'] = 'HKEX 2026-11-13 22:40 Beijing; first subsequent session Nov16; governance vote'
     supplement['reaction_full'] = supplement.reaction_days.eq(2)
     supplement.insert(0,'data_cutoff',DATE)
     supplement.to_csv(ROOT/'eventstudy/october_window_update.csv',index=False)

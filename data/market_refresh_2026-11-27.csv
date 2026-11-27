@@ -1,0 +1,12 @@
+file,added_rows,cutoff,close,source,source_url,retrieved_on_beijing,turnover_basis,verification
+Zhipu_KnowledgeAtlas_daily.csv,5,20261127,347.4,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-27,Tencent field 8 times 10000 if available; fallback close times volume,Tencent and Yahoo OHLC agree on Nov27; ET Net 16:15 HKT also agrees
+MiniMax_daily.csv,5,20261127,110.1,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-27,Tencent field 8 times 10000 if available; fallback close times volume,Tencent and Yahoo OHLC agree on Nov27
+WengeAI_daily.csv,5,20261127,43.1,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-27,Tencent field 8 times 10000 if available; fallback close times volume,Tencent and Yahoo OHLC agree on Nov27
+Alibaba_daily.csv,5,20261127,88.3,Tencent Finance through Nov26; Yahoo Finance for Nov27,https://query1.finance.yahoo.com/v8/finance/chart/9988.HK,2026-11-27,Tencent method through Nov26; close-times-volume proxy Nov27,Tencent Nov27 absent; Yahoo agrees with ET Net OHLC at 16:15 HKT
+Baidu_daily.csv,5,20261127,62.65,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-27,Tencent field 8 times 10000 if available; fallback close times volume,Existing fetch order; Tushare quota on fallback rows
+Tencent_daily.csv,5,20261127,352.0,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-27,Tencent field 8 times 10000 if available; fallback close times volume,Existing fetch order; Tushare quota on fallback rows
+Meituan_daily.csv,5,20261127,67.85,Tencent Finance,https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get,2026-11-27,Tencent field 8 times 10000 if available; fallback close times volume,Existing fetch order; Tushare quota on fallback rows
+Google_daily.csv,4,20261125,273.1,Tushare,https://tushare.pro,2026-11-27,provider turnover,Existing fetch order; Tushare quota on fallback rows
+Meta_daily.csv,4,20261125,609.89,Nasdaq,https://api.nasdaq.com/api/quote/META/historical,2026-11-27,close-times-volume proxy,Existing fetch order; Tushare quota on fallback rows
+Microsoft_daily.csv,4,20261125,489.93,Nasdaq,https://api.nasdaq.com/api/quote/MSFT/historical,2026-11-27,close-times-volume proxy,Existing fetch order; Tushare quota on fallback rows
+Tesla_daily.csv,4,20261125,380.14,Nasdaq,https://api.nasdaq.com/api/quote/TSLA/historical,2026-11-27,close-times-volume proxy,Existing fetch order; Tushare quota on fallback rows

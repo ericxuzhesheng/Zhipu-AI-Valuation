@@ -1,0 +1,6 @@
+metric,value,unit,event_date_us,available_at_et,available_at_beijing,source_locator,source_url
+Settled issuer IPO shares,1103351354,shares,2026-11-20,2026-11-25 16:10:29 EST,2026-11-26 05:10:29,Item 8.01,https://www.sec.gov/Archives/edgar/data/2130357/000162828026075973/ant-20261119.htm
+Settled seller IPO shares,23648646,shares,2026-11-20,2026-11-25 16:10:29 EST,2026-11-26 05:10:29,Item 8.01,https://www.sec.gov/Archives/edgar/data/2130357/000162828026075973/ant-20261119.htm
+Settled option shares,147000000,shares,2026-11-20,2026-11-25 16:10:29 EST,2026-11-26 05:10:29,Item 8.01,https://www.sec.gov/Archives/edgar/data/2130357/000162828026075973/ant-20261119.htm
+Settled placement shares,313253007,shares,2026-11-20,2026-11-25 16:10:29 EST,2026-11-26 05:10:29,Item 3.02,https://www.sec.gov/Archives/edgar/data/2130357/000162828026075973/ant-20261119.htm
+Settled price,83,USD/share,2026-11-20,2026-11-25 16:10:29 EST,2026-11-26 05:10:29,Items 3.02 and 8.01,https://www.sec.gov/Archives/edgar/data/2130357/000162828026075973/ant-20261119.htm

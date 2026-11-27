@@ -16,7 +16,7 @@ FORWARD_MULTIPLE = 10.0
 DISCLOSURES = pd.read_csv(ROOT / 'data/anthropic_ipo_disclosures_input.csv').set_index('metric')
 IPO_BENCHMARK = float(DISCLOSURES.loc['Historical IPO equity discussion', 'value'])
 NET_CASH_ASSUMPTION = 0.0
-INFORMATION_CUTOFF = '2026-11-20'
+INFORMATION_CUTOFF = '2026-11-27'
 S1_FINANCIALS = pd.read_csv(ROOT / 'data/anthropic_s1_financials_input.csv').set_index('period')
 S1_BALANCE = pd.read_csv(ROOT / 'data/anthropic_s1_balance_input.csv').set_index('metric')
 
@@ -116,9 +116,39 @@ def priced_offer_bridge():
             net_less_rsu_estimate_usdbn=net-terms['Estimated RSU withholding'],
             basic_shares=int(shares), offer_equity_proxy_usdbn=shares*price/1e9,
             debut_equity_proxy_usdbn=shares*debut/1e9,
-            classification='Prospectus pro forma A plus accounting-outstanding N; no diluted instruments or confirmed cash at cutoff',
+            classification='November 20 17:30 Beijing snapshot; prospectus pro forma A plus accounting-outstanding N',
         ))
     return pd.DataFrame(rows)
+
+
+def settled_offer_bridge(pricing, priced, dcf_ev):
+    inputs = pd.read_csv(ROOT/'data/anthropic_ipo_settlement_input.csv').set_index('metric')
+    settled = inputs['value']
+    quotes = pd.read_csv(ROOT/'data/anthropic_public_prices.csv').sort_values('trade_date')
+    latest = quotes.iloc[-1]
+    price = settled['Settled price']
+    issuer_gross = settled['Settled issuer IPO shares'] * price / 1e9
+    seller_gross = settled['Settled seller IPO shares'] * price / 1e9
+    placement = settled['Settled placement shares'] * price / 1e9
+    shares = int(priced.iloc[1].basic_shares)
+    cash_increment = priced.iloc[1].net_less_rsu_estimate_usdbn
+    balance = S1_BALANCE['value']
+    residual = balance['Amazon 2023 note principal'] + balance['Amazon 2024 note principal'] - pricing['Amazon principal conversion']
+    cash_proxy = balance['Cash and equivalents'] + balance['Short-term investments'] - balance['Finance lease liabilities'] - residual + cash_increment
+    result = dict(
+        settlement_date_us=inputs.event_date_us.iloc[0], market_date=str(pd.Timestamp(str(int(latest.trade_date))).date()),
+        close=latest.close, close_return_from_ipo=latest.close/price-1,
+        issuer_ipo_gross_usdbn=issuer_gross, seller_ipo_gross_usdbn=seller_gross,
+        placement_gross_usdbn=placement, issuer_combined_gross_usdbn=issuer_gross+placement,
+        combined_gross_including_sellers_usdbn=issuer_gross+seller_gross+placement,
+        net_proceeds_prospectus_estimate_usdbn=priced.iloc[1].issuer_net_estimate_usdbn,
+        net_less_rsu_estimate_usdbn=cash_increment, economic_share_proxy=shares,
+        equity_proxy_usdbn=shares*latest.close/1e9, residual_amazon_principal_proxy_usdbn=residual,
+        financing_adjusted_september_net_cash_proxy_usdbn=cash_proxy,
+        financing_adjusted_dcf_equity_usdbn=dcf_ev+cash_proxy,
+        classification='Closed gross amounts. Net is a prospectus estimate. Share and cash calculations are pro forma; no Q4 operating cash roll-forward.',
+    )
+    return settled.to_dict(), result
 
 
 def main():
@@ -142,10 +172,13 @@ def main():
     priced = priced_offer_bridge()
     priced.to_csv(ROOT/'eventstudy/anthropic_ipo_priced_bridge.csv',index=False)
     pricing = pd.read_csv(ROOT/'data/anthropic_ipo_pricing_input.csv').set_index('metric')['value']
+    settlement_inputs, settlement = settled_offer_bridge(pricing, priced, summary['DCF EV (USD bn)'])
+    pd.DataFrame([settlement]).to_csv(ROOT/'eventstudy/anthropic_ipo_settled_bridge.csv',index=False)
     runtime = ROOT/'tmp/1011_runtime'
     runtime.mkdir(parents=True, exist_ok=True)
     _, historical = calculate(ipo_benchmark=2000)
     payload = dict(offer=offer.to_dict(), pricing=pricing.to_dict(), priced=priced.to_dict(orient='records'),
+        settlementInputs=settlement_inputs, settlement=settlement,
         cutoff=INFORMATION_CUTOFF, dcf=summary['DCF EV (USD bn)'],
         requiredMargin=summary['Required terminal EBIT margin at benchmark'],
         historicalMargin=historical['Required terminal EBIT margin at benchmark'],

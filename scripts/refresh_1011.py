@@ -14,7 +14,7 @@ def main():
     path = ROOT / 'data/valuation_comps_input.csv'
     comps = pd.read_csv(path, keep_default_na=False)
     manifest = ROOT / 'data' / f'market_refresh_{DATE}.csv'
-    source_urls = pd.read_csv(manifest).set_index('file')['source_url'] if DATE == '2026-11-20' else {}
+    source_urls = pd.read_csv(manifest).set_index('file').get('source_url', {}) if manifest.exists() else {}
     comps['equity_value_bn'] = pd.to_numeric(comps['equity_value_bn'], errors='coerce')
     shares = pd.read_csv(ROOT / 'data/listed_share_counts.csv').set_index('company')
     for company, filename in [('MiniMax','MiniMax_daily.csv'), ('Wenge AI','WengeAI_daily.csv')]:
@@ -30,6 +30,10 @@ def main():
             disclosure = shares.loc[company]
             comps.loc[mask, 'equity_value_bn'] = float(prices.loc[CUTOFF, 'close']) * disclosure.issued_shares / r.USD_HKD / 1e9
             comps.loc[mask, 'comparability_note'] = f'Closest listed foundation-model peer. Price refreshed to {DATE}; {disclosure.issued_shares} issued shares at {disclosure.balance_date}; HKD/USD assumption {r.USD_HKD}. Share source: {disclosure.source_url}'
+        elif company == 'Wenge AI' and company in shares.index:
+            disclosure = shares.loc[company]
+            comps.loc[mask, 'equity_value_bn'] = float(prices.loc[CUTOFF, 'close']) * disclosure.issued_shares * r.USD_CNY / r.USD_HKD / 1e9
+            comps.loc[mask, 'comparability_note'] = f'Contextual decision-intelligence peer. Price refreshed to {DATE}; {disclosure.issued_shares} issued H shares at {disclosure.balance_date}; unchanged model FX. Share source: {disclosure.source_url}'
     bridge = pd.read_csv(ROOT/'data/comps_price_bridge.csv')
     for company, rows in bridge.groupby('company'):
         mask = comps.company.eq(company)
@@ -71,6 +75,8 @@ def main():
         ('MiniMax','00100.HK','H3-Image release','2026-11-11','image_release','MiniMax_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
         ('Zhipu','02513.HK','ZCode v3.18.2','2026-11-13','developer_tool','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
         ('Zhipu','02513.HK','Related-party EGM results after close','2026-11-16','governance_disclosure','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
+        ('Zhipu','02513.HK','GLM-5.4 Coding Plan availability','2026-11-23','capability_release','Zhipu_KnowledgeAtlas_daily.csv','MiniMax_daily.csv'),
+        ('Wenge AI','01956.HK','Proposed H-share buyback after close','2026-11-27','capital_allocation','WengeAI_daily.csv','Zhipu_KnowledgeAtlas_daily.csv'),
     ]]
     supplement = event_panel.event_panel_rows(events)
     supplement.loc[supplement.drift_days.eq(0), ['drift_mean', 'drift_peer']] = None
@@ -78,6 +84,8 @@ def main():
     supplement.loc[supplement.event.eq('Technology export registration after close'), 'source_type'] = 'HKEX 2026-10-23 22:33 Beijing; first subsequent session 2026-10-26; drift completeness reported separately'
     supplement.loc[supplement.event.eq('H-share repurchase intention after close'), 'source_type'] = 'HKEX 2026-11-10 19:05 Beijing; first subsequent session Nov11; intention not executed repurchases'
     supplement.loc[supplement.event.eq('Related-party EGM results after close'), 'source_type'] = 'HKEX 2026-11-13 22:40 Beijing; first subsequent session Nov16; governance vote'
+    supplement.loc[supplement.event.eq('GLM-5.4 Coding Plan availability'), 'source_type'] = 'Official Nov23 release; earlier intraday availability reported secondhand; provisional and overlaps ZCode 4.0.0'
+    supplement.loc[supplement.event.eq('Proposed H-share buyback after close'), 'source_type'] = 'HKEX Nov26 18:05 Beijing; first subsequent session Nov27; authorization pending'
     supplement['reaction_full'] = supplement.reaction_days.eq(2)
     supplement.insert(0,'data_cutoff',DATE)
     supplement.to_csv(ROOT/'eventstudy/october_window_update.csv',index=False)

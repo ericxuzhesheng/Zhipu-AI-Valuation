@@ -15,11 +15,11 @@ if (process.argv.includes('--inspect')) {
 } else {
   const expected = JSON.parse(await fs.readFile(path.join(runtime, 'anthropic-latest.json'), 'utf8'));
   inputs.getRange('D8').values = [[new Date(`${expected.cutoff}T00:00:00Z`)]];
-  inputs.getRange('C3').values = [['USD billions. Information cutoff: 20 Nov 2026, 17:30 Beijing.']];
-  valuation.getRange('C3').values = [['USD billions. Nov20 information cutoff. Assumed DCF valuation date: 31 Dec 2026.']];
-  inputs.getRange('F8').values = [['Final pricing and Nasdaq debut below [S28/S29].']];
+  inputs.getRange('C3').values = [['USD billions. Information cutoff: ' + expected.cutoff + ', 17:30 Beijing.']];
+  valuation.getRange('C3').values = [['USD billions. ' + expected.cutoff + ' snapshot. Assumed DCF date: 31 Dec 2026.']];
+  inputs.getRange('F8').values = [['IPO settlement and latest Nasdaq close below [S29/S30].']];
   inputs.getRange('F12').values = [['Zero remains a Dec-2026 assumption. September liquidity and debt sensitivities appear below.']];
-  inputs.getRange('F16').values = [['Priced proceeds sensitivities below. Settlement confirmation falls outside this snapshot.']];
+  inputs.getRange('F16').values = [['IPO and placement closed. Gross proceeds and net estimates appear below.']];
   inputs.getRange('F18').values = [['Prospectus pro forma A and N share counts are shown below.']];
   valuation.getRange('F81').values = [['See priced-deal equity proxies below. December cash roll-forward remains unobserved.']];
   inputs.getRange('F15').values = [['Historical October USD1.5tn stress benchmark [S20]; November offer terms below.']];
@@ -210,8 +210,43 @@ if (process.argv.includes('--inspect')) {
   valuation.getRange('D167:E179').setNumberFormat('0.00');
   valuation.getRange('D169:E169').setNumberFormat('0.0%');
   valuation.getRange('D178:E179').setNumberFormat('0.0000');
-  valuation.getRange('C181').values = [['Prospectus estimates. The full option column shows a settlement scenario at the cutoff.']];
+  valuation.getRange('C181').values = [['Historical pricing cases as of Nov20 17:30 Beijing. Settlement is recorded below.']];
   valuation.getRange('C182').values = [['Basic share proxy excludes subsidiary-held fund shares and unconverted instruments.']];
+
+  const settlement = expected.settlement;
+  const settledMetrics = ['Settled issuer IPO shares','Settled seller IPO shares','Settled option shares',
+    'Settled placement shares','Settled price'];
+  inputs.getRange('C226:H233').format = { font: { name: 'Arial', size: 10 }, rowHeight: 24 };
+  inputs.getRange('C226:H226').copyFrom(inputs.getRange('C206:H206'), 'all');
+  inputs.getRange('C226:H226').values = [['Settled IPO and market quote','Value','Unit','Source',null,null]];
+  inputs.getRange('C227:F231').values = settledMetrics.map((metric, i) =>
+    [metric, expected.settlementInputs[metric], i===4?'USD/share':'shares', 'S30']);
+  inputs.getRange('D227:D230').setNumberFormat('#,##0');
+  inputs.getRange('C232:F232').values = [['Latest Nasdaq close',settlement.close,'USD/share','S29']];
+  inputs.getRange('C233:F233').values = [['US trade date',settlement.market_date,null,'S29']];
+  inputs.getRange('C235').values = [['S30. 8-K filed Nov25 at 16:10:29 EST, Items 3.02 and 8.01.']];
+  inputs.getRange('C236').values = [['https://www.sec.gov/Archives/edgar/data/2130357/000162828026075973/ant-20261119.htm']];
+  valuation.getRange('C184:H200').format = { font: { name: 'Arial', size: 10 }, rowHeight: 24 };
+  valuation.getRange('C184:H184').copyFrom(valuation.getRange('C165:H165'), 'all');
+  valuation.getRange('C184:H184').values = [['Settled IPO and public equity comparison',null,null,null,null,null]];
+  valuation.getRange('C185:C198').values = [
+    'Issuer IPO gross (USD bn)','Seller IPO gross (USD bn)','Placement gross (USD bn)',
+    'Total issuer gross (USD bn)','Gross including sellers (USD bn)','Prospectus net estimate (USD bn)',
+    'Estimated net less RSU withholding','Latest Nasdaq close (USD)','Return from IPO',
+    'Pro forma A + economic N shares (bn)','Public equity proxy (USD bn)',
+    'Residual Amazon principal proxy (USD bn)','Financing-adjusted Sep net cash proxy',
+    'Financing-adjusted DCF equity (USD bn)',
+  ].map(x=>[x]);
+  valuation.getRange('D185:D198').formulas = [
+    ["='Inputs'!D227*'Inputs'!D231/1000000000"],["='Inputs'!D228*'Inputs'!D231/1000000000"],
+    ["='Inputs'!D230*'Inputs'!D231/1000000000"],['=D185+D187'],['=D188+D186'],
+    ['=E173'],['=E174'],["='Inputs'!D232"],["=D192/'Inputs'!D231-1"],
+    ["=D175+'Inputs'!D229/1000000000"],['=D194*D192'],['=D179'],
+    ['=D127-D128-D196+D191'],['=D8+D197'],
+  ];
+  valuation.getRange('D185:D198').setNumberFormat('#,##0.00');
+  valuation.getRange('D193').setNumberFormat('0.00%');
+  valuation.getRange('C200').values = [['Financing sensitivity uses September balances and excludes subsequent operating cash changes.']];
 
   wb.recalculate();
   const close = (actual, target, label) => { if (Math.abs(actual - target) > 1e-8) throw new Error(`${label}: ${actual} != ${target}`); };
@@ -224,6 +259,10 @@ if (process.argv.includes('--inspect')) {
     close(valuation.getRange(column+'170').values[0][0], priced.issuer_gross_usdbn, 'Priced issuer gross');
     close(valuation.getRange(column+'174').values[0][0], priced.net_less_rsu_estimate_usdbn, 'Priced net less withholding');
     close(valuation.getRange(column+'177').values[0][0], priced.debut_equity_proxy_usdbn, 'Debut equity proxy');
+  }
+  for (const [cell, metric] of [['D188','issuer_combined_gross_usdbn'],['D189','combined_gross_including_sellers_usdbn'],
+    ['D193','close_return_from_ipo'],['D195','equity_proxy_usdbn'],['D198','financing_adjusted_dcf_equity_usdbn']]) {
+    close(valuation.getRange(cell).values[0][0], settlement[metric], metric);
   }
   close(valuation.getRange('D8').values[0][0], expected.dcf, 'DCF');
   close(valuation.getRange('D10').values[0][0], 1500, 'IPO benchmark');
@@ -257,6 +296,8 @@ if (process.argv.includes('--inspect')) {
   }
   const pricedPreview = await wb.render({ sheetName: 'Valuation', range: 'C165:H182', scale: 1.5, format: 'png' });
   await fs.writeFile(path.join(runtime, 'anthropic-priced.png'), new Uint8Array(await pricedPreview.arrayBuffer()));
+  const settledPreview = await wb.render({ sheetName: 'Valuation', range: 'C184:H200', scale: 1.5, format: 'png' });
+  await fs.writeFile(path.join(runtime, 'anthropic-settled.png'), new Uint8Array(await settledPreview.arrayBuffer()));
   await (await SpreadsheetFile.exportXlsx(wb)).save(target);
   console.log(JSON.stringify({ benchmark: 1500, dcf: expected.dcf, q4Required: expected.q4Required, propagationVerified: true }));
 }

@@ -82,8 +82,8 @@ The 31 August boundary also prevents a tempting causal mistake. Zhipu rose 9.63%
 
 *Inputs: market prices through 2026-08-31 for the core Zhipu/MiniMax series in `data/`; CAR tables to `eventstudy/car_robustness.csv`; charts to `figures/`.*
 
-## November 20 supplementary cutoff
+## November 27 supplementary cutoff
 
-The core five events and bootstrap retain the August 31 sample end. The October windows and ZCode v3.17.2 have nine drift sessions. The November 10 buyback intention and November 11 H3-Image launch each have two reaction sessions and six drift sessions. ZCode v3.18.2 has two reaction sessions and four drift sessions. The launch-day assignments remain provisional because intraday release times are unverified.
+The core five events and bootstrap retain the August 31 sample end. Zhipu's buyback intention, MiniMax H3-Image and ZCode v3.18.2 each now have nine drift sessions. The EGM window starts on November 16 and has eight drift sessions.
 
-HKEX released the November 13 EGM results at 22:40 Beijing. The separate governance window starts with the November 16 close and includes two reaction sessions and three drift sessions. The meeting approved confirmation of related-party transactions. [Window results](eventstudy/october_window_update.csv) · [Disclosure review](data/disclosure_review_2026-11-20.csv)
+GLM-5.4 Coding Plan availability is a provisional November 23 event with two reaction sessions and three drift sessions. The reported daytime availability overlaps ZCode 4.0.0. The later technical announcement cannot explain the November 23 close. Wenge AI's proposal was announced at 18:05 Beijing on November 26. Its window starts on November 27 and has one reaction observation. The two-day window is incomplete and drift is blank. [Supplementary results](eventstudy/october_window_update.csv) · [Sources](data/disclosure_review_2026-11-27.csv)

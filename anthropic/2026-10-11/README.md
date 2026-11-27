@@ -1,15 +1,15 @@
-# Anthropic IPO 底稿（起始版本 2026-10-11，信息复核至 2026-11-20）
+# Anthropic IPO 底稿（起始版本 2026-10-11，信息复核至 2026-11-27）
 
 2026-10-11 从 `D:/Quant/Financial Valuation & Modeling/midterm/anthropic_ipo_20260930/` 迁入，共 28 项原始内容；源文件夹已清空。原目录名虽含 20260930，Excel 和生成脚本的研究截止日实际为 2026-10-11。旧版底稿通过 Git 历史查阅。
 
 | 入口 | 内容 |
 |---|---|
-| [估值工作簿](Anthropic_IPO_Basic_Valuation.xlsx) | 保留 Valuation / Comps / Inputs 三表；当前披露已同步至 11 月 20 日 17:30 北京的信息截点 |
+| [估值工作簿](Anthropic_IPO_Basic_Valuation.xlsx) | 保留 Valuation / Comps / Inputs 三表；当前披露已同步至 11 月 27 日 17:30 北京的信息截点 |
 | [演示 PDF](Anthropic_IPO_Valuation_Beamer.pdf) | 同步收入锚、DCF、最终定价及首日收盘 |
 | [演示源文件](Anthropic_IPO_Valuation_Beamer.tex) | 本地 XeLaTeX 可编译 |
 | [生成脚本](build_model.mjs) | 输出路径改为本目录，不再写回源文件夹 |
 
-DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始日为 10 月 11 日，当前工作簿的信息复核截止已更新至正式招股书与上市首日，估值日仍假设为 12 月 31 日。历史 IPO 投资者讨论基准为 US$1,500bn；原 US$2,000bn 保留为历史压力情景。季度收入及年度假设对照已加入工作簿，US$64bn 仍为分析者假设。来源见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。
+DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始日为 10 月 11 日，当前工作簿的信息复核截止已更新至 IPO 交割与 11 月 25 日已收盘行情，估值日仍假设为 12 月 31 日。历史 IPO 投资者讨论基准为 US$1,500bn；原 US$2,000bn 保留为历史压力情景。季度收入及年度假设对照已加入工作簿，US$64bn 仍为分析者假设。来源见[Git 提交历史](https://github.com/ericxuzhesheng/Zhipu-AI-Valuation/commits/main/)。
 
 ## 已纳入智谱项目
 
@@ -29,4 +29,6 @@ DCF EV 为 US$788.539bn，前瞻收入倍数法 EV 为 US$1,950bn。底稿起始
 
 11 月 10 日 [S-1/A 第 2 次修订](https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm)披露初步区间 US$70–78，合计 825,000,000 股，其中发行人 801,351,354 股、售股股东 23,648,646 股。中点 US$74 下，发行人毛款 US$59.30bn、售股股东 US$1.75bn；后者不是公司所得。另有条件式 US$26bn 并行私募，合计预计净款 US$84.6bn，另拟支付约 US$3.8bn RSU 代扣款；均未视作已收到现金。拟转换 Amazon 本金 US$0.5793bn，不能假定全部 US$6.203bn 本金消失。10 月末收入 run-rate 约 US$81bn，不等于全年收入。区间毛款计算保留为活公式，原经营路径及十二月净现金零假设不变；US$1.5tn 仅作历史情景。
 
-Anthropic 正式发行价为 US$83，11 月 19 日纳斯达克首日收于 US$97.17，较发行价上涨 17.1%。按正式招股书，基础发行公司毛款 US$79.38bn，售股股东毛款 US$1.96bn。计入 US$26bn 并行私募后，公司预计净募资 US$104.8bn，全额超配情景为 US$117.0bn。两种情景均另扣预计 US$4.3bn RSU 代扣款。按基础发行的 A 股与会计口径流通在外 N 股，首日股权价值代理为 US$1,202.3bn。截止北京时间 11 月 20 日 17:30，交割尚未在本期信息集中确认。 [价格与募资桥](../../eventstudy/anthropic_ipo_priced_bridge.csv)
+Anthropic 正式发行价为 US$83，11 月 19 日纳斯达克首日收于 US$97.17，较发行价上涨 17.1%。按正式招股书，基础发行公司毛款 US$79.38bn，售股股东毛款 US$1.96bn。计入 US$26bn 并行私募后，公司预计净募资 US$104.8bn，全额超配情景为 US$117.0bn。两种情景均另扣预计 US$4.3bn RSU 代扣款。按基础发行的 A 股与会计口径流通在外 N 股，首日股权价值代理为 US$1,202.3bn。截止北京时间 11 月 20 日 17:30，交割尚未纳入当期快照。 [价格与募资桥](../../eventstudy/anthropic_ipo_priced_bridge.csv)
+
+Anthropic 于美国当地 11 月 20 日完成 IPO、全额超额配售和 US$26.0bn 并行私募。公司 IPO 毛款 US$91.58bn，含私募合计 US$117.58bn，售股股东另得 US$1.96bn。招股书估计公司净款 US$117.0bn，扣预计 RSU 代扣款后约 US$112.7bn。ANT 11 月 25 日收 US$82.79，较发行价低 0.25%。以招股书列示的 A 股和会计口径 N 股加全额超配推算，股权价值约 US$1,036.5bn。 11 月 25 日 16:10:29 美东时间提交的 8-K 对应北京时间 11 月 26 日 05:10:29，晚于该美股交易日收盘。用九月资产负债数据加上估计融资净增量，可得净现金代理 US$237.3bn，条件式股权 DCF US$1,025.8bn。该敏感性未滚动第四季度经营现金。招股书列示 12 月 15 日下一批最多 3.03 亿股具转售资格，实际成交以日后披露为准。[SEC 8-K](https://www.sec.gov/Archives/edgar/data/2130357/000162828026075973/ant-20261119.htm) · [交割与估值对账](../../eventstudy/anthropic_ipo_settled_bridge.csv)

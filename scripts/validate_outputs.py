@@ -17,8 +17,8 @@ from anthropic_ipo_crosscheck import INFORMATION_CUTOFF
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "paper" / "main.tex"
 SUBMISSION_GLOB = "42353012_*.pdf"
-DATA_CUTOFF = 20261120
-US_DATA_CUTOFF = 20261119
+DATA_CUTOFF = 20261127
+US_DATA_CUTOFF = 20261125
 
 
 def fail(message: str) -> None:
@@ -427,6 +427,15 @@ def check_disclosure_refresh() -> None:
                                (174, row.net_less_rsu_estimate_usdbn), (177, row.debut_equity_proxy_usdbn)]:
             if abs(float(wb['Valuation'][f'{column}{cell}'].value)-expected) > 1e-8:
                 fail(f'Anthropic workbook {column}{cell} does not reconcile to final pricing')
+    settlement = pd.read_csv(ROOT / 'eventstudy' / 'anthropic_ipo_settled_bridge.csv').iloc[0]
+    ant_prices = pd.read_csv(ROOT / 'data' / 'anthropic_public_prices.csv')
+    latest_quote = ant_prices.sort_values('trade_date').iloc[-1]
+    if latest_quote.trade_date != US_DATA_CUTOFF or latest_quote.close != settlement.close:
+        fail('Anthropic settlement comparison must use the latest eligible Nasdaq close')
+    for cell, metric in [('D188', 'issuer_combined_gross_usdbn'), ('D190', 'net_proceeds_prospectus_estimate_usdbn'),
+                         ('D195', 'equity_proxy_usdbn'), ('D198', 'financing_adjusted_dcf_equity_usdbn')]:
+        if abs(float(wb['Valuation'][cell].value)-settlement[metric]) > 1e-8:
+            fail(f'Anthropic workbook {cell} does not match the settlement bridge')
     for cell, row, metric in [('D132', 0, 'dcf_equity_usdbn'), ('D133', 1, 'dcf_equity_usdbn'),
                               ('D135', 1, 'required_terminal_ebit_margin')]:
         if abs(float(wb['Valuation'][cell].value)-float(bridges.iloc[row][metric])) > 1e-8:

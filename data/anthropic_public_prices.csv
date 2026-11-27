@@ -1,2 +1,6 @@
 trade_date,open,high,low,close,vol,source_url,retrieved_at_beijing
 20261119,111.5,115.1,92.72,97.17,857312300.0,https://api.nasdaq.com/api/quote/ANT/historical,2026-11-24
+20261120,89.86,92.56,83.05,88.91,400460300.0,https://api.nasdaq.com/api/quote/ANT/historical,2026-11-27
+20261123,93.645,94.24,84.61,87.64,254101700.0,https://api.nasdaq.com/api/quote/ANT/historical,2026-11-27
+20261124,83.4,83.49,75.61,81.905,313046200.0,https://api.nasdaq.com/api/quote/ANT/historical,2026-11-27
+20261125,77.93,85.92,73.85,82.79,293740400.0,https://api.nasdaq.com/api/quote/ANT/historical,2026-11-27
